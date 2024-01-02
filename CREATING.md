@@ -28,6 +28,7 @@ npm create svelte@latest my-app
 cd my-app
 pnpm install
 git init && git add -A && git commit -m "Initial commit" # (optional)
+pnpm exec playwright install
 ```
 
 ## Developing Locally
@@ -55,3 +56,8 @@ pnpm run dev -- --open
 
 Run `pnpm run XXX` replacing XXX for each of the scripts in `package.json`. It's a good idea to fix all errors and warnings that might come up, and re-check after each major addition.
 
+### Install Playwright
+
+```bash
+pnpm exec playwright install
+```
