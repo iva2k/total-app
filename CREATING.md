@@ -61,3 +61,15 @@ Run `pnpm run XXX` replacing XXX for each of the scripts in `package.json`. It's
 ```bash
 pnpm exec playwright install
 ```
+
+### Lint Error "illegal variable name"
+
+```bash
+$ pnpm run lint
+...\total-app\src\routes\Header.svelte
+  19:25  error  $page is an illegal variable name. To reference a global variable called $page, use globalThis.$page(illegal-global)  svelte/valid-compile
+...\total-app\src\routes\sverdle\+page.svelte
+  189:22  error  $reduced_motion is an illegal variable name. To reference a global variable called $reduced_motion, use globalThis.$reduced_motion(illegal-global)  svelte/valid-compile
+
+✖ 2 problems (2 errors, 0 warnings)
+```
