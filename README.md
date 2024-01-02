@@ -30,6 +30,10 @@ Built with:
 
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
+- [Prettier](https://prettier.io/) - Opinionated Code Formatter
+- [ESLint](https://eslint.org) - Pluggable JavaScript linter
+- [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
+- [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
 
 ## Install
 
