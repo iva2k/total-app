@@ -5,7 +5,7 @@ node_modules
 /package
 .env
 .env.*
-!.env.example
+!.env.EXAMPLE
 .vercel
 .output
 vite.config.js.timestamp-*
