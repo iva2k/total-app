@@ -26,6 +26,8 @@ Out of the box features:
 - Prepared for Isolated Component Development (Storybook).
 - Instrumented for quick deployment - Netlify, Vercel, NGINX, etc.
 
+## Technology Stack
+
 Built with:
 
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework

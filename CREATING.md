@@ -4,6 +4,13 @@ This file describes how this app was created.
 
 It is not a tutorial per se, and uses a dense step-by-step language without too much explanation and expects the reader to dive deeper on their own. Making it into a tutorial will yield a thick book, which is not the goal here.
 
+## Technology Stack
+
+Built with:
+
+- [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
+- [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
+
 ## Software Mantra
 
 ### DRY
