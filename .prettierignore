@@ -2,3 +2,6 @@
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# Ignore package.json, so our scripts will stay aligned.
+package.json
