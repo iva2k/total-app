@@ -59,15 +59,32 @@ pnpm run dev
 pnpm run dev -- --open
 ```
 
-## Fix Issues That Might Come Up
+## Add Tooling and Fix Issues That Might Come Up
 
 Run `pnpm run XXX` replacing XXX for each of the scripts in `package.json`. It's a good idea to fix all errors and warnings that might come up, and re-check after each major addition.
 
-### Install Playwright
+### Add HTTPS
 
 ```bash
-pnpm exec playwright install
+pnpm i -D @vitejs/plugin-basic-ssl
 ```
+
+Add plugin to vite.config.ts (see source).
+
+Run the server with a self-signed cert:
+
+```bash
+pnpm run dev:https --host
+```
+
+### Add Tooling
+
+```bash
+pnpm install -D cross-env glob rimraf minimist @types/minimist sass shx vite-plugin-static-copy cpy @types/node @types/glob
+pnpm install -D ts-node tsx
+```
+
+Add assets copying to svelte.config.js (see source file).
 
 ### Lint Error "illegal variable name"
 
