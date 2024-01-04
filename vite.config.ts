@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+// import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 import type { UserConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
@@ -9,6 +10,7 @@ import assets from './assets.js';
 // TODO: (when needed) Remove eslint-disable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default defineConfig(async ({ mode }) => {
+  // const env = loadEnv(mode, process.cwd());
   const plugins = [
     sveltekit(),
 

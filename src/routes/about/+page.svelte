@@ -1,3 +1,8 @@
+<script lang="ts">
+  import website from '$lib/config/website';
+  const { siteTitle, githubRepo } = website;
+</script>
+
 <svelte:head>
   <title>About</title>
   <meta name="description" content="About this app" />
@@ -7,11 +12,16 @@
   <h1>About this app</h1>
 
   <p>
-    This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-    following into your command line and following the prompts:
+    This is a {siteTitle} app built with <a href="https://kit.svelte.dev">SvelteKit</a> and Svelte. You
+    can make your own by typing the following into your command line and following the prompts:
   </p>
 
   <pre>npm create svelte@latest</pre>
+
+  <p>
+    Visit <a href={githubRepo}>App GitHub Repo</a> for details on this App and How to build one like
+    that.
+  </p>
 
   <p>
     The page you're looking at is purely static HTML, with no client-side interactivity needed.

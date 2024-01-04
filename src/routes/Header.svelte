@@ -1,5 +1,8 @@
 <script>
   import { page } from '$app/stores';
+  import website from '$lib/config/website';
+  const { siteTitle, githubRepo } = website;
+
   import logo from '$lib/images/svelte-logo.svg';
   import github from '$lib/images/github.svg';
 </script>
@@ -37,7 +40,7 @@
   </nav>
 
   <div class="corner">
-    <a href="https://github.com/sveltejs/kit">
+    <a href="{githubRepo}">
       <img src={github} alt="GitHub" />
     </a>
   </div>

@@ -37,6 +37,14 @@ Built with:
 - [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
 
+Enhancements not found in the foundational packages and templates:
+
+- HTTPS support in development
+- Vitest coverage
+- Playwright reports
+- ESLint imports
+- Consolidated website configuration
+
 ## Install
 
 ### Quick Start
@@ -114,7 +122,9 @@ To deploy the app, need to install an [adapter](https://kit.svelte.dev/docs/adap
 
 ## Customizing
 
-Many variables are set in `.env` file.
+Check file `src/lib/config/websiteFnc.js` for setting all information about the App / Website.
+
+Many variables are also set in `.env` file.
 
 ## How This App Was Created
 
