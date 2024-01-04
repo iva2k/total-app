@@ -7,6 +7,8 @@ node_modules
 !.env.EXAMPLE
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+test-results.json
+/playwright-report
 /coverage
 
 # Ignore files for PNPM, NPM and YARN
