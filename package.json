@@ -36,6 +36,7 @@
     "@types/glob": "^8.1.0",
     "@types/minimist": "^1.2.5",
     "@types/node": "^20.10.6",
+    "@types/object-hash": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
@@ -49,6 +50,7 @@
     "eslint-plugin-svelte": "next",
     "glob": "^10.3.10",
     "minimist": "^1.2.8",
+    "object-hash": "^3.0.0",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",
     "rimraf": "^5.0.5",
@@ -60,6 +62,7 @@
     "tslib": "^2.4.1",
     "tsx": "^4.7.0",
     "typescript": "^5.0.0",
+    "vanilla-lazyload": "^17.8.5",
     "vite": "^5.0.3",
     "vite-plugin-static-copy": "^1.0.0",
     "vitest": "^1.0.0"

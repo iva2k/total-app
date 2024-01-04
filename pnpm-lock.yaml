@@ -35,6 +35,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.10.6
     version: 20.10.6
+  '@types/object-hash':
+    specifier: ^3.0.6
+    version: 3.0.6
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.0.0
     version: 6.17.0(@typescript-eslint/parser@6.17.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -74,6 +77,9 @@ devDependencies:
   minimist:
     specifier: ^1.2.8
     version: 1.2.8
+  object-hash:
+    specifier: ^3.0.0
+    version: 3.0.0
   prettier:
     specifier: ^3.1.1
     version: 3.1.1
@@ -107,6 +113,9 @@ devDependencies:
   typescript:
     specifier: ^5.0.0
     version: 5.3.3
+  vanilla-lazyload:
+    specifier: ^17.8.5
+    version: 17.8.5
   vite:
     specifier: ^5.0.3
     version: 5.0.10(@types/node@20.10.6)(sass@1.69.7)
@@ -784,6 +793,10 @@ packages:
     resolution: {integrity: sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
+
+  /@types/object-hash@3.0.6:
+    resolution: {integrity: sha512-fOBV8C1FIu2ELinoILQ+ApxcUKz4ngq+IWUYrxSGjXzzjUALijilampwkMgEtJ+h2njAW3pi853QpzNVCHB73w==}
     dev: true
 
   /@types/pug@2.0.10:
@@ -2630,6 +2643,11 @@ packages:
       path-key: 4.0.0
     dev: true
 
+  /object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
+    dev: true
+
   /object-inspect@1.13.1:
     resolution: {integrity: sha512-5qoj1RUiKOMsCCNLV1CBiPYE10sziTsnmNxkAI/rZhiD63CF7IqdFGC/XzjWjpSgLf0LxXX3bDFIh0E18f6UhQ==}
     dev: true
@@ -3645,6 +3663,10 @@ packages:
       '@jridgewell/trace-mapping': 0.3.20
       '@types/istanbul-lib-coverage': 2.0.6
       convert-source-map: 2.0.0
+    dev: true
+
+  /vanilla-lazyload@17.8.5:
+    resolution: {integrity: sha512-SQdQztlVUJqCbyU15zobpAcoTucCzdJiDIEfqinZDdwifhZxQ5H2j0BJfHlrFxi0lrVAdFBRsICH51YdPv18DQ==}
     dev: true
 
   /vite-node@1.1.1(@types/node@20.10.6)(sass@1.69.7):

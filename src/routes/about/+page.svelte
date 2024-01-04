@@ -1,12 +1,13 @@
 <script lang="ts">
+  import SEO from '$lib/components/seo/SEO.svelte';
   import website from '$lib/config/website';
   const { siteTitle, githubRepo } = website;
+  const pageTitle = 'About';
+  const pageCaption = 'About page';
+  const seoProps = { pageTitle, pageCaption, slug: 'about' };
 </script>
 
-<svelte:head>
-  <title>About</title>
-  <meta name="description" content="About this app" />
-</svelte:head>
+<SEO {...seoProps} />
 
 <div class="text-column">
   <h1>About this app</h1>

@@ -1,20 +1,102 @@
-<script>
+<script lang="ts">
+  import SEO from '$lib/components/seo/SEO.svelte';
+  import website from '$lib/config/website';
+  const { author, siteUrl } = website;
+  const pageTitle = 'Home';
+  const pageCaption = 'Home page';
+
+  import {
+    ogSquareImageSrc,
+    ogImageSrc,
+    twitterImageSrc,
+    featuredImageSrc,
+    altDescription
+  } from '$lib/assets/home/index';
+
   import Counter from './Counter.svelte';
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
+  const welcomeSize = { width: 2048, height: 495 };
+
+  const breadcrumbs = [
+    {
+      name: pageTitle,
+      slug: ''
+    }
+  ];
+  // let pageCaption = description;
+
+  const featuredImageAlt = altDescription;
+  const featuredImage = {
+    url: featuredImageSrc,
+    alt: featuredImageAlt,
+    width: 672,
+    height: 448,
+    caption: pageCaption
+  };
+  const ogImage = {
+    url: ogImageSrc,
+    alt: featuredImageAlt
+  };
+  const ogSquareImage = {
+    url: ogSquareImageSrc,
+    alt: featuredImageAlt
+  };
+  const twitterImage = {
+    url: twitterImageSrc,
+    alt: featuredImageAlt
+  };
+
+  const entityMeta = {
+    url: `${siteUrl}/`,
+    faviconWidth: 512,
+    faviconHeight: 512,
+    caption: author
+  };
+
+  const seoProps = {
+    pageTitle,
+    pageCaption,
+    slug: '',
+    entityMeta,
+    datePublished: '2022-12-09T16:06:55.000Z', // ISO8601 (new Date()).toISOString()
+    lastUpdated: '2022-12-09T16:06:55.000Z', // ISO8601 (new Date()).toISOString()
+    breadcrumbs,
+
+    // Change default images:
+    featuredImage,
+    ogImage,
+    ogSquareImage,
+    twitterImage,
+
+    // since no `article: true`, we have to explicitly turn on meta objects:
+    useOpenGraph: true,
+    useTwitter: true,
+    useSchemaOrg: true
+  };
 </script>
 
-<svelte:head>
-  <title>Home</title>
-  <meta name="description" content="Svelte demo app" />
-</svelte:head>
+<SEO {...seoProps} />
 
 <section>
   <h1>
     <span class="welcome">
       <picture>
-        <source srcset={welcome} type="image/webp" />
-        <img src={welcome_fallback} alt="Welcome" />
+        <source
+          width={welcomeSize.width}
+          height={welcomeSize.height}
+          srcset={welcome}
+          type="image/webp"
+        />
+        <img
+          loading="lazy"
+          decoding="async"
+          width={welcomeSize.width}
+          height={welcomeSize.height}
+          data-src={welcome_fallback}
+          src=""
+          alt="Welcome"
+        />
       </picture>
     </span>
 

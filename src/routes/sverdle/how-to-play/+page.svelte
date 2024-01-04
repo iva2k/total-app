@@ -1,7 +1,11 @@
-<svelte:head>
-  <title>How to play Sverdle</title>
-  <meta name="description" content="How to play Sverdle" />
-</svelte:head>
+<script lang="ts">
+  import SEO from '$lib/components/seo/SEO.svelte';
+  const pageTitle = 'How to play Sverdle';
+  const pageCaption = 'How to play Sverdle';
+  const seoProps = { pageTitle, pageCaption, slug: 'sverdle/how-to-play' };
+</script>
+
+<SEO {...seoProps} />
 
 <div class="text-column">
   <h1>How to play Sverdle</h1>

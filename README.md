@@ -19,6 +19,7 @@ Is it Native? - No. It uses JavaScript / TypeScript and modern tooling to create
 
 Out of the box features:
 
+- SEO and integration with Social Networks
 - Offline mode / can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
 - Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs.
 - Support deep links, in online and in offline modes.

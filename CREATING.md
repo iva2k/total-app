@@ -264,3 +264,36 @@ This setup involves 4 files: `.env` (it is listed in .gitignore and is never com
 The source of truth / relevant variables are spread between 2 files: `.env` and `$lib/config/websiteFnc.js`. The `.env` file should never be committed to repository since it is intended to contain website secrets. It is more involved to reproduce that file on the server / hosting provider. Most variables for the website are public anyway, and they should be defined in `$lib/config/websiteFnc.js` and commited to the repository. It will limit how many variables will need to be configured on hosting provider, since all variables set in `.env` will need to be configured securely in provider UI.
 
 One more hurdle to overcome is fixing the ESLint rule 'import/no-unresolved' for `$env/static/public` used in `$lib/config/website.js`. But for now the ESLint is shut down with `// eslint-disable-next-line import/no-unresolved`.
+
+### Add SEO
+
+TODO: (soon) Revisit <https://github.com/artiebits/svelte-seo>, maybe it is worth using that idea? Has reasonable object data types, has keywords & tags. Downside is common params have to be repeated across objects.
+
+If your app or website does not appear in the top search results, very few people will visit it, because 90% of users will not go beyond the first page of search results [[source]](https://www.forbes.com/sites/forbesagencycouncil/2017/10/30/the-value-of-search-results-rankings/). 33% of users will click the first result and 17% the second. You need Google to rank your website high for the users to click on it.
+
+Search Engine Optimisation (SEO) is all about getting your website to appear at the top of search engine results. This SEO component adds some metadata and makes optimizations to get higher search rankings.
+
+Other optimizations are getting higher speed / better UX. SvelteKit provides the fastest performance with PWA/SSR/SSG done right, and no slowdowns from virtual DOM of other popular frameworks. One thing is important for UX and fast loads are lazy loading, so we will add it as an example to the large images. TODO.
+
+```bash
+pnpm i -D @types/object-hash object-hash vanilla-lazyload
+```
+
+Create `src/lib/components/seo/SEO.svelte` component and few sub-components for generating meta-data for SEO (see sources). SEO component is used on each page, and relies on the configuration information from `$lib/config/website.js`.
+
+It is worth stressing that there's no way to determine hosting website URL during build / prerendering phase. PUBLIC_SITE_URL variable must be configured so the SEO canonical URL is generated correctly. Site URL's for Netlify and Vercel can be also set in `prerender.origin` in `svelte.config.js`, but they seem to not work as expected (SEO.svelte does not receive `$page.url.origin` other than `http://sveltekit-prerender`).
+
+Credits: [Rodney Lab: SvelteKit SEO](https://rodneylab.com/sveltekit-seo/)
+
+To add more Schemas, lookup the types on <https://schema.org/docs/full.html> and check what types other sites use.
+
+See the following tools for checking the structured data on your deployed website:
+
+- <https://validator.schema.org>
+- <https://developers.google.com/search/docs/appearance/structured-data>
+- <https://search.google.com/test/rich-results>
+- <https://search.google.com/search-console/welcome>
+- <https://developers.facebook.com/tools/debug/> (Must login to use it)
+
+TODO: (soon) Fix FB issue:
+Missing Properties | The following required properties are missing: fb:app_id
