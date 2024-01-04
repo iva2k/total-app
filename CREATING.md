@@ -241,6 +241,14 @@ const config: PlaywrightTestConfig = {
   ...
 ```
 
+### Organize template components into `src/lib/components`
+
+Move `src/routes/Counter.svelte` to `src/lib/components/counter/` and change paths to match in `src/routes/+page.svelte` file where it is used.
+
+Move `src/routes/Header.svelte` to `src/lib/components/header/` and change paths to match in `src/routes/+layout.svelte` file where it is used.
+
+(See sources).
+
 ### Website Config Files
 
 Config files help organize site-wide settings. SvelteKit and Vite use .env files underneath, and we will build a helper file `$lib/config/website.js` to collect the relevant settings into one abstraction, similar to <https://rodneylab.com/sveltekit-blog-starter/#src-lib>.

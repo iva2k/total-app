@@ -13,7 +13,7 @@
     altDescription
   } from '$lib/assets/home/index';
 
-  import Counter from './Counter.svelte';
+  import Counter from '$lib/components/counter/Counter.svelte';
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
   const welcomeSize = { width: 2048, height: 495 };
