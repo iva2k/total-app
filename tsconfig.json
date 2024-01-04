@@ -12,6 +12,12 @@
     // END copy from .svelte-kit/tsconfig.json
 
     // BEGIN override .svelte-kit/tsconfig.json
+    "paths": {
+      "$app/*": ["./node_modules/@sveltejs/kit/src/runtime/app/*"], // Added for $app ESLint
+      "$env/*": ["./node_modules/@sveltejs/kit/src/runtime/env/*"], // Added for $env ESLint
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"]
+    },
     // END override .svelte-kit/tsconfig.json
 
     "allowJs": true,
@@ -21,9 +27,11 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "outDir": ".types"
   },
-  "ts-node": { "esm": true, "experimentalSpecifierResolution": "node" }
+  "exclude": ["./node_modules/**", "./.svelte-kit/[!ambient.d.ts]**", "./.types"]
+
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //
   // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
