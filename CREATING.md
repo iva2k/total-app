@@ -183,3 +183,40 @@ avoid problems with intellisense. For path aliases, use `kit.alias` instead: htt
 ```
 
 We ignore it for now.
+
+### Issue "Could not detect a supported production environment" when running `pnpm run build`
+
+> Could not detect a supported production environment. See <https://kit.svelte.dev/docs/adapters> to learn how to configure your app to run on the platform of your choosing
+
+Fix:
+
+TBD
+
+## Additions
+
+### Vitest Coverage
+
+When creating SvelteKit project, choose vitest to be added.
+
+For coverage, add '@vitest/coverage-v8' package:
+
+```bash
+pnpm i -D @vitest/coverage-v8
+```
+
+Add '/coverage' to .gitignore, .eslintignore, .prettierignore (see sources).
+
+Add some scripts:
+
+```json
+// package.json
+{
+  ...
+  "scripts": {
+    ...
++    "test:unit": "echo RUN test:unit && vitest run",
++    "test:unit:watch": "echo RUN test:unit:watch && vitest",
++    "test:unit:coverage": "echo RUN test:unit:coverage && vitest run --coverage",
+  }
+}
+```

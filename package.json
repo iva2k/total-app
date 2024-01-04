@@ -18,9 +18,11 @@
     "test:integration:debug":                        "echo RUN test:integration:debug                         && cross-env NO_HTTPS=1 playwright test --headed --timeout=0",
     "check":                                         "echo RUN check                                          && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch":                                   " echo RUN check:watch                                   &&  svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test:unit":                                     "echo RUN test:unit                                      && vitest run",
+    "test:unit:watch":                               "echo RUN test:unit:watch                                && vitest",
+    "test:unit:coverage":                            "echo RUN test:unit:coverage                             && vitest run --coverage",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
-    "test:unit": "vitest",
     "all": "pnpm i && pnpm format && pnpm lint && pnpm build && pnpm test:unit && pnpm test:integration && pnpm check"
   },
   "devDependencies": {
@@ -37,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
+    "@vitest/coverage-v8": "^1.1.1",
     "cpy": "^11.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
