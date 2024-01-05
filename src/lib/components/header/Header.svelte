@@ -20,16 +20,15 @@
     </svg>
     <ul>
       <!-- TODO: (when needed) Remove eslint-disable -->
-      <li
-        aria-current={/* eslint-disable svelte/valid-compile */ $page.url.pathname === '/'
-          ? 'page'
-          : undefined}
-      >
+      <!-- eslint-disable-next-line svelte/valid-compile -->
+      <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
         <a href="/">Home</a>
       </li>
+      <!-- eslint-disable-next-line svelte/valid-compile -->
       <li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
         <a href="/about">About</a>
       </li>
+      <!-- eslint-disable-next-line svelte/valid-compile -->
       <li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
         <a href="/sverdle">Sverdle</a>
       </li>
