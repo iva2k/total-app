@@ -305,3 +305,19 @@ See the following tools for checking the structured data on your deployed websit
 
 TODO: (soon) Fix FB issue:
 Missing Properties | The following required properties are missing: fb:app_id
+
+### Add SSR-Safe Store Services
+
+SvelteKit provides good server/client support for stores. They are easy to use, but have some mines to avoid when using SSR (see <https://kit.svelte.dev/docs/state-management#avoid-shared-state-on-the-server> and <https://github.com/sveltejs/kit/discussions/4339>).
+
+See package addressing the issue in the most simple to use way: `@svelte-kits/store` <https://github.com/svelte-kits/store>
+
+```bash
+pnpm install -D @svelte-kits/store
+```
+
+Then just replace `svelte/store` with `@svelte-kits/store`, for all store uses (though only `writable` store is affected by SSR).
+
+Also see <https://dev.to/jdgamble555/the-correct-way-to-use-stores-in-sveltekit-3h6i>.
+
+For upcoming v5.0 Svelte runes, see <https://dev.to/jdgamble555/create-the-perfect-sharable-rune-in-svelte-ij8>.

@@ -1,4 +1,5 @@
-import { readable } from 'svelte/store';
+// import { readable } from 'svelte/store';
+import { readable } from '@svelte-kits/store';
 import { browser } from '$app/environment';
 
 const reduced_motion_query = '(prefers-reduced-motion: reduce)';
