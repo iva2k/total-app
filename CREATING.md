@@ -321,3 +321,40 @@ Then just replace `svelte/store` with `@svelte-kits/store`, for all store uses (
 Also see <https://dev.to/jdgamble555/the-correct-way-to-use-stores-in-sveltekit-3h6i>.
 
 For upcoming v5.0 Svelte runes, see <https://dev.to/jdgamble555/create-the-perfect-sharable-rune-in-svelte-ij8>.
+
+### Add Service Worker for Offline Operation
+
+Service Worker will allow the app to work in offline mode. See <https://kit.svelte.dev/docs/service-workers> and <https://vite-pwa-org.netlify.app/frameworks/sveltekit.html> / <https://vite-pwa-org.netlify.app/frameworks/svelte.html>.
+
+In order for the application to work offline, `csr` should NOT be set to false on any of the pages since it will prevent injecting JavaScript into the layout for offline support.
+
+The app has to satisfy PWA Minimal Requirements, see <https://vite-pwa-org.netlify.app/guide/pwa-minimal-requirements.html>.
+
+If your application has forms, we recommend you to change the behavior of automatic reload to use default `prompt` option to allow the user decide when to update the content of the application, otherwise automatic update may clear form data if it decides to update when the user is filling the form.
+
+```bash
+pnpm i -D @vite-pwa/sveltekit vite-plugin-pwa@^0.13.3 workbox-core workbox-build workbox-window workbox-precaching workbox-routing @rollup/plugin-replace
+```
+
+Create files and make some changes (see sources):
+
+- Add /dev-dist to .gitignore, .eslintignore, .prettierignore
+- TODO: (now) Needed? Patch @vite-pwa/sveltekit to fix problem with import in TypeScript, see file `patches/@vite-pwa__sveltekit@0.0.1.patch` for a hot-fix.
+- Add SvelteKitPWA to "vite.config.ts"
+- Create "src/lib/components/offline/Offline.svelte"
+- Create "src/lib/components/reloadprompt/ReloadPrompt.svelte"
+- Create "src/claims-sw.ts"
+- Create "src/prompt-sw.ts"
+- Create "pwa-configuration.js" (no typescript!)
+- Add Offline component to "src/routes/+layout.svelte"
+- Make `prerender = true` the default in "src/routes/+layout.svelte" - offline precaching needs all routes prerenderd. Dynamic routes won't work offline.
+- Remove `csr = false` and `csr = dev` from all "src/routes/\*\*/+page.ts" files
+- Add service worker scripts to `package.json`
+
+#### Fix Issues
+
+// TODO: (now) File issue:
+
+Error importing from '@vite-pwa/sveltekit' - there is `export default {...}` in @vite-pwa/sveltekit/dist/index.mjs.
+Changing it to `export {...}` (removing `default`) fixes the problem.
+Use `pnpm patch @vite-pwa/sveltekit`, editing the file in directory created by `pnpm patch`, and creating a patch file with `pnpm patch-commit <path given by pnpm>`.

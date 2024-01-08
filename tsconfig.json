@@ -16,7 +16,11 @@
       "$app/*": ["./node_modules/@sveltejs/kit/src/runtime/app/*"], // Added for $app ESLint
       "$env/*": ["./node_modules/@sveltejs/kit/src/runtime/env/*"], // Added for $env ESLint
       "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
+      "$lib/*": ["./src/lib/*"],
+      "@vite-pwa/sveltekit": ["./node_modules/@vite-pwa/sveltekit/dist"],
+      "virtual:pwa-client": ["./node_modules/vite-plugin-pwa/client.d.ts"],
+      "virtual:pwa-info": ["./node_modules/vite-plugin-pwa/info.d.ts"]
+      // "*": ["*", "./node_modules/@types/*", "./node_modules/@vite-pwa/sveltekit/*"]
     },
     // END override .svelte-kit/tsconfig.json
 
@@ -30,7 +34,7 @@
     "strict": true,
     "outDir": ".types"
   },
-  "exclude": ["./node_modules/**", "./.svelte-kit/[!ambient.d.ts]**", "./.types"]
+  "exclude": ["./node_modules/**", "./.svelte-kit/[!ambient.d.ts]**", "./.types", "./dev-dist/**"]
 
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //

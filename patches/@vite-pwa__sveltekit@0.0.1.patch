@@ -1,0 +1,10 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 6bf8429c23efaa7993f65e40968ecf6fb8364b3e..176e7301cbcf9ba86ff093cce40edd65f6c19376 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -80,4 +80,4 @@ function SvelteKitPWA(userOptions = {}) {
+   return VitePWA(userOptions);
+ }
+ 
+-export default { SvelteKitPWA };
++export { SvelteKitPWA };

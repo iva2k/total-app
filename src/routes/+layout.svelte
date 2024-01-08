@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import Offline from '$lib/components/offline/Offline.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
 
@@ -12,6 +13,8 @@
   <main>
     <slot />
   </main>
+
+  <Offline />
 
   <footer>
     <p>

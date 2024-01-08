@@ -6,10 +6,13 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.svelte",
+    "src/claims-sw.ts",
+    "src/prompt-sw.ts",
     "scripts/*.ts",
     "tests/**/*.ts",
     "assets.ts",
     "playwright.config.ts",
+    "pwa-configuration.js",
     "svelte.config.js"
   ]
 }
