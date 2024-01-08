@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "svelte.svelte-vscode",
+    "fivethree.vscode-svelte-snippets",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "stylelint.vscode-stylelint",
+    "gruntfuggly.todo-tree",
+    "joshbolduc.story-explorer",
+    "mrmlnc.vscode-autoprefixer",
+    "ms-playwright.playwright",
+    "ionic.ionic",
+    "dotjoshjohnson.xml",
+    "christian-kohler.npm-intellisense",
+    "eamodio.gitlens",
+    "kamikillerto.vscode-colorize",
+    "steoates.autoimport",
+    "wix.vscode-import-cost",
+    "zignd.html-css-class-completion",
+    "zixuanchen.vitest-explorer",
+    "usernamehw.errorlens"
+  ]
+}
