@@ -103,7 +103,7 @@ const pwaConfigurationFnc = async (
       name: siteTitle, // set programmatically, below
       description,
       screenshots: [
-        {src: '/icon-txr-512x512.png', type: 'image/png', sizes:'512x512', form_factor: 'wide'},
+        {src: '/icon-txr-512x512.png', type: 'image/png', sizes:'512x512', form_factor: 'wide'}, // TODO: (now) Make wide screenshot image
         {src: '/icon-txr-512x512.png', type: 'image/png', sizes:'512x512', form_factor: 'narrow'}
       ],
 
