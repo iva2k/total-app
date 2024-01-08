@@ -45,7 +45,8 @@
     "test:unit:coverage":                            "echo RUN test:unit:coverage                             && vitest run --coverage",
     "lint":                                          "prettier  --check . && eslint .",
     "format":                                        "prettier --write .",
-    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm test:unit && pnpm test:integration && pnpm check"
+    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm test:unit && pnpm test:integration && pnpm check",
+    "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
   "devDependencies": {
     "@fontsource/fira-mono": "^4.5.10",
