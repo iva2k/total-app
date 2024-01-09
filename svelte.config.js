@@ -46,7 +46,10 @@ const config = {
       // $components: resolve('./src/lib/components')
     },
     files: {
-      serviceWorker: path.join(pwaConfiguration.srcDir || 'src', pwaConfiguration.filename || 'sw.js'),
+      serviceWorker: path.join(
+        pwaConfiguration.srcDir || 'src',
+        pwaConfiguration.filename || 'sw.js'
+      )
     }
   },
 

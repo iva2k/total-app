@@ -14,10 +14,10 @@ Place the following SVG files in this directory:
 
 For image conversion & generation script install the following software:
 
-- Python 3    : Visit <https://www.python.org> to install.
-- Scour       : Visit <https://github.com/scour-project/scour> to install. Run `pip install scour`.
-- Inkscape    : Visit <https://inkscape.org> to install.
-- OptiPNG     : Visit <https://optipng.sourceforge.net> to install.
+- Python 3 : Visit <https://www.python.org> to install.
+- Scour : Visit <https://github.com/scour-project/scour> to install. Run `pip install scour`.
+- Inkscape : Visit <https://inkscape.org> to install.
+- OptiPNG : Visit <https://optipng.sourceforge.net> to install.
 - ImageMagick : Visit <https://imagemagick.org> to install.
 
 ## Generate
