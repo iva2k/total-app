@@ -35,6 +35,9 @@
     "preview":                                       " echo RUN preview(:https)                               &&  vite preview --port 4173",
     "preview:https":                                 " pnpm preview",
     "preview:http":                                  " echo RUN preview:http                                  &&  cross-env NO_HTTPS=1 vite preview --port 4173",
+    "tauri:dev":                                     " echo RUN tauri:dev                                     &&  tauri dev",
+    "tauri:build":                                   "echo RUN tauri:build                                    && tauri build",
+    "tauri":                                         "echo RUN tauri                                          && tauri",
     "test":                                          "pnpm run test:integration && pnpm run test:unit",
     "test:integration":                              "echo RUN test:integration                               && cross-env NO_HTTPS=1 playwright test",
     "test:integration:debug":                        "echo RUN test:integration:debug                         && cross-env NO_HTTPS=1 playwright test --headed --timeout=0",
@@ -45,7 +48,7 @@
     "test:unit:coverage":                            "echo RUN test:unit:coverage                             && vitest run --coverage",
     "lint":                                          "prettier  --check . && eslint .",
     "format":                                        "prettier --write .",
-    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm test:unit && pnpm test:integration && pnpm check",
+    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm test:unit && pnpm test:integration && pnpm check",
     "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
   "devDependencies": {
@@ -57,6 +60,8 @@
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@tauri-apps/api": "2.0.0-alpha.13",
+    "@tauri-apps/cli": "2.0.0-alpha.20",
     "@types/eslint": "8.56.0",
     "@types/glob": "^8.1.0",
     "@types/minimist": "^1.2.5",

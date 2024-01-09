@@ -31,6 +31,7 @@ Built with:
 
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
+- [Tauri](https://tauri.studio) - Desktop Application framework
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
@@ -92,6 +93,8 @@ When deploying your website to any provider (Netlify, Vercel), make sure to set 
 
 ## Developing Locally
 
+Please follow the [Tauri Getting Started Guide](https://tauri.app/v1/guides/getting-started/prerequisites) to setup your system with the required [Rust](https://www.rust-lang.org/) toolchain.
+
 This application is built like a typical Node.js application. However, instead of `npm`, [`pnpm`](https://pnpm.io/) is used for package management.
 
 > **Note:** You may use `yarn` or `npm`, but only a `pnpm` lockfile is included, and some scripts call `pnpm` directly and need to be changed to your package manager.
@@ -120,6 +123,21 @@ pnpm run build
 To preview the production build of the web app, execute `pnpm run preview`.
 
 To deploy the app, need to install an [adapter](https://kit.svelte.dev/docs/adapters) for the target environment. Netlify and Vercel adapters are already installed and automatically selected when deploying to these providers.
+
+## Desktop App
+
+To run desktop app (using Tauri)
+
+```bash
+pnpm run tauri:dev
+# The app window will open
+```
+
+To create desktop executable:
+
+```bash
+pnpm run tauri:build
+```
 
 ## Customizing
 

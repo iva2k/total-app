@@ -27,7 +27,13 @@ KISS - Keep-It-Simple,Stupid. Keep the code simple and clear, making it easy to 
 
 ## Prerequisites
 
-Please follow the [Tauri Getting Started Guide](https://tauri.studio/en/docs/getting-started/intro#steps) to setup your system with the required Rust toolchain.
+Install [Git](https://git-scm.com/).
+
+Install [NodeJS](https://nodejs.org/en).
+
+Recommended [VSCode](https://code.visualstudio.com/) for IDE.
+
+Please follow the [Tauri Getting Started Guide](https://tauri.app/v1/guides/getting-started/prerequisites) to setup your system with the required [Rust](https://www.rust-lang.org/) toolchain.
 
 ## create-svelte
 
@@ -387,4 +393,85 @@ Modifications include:
 - Use CSS `visibility: hidden` so no interference with layout and other elements.
 - Keyboard handling of 'Escape' to close and 'Tab' to move focus between elements.
 
-The Drawer component is not used yet, but will be needd later.
+The Drawer component is not used yet, but will be needed later.
+
+### Add Tauri
+
+Add desktop support using Tauri (version 2.0.0-alpha.20 as of writing time).
+
+Why not Electron? - Tauri is way way better.
+
+TODO: (now) Check out Tauri mobile support:
+
+Note: iOS and Android support is promised in Tauri discussions, 2.0.0-alpha seems to bring it.
+
+```bash
+pnpm i -D @tauri-apps/api@next @tauri-apps/cli@next
+rustc --version
+# If needed, update to rustc 1.70 or newer:
+rustup update
+```
+
+Add scripts to package.json (see source for exact changes, these are the essence):
+
+```json
+   {
+     scripts {
+-      "dev": "vite dev",
++      "dev": "vite dev --port 3000",
+       "build": "vite build",
++      "tauri:dev": "tauri dev",
++      "tauri:build": "tauri build",
++      "tauri": "tauri",
+     }
+   }
+```
+
+```bash
+pnpm run tauri init
+# What is your app name? - total-app
+# What should the window title be? - total-app
+# Where are your web assets (HTML/CSS/JS) located, relative to the "<current dir>/src-tauri/tauri.conf.json" file that will be created? - ../build
+# What is the url of your dev server? - http://localhost:3000
+# What is your frontend dev command? - pnpm run dev
+# What is your frontend build command? - pnpm run build
+```
+
+Add some .gitignore/.eslintignore/.prettierignore patterns (see source files).
+
+#### Change bundle identifier
+
+To remove the issue:
+
+> "Error: You must change the bundle identifier in `tauri.conf.json > tauri > bundle > identifier`. The default value `com.tauri.dev` is not allowed as it must be unique across applications."
+
+Edit file `src-tauri/tauri.conf.json`:
+
+```json
+// src-tauri/tauri.conf.json
+{
+  ...
+  "tauri": {
+    ...
+    "bundle": {
+      ...
+-      "identifier": "com.tauri.dev",
++      "identifier": "com.iva2k.total-app",
+      ...
+```
+
+#### Fix Tauri Issues
+
+TODO: (soon):
+
+```bash
+pnpm tauri:dev
+Warn Invalid target triple: x86_64-pc-windows-msvc
+```
+
+TODO: (soon):
+
+```bash
+pnpm tauri:build
+Error Unable to find your web assets, did you forget to build your web app? Your distDir is set to ""../build"".
+```
