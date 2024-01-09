@@ -1,0 +1,54 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "pnpm build:only",
+      "name": "pnpm build:only",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm build:only-sw",
+      "name": "pnpm build:only-sw",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm build:only-destroy",
+      "name": "pnpm build:only-destroy",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost:3000",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against https://localhost:3000",
+      "url": "https://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost:4173",
+      "url": "http://localhost:4173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against https://localhost:4173",
+      "url": "https://localhost:4173",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
