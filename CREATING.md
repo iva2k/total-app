@@ -287,7 +287,7 @@ Other optimizations are getting higher speed / better UX. SvelteKit provides the
 pnpm i -D @types/object-hash object-hash vanilla-lazyload
 ```
 
-Create `src/lib/components/seo/SEO.svelte` component and few sub-components for generating meta-data for SEO (see sources). SEO component is used on each page, and relies on the configuration information from `$lib/config/website.js`.
+Create `src/lib/components/seo/SEO.svelte` component and few sub-components for generating meta-data for SEO (see sources). SEO component is used on each page, and relies on the configuration information from `src/lib/config/website.js`.
 
 It is worth stressing that there's no way to determine hosting website URL during build / prerendering phase. PUBLIC_SITE_URL variable must be configured so the SEO canonical URL is generated correctly. Site URL's for Netlify and Vercel can be also set in `prerender.origin` in `svelte.config.js`, but they seem to not work as expected (SEO.svelte does not receive `$page.url.origin` other than `http://sveltekit-prerender`).
 
@@ -361,8 +361,30 @@ Use `pnpm patch @vite-pwa/sveltekit`, editing the file in directory created by `
 
 ### Add Favicon Component
 
-To encapsulate all favicon-related stuff (and keep the mess out of app.html), create ``$lib/components/favicon/Favicon.svelte` component. Use it from `src/routes/+layout.svelte` file.
+To encapsulate all favicon-related stuff (and keep the mess out of app.html), create `src/lib/components/favicon/Favicon.svelte` component. Use it from `src/routes/+layout.svelte` file.
 
 Add `badge.ts` to all png favicons so they dynamically display number of new notifications.
 
 See source files.
+
+### Add Drawer Component
+
+A slide-out drawer is a must-have functionality for most modern apps and many websites.
+
+Let's create one, with animations, accessibility, SSR-friendly.
+
+See `src/lib/components/drawer/Drawer.svelte` and `src/lib/actions/FocusTrap/focusTrap.ts` sources.
+
+Credits:
+
+- <https://github.com/rsdavis/svelte-drawer/blob/main/src/Drawer.svelte>
+- <https://github.com/skeletonlabs/skeleton/blob/master/src/lib/utilities/Drawer/Drawer.svelte>
+- <https://github.com/skeletonlabs/skeleton/blob/master/src/lib/actions/FocusTrap/focusTrap.ts>
+
+Modifications include:
+
+- Elements remain mounted (no `{#if ...} that remove elements from DOM).
+- Use CSS `visibility: hidden` so no interference with layout and other elements.
+- Keyboard handling of 'Escape' to close and 'Tab' to move focus between elements.
+
+The Drawer component is not used yet, but will be needd later.
