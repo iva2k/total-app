@@ -58,6 +58,7 @@
     "@rollup/plugin-replace": "^5.0.5",
     "@svelte-kits/store": "^0.1.2",
     "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@tauri-apps/api": "2.0.0-alpha.13",

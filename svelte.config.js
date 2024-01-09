@@ -1,5 +1,6 @@
 import path from 'path';
-import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { loadEnv } from 'vite';
 import { pwaConfigurationFnc } from './pwa-configuration.js';
@@ -32,7 +33,14 @@ const config = {
     // base: '',
     // outDir: './.svelte-kit',
     // ? adapterFallback: 'index.html',
-    adapter: adapter(),
+    adapter: adapter({
+      // default options are shown:
+      // pages: 'build',
+      // assets: 'build',
+      // fallback: null,
+      // precompress: false
+      fallback: 'index.html'
+    }),
     // prerender: { entries: [] },
 
     // Form submissions do not function in `vite preview` with https (due to cookie)

@@ -469,9 +469,66 @@ pnpm tauri:dev
 Warn Invalid target triple: x86_64-pc-windows-msvc
 ```
 
-TODO: (soon):
+### Set Svelte SPA mode
+
+For using Tauri and Capacitor (standalone app) - SvelteKit should be set to SPA mode and explicitly opt out of SvelteKit's assumption needing a server.
+
+SPA mode is set by using adapter-static and setting `fallback` option, see <https://github.com/sveltejs/kit/tree/master/packages/adapter-static#spa-mode>.
+
+There are errors in many online sources that give wrong information about `prerender` and `ssr` for SPA mode (including SvelteKit's own documentation).
+
+Note: Tauri and Capacitor -based app could still use a server if needed, but they cannot rely on SvelteKit server-side endpoints.
+
+For deploying web apps, we can add and setup necessary adapters as needed (see below).
 
 ```bash
-pnpm tauri:build
-Error Unable to find your web assets, did you forget to build your web app? Your distDir is set to ""../build"".
+pnpm i -D @sveltejs/adapter-static
+```
+
+SvelteKit dynamic routes don't work with adapter-static, unless a fallback is set.
+
+```js
+// svelte.config.js
+- import adapter from '@sveltejs/adapter-auto';
++ import adapter from '@sveltejs/adapter-static';
+...
+export default {
+  kit: {
+    ...
++    adapter: adapter({
++      // default options are shown:
++      // pages: 'build',
++      // assets: 'build',
++      // fallback: null,
++      // precompress: false
++      fallback: 'index.html'
++    }),
++    // prerender: { entries: [] },
+  }
+};
+```
+
+Create `src/routes/+layout.ts` to set `prerender` and `ssr`:
+
+```js
+// src/routes/+layout.ts
+
+// Let SvelteKit decide to prerender for each page by default:
+export const prerender = true;
+// As of @sveltejs/kit 1.0.0-next.563, pages with actions (e.g. sub-routes) throw error in `vite build`.
+// Each such route should set prerender = false if needed in `src/routes/**/+page.ts`.
+
+// Setting ssr = false (which is recommended for SPA in docs) breaks all server-side routes
+// (generated pages have no content, therefore SPA does not load).
+// We let SvelteKit render all routes on server, so deep links will still work:
+export const ssr = true;
+```
+
+Adjust all `src/routes/**+page.ts` files - set prerender = false for pages with action (i.e. having a sub-route), in SvelteKit demo app it is /sverdle:
+
+```js
+// src/routes/sverdle/+page.ts
+
+// This page has action (sub-route), so we need to explicitly disable prerender here;
+export const prerender = false;
 ```
