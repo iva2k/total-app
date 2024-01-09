@@ -358,3 +358,11 @@ Create files and make some changes (see sources):
 Error importing from '@vite-pwa/sveltekit' - there is `export default {...}` in @vite-pwa/sveltekit/dist/index.mjs.
 Changing it to `export {...}` (removing `default`) fixes the problem.
 Use `pnpm patch @vite-pwa/sveltekit`, editing the file in directory created by `pnpm patch`, and creating a patch file with `pnpm patch-commit <path given by pnpm>`.
+
+### Add Favicon Component
+
+To encapsulate all favicon-related stuff (and keep the mess out of app.html), create ``$lib/components/favicon/Favicon.svelte` component. Use it from `src/routes/+layout.svelte` file.
+
+Add `badge.ts` to all png favicons so they dynamically display number of new notifications.
+
+See source files.

@@ -22,11 +22,8 @@ Out of the box features:
 - SEO and integration with Social Networks
 - SSR / Server-Side Rendering
 - Offline mode / can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
-- Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs.
 - Support deep links, in online and in offline modes.
 - Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
-- Prepared for Isolated Component Development (Storybook).
-- Instrumented for quick deployment - Netlify, Vercel, NGINX, etc.
 
 ## Technology Stack
 
@@ -45,8 +42,9 @@ Enhancements not found in the foundational packages and templates:
 - Vitest coverage
 - Playwright reports
 - ESLint imports
-- Consolidated website configuration
 - SSR-safe Svelte stores
+- Consolidated website configuration
+- Organized Favicon resolutions with notification badges support
 
 ## Install
 
