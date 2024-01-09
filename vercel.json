@@ -1,0 +1,6 @@
+{
+  "framework": "sveltekit",
+  "buildCommand": "pnpm run build:only-sw",
+  "devCommand": "pnpm run dev",
+  "outputDirectory": ".vercel/output"
+}

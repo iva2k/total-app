@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "pnpm build:netlify",
+      "name": "pnpm build:netlify",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm build:vercel",
+      "name": "pnpm build:vercel",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "command": "pnpm build:only",
       "name": "pnpm build:only",
       "request": "launch",

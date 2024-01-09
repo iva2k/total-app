@@ -24,6 +24,7 @@ Out of the box features:
 - Offline mode / can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
 - Support deep links, in online and in offline modes.
 - Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
+- Instrumented for quick deployment - Netlify, Vercel, NGINX, etc.
 
 ## Technology Stack
 
@@ -36,6 +37,11 @@ Built with:
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
+
+Continuous Integrations and Deployments:
+
+- [Netlify](https://total-app.netlify.app) - App Demo
+- [Vercel](https://total-app.vercel.app) - App Demo
 
 Enhancements not found in the foundational packages and templates:
 

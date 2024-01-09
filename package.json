@@ -15,6 +15,8 @@
     "dev-claims-destroy":                            " echo RUN dev-claims-destroy                            && pnpm svelte:predev     && cross-env SW_DEV=true DEBUG=vite-plugin-pwa:* SW=true SW_DESTROY=true CLAIMS=true vite dev --port 3000",
     "build":                                         "echo RUN build                                          && pnpm build:base",
     "build:base":                                    "echo RUN build:base                                     && pnpm svelte:prebuild   && vite build",
+    "build:netlify":                                 "echo RUN build:netlify                                  && cross-env NETLIFY=true pnpm build:only-sw",
+    "build:vercel":                                  "echo RUN build:vercel                                   && cross-env VERCEL=true  pnpm build:only-sw",
     "build:only":                                    "echo RUN build:only                                     && cross-env BASE_URL=/ SOURCE_MAP=true DEBUG=vite-plugin-pwa:*                                                     pnpm build:base",
     "build:only-reloadsw":                           "echo RUN build:only-reloadsw                            && cross-env BASE_URL=/ SOURCE_MAP=true DEBUG=vite-plugin-pwa:*                                     RELOAD_SW=true  pnpm build:base",
     "build:only-claims":                             "echo RUN build:only-claims                              && cross-env BASE_URL=/ SOURCE_MAP=true DEBUG=vite-plugin-pwa:*                         CLAIMS=true                 pnpm build:base",
@@ -48,7 +50,7 @@
     "test:unit:coverage":                            "echo RUN test:unit:coverage                             && vitest run --coverage",
     "lint":                                          "prettier  --check . && eslint .",
     "format":                                        "prettier --write .",
-    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm test:unit && pnpm test:integration && pnpm check",
+    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
     "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
   "devDependencies": {
@@ -58,7 +60,9 @@
     "@rollup/plugin-replace": "^5.0.5",
     "@svelte-kits/store": "^0.1.2",
     "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/adapter-netlify": "^3.0.1",
     "@sveltejs/adapter-static": "^3.0.1",
+    "@sveltejs/adapter-vercel": "^4.0.4",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@tauri-apps/api": "2.0.0-alpha.13",

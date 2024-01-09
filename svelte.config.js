@@ -1,5 +1,7 @@
 import path from 'path';
 // import adapter from '@sveltejs/adapter-auto';
+import netlify from '@sveltejs/adapter-netlify';
+import vercel from '@sveltejs/adapter-vercel';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { loadEnv } from 'vite';
@@ -23,30 +25,34 @@ const config = {
     default: true,
     onError: 'continue',
     origin: process.env.VERCEL
-      ? 'https://svelte-blank-20221125.vercel.app'
+      ? 'https://total-app.vercel.app'
       : process.env.NETLIFY
-        ? 'https://svelte-blank-20221125.netlify.app'
-        : 'https://svelte-blank-20221125.iva2k.com'
+        ? 'https://total-app.netlify.app'
+        : 'https://total-app.iva2k.com'
   },
 
   kit: {
     // base: '',
     // outDir: './.svelte-kit',
     // ? adapterFallback: 'index.html',
-    adapter: adapter({
-      // default options are shown:
-      // pages: 'build',
-      // assets: 'build',
-      // fallback: null,
-      // precompress: false
-      fallback: 'index.html'
-    }),
+    adapter: process.env.VERCEL
+      ? vercel()
+      : process.env.NETLIFY
+        ? netlify()
+        : adapter({
+            // default options are shown:
+            // pages: 'build',
+            // assets: 'build',
+            // fallback: null,
+            // precompress: false
+            fallback: 'index.html'
+          }),
     // prerender: { entries: [] },
 
     // Form submissions do not function in `vite preview` with https (due to cookie)
     // @see https://github.com/sveltejs/kit/issues/7277
     csrf: {
-      checkOrigin: false
+      checkOrigin: !!process.env.VERCEL || !!process.env.NETLIFY
     },
 
     alias: {

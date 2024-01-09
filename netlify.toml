@@ -1,0 +1,11 @@
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS="--version"
+[build]
+  command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm run build:only-sw"
+  publish = "build"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"

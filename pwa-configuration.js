@@ -11,9 +11,8 @@ const pwaConfigurationFnc = async (
   const { backgroundColor, description, siteShortTitle, siteTitle, themeColor } =
     await websiteAsync(env);
 
-  // const outDir = process.env.VERCEL ? './.vercel/output/static' : './.svelte-kit/output/client';
+  // const outDir = process.env.VERCEL ? './.vercel/output/static' : './.svelte-kit/output';
   // const srcDir = process.env.VERCEL ? './src' : './src';
-  // const outDir = './.svelte-kit/output/client';
   const outDir = './.svelte-kit/output'; // Since some rev. @vite-pwa/sveltekit adds '/client' to outDir,
   const srcDir = './src';
   // ? const globDirectory = process.env.VERCEL ? './.vercel/output/static' : 'client';

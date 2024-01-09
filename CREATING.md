@@ -532,3 +532,31 @@ Adjust all `src/routes/**+page.ts` files - set prerender = false for pages with 
 // This page has action (sub-route), so we need to explicitly disable prerender here;
 export const prerender = false;
 ```
+
+### Deploy on Netlify and Vercel
+
+Though it is recommended to use adapter-auto to choose between adapter-netlify and adapter-vercel, it does not fall back to adapter-static, which we need. So we will do it ourselves.
+
+```bash
+pnpm i -D @sveltejs/adapter-netlify @sveltejs/adapter-vercel
+```
+
+Load adapters in svelte.config.js:
+
+```js
++ import netlify from '@sveltejs/adapter-netlify';
++ import vercel from '@sveltejs/adapter-vercel';
+...
+const config = {
+  ...
+  kit: {
+    adapter:
++      process.env.VERCEL ? vercel() :
++      process.env.NETLIFY ? netlify() :
+      adapter({
+        ...
+```
+
+See netlify.toml and vercel.json files for other deploy settings.
+
+Add '.netlify' and '.vercel' to .gitignore, .eslintignore, .prettierignore (see sources).
