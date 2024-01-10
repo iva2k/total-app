@@ -582,6 +582,14 @@ See "patches/eslint-plugin-svelte3@4.0.0.patch" for a hot-fix.
 
 See open issue <https://github.com/sveltejs/kit/issues/8081>
 
+### Add Histoire
+
+See `histoire` branch.
+
+### Add Storybook
+
+See `storybook` branch.
+
 ### Add Github and Svelte icons to Footer links
 
 See `src/routes/+layout.svelte` source file.
