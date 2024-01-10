@@ -39,8 +39,20 @@ for TARGET_BRANCH in "${TARGET_BRANCHES[@]}"; do
 
     # Check for merge conflicts
     if [ $? -ne 0 ]; then
-        echo "Merge conflict detected in \"$TARGET_BRANCH\" branch. Please resolve conflicts manually, push changes, and run the script again."
-        exit 1
+        echo "Merge conflict detected in \"$TARGET_BRANCH\" branch."
+        echo "  Recreating 'pnpm-lock.yaml' as most likely attempt to resolve conflicts..."
+        (git checkout HEAD -- pnpm-lock.yaml && pnpm install &&  git add pnpm-lock.yaml)
+        echo "  DONE Recreating 'pnpm-lock.yaml'."
+        if git diff --name-only --diff-filter=U | grep -q .; then
+          echo "  There are remaining unresolved Git conflicts:"
+          git diff --name-only --diff-filter=U 
+          echo "  Please resolve any remaining Git conflicts manually, commit and push changes, and run the script again."
+          exit 1
+        else
+          echo "No unresolved Git conflicts found, continuing..."
+          git commit --no-edit
+        fi
+
     fi
 
     # Push the changes to the remote repository
