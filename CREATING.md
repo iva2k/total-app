@@ -588,7 +588,17 @@ See `src/routes/+layout.svelte` source file.
 
 ### Add Histoire
 
-See `histoire` branch.
+Per [Histoire Svelte Guide](https://histoire.dev/guide/svelte3/getting-started.html).
+
+Install Histoire:
+
+```bash
+pnpm i -D histoire @histoire/plugin-svelte
+```
+
+Create `histoire.config.ts`  (see source). Add it to the "include" section in `tsconfig.lint.json`.
+
+As of 2024-0110, @histoire/plugin-svelte@0.17.6 does not work with svelte@5 and @sveltejs/kit@2.
 
 ### Add Storybook
 

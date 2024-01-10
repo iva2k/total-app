@@ -35,6 +35,18 @@
       "type": "node-terminal"
     },
     {
+      "command": "pnpm story:build",
+      "name": "pnpm story:build",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm story:dev",
+      "name": "pnpm story:dev",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost:3000",

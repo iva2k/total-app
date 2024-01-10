@@ -11,6 +11,7 @@
     "scripts/*.ts",
     "tests/**/*.ts",
     "assets.ts",
+    "histoire.config.ts",
     "playwright.config.ts",
     "pwa-configuration.js",
     "svelte.config.js"
