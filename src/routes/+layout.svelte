@@ -1,12 +1,17 @@
 <script lang="ts">
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
+  import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
   const { githubRepo } = website;
-  import github from '$lib/images/github.svg';
+  import GithubLogo from '$lib/images/github.svelte';
+  import svelte_logo from '$lib/images/svelte-logo.svg';
+
+  let isDarkMode: boolean;
 
   // Favicon params:
   const pngFavicons = [
@@ -27,10 +32,15 @@
 <div class="app">
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
-  <Header>
-    <a href={githubRepo}>
-      <img src={github} alt="GitHub" />
-    </a>
+  <Header --corner-right-width="8em">
+    <DarkMode bind:isDarkMode>
+      <svelte:fragment let:data>
+        <label>
+          {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+          <input id="cb1" type="checkbox" checked={isDarkMode} on:change={data.onToggle} />
+        </label>
+      </svelte:fragment>
+    </DarkMode>
   </Header>
 
   <main>
@@ -41,8 +51,17 @@
 
   <footer>
     <p>
-      visit <a href={githubRepo}>App GitHub Repo</a> for details | visit
-      <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
+      visit
+      <a href={githubRepo}>
+        <GithubLogo />
+        <span>App GitHub Repo</span>
+      </a>
+      for details | visit
+      <a href="https://kit.svelte.dev">
+        <img src={svelte_logo} alt="SvelteKit" aria-hidden="true" role="presentation" />
+        <span>kit.svelte.dev</span>
+      </a>
+      to learn SvelteKit
     </p>
   </footer>
 </div>
@@ -74,7 +93,22 @@
   }
 
   footer a {
+    display: inline-block; /* Place link and image inline */
+    text-decoration: none; /* Remove default underline for links */
+  }
+
+  footer a :global(img),
+  footer a :global(svg) {
+    vertical-align: middle; /* Aligns image vertically with the text */
+    width: 2em;
+    height: 3em;
+    --fill_color: var(--color-text);
+  }
+  footer a {
     font-weight: bold;
+  }
+  footer a span {
+    margin-top: 10px; /* Adjust the margin as needed */
   }
 
   @media (min-width: 480px) {

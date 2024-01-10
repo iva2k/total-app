@@ -192,6 +192,13 @@ There are many UI frameworks that work with Svelte / SvelteKit, and choice can b
 
 <https://sveltesociety.dev/components/>
 
+This project has few of the top UI frameworks integrated in separate git branches:
+
+<!-- prettier-ignore -->
+| Git Branch | UI Framework | Dark Theme Switch | Notes |
+|-|-|:-:|-|
+| main                                      | (none) | Y | |
+
 ## Enjoy! \\\_/
 
 ![Total App](static/icon-txr-512x512.png)
