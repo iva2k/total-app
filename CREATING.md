@@ -551,3 +551,21 @@ const config = {
 See netlify.toml and vercel.json files for other deploy settings.
 
 Add '.netlify' and '.vercel' to .gitignore, .eslintignore, .prettierignore (see sources).
+
+### Rework Header into Header + PureHeader
+
+Non-pure Header loads $page from $app/store, and it makes it hard to use in Histoire/Storybook - it will need mocking of $app/stores which is a lot of work without benefits. Instead we will make PureHeader.
+
+In "src/lib/components/header" copy Header.svelte to PureHeader.svelte, remove `import { page } from '$app/stores';` and replace all usages of $page.pathname with a component parameter `pathname` in PureHeader. PureHeader will be usable in Histoire/Storybook below.
+
+Rework Header.svelte to use PureHeader and pass it the $page.pathname (see sources).
+
+### Rework PureHeader Corners
+
+Add classes "corner-left" and "corner-right" to left and right corners and split their styling, adding "--corner-left-width" and "--corner-right-width" variables, so their sizes can be changed as needed.
+
+Add `<slot />` to the right corner of PureHeader, and move github logo to be slotted into Header>PureHeader in "+layout.svelte".
+
+For styling to apply into the slot elements, add `:global()` clauses to some of styles on PureHeader.
+
+(See sources).

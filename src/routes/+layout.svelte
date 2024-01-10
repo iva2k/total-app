@@ -6,6 +6,7 @@
 
   import website from '$lib/config/website';
   const { githubRepo } = website;
+  import github from '$lib/images/github.svg';
 
   // Favicon params:
   const pngFavicons = [
@@ -26,7 +27,11 @@
 <div class="app">
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
-  <Header />
+  <Header>
+    <a href={githubRepo}>
+      <img src={github} alt="GitHub" />
+    </a>
+  </Header>
 
   <main>
     <slot />
