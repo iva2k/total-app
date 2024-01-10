@@ -345,7 +345,6 @@ pnpm i -D @vite-pwa/sveltekit vite-plugin-pwa@^0.13.3 workbox-core workbox-build
 Create files and make some changes (see sources):
 
 - Add /dev-dist to .gitignore, .eslintignore, .prettierignore
-- TODO: (now) Needed? Patch @vite-pwa/sveltekit to fix problem with import in TypeScript, see file `patches/@vite-pwa__sveltekit@0.0.1.patch` for a hot-fix.
 - Add SvelteKitPWA to "vite.config.ts"
 - Create "src/lib/components/offline/Offline.svelte"
 - Create "src/lib/components/reloadprompt/ReloadPrompt.svelte"
@@ -356,14 +355,6 @@ Create files and make some changes (see sources):
 - Make `prerender = true` the default in "src/routes/+layout.svelte" - offline precaching needs all routes prerenderd. Dynamic routes won't work offline.
 - Remove `csr = false` and `csr = dev` from all "src/routes/\*\*/+page.ts" files
 - Add service worker scripts to `package.json`
-
-#### Fix Issues
-
-// TODO: (now) File issue:
-
-Error importing from '@vite-pwa/sveltekit' - there is `export default {...}` in @vite-pwa/sveltekit/dist/index.mjs.
-Changing it to `export {...}` (removing `default`) fixes the problem.
-Use `pnpm patch @vite-pwa/sveltekit`, editing the file in directory created by `pnpm patch`, and creating a patch file with `pnpm patch-commit <path given by pnpm>`.
 
 ### Add Favicon Component
 
