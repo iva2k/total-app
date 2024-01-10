@@ -1,5 +1,26 @@
 # Total App | Blank SvelteKit App
 
+<!-- markdownlint-disable MD033 -->
+<!-- prettier-ignore -->
+<table>
+    <tbody>
+        <tr>
+            <td rowspan=2 style="vertical-align:bottom;">
+                <img src="static/logotype-hor.svg" alt="Total App" />
+            </td>
+            <td align=center>Storybook</td>
+            <td align=center><a href="https://app.netlify.com/sites/total-app/deploys"><img src="https://api.netlify.com/api/v1/badges/1efdc5eb-be6d-422f-8131-dce6f7b58068/deploy-status" alt="Netlify shield"/></a></td>
+            <td align=center><a href="https://vercel.com/iva2k/total-app"><img src="https://shields.io/github/deployments/iva2k/total-app/production?style=flat&label=vercel&logo=vercel" alt="Vercel shield"/></a></td>
+        </tr>
+        <tr>
+            <td align=center><a href=https://www.chromatic.com/builds?appId=63839ed0e936a148379c5c65>Chromatic</a></td>
+            <td align=center><a href="https://total-app.netlify.app">App Demo</a></td>
+            <td align=center><a href="https://total-app.vercel.app">App Demo</a></td>
+        </tr>
+    </tbody>
+</table>
+<!-- markdownlint-enable MD033 -->
+
 <!-- ![Total App](static/logotype-hor.svg) -->
 
 A cross-platform Desktop / Mobile / Web application starter.
@@ -25,6 +46,12 @@ Out of the box features:
 - Support deep links, in online and in offline modes.
 - Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
 - Instrumented for quick deployment - Netlify, Vercel, NGINX, etc.
+
+<!-- prettier-ignore -- >
+|Storybook| [![Netlify Status](https://api.netlify.com/api/v1/badges/1efdc5eb-be6d-422f-8131-dce6f7b58068/deploy-status)](https://app.netlify.com/sites/total-app/deploys) |  [![Vercel Status](https://shields.io/github/deployments/iva2k/total-app/production?style=flat&label=vercel&logo=vercel)](https://vercel.com/iva2k/total-app) |
+|:-:|:-:|:-:|
+|[Chromatic](https://www.chromatic.com/builds?appId=63839ed0e936a148379c5c65)| [App Demo](https://total-app.netlify.app) | [App Demo](https://total-app.vercel.app)  |
+<!-- -->
 
 ## Technology Stack
 
