@@ -663,6 +663,8 @@ const config = {
   ...
 ```
 
+Change all `<style>` tags in `*.svelte` files to `<style lang="scss">`.
+
 #### Prettier and additional Stylelint rules
 
 ```bash

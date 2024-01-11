@@ -199,7 +199,7 @@
   />
 {/if}
 
-<style>
+<style lang="scss">
   form {
     width: 100%;
     height: 100%;

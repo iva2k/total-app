@@ -18,7 +18,7 @@
   />
 </svg>
 
-<style>
+<style lang="scss">
   svg path {
     fill: var(--fill_color, rgba(0, 0, 0, 0.7));
   }

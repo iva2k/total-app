@@ -55,7 +55,7 @@
   </div>
 </aside>
 
-<style>
+<style lang="scss">
   /** For open / close we can't use `display: none / block` - it will break
     * animations on all elements, not just ones doing the `transition`.
     * So we use `visibility: hidden / visible`, and set transition to 0 on it.

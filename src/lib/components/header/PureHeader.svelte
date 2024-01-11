@@ -38,7 +38,7 @@
   </div>
 </header>
 
-<style>
+<style lang="scss">
   header {
     display: flex;
     justify-content: space-between;
