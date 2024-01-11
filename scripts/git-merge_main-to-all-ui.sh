@@ -8,9 +8,9 @@ git config user.name "IVA2K"
 SOURCE_BRANCH="main"
 TARGET_BRANCHES=(
   "histoire"
+  "storybook"
 )
 TARGET_BRANCHES_FUTURE=(
-  "storybook"
   "ui-agnostic"
   "ui-bootstrap"
   "ui-bulma"

@@ -7,6 +7,7 @@ module.exports = {
     // 'plugin:@typescript-eslint/recommended-type-checked', // This does type-checking, but breaks in .svelte files and few .ts places
     'plugin:svelte/recommended',
     'plugin:import/recommended',
+    'plugin:storybook/recommended',
     'prettier'
   ],
   parser: '@typescript-eslint/parser',

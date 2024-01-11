@@ -60,6 +60,7 @@ Built with:
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
 - [Tauri](https://tauri.studio) - Desktop Application framework
+- [Storybook](https://storybook.js.org) - Tool for building UI components and pages in isolation
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
