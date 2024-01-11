@@ -810,66 +810,29 @@ module.exports = {
   ...
 ```
 
-### TODO: (now) Solve Storybook Issues
+See some useful Storybook info at <https://github.com/storybookjs/storybook/tree/next/code/frameworks/sveltekit#manual-migration>.
 
-#### TODO: (now) Revisit: Preprocess in .storybook/main.ts
-
-It turned out that storybook `main.ts` trying to import preprocess from `svelte.config.js` is not viable (import is async, returns Promise, and can't await in top-level .cjs files). The solution was to hard-code same preprocess in `.storybook/main.ts` same as in `svelte.config.js`.
-
-```js
-// .storybook/main.ts
-+ const preprocess = require('svelte-preprocess');
-module.exports = {
-  ...
-  svelteOptions: {
--    preprocess: require('../svelte.config.js').preprocess
-+    preprocess: preprocess(),
-  },
-```
-
-#### Vite $app and $lib aliases
-
-See <https://github.com/storybookjs/storybook/issues/14952>
-
-Add vite config to .storybook/main.ts:
-
-```js
-module.exports = {
-+  async viteFinal(config) {
-+    config.resolve.alias = {
-+      ...config.resolve.alias,
-+      // $app: path.resolve('./.svelte-kit/dev/runtime/app')
-+      $lib: path.resolve(__dirname, '../src/lib')
-+      // $components: path.resolve(__dirname, '../src/lib/components')
-+    };
-+    return config;
-+  },
-  ...
-};
-```
-
-#### Node version
-
-Note: As of 2022-0522 Node 17 and 18 have breaking changes (migrated to ssl3):
-
-- `Error: error:0308010C:digital envelope routines::unsupported`
-- <https://github.com/webpack/webpack/issues/14532>
-- <https://github.com/storybookjs/storybook/issues/18019>
-- <https://github.com/storybookjs/storybook/issues/16555>
-
-One solution would be to use node<17.0.0 in package.json "engines" and engine-strict=true in .npmrc, however...
-
-The problem with node<17.0.0 is it breaks playwright which requires node>17. No solution to use playwright with node<17 yet. Argh!
-
-For all other issues, adding `cross-env NODE_OPTIONS=--openssl-legacy-provider` to all affected scripts (storybook ones) in `package.json` is the only practical solution for now (it opens up old security vulnerabilities in legacy openssl).
-
-TODO: (blocked by upstream) When there's a fix for node>17 and storybook / webpack@4, remove `NODE_OPTIONS=--openssl-legacy-provider` from `package.json`.
+### TODO: (later) Solve Storybook Issues
 
 #### Using \*.stories.svelte files
 
-An open/unresolved issue is storybook's v6.5.3 storyStoreV7=true not parsing `.stories.svelte` files. And storyStoreV7=false does not load stories at all (no filed issues). So use only `.stories.tsx` for now.
+```bash
+pnpm story:dev
+pnpm story:build
 
-<https://github.com/storybookjs/storybook/issues/16673>
+WARN 🚨 Unable to index ./src/lib/components/counter/Counter.stories.svelte:
+WARN   TypeError: Cannot read properties of undefined (reading 'instance')
+WARN     at extractStories (c:\dev\svelte\total-app\node_modules\.pnpm\@storybook+addon-svelte-csf@4.1.0_@storybook+svelte@0.0.0-pr-24889-sha-7abeedf4_@storybook+th_3k4uz76y5ybmvknzruh5glmdnm\node_modules\@storybook\addon-svelte-csf\dist\parser\extract-stories.js:92:13)
+WARN     at readStories (c:\dev\svelte\total-app\node_modules\.pnpm\@storybook+addon-svelte-csf@4.1.0_@storybook+svelte@0.0.0-pr-24889-sha-7abeedf4_@storybook+th_3k4uz76y5ybmvknzruh5glmdnm\node_modules\@storybook\addon-svelte-csf\dist\preset\indexer.js:13:12)
+...
+Error: Unable to index ./src/lib/components/counter/Counter.stories.svelte
+    at StoryIndexGenerator.getIndex (.\node_modules\.pnpm\@storybook+core-server@0.0.0-pr-24889-sha-7abeedf4\node_modules\@storybook\core-server\dist\index.js:60:3746)
+    at async extractStoriesJson (.\node_modules\.pnpm\@storybook+core-server@0.0.0-pr-24889-sha-7abeedf4\node_modules\@storybook\core-server\dist\index.js:51:4623)
+```
+
+Suspect clash with Svelte v5 changes <https://github.com/storybookjs/addon-svelte-csf/issues/156>.
+
+Also TypeScript usage is unclear, see <https://github.com/storybookjs/addon-svelte-csf/issues/162>.
 
 At least, Storybook is working with stories (.tsx, not .svelte) for Counter and Header (after reworking Header into Header + PureHeader).
 

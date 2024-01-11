@@ -52,9 +52,9 @@
     "lint:css":                                      "stylelint \"src/**/*.{css,html,svelte}\"",
     "format":                                        "echo RUN format                                         && pnpm lint:css --fix && prettier --write .",
     "story":                                         " pnpm story:dev",
-    "story:dev":                                     " echo RUN story(:dev)                                   && cross-env NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006",
+    "story:dev":                                     " echo RUN story(:dev)                                   && storybook dev -p 6006",
     "story:preview":                                 " echo RUN story:preview EMPTY",
-    "story:build":                                   "echo RUN story:build                                    && cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",
+    "story:build":                                   "echo RUN story:build                                    && storybook build",
     "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm story:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
     "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
