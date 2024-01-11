@@ -18,6 +18,8 @@ jobs:
     # Job steps
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v2
         with:
           version: 8.14
