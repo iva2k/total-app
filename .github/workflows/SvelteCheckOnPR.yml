@@ -24,6 +24,6 @@ jobs:
       - name: Build app
         run: pnpm build:only
 
-      - name: Run Svelte Check
-        run: pnpm check
+      - name: Run all checks
+        run: pnpm all
         working-directory: '.'

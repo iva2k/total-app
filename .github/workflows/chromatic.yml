@@ -2,7 +2,10 @@
 name: 'Chromatic'
 
 # Event for the workflow
-on: push
+on:
+  push:
+    branches:
+      - storybook
 
 # List of jobs
 jobs:
@@ -32,4 +35,4 @@ jobs:
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          buildScriptName: 'storybook:build'
+          buildScriptName: 'story:build'
