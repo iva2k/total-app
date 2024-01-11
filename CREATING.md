@@ -836,6 +836,31 @@ Also TypeScript usage is unclear, see <https://github.com/storybookjs/addon-svel
 
 At least, Storybook is working with stories (.tsx, not .svelte) for Counter and Header (after reworking Header into Header + PureHeader).
 
+### Add Storybook App Theme Switcher Addon
+
+There's a default Storybook theming addon: `@storybook/theming`. It allows control over theming of all parts of Storybook app (UI, docs, preview), but it won't affect the components preview.
+
+```bash
+pnpm i -D @storybook/manager-api @storybook/theming
+```
+
+To add custom theme to Storybook app, per <https://storybook.js.org/docs/configure/theming> create files:
+
+- `.storybook/manager.ts` - Sets Storybook App theme
+- `.storybook/YourTheme.ts` - Custom Storybook theme to use
+- `.storybook/preview.ts` - Sets Storybook doc theme
+
+(See source files).
+
+The theme only changes class on the root element (which can be chosen to differ from the default \<body\> tag). The actual theme should be provided and can match the app theme.
+
+It is possible to load the app theme in `.storybook/preview.ts`, just add the CSS file:
+
+```js
+// .storybook/preview.ts
++ import '../src/app.css';
+```
+
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>

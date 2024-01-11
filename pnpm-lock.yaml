@@ -47,6 +47,9 @@ devDependencies:
   '@storybook/cli':
     specifier: 0.0.0-pr-24889-sha-7abeedf4
     version: 0.0.0-pr-24889-sha-7abeedf4
+  '@storybook/manager-api':
+    specifier: ^7.6.7
+    version: 7.6.7(react-dom@18.2.0)(react@18.2.0)
   '@storybook/svelte':
     specifier: 0.0.0-pr-24889-sha-7abeedf4
     version: 0.0.0-pr-24889-sha-7abeedf4(svelte@5.0.0-next.28)
@@ -56,6 +59,9 @@ devDependencies:
   '@storybook/test':
     specifier: 7.6.7
     version: 7.6.7(vitest@1.1.2)
+  '@storybook/theming':
+    specifier: ^7.6.7
+    version: 7.6.7(react-dom@18.2.0)(react@18.2.0)
   '@svelte-kits/store':
     specifier: ^0.1.2
     version: 0.1.2(@sveltejs/kit@2.0.6)(svelte@5.0.0-next.28)
