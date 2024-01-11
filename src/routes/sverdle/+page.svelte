@@ -343,6 +343,8 @@
     border: 2px solid var(--color-theme-2);
   }
 
+  /* TODO: (now) revisit, maybe a better way: */
+  /* stylelint-disable-next-line a11y/no-outline-none */
   .keyboard button:focus {
     background: var(--color-theme-1);
     color: white;
@@ -380,6 +382,8 @@
     border: none;
   }
 
+  /* TODO: (now) revisit, maybe a better way: */
+  /* stylelint-disable-next-line a11y/no-outline-none */
   .restart:focus,
   .restart:hover {
     background: var(--color-theme-1);

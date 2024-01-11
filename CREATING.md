@@ -10,10 +10,18 @@ Built with:
 
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
+- [Tauri](https://tauri.studio) - Desktop Application framework
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
+- [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
+- [Postcss](https://postcss.org/) - Transforming styles with JS plugins
 - [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
+
+Continuous Integrations and Deployments:
+
+- [Netlify](https://svelte-blank-20221125.netlify.app) - App Demo
+- [Vercel](https://svelte-blank-20221125.vercel.app) - App Demo
 
 ## Software Mantra
 
@@ -586,6 +594,147 @@ See open issue <https://github.com/sveltejs/kit/issues/8081>
 
 See `src/routes/+layout.svelte` source file.
 
+### Add Prettier & ESLint Rules, Stylelint, Postcss and Autoprefixer
+
+ESLint and Prettier is already part of Svelte Kit installation, so some of the packages below are already present, we will add some useful configuration to them.
+
+#### Stylelint and additional ESLint rules (Storybook)
+
+```bash
+pnpm install -D stylelint@^14.15.0 @ronilaukkarinen/stylelint-a11y@1.2.9 stylelint-config-standard@^29.0.0 stylelint-config-recommended@^9.0.0
+#? pnpm install -D stylelint@^14.15.0 @double-great/stylelint-a11y stylelint-config-standard stylelint-config-recommended
+```
+
+Note: stylelint-a11y original creator / maintainer is AWOL, using an updated and maintained fork `@ronilaukkarinen/stylelint-a11y`. Another fork `@double-great/stylelint-a11y` is also maintained.
+
+Edit `.eslintrc.cjs` file:
+
+```js
+// .eslintrc.cjs
+module.exports = {
+  ...
+  parserOptions: {
+     project: ['./tsconfig.json', './tsconfig.lint.json'],
+     tsconfigRootDir: './',
+     sourceType: 'module',
+     ecmaVersion: 2020,
++    extraFileExtensions: ['.svelte']
+  },
+  ...
++  rules: {
++    'import/no-mutable-exports': 'off'
++  }
+};
+```
+
+#### Postcss, Autoprefixer
+
+Autoprefixer is a PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from [Can I Use](https://caniuse.com/). It is recommended by Google and used in Twitter and Alibaba.
+
+```bash
+pnpm install -D postcss postcss-cli postcss-import postcss-nesting postcss-html autoprefixer
+```
+
+Add file `postcss.config.cjs` with the following contents:
+
+```js
+const autoprefixer = require('autoprefixer');
+
+const config = {
+  plugins: {
+    'postcss-import': {},
+    'postcss-nesting': {},
+    autoprefixer
+  }
+};
+
+module.exports = config;
+```
+
+Enable postcss & scss in svelte.config.js:
+
+```js
+import preprocess from 'svelte-preprocess';
+const config = {
+  preprocess: preprocess({
++    postcss: true,
++    scss: { includePaths: ['src', 'node_modules'] }
+  }),
+  ...
+```
+
+#### Prettier and additional Stylelint rules
+
+```bash
+pnpm install -D prettier stylelint-config-prettier stylelint-config-html
+```
+
+#### Create Stylelint configuration
+
+Add file `.stylelintrc.json`:
+
+```json
+// .stylelintrc.json
+{
+  ... see file in the repo
+}
+```
+
+#### VSCode formatOnSave
+
+VSCode can format all documents on save, and it should match Stylelint & Prettier.
+
+Some issues can be with VSCode user settings that are not visible right away. If saving any files and then running `pnpm format` shows those files as changed in the process, check "editor.defaultFormatter" for that file type.
+
+For example, VSCode would re-format .json files differently. It turns out VSCode was using different JSON formatter set in user settings, and ignored top-level "editor.defaultFormatter". To fix that, add `jsonc` and `json` settings to `.vscode/settings.json` file as shown below.
+
+Add the following to `.vscode/settings.json` file (if not already there):
+
+```json
+// .vscode/settings.json
+{
++  "editor.defaultFormatter": "esbenp.prettier-vscode",
++  "editor.formatOnSave": true,
++  "editor.formatOnPaste": true,
++  "editor.formatOnType": false,
++  "editor.codeActionsOnSave": {
++    "source.fixAll.eslint": true,
++    "source.fixAll.html": true
++  },
++  "eslint.validate": ["svelte"],
++  "editor.tokenColorCustomizations": {
++    "[Svelte]": {
++      "textMateRules": [
++        {
++          "settings": {
++            "foreground": "#569CD6" // any color you like
++          },
++          "scope": "support.class.component.svelte" // scope name you want to adjust highlighting for
++        }
++      ]
++    }
++  },
++  "svelte.enable-ts-plugin": true,
++  "javascript.format.enable": false,
++  "files.insertFinalNewline": true,
++  "files.trimFinalNewlines": false,
++  "[json]": {
++    "editor.defaultFormatter": "esbenp.prettier-vscode"
++  },
++  "[jsonc]": {
++    "editor.defaultFormatter": "esbenp.prettier-vscode"
++  },
++  "[svelte]": {
++    "editor.defaultFormatter": "svelte.svelte-vscode"
++  },
++  "[html]": {
++    "editor.defaultFormatter": "vscode.html-language-features"
++  }
+}
+```
+
+See `package.json` file for "scripts.format" change and new "scripts.lint:css".
+
 ### Add Histoire
 
 See `histoire` branch.
@@ -593,3 +742,7 @@ See `histoire` branch.
 ### Add Storybook
 
 See `storybook` branch.
+
+## References
+
+- Svelte components: <https://www.shadcn-svelte.com/docs>

@@ -62,6 +62,8 @@ Built with:
 - [Tauri](https://tauri.studio) - Desktop Application framework
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
+- [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
+- [Postcss](https://postcss.org/) - Transforming styles with JS plugins
 - [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
 
