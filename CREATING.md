@@ -20,6 +20,7 @@ Built with:
 
 Continuous Integrations and Deployments:
 
+- [Chromatic](https://www.chromatic.com) - Storybook Github CI
 - [Netlify](https://svelte-blank-20221125.netlify.app) - App Demo
 - [Vercel](https://svelte-blank-20221125.vercel.app) - App Demo
 
@@ -560,6 +561,8 @@ See netlify.toml and vercel.json files for other deploy settings.
 
 Add '.netlify' and '.vercel' to .gitignore, .eslintignore, .prettierignore (see sources).
 
+Storybook (below) is deployed on Chromatic.
+
 ### Rework Header into Header + PureHeader
 
 Non-pure Header loads $page from $app/store, and it makes it hard to use in Histoire/Storybook - it will need mocking of $app/stores which is a lot of work without benefits. Instead we will make PureHeader.
@@ -860,6 +863,21 @@ It is possible to load the app theme in `.storybook/preview.ts`, just add the CS
 // .storybook/preview.ts
 + import '../src/app.css';
 ```
+
+### Publish Storybook on Chromatic
+
+Login to [www.chromatic.com](https://www.chromatic.com) and setup yor project, get [YOUR_TOKEN]. Then connect:
+
+```bash
+pnpm i -D chromatic
+npx chromatic --build-script-name=story:build --project-token=[YOUR_TOKEN]
+```
+
+Also add project token to the Github repo, see <https://www.chromatic.com/docs/github-actions>:
+
+Go to [Your Github Repo](https://github.com/iva2k/total-app) > Settings > Secrets and Variables > Actions > New Repository Secret, then enter Name - CHROMATIC_PROJECT_TOKEN and Secret - [YOUR_TOKEN].
+
+Create file '.github/workflows/chromatic.yml' (see contents in sources).
 
 ## References
 

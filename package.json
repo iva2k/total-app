@@ -55,6 +55,7 @@
     "story:dev":                                     " echo RUN story(:dev)                                   && storybook dev -p 6006",
     "story:preview":                                 " echo RUN story:preview EMPTY",
     "story:build":                                   "echo RUN story:build                                    && storybook build",
+    "chromatic":                                     "npx chromatic --build-script-name=story:build",
     "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm story:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
     "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
@@ -98,6 +99,7 @@
     "@vitejs/plugin-basic-ssl": "^1.0.2",
     "@vitest/coverage-v8": "^1.1.1",
     "autoprefixer": "^10.4.16",
+    "chromatic": "^10.2.1",
     "cpy": "^11.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.56.0",

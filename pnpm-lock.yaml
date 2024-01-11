@@ -122,6 +122,9 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.33)
+  chromatic:
+    specifier: ^10.2.1
+    version: 10.2.1
   cpy:
     specifier: ^11.0.0
     version: 11.0.0
@@ -5636,6 +5639,11 @@ packages:
   /chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+    dev: true
+
+  /chromatic@10.2.1:
+    resolution: {integrity: sha512-8FU4hcqFkSie+00602fRBl8fSHp2pX452n8eoM1hcvlaTHzMpIDiEV3qrijBuxrc5n+OaKg0HNN550vOZZoQ6w==}
+    hasBin: true
     dev: true
 
   /ci-info@3.9.0:
