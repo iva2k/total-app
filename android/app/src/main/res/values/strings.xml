@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">total-app</string>
+    <string name="title_activity_main">total-app</string>
+    <string name="package_name">com.iva2k.totalapp</string>
+    <string name="custom_url_scheme">com.iva2k.totalapp</string>
+</resources>

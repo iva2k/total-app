@@ -11,6 +11,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'import'],
+  ignorePatterns: ['*.cjs'],
   overrides: [
     {
       files: ['*.svelte'],
@@ -36,5 +37,8 @@ module.exports = {
     browser: true,
     es2017: true,
     node: true
+  },
+  rules: {
+    'import/no-mutable-exports': 'off'
   }
 };

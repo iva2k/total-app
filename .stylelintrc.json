@@ -1,0 +1,66 @@
+{
+  "extends": ["stylelint-config-recommended", "stylelint-config-html", "stylelint-config-prettier"],
+  "plugins": ["@ronilaukkarinen/stylelint-a11y"],
+  "processors": [],
+  "rulesDisabled": {
+    "a11y/media-prefers-reduced-motion-NOTE": "https:57//github.com/YozhikM/stylelint-a11y/issues/57",
+    "a11y/media-prefers-reduced-motion": true
+  },
+  "rules": {
+    "a11y/no-outline-none": true,
+    "a11y/selector-pseudo-class-focus": true,
+    "font-family-name-quotes": "always-where-required",
+    "function-url-no-scheme-relative": true,
+    "function-url-quotes": "always",
+    "string-quotes": "single",
+    "value-keyword-case": "lower",
+    "unit-disallowed-list": [],
+    "max-empty-lines": 2,
+    "no-duplicate-selectors": true,
+    "font-family-no-missing-generic-family-keyword": null,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["/^lost-/"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen",
+          "function",
+          "each",
+          "if",
+          "else",
+          "return",
+          "layer"
+        ]
+      }
+    ],
+    "declaration-block-trailing-semicolon": null,
+    "no-descending-specificity": null,
+    "no-invalid-double-slash-comments": true,
+    "block-no-empty": null
+  },
+  "ignoreFiles": [
+    "node_modules/*",
+    "src/assets/**",
+    "build/**",
+    "src/lib/styles/normalise.css",
+    "android/**",
+    "ios/**"
+  ],
+  "defaultSeverity": "error",
+  "customSyntax": "postcss-html"
+}

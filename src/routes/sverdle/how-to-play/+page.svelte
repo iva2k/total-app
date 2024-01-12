@@ -47,7 +47,7 @@
   </p>
 </div>
 
-<style>
+<style lang="scss">
   span {
     display: inline-flex;
     justify-content: center;

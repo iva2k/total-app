@@ -10,10 +10,19 @@ Built with:
 
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
+- [Tauri](https://tauri.studio) - Desktop Application framework
+- [Capacitor](https://capacitorjs.com) - Building crossplatform apps
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
+- [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
+- [Postcss](https://postcss.org/) - Transforming styles with JS plugins
 - [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
+
+Continuous Integrations and Deployments:
+
+- [Netlify](https://total-app.netlify.app) - App Demo
+- [Vercel](https://total-app.vercel.app) - App Demo
 
 ## Software Mantra
 
@@ -200,7 +209,7 @@ We ignore it for now.
 
 Fix:
 
-TBD
+See [Set Svelte SPA mode](#set-svelte-spa-mode) below.
 
 ## Additions
 
@@ -586,6 +595,149 @@ See open issue <https://github.com/sveltejs/kit/issues/8081>
 
 See `src/routes/+layout.svelte` source file.
 
+### Add Prettier & ESLint Rules, Stylelint, Postcss and Autoprefixer
+
+ESLint and Prettier is already part of Svelte Kit installation, so some of the packages below are already present, we will add some useful configuration to them.
+
+#### Stylelint and additional ESLint rules (Storybook)
+
+```bash
+pnpm install -D stylelint@^14.15.0 @ronilaukkarinen/stylelint-a11y@1.2.9 stylelint-config-standard@^29.0.0 stylelint-config-recommended@^9.0.0
+#? pnpm install -D stylelint@^14.15.0 @double-great/stylelint-a11y stylelint-config-standard stylelint-config-recommended
+```
+
+Note: stylelint-a11y original creator / maintainer is AWOL, using an updated and maintained fork `@ronilaukkarinen/stylelint-a11y`. Another fork `@double-great/stylelint-a11y` is also maintained.
+
+Edit `.eslintrc.cjs` file:
+
+```js
+// .eslintrc.cjs
+module.exports = {
+  ...
+  parserOptions: {
+     project: ['./tsconfig.json', './tsconfig.lint.json'],
+     tsconfigRootDir: './',
+     sourceType: 'module',
+     ecmaVersion: 2020,
++    extraFileExtensions: ['.svelte']
+  },
+  ...
++  rules: {
++    'import/no-mutable-exports': 'off'
++  }
+};
+```
+
+#### Postcss, Autoprefixer
+
+Autoprefixer is a PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from [Can I Use](https://caniuse.com/). It is recommended by Google and used in Twitter and Alibaba.
+
+```bash
+pnpm install -D postcss postcss-cli postcss-import postcss-nesting postcss-html autoprefixer
+```
+
+Add file `postcss.config.cjs` with the following contents:
+
+```js
+const autoprefixer = require('autoprefixer');
+
+const config = {
+  plugins: {
+    'postcss-import': {},
+    'postcss-nesting': {},
+    autoprefixer
+  }
+};
+
+module.exports = config;
+```
+
+Enable postcss & scss in svelte.config.js:
+
+```js
+import preprocess from 'svelte-preprocess';
+const config = {
+  preprocess: preprocess({
++    postcss: true,
++    scss: { includePaths: ['src', 'node_modules'] }
+  }),
+  ...
+```
+
+Change all `<style>` tags in `*.svelte` files to `<style lang="scss">`.
+
+#### Prettier and additional Stylelint rules
+
+```bash
+pnpm install -D prettier stylelint-config-prettier stylelint-config-html
+```
+
+#### Create Stylelint configuration
+
+Add file `.stylelintrc.json`:
+
+```json
+// .stylelintrc.json
+{
+  ... see file in the repo
+}
+```
+
+#### VSCode formatOnSave
+
+VSCode can format all documents on save, and it should match Stylelint & Prettier.
+
+Some issues can be with VSCode user settings that are not visible right away. If saving any files and then running `pnpm format` shows those files as changed in the process, check "editor.defaultFormatter" for that file type.
+
+For example, VSCode would re-format .json files differently. It turns out VSCode was using different JSON formatter set in user settings, and ignored top-level "editor.defaultFormatter". To fix that, add `jsonc` and `json` settings to `.vscode/settings.json` file as shown below.
+
+Add the following to `.vscode/settings.json` file (if not already there):
+
+```json
+// .vscode/settings.json
+{
++  "editor.defaultFormatter": "esbenp.prettier-vscode",
++  "editor.formatOnSave": true,
++  "editor.formatOnPaste": true,
++  "editor.formatOnType": false,
++  "editor.codeActionsOnSave": {
++    "source.fixAll.eslint": true,
++    "source.fixAll.html": true
++  },
++  "eslint.validate": ["svelte"],
++  "editor.tokenColorCustomizations": {
++    "[Svelte]": {
++      "textMateRules": [
++        {
++          "settings": {
++            "foreground": "#569CD6" // any color you like
++          },
++          "scope": "support.class.component.svelte" // scope name you want to adjust highlighting for
++        }
++      ]
++    }
++  },
++  "svelte.enable-ts-plugin": true,
++  "javascript.format.enable": false,
++  "files.insertFinalNewline": true,
++  "files.trimFinalNewlines": false,
++  "[json]": {
++    "editor.defaultFormatter": "esbenp.prettier-vscode"
++  },
++  "[jsonc]": {
++    "editor.defaultFormatter": "esbenp.prettier-vscode"
++  },
++  "[svelte]": {
++    "editor.defaultFormatter": "svelte.svelte-vscode"
++  },
++  "[html]": {
++    "editor.defaultFormatter": "vscode.html-language-features"
++  }
+}
+```
+
+See `package.json` file for "scripts.format" change and new "scripts.lint:css".
+
 ### Add Histoire
 
 Per [Histoire Svelte Guide](https://histoire.dev/guide/svelte3/getting-started.html).
@@ -603,3 +755,198 @@ As of 2024-0110, @histoire/plugin-svelte@0.17.6 does not work with svelte@5 and 
 ### Add Storybook
 
 See `storybook` branch.
+
+### Add Capacitor
+
+Capacitor has 2 largely independent parts that we could use:
+
+1. Plugins to use native functionality on various platforms
+2. Build apps for mobile platforms - iOS, Android
+
+Use of Capacitor \#1 native functionality (like Camera, GPS, etc.) can be very handy for some apps.
+
+TODO: (now) Check Tauri iOS/Android build support (it's in development). Meanwhile we can use Capacitor \#2 to bridge that gap. Once Tauri implements iOS/Android build support, we can revisit \#2, and keep Capacitor just for \#1.
+
+We will target Geolocation example as a very usefull feature for \#1.
+
+#### Setup
+
+The following setup is based on `@sveltejs/adapter-static` which puts output to 'build' folder by default (beware that other adapters place output files into different location).
+
+First, install pre-requisites per <https://capacitorjs.com/docs/getting-started/environment-setup>.
+
+Then, install VSCode extension:
+
+```bash
+code --install-extension ionic.ionic
+```
+
+Add Capacitor to the project:
+
+```bash
+pnpm install @capacitor/core
+pnpm install -D @capacitor/cli
+# use npx vs. pnpx with cap as pnpx won't run cap (or call cap directly, without npx):
+npx cap init total-app com.iva2k.totalapp --web-dir=build
+```
+
+Add few scripts for convenince:
+
+```json
+// package.json
+{
+  ...
+  "scripts": {
+     ...
++    "android:open": "cap open android",
++    "android:dev": "cap run android",
+```
+
+Add "capacitor.config.ts" to `tsconfig.lint.json` file.
+
+##### Add Android platform
+
+```bash
+pnpm install @capacitor/android
+npx cap add android
+```
+
+Add `cap sync android` to the "build" script in `package.json`.
+
+Add "/android" to `.eslintignore`, `.prettierignore`, `.stylelintrc.json` and "excludes" section of `tsconfig.json` files.
+
+##### Add iOS platform
+
+```bash
+pnpm install @capacitor/ios
+npx cap add ios
+```
+
+Add `cap sync ios` to the "build" script in `package.json`.
+
+Add "/ios" to `.eslintignore`, `.prettierignore`, `.stylelintrc.json` and "excludes" section of `tsconfig.json` files.
+
+Now we can use Capacitor plugins for native functionality.
+
+#### Add Geolocation
+
+For a quick example, add Geolocation:
+
+```bash
+pnpm install @capacitor/geolocation
+npx cap sync
+```
+
+Create `src/routes/geolocation/+page.svelte` (see source file in repo)
+
+Add the page to the PureHeader pages array:
+
+```js
+<script lang="ts">
+  ...
+  const pages = [
+    ...
++    { path: '/geolocation', title: 'Geolocation' },
+  ];
+</script>
+```
+
+For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
+
+```xml
+<manifest ...>
+  ...
++  <!-- Geolocation API -->
++  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
++  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
++  <uses-feature android:name="android.hardware.location.gps" />
+</manifest>
+```
+
+For iOS, add usage description to "ios/App/App/Info.plist" file:
+
+```xml
+<dict>
++  <key>NSLocationAlwaysUsageDescription</key>
++  <string>To be able to use location services when app is in the background</string>
++  <key>NSLocationWhenInUseUsageDescription</key>
++  <string>To be able to use location services when app is running</string>
+</dict>
+```
+
+#### Add QR Code Scanner
+
+For the QR Code scanner feature, we could use [@capacitor-community/barcode-scanner](https://github.com/capacitor-community/barcode-scanner) plugin, but web platform is not yet supported [#31](https://github.com/capacitor-community/barcode-scanner/issues/31).
+
+Web browsers have good support for the camera, and there are few QR scanner plugins with web platform support:
+
+- see <https://github.com/xulihang/capacitor-plugin-dynamsoft-barcode-reader/tree/main/example>
+- see <https://www.npmjs.com/package/qr-scanner>
+- see <https://github.com/zxing-js/library>
+
+We will use <https://www.npmjs.com/package/qr-scanner> and create a multi-platform QR Code Scanner. Note that it does not support formats other than QR (see [issue#63](https://github.com/nimiq/qr-scanner/issues/63#issuecomment-1029940019)), but it is a solid performer and feature-rich.
+
+If we used a capacitor / native plugin, then the Scanner View will be rendered behind the WebView, and we have to call `hideBackground()` to make the WebView and the \<html\> element transparent. Every other element that needs transparency, we will have to handle ourselves.
+
+The elements are made transparent by adding `background: 'transparent';` in the \<style\> section.
+
+```bash
+pnpm install qr-scanner
+```
+
+Create `src/routes/qrscanner/+page.svelte` (see source file in repo).
+
+Add the page to the PureHeader pages array:
+
+```js
+<script lang="ts">
+  ...
+  const pages = [
+    ...
++    { path: '/qrscanner', title: 'QR Scanner' }
+  ];
+</script>
+```
+
+For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
+
+```xml
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
++  xmlns:tools="http://schemas.android.com/tools"
+  package="com.example">
+
+  <application
+    ...
++    android:hardwareAccelerated="true"
+  >
+  </application>
+  ...
++  <!-- QR Scanner -->
++  <uses-permission android:name="android.permission.CAMERA" />
++  <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+</manifest>
+```
+
+For iOS, add usage description to "ios/App/App/Info.plist" file:
+
+```xml
+<dict>
++  <key>NSCameraUsageDescription</key>
++  <string>To be able to scan barcodes</string>
+</dict>
+```
+
+#### Interesting Capacitor Community Plugins
+
+- @capacitor-community/bluetooth-le
+- @capacitor-community/camera-preview
+- @capacitor-community/keep-awake
+
+#### Fix Issues With Capacitor
+
+None to fix.
+
+## References
+
+- Svelte components: <https://www.shadcn-svelte.com/docs>

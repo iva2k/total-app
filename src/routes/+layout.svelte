@@ -66,7 +66,7 @@
   </footer>
 </div>
 
-<style>
+<style lang="scss">
   .app {
     display: flex;
     flex-direction: column;
@@ -95,6 +95,10 @@
   footer a {
     display: inline-block; /* Place link and image inline */
     text-decoration: none; /* Remove default underline for links */
+    font-weight: bold;
+  }
+  footer a span {
+    margin-top: 10px; /* Adjust the margin as needed */
   }
 
   footer a :global(img),
@@ -103,12 +107,6 @@
     width: 2em;
     height: 3em;
     --fill_color: var(--color-text);
-  }
-  footer a {
-    font-weight: bold;
-  }
-  footer a span {
-    margin-top: 10px; /* Adjust the margin as needed */
   }
 
   @media (min-width: 480px) {
