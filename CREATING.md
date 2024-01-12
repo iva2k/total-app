@@ -11,6 +11,7 @@ Built with:
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
 - [Tauri](https://tauri.studio) - Desktop Application framework
+- [Capacitor](https://capacitorjs.com) - Building crossplatform apps
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
@@ -20,8 +21,8 @@ Built with:
 
 Continuous Integrations and Deployments:
 
-- [Netlify](https://svelte-blank-20221125.netlify.app) - App Demo
-- [Vercel](https://svelte-blank-20221125.vercel.app) - App Demo
+- [Netlify](https://total-app.netlify.app) - App Demo
+- [Vercel](https://total-app.vercel.app) - App Demo
 
 ## Software Mantra
 
@@ -208,7 +209,7 @@ We ignore it for now.
 
 Fix:
 
-TBD
+See [Set Svelte SPA mode](#set-svelte-spa-mode) below.
 
 ## Additions
 
@@ -744,6 +745,197 @@ See `histoire` branch.
 ### Add Storybook
 
 See `storybook` branch.
+
+### Add Capacitor
+
+Capacitor has 2 largely independent parts that we could use:
+
+1. Plugins to use native functionality on various platforms
+2. Build apps for mobile platforms - iOS, Android
+
+Use of Capacitor \#1 native functionality (like Camera, GPS, etc.) can be very handy for some apps.
+
+TODO: (now) Check Tauri iOS/Android build support (it's in development). Meanwhile we can use Capacitor \#2 to bridge that gap. Once Tauri implements iOS/Android build support, we can revisit \#2, and keep Capacitor just for \#1.
+
+We will target Geolocation example as a very usefull feature for \#1.
+
+#### Setup
+
+The following setup is based on `@sveltejs/adapter-static` which puts output to 'build' folder by default (beware that other adapters place output files into different location).
+
+First, install pre-requisites per <https://capacitorjs.com/docs/getting-started/environment-setup>.
+
+Then, install VSCode extension:
+
+```bash
+code --install-extension ionic.ionic
+```
+
+Add Capacitor to the project:
+
+```bash
+pnpm install @capacitor/core
+pnpm install -D @capacitor/cli
+# use npx vs. pnpx with cap as pnpx won't run cap (or call cap directly, without npx):
+npx cap init total-app com.iva2k.totalapp --web-dir=build
+```
+
+Add few scripts for convenince:
+
+```json
+// package.json
+{
+  ...
+  "scripts": {
+     ...
++    "android:open": "cap open android",
++    "android:dev": "cap run android",
+```
+
+Add "capacitor.config.ts" to `tsconfig.lint.json` file.
+
+##### Add Android platform
+
+```bash
+pnpm install @capacitor/android
+npx cap add android
+```
+
+Add `cap sync android` to the "build" script in `package.json`.
+
+Add "/android" to `.eslintignore`, `.prettierignore`, `.stylelintrc.json` and "excludes" section of `tsconfig.json` files.
+
+##### Add iOS platform
+
+```bash
+pnpm install @capacitor/ios
+npx cap add ios
+```
+
+Add `cap sync ios` to the "build" script in `package.json`.
+
+Add "/ios" to `.eslintignore`, `.prettierignore`, `.stylelintrc.json` and "excludes" section of `tsconfig.json` files.
+
+Now we can use Capacitor plugins for native functionality.
+
+#### Add Geolocation
+
+For a quick example, add Geolocation:
+
+```bash
+pnpm install @capacitor/geolocation
+npx cap sync
+```
+
+Create `src/routes/geolocation/+page.svelte` (see source file in repo)
+
+Add the page to the PureHeader pages array:
+
+```js
+<script lang="ts">
+  ...
+  const pages = [
+    ...
++    { path: '/geolocation', title: 'Geolocation' },
+  ];
+</script>
+```
+
+For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
+
+```xml
+<manifest ...>
+  ...
++  <!-- Geolocation API -->
++  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
++  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
++  <uses-feature android:name="android.hardware.location.gps" />
+</manifest>
+```
+
+For iOS, add usage description to "ios/App/App/Info.plist" file:
+
+```xml
+<dict>
++  <key>NSLocationAlwaysUsageDescription</key>
++  <string>To be able to use location services when app is in the background</string>
++  <key>NSLocationWhenInUseUsageDescription</key>
++  <string>To be able to use location services when app is running</string>
+</dict>
+```
+
+#### Add QR Code Scanner
+
+For the QR Code scanner feature, we could use [@capacitor-community/barcode-scanner](https://github.com/capacitor-community/barcode-scanner) plugin, but web platform is not yet supported [#31](https://github.com/capacitor-community/barcode-scanner/issues/31).
+
+Web browsers have good support for the camera, and there are few QR scanner plugins with web platform support:
+
+- see <https://github.com/xulihang/capacitor-plugin-dynamsoft-barcode-reader/tree/main/example>
+- see <https://www.npmjs.com/package/qr-scanner>
+- see <https://github.com/zxing-js/library>
+
+We will use <https://www.npmjs.com/package/qr-scanner> and create a multi-platform QR Code Scanner. Note that it does not support formats other than QR (see [issue#63](https://github.com/nimiq/qr-scanner/issues/63#issuecomment-1029940019)), but it is a solid performer and feature-rich.
+
+If we used a capacitor / native plugin, then the Scanner View will be rendered behind the WebView, and we have to call `hideBackground()` to make the WebView and the \<html\> element transparent. Every other element that needs transparency, we will have to handle ourselves.
+
+The elements are made transparent by adding `background: 'transparent';` in the \<style\> section.
+
+```bash
+pnpm install qr-scanner
+```
+
+Create `src/routes/qrscanner/+page.svelte` (see source file in repo).
+
+Add the page to the PureHeader pages array:
+
+```js
+<script lang="ts">
+  ...
+  const pages = [
+    ...
++    { path: '/qrscanner', title: 'QR Scanner' }
+  ];
+</script>
+```
+
+For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
+
+```xml
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
++  xmlns:tools="http://schemas.android.com/tools"
+  package="com.example">
+
+  <application
+    ...
++    android:hardwareAccelerated="true"
+  >
+  </application>
+  ...
++  <!-- QR Scanner -->
++  <uses-permission android:name="android.permission.CAMERA" />
++  <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+</manifest>
+```
+
+For iOS, add usage description to "ios/App/App/Info.plist" file:
+
+```xml
+<dict>
++  <key>NSCameraUsageDescription</key>
++  <string>To be able to scan barcodes</string>
+</dict>
+```
+
+#### Interesting Capacitor Community Plugins
+
+- @capacitor-community/bluetooth-le
+- @capacitor-community/camera-preview
+- @capacitor-community/keep-awake
+
+#### Fix Issues With Capacitor
+
+None to fix.
 
 ## References
 

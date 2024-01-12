@@ -35,7 +35,16 @@
     "strict": true,
     "outDir": ".types"
   },
-  "exclude": ["./node_modules/**", "./.svelte-kit/[!ambient.d.ts]**", "./.types", "./dev-dist/**"]
+  "exclude": [
+    "./node_modules/**",
+    "./.svelte-kit/[!ambient.d.ts]**",
+    "./.types",
+    "./src-tauri/target/**",
+    "./android/**",
+    "./ios/**",
+    "./storybook-static/**",
+    "./dev-dist/**"
+  ]
 
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //

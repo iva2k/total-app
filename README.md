@@ -43,8 +43,10 @@ Out of the box features:
 - SEO and integration with Social Networks
 - SSR / Server-Side Rendering
 - Offline mode / can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
+- Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs.
 - Support deep links, in online and in offline modes.
 - Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
+- Prepared for Isolated Component Development (Storybook).
 - Instrumented for quick deployment - Netlify, Vercel, NGINX, etc.
 
 <!-- prettier-ignore -- >
@@ -60,6 +62,7 @@ Built with:
 - [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
 - [Tauri](https://tauri.studio) - Desktop Application framework
+- [Capacitor](https://capacitorjs.com) - Building crossplatform apps
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
@@ -173,6 +176,17 @@ To create desktop executable:
 ```bash
 pnpm run tauri:build
 ```
+
+## Mobile App
+
+To update mobile app project (Android):
+
+```bash
+pnpm run build
+cap open android
+```
+
+iOS platform is installed but not fully scripted in this repo, custom scripts can easily be added. See [CREATING](./CREATING.md)
 
 ## Customizing
 

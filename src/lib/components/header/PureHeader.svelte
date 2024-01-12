@@ -6,7 +6,9 @@
   const pages = [
     { path: '/', title: 'Home' },
     { path: '/about', title: 'About' },
-    { path: '/sverdle', title: 'Sverdle' }
+    { path: '/sverdle', title: 'Sverdle' },
+    { path: '/geolocation', title: 'Geolocation' },
+    { path: '/qrscanner', title: 'QR Scanner' }
   ];
 </script>
 
