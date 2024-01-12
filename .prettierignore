@@ -22,6 +22,8 @@ test-results.json
 /src-tauri/Cargo.lock
 /playwright-report
 /coverage
+/android
+/ios
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml

@@ -40,6 +40,8 @@
     "./.svelte-kit/[!ambient.d.ts]**",
     "./.types",
     "./src-tauri/target/**",
+    "./android/**",
+    "./ios/**",
     "./storybook-static/**",
     "./dev-dist/**"
   ]
