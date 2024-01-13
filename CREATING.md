@@ -976,6 +976,18 @@ Add the page to the PureHeader pages array:
 </script>
 ```
 
+Add option to PureHeader.stories.tsx:
+
+```tsx
+export default {
+  ...
+  argTypes: {
+    pathname: {
+-      options: ['/', '/about'],
++      options: ['/', '/about', '/geolocation'],
+    ...
+```
+
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
 
 ```xml
@@ -1031,6 +1043,18 @@ Add the page to the PureHeader pages array:
 +    { path: '/qrscanner', title: 'QR Scanner' }
   ];
 </script>
+```
+
+Add option to PureHeader.stories.tsx:
+
+```tsx
+export default {
+  ...
+  argTypes: {
+    pathname: {
+-      options: ['/', '/about', '/geolocation'],
++      options: ['/', '/about', '/geolocation', 'qrscanner'],
+    ...
 ```
 
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
