@@ -389,6 +389,7 @@
     background: var(--color-theme-1);
     color: white;
     outline: none;
+    /* outline: thin dotted; */
   }
 
   @keyframes wiggle {
