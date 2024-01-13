@@ -10,7 +10,7 @@ export default {
   argTypes: {
     // Note: For Typescript, keep argTypes in sync with argParams below.
     pathname: {
-      options: ['/', '/about', '/sverdle'],
+      options: ['/', '/about', '/sverdle', '/geolocation', '/qrscanner'],
       control: { type: 'radio' }
     }
   }
