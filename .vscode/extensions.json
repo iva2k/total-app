@@ -18,6 +18,7 @@
     "wix.vscode-import-cost",
     "zignd.html-css-class-completion",
     "zixuanchen.vitest-explorer",
-    "usernamehw.errorlens"
+    "usernamehw.errorlens",
+    "github.vscode-github-actions"
   ]
 }
