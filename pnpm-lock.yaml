@@ -17,6 +17,9 @@ dependencies:
   '@capacitor/ios':
     specifier: ^5.6.0
     version: 5.6.0(@capacitor/core@5.6.0)
+  '@ionic/pwa-elements':
+    specifier: ^3.2.2
+    version: 3.2.2
   qr-scanner:
     specifier: ^1.4.2
     version: 1.4.2
@@ -1800,6 +1803,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@ionic/pwa-elements@3.2.2:
+    resolution: {integrity: sha512-gCQsHdvkaWa83T3ToKsr6FOtzSmLIYFWy+zZisXVDqU3ry4Hv581dFSxDUgokgoWSxIERe/nvYnhoN8zIIEKQQ==}
+    engines: {node: '>=16.0.0', npm: '>=8.0.0'}
+    dev: false
 
   /@ionic/utils-array@2.1.6:
     resolution: {integrity: sha512-0JZ1Zkp3wURnv8oq6Qt7fMPo5MpjbLoUoa9Bu2Q4PJuSDWM8H8gwF3dQO7VTeUj3/0o1IB1wGkFWZZYgUXZMUg==}
