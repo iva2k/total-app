@@ -965,6 +965,14 @@ Note: `svelte-check` throws error for no type definition in `import loader ...`.
 
 None to fix.
 
+### Lighthouse metrics
+
+Run Lighthouse and other web tests at <https://www.webpagetest.org>
+
+TODO: (now) Improve Lighthouse: Content is not sized correctly for the viewport The viewport size of 541px does not match the window size of 360px.
+If the width of your app's content doesn't match the width of the viewport, your app might not be optimized for mobile screens.
+<https://developer.chrome.com/docs/lighthouse/pwa/content-width/?utm_source=lighthouse&utm_medium=wpt>
+
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
