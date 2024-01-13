@@ -1,15 +1,24 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  // import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  import { loadIonicPWAElements } from '$lib/utils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
   const { githubRepo } = website;
   import GithubLogo from '$lib/images/github.svelte';
   import svelte_logo from '$lib/images/svelte-logo.svg';
+
+  onMount(async () => {
+    // await defineCustomElements(window);
+    await loadIonicPWAElements(window);
+  });
 
   let isDarkMode: boolean;
 

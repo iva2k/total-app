@@ -1086,6 +1086,34 @@ For iOS, add usage description to "ios/App/App/Info.plist" file:
 </dict>
 ```
 
+#### Using PWA Elements
+
+Some Capacitor plugins (such as Camera, Toast) need custom UI elements (even though @capacitor-community/barcode-scanner seems to be working just fine without it).
+
+In preparation to use various Capacitor plugins, we add @ionic/pwa-elements to the project:
+
+```bash
+pnpm install @ionic/pwa-elements
+```
+
+A typical installation involves importing the package and registering the elements, or adding a script tag to the \<head\> of the index.html for the app.
+
+There is an issue with TypeScript types, so we use `src/lib/utils.cjs` that avoids this issue.
+
+```js
+// src/routes/+layout.svelte
+<script lang="ts">
+  ...
++  import { onMount } from 'svelte';
++  import { loadIonicPWAElements } from '$lib/utils.cjs';
++  onMount(async () => {
++    await loadIonicPWAElements(window);
++  });
+  ...
+```
+
+Note: `svelte-check` throws error for no type definition in `import loader ...`. See `src/lib/utils.cjs` that shuts this error up.
+
 #### Interesting Capacitor Community Plugins
 
 - @capacitor-community/bluetooth-le
