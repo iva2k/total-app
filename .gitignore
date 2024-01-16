@@ -4,6 +4,7 @@ node_modules
 /build
 /.svelte-kit
 /package
+/static/vendor
 .env
 .env.*
 !.env.EXAMPLE
@@ -13,6 +14,7 @@ node_modules
 /dev-dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.types
 log.*
 *.log
 test-results.json
