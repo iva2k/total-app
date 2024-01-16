@@ -34,6 +34,14 @@ const websiteFnc = (
   const twitterUserId = '1234567890';
   const wireUsername = '@iva2k';
   const githubRepo = 'https://github.com/iva2k/total-app';
+  const websiteUrlBase = 'https://total-app.iva2k.com';
+  const websiteUrlNetlify = 'https://total-app.netlify.app';
+  const websiteUrlVercel = 'https://total-app.vercel.app';
+  const websiteUrl = env.NETLIFY
+    ? websiteUrlNetlify
+    : env.VERCEL
+      ? websiteUrlVercel
+      : websiteUrlBase;
 
   const googleSiteVerificationNetlify = '';
   const googleSiteVerificationVercel = 'BXO06YUfaqiMbQ-FgBPqQAgWB7giDX-pLEDSz89vUng';
@@ -64,7 +72,9 @@ const websiteFnc = (
     wireUsername,
     googleSiteVerificationNetlify,
     googleSiteVerificationVercel,
-    githubRepo
+    githubRepo,
+    websiteUrlBase,
+    websiteUrl
   };
   console.log('DEBUG websiteFnc.js website=%o, env=%o', website, env);
   return website;
