@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "pnpm test",
+      "name": "pnpm test",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm test:debug",
+      "name": "pnpm test:debug",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "command": "pnpm build:netlify",
       "name": "pnpm build:netlify",
       "request": "launch",
