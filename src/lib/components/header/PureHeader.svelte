@@ -1,5 +1,7 @@
 <script lang="ts">
   import logo from '$lib/images/logo.svg';
+  import website from '$lib/config/website';
+  const { websiteUrlBase } = website;
 
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
@@ -14,7 +16,7 @@
 
 <header>
   <div class="corner corner-left">
-    <a href="https://total-app.vercel.app">
+    <a href={websiteUrlBase}>
       <img src={logo} alt="Total App" />
     </a>
   </div>

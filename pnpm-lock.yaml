@@ -28,9 +28,6 @@ devDependencies:
   '@capacitor/cli':
     specifier: ^5.6.0
     version: 5.6.0
-  '@double-great/stylelint-a11y':
-    specifier: ^3.0.0
-    version: 3.0.0(stylelint@14.16.1)
   '@fontsource/fira-mono':
     specifier: ^4.5.10
     version: 4.5.10
@@ -1576,16 +1573,6 @@ packages:
       postcss-selector-parser: ^6.0.13
     dependencies:
       postcss-selector-parser: 6.0.15
-    dev: true
-
-  /@double-great/stylelint-a11y@3.0.0(stylelint@14.16.1):
-    resolution: {integrity: sha512-MdBk83+r4R7AhycEGi4uueUh6rFJYIZzRrkt4Dtqc0lzNTQ101/1n54qES0SMMty/pqBYykPt/B4xdZO+wibeg==}
-    engines: {node: '>=18.12.0'}
-    peerDependencies:
-      stylelint: '>=16.0.0'
-    dependencies:
-      postcss: 8.4.33
-      stylelint: 14.16.1
     dev: true
 
   /@esbuild/aix-ppc64@0.19.11:

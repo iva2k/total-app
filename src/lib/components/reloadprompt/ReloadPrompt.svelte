@@ -76,7 +76,8 @@
     z-index: 2;
     text-align: left;
     box-shadow: 3px 4px 5px 0 #8885;
-    background-color: white;
+    background-color: var(--color-bg-2);
+    color: var(--color-text);
   }
   .pwa-toast .message {
     margin-bottom: 8px;

@@ -31,6 +31,7 @@ test-results.json
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+/patches
 
 # Ignore package.json, so our scripts will stay aligned.
 package.json
