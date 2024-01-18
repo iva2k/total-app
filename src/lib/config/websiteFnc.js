@@ -37,9 +37,9 @@ const websiteFnc = (
   const websiteUrlBase = 'https://total-app.iva2k.com';
   const websiteUrlNetlify = 'https://total-app.netlify.app';
   const websiteUrlVercel = 'https://total-app.vercel.app';
-  const websiteUrl = env.NETLIFY
+  const websiteUrl = NETLIFY
     ? websiteUrlNetlify
-    : env.VERCEL
+    : VERCEL
       ? websiteUrlVercel
       : websiteUrlBase;
 
