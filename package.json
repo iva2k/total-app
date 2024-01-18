@@ -76,6 +76,7 @@
     "@playwright/test": "^1.28.1",
     "@rollup/plugin-replace": "^5.0.5",
     "@ronilaukkarinen/stylelint-a11y": "^1.2.9",
+    "@storybook/addon-a11y": "^7.6.9",
     "@storybook/addon-controls": "^7.6.7",
     "@storybook/addon-docs": "^7.6.7",
     "@storybook/addon-essentials": "7.6.7",

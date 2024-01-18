@@ -866,6 +866,14 @@ It is possible to load the app theme in `.storybook/preview.ts`, just add the CS
 + import '../src/app.css';
 ```
 
+### Add @storybook/addon-a11y
+
+```bash
+pnpm i -D @storybook/addon-a11y
+```
+
+Edit `.storybook/main.ts` to add "@storybook/addon-a11y" to addons (see source file).
+
 ### Publish Storybook on Chromatic
 
 Login to [www.chromatic.com](https://www.chromatic.com) and setup yor project, get [YOUR_TOKEN]. Then connect:

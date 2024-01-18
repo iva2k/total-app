@@ -43,6 +43,9 @@ devDependencies:
   '@ronilaukkarinen/stylelint-a11y':
     specifier: ^1.2.9
     version: 1.2.9(stylelint@14.16.1)
+  '@storybook/addon-a11y':
+    specifier: ^7.6.9
+    version: 7.6.9
   '@storybook/addon-controls':
     specifier: ^7.6.7
     version: 7.6.7(react-dom@18.2.0)(react@18.2.0)
@@ -3284,6 +3287,13 @@ packages:
     engines: {node: '>=18'}
     dev: true
 
+  /@storybook/addon-a11y@7.6.9:
+    resolution: {integrity: sha512-TMr6X8rd0qIAoNHP4Sb+YcQR13lB1uEWNv7lFJc7lcZVUV9ZtxqrQ3lbZDrPaTU1rpBoWXNUGMKjd6Teq9WDAw==}
+    dependencies:
+      '@storybook/addon-highlight': 7.6.9
+      axe-core: 4.8.3
+    dev: true
+
   /@storybook/addon-actions@0.0.0-pr-24889-sha-7abeedf4:
     resolution: {integrity: sha512-hYRA7erwVYjA/VVnTg3iBgTiWYiWa7Pk7YjyMzkiCuDBIuDYyEbxwtSvpcQ+0tsPOq3gQm8W55FsrJPsXtt+uA==}
     dependencies:
@@ -3394,6 +3404,12 @@ packages:
 
   /@storybook/addon-highlight@7.6.7:
     resolution: {integrity: sha512-2F/tJdn45d4zrvf/cmE1vsczl99wK8+I+kkj0G7jLsrJR0w1zTgbgjy6T9j86HBTBvWcnysNFNIRWPAOh5Wdbw==}
+    dependencies:
+      '@storybook/global': 5.0.0
+    dev: true
+
+  /@storybook/addon-highlight@7.6.9:
+    resolution: {integrity: sha512-TgfUdZqG+X6lJfZJvMkSsG+UfiEkh1xAXC628RTcVjVx5uopuezdASLU2jpLbyBc9Dmvp3j0XaEJph50n9sEUQ==}
     dependencies:
       '@storybook/global': 5.0.0
     dev: true
@@ -5532,6 +5548,11 @@ packages:
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
+    dev: true
+
+  /axe-core@4.8.3:
+    resolution: {integrity: sha512-d5ZQHPSPkF9Tw+yfyDcRoUOc4g/8UloJJe5J8m4L5+c7AtDdjDLRxew/knnI4CxvtdxEUVgWz4x3OIQUIFiMfw==}
+    engines: {node: '>=4'}
     dev: true
 
   /axobject-query@4.0.0:
