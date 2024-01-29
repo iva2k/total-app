@@ -7,6 +7,8 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  import 'agnostic-svelte/css/common.min.css';
+  import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
   import { loadIonicPWAElements } from '$lib/utils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
@@ -44,10 +46,13 @@
   <Header --corner-right-width="8em">
     <DarkMode bind:isDarkMode>
       <svelte:fragment let:data>
-        <label>
-          {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
-          <input id="cb1" type="checkbox" checked={isDarkMode} on:change={data.onToggle} />
-        </label>
+        <Switch
+          id="switch-1"
+          label={isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+          labelPosition="left"
+          bind:isChecked={isDarkMode}
+          on:change={data.onToggle}
+        />
       </svelte:fragment>
     </DarkMode>
   </Header>
