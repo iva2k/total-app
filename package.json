@@ -63,6 +63,7 @@
     "@capacitor/ios": "^5.6.0",
     "@fontsource/fira-mono": "^4.5.10",
     "@ionic/pwa-elements": "^3.2.2",
+    "bulma": "^0.9.4",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {

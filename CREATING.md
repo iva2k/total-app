@@ -970,3 +970,17 @@ If the width of your app's content doesn't match the width of the viewport, your
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+### Add UI : Bulma
+
+[Bulma](https://bulma.io/)
+
+```bash
+pnpm install bulma
+```
+
+Note: This implementation is not using [svelma](https://github.com/c0bra/svelma), which adds component wrappers over regular HTML elements. Bulma styles basic HTML directly without any help.
+
+Insert code that loads the framework into `src/routes/+layout.svelte` (see source).
+
+Add example page `src/routes/bulma/+page.svelte` (see source).
