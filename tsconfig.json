@@ -12,6 +12,7 @@
     // END copy from .svelte-kit/tsconfig.json
 
     // BEGIN override .svelte-kit/tsconfig.json
+    "baseUrl": ".",
     "paths": {
       "$app/*": ["./node_modules/@sveltejs/kit/src/runtime/app/*"], // Added for $app ESLint
       "$env/*": ["./node_modules/@sveltejs/kit/src/runtime/env/*"], // Added for $env ESLint
