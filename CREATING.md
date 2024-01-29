@@ -970,3 +970,33 @@ If the width of your app's content doesn't match the width of the viewport, your
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+### Add UI : Bootstrap / Sveltestrap
+
+[Sveltestrap](https://sveltestrap.js.org/?path=/story/components--get-started)
+
+[Bootswatch](https://github.com/thomaspark/bootswatch)
+
+```bash
+pnpm install bootswatch bootstrap-icons
+pnpm install -D @sveltestrap/sveltestrap
+```
+
+Note: When using SSR, import the components from sveltestrap/src:
+
+```js
+import { Card } from 'sveltestrap/src';
+```
+
+Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source).
+
+Add example page `src/routes/bootstrap/+page.svelte` (see source).
+
+Add some items to `assets.ts` (see source).
+
+#### Issue with `pnpm check`
+
+```bash
+Error: Argument of type 'typeof Row' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'
+Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'
+```

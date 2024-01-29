@@ -7,6 +7,8 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+  import { Input } from '@sveltestrap/sveltestrap';
   import { loadIonicPWAElements } from '$lib/utils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
@@ -38,16 +40,27 @@
   ];
 </script>
 
+<svelte:head>
+  <!-- <link rel="stylesheet" href="vendor/bootstrap/themes/{isDarkMode ? 'darkly' : 'flatly'}/bootstrap.min.css" /> -->
+  {#if isDarkMode}
+    <link rel="stylesheet" href="/vendor/bootstrap/themes/darkly/bootstrap.min.css" />
+  {:else}
+    <link rel="stylesheet" href="/vendor/bootstrap/themes/flatly/bootstrap.min.css" />
+  {/if}
+</svelte:head>
+
 <div class="app">
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
   <Header --corner-right-width="8em">
     <DarkMode bind:isDarkMode>
       <svelte:fragment let:data>
-        <label>
-          {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
-          <input id="cb1" type="checkbox" checked={isDarkMode} on:change={data.onToggle} />
-        </label>
+        <Input
+          type="switch"
+          label={isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+          checked={isDarkMode}
+          on:change={data.onToggle}
+        />
       </svelte:fragment>
     </DarkMode>
   </Header>
