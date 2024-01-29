@@ -37,11 +37,7 @@ const websiteFnc = (
   const websiteUrlBase = 'https://total-app.iva2k.com';
   const websiteUrlNetlify = 'https://total-app.netlify.app';
   const websiteUrlVercel = 'https://total-app.vercel.app';
-  const websiteUrl = NETLIFY
-    ? websiteUrlNetlify
-    : VERCEL
-      ? websiteUrlVercel
-      : websiteUrlBase;
+  const websiteUrl = NETLIFY ? websiteUrlNetlify : VERCEL ? websiteUrlVercel : websiteUrlBase;
 
   const googleSiteVerificationNetlify = '';
   const googleSiteVerificationVercel = 'BXO06YUfaqiMbQ-FgBPqQAgWB7giDX-pLEDSz89vUng';
