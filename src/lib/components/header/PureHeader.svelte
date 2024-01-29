@@ -10,7 +10,8 @@
     { path: '/about', title: 'About' },
     { path: '/sverdle', title: 'Sverdle' },
     { path: '/geolocation', title: 'Geolocation' },
-    { path: '/qrscanner', title: 'QR Scanner' }
+    { path: '/qrscanner', title: 'QR Scanner' },
+    { path: '/carbon', title: 'Carbon' }
   ];
 </script>
 

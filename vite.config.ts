@@ -43,6 +43,12 @@ export default defineConfig(async ({ mode }) => {
       __UPDATE_CHECK_PERIOD_MS__: JSON.stringify(20000) // in milli-seconds, 20s for testing purposes
     },
     plugins,
+    optimizeDeps: {
+      // carbon-components-svelte is large, prebundle
+      // include: ['carbon-components-svelte'],
+      // carbon-icons-svelte is huge and takes 12s to prebundle, better use deep imports for the icons you need
+      // exclude: ['carbon-icons-svelte']
+    },
     test: {
       include: ['src/**/*.{test,spec}.{js,ts}']
     }
