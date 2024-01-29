@@ -589,12 +589,6 @@ See sources - "src/components/darkmode/\*" and edits to "src/routes/+layout.svel
 
 Note: DarkMode toggles 'color-scheme' property on \<html\> tag between 'light' and 'dark'/. However, there's no effect visible, as there's no support for dark mode in current "/src/routes/style.css".
 
-There is an unresolved "ParseError" issue <https://github.com/sveltejs/eslint-plugin-svelte3/issues/137> in eslint-plugin-svelte3 which is wrongly closed, causing Lint to fail on ColorSchemeManager class in DarkMode.svelte.
-
-See "patches/eslint-plugin-svelte3@4.0.0.patch" for a hot-fix.
-
-See open issue <https://github.com/sveltejs/kit/issues/8081>
-
 ### Add Github and Svelte icons to Footer links
 
 See `src/routes/+layout.svelte` source file.
