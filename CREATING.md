@@ -970,3 +970,19 @@ If the width of your app's content doesn't match the width of the viewport, your
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Framework7
+
+[Framework7 for Svelte](https://framework7.io/svelte/introduction.html)
+
+```bash
+pnpm install framework7 framework7-svelte
+```
+
+Insert code that loads the framework into `src/routes/+layout.svelte` (see source in repo).
+
+Add example page `src/routes/framework7/+page.svelte` (see source in repo).
+
+### Issue - `framework7-svelte` is not compatible with Svelte 5
+
+Things break miserably. As of now, ui-framework7 branch is useless.
