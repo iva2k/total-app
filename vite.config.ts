@@ -11,8 +11,6 @@ import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { pwaConfigurationFnc } from './pwa-configuration.js';
 import assets from './assets.js';
 
-// TODO: (when needed) Remove eslint-disable
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   const { pwaConfiguration, replaceOptions } = await pwaConfigurationFnc(env);
