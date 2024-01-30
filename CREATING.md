@@ -970,3 +970,23 @@ If the width of your app's content doesn't match the width of the viewport, your
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Shoelace
+
+[Shoelace](https://shoelace.style/)
+
+```bash
+pnpm install @shoelace-style/shoelace
+```
+
+Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source in repo).
+
+Add example page `src/routes/shoelace/+page.svelte` (see source in repo).
+
+### Issue in @shoelace-style/shoelace@2.13.1
+
+`dark.css` has missing `:root` specifier, which makes dark theme broken.
+
+FIX: added `patches/@shoelace-style__shoelace@2.13.1.patch`.
+
+See <https://github.com/shoelace-style/shoelace/issues/1842>.

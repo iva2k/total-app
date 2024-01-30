@@ -18,6 +18,8 @@
   onMount(async () => {
     // await defineCustomElements(window);
     await loadIonicPWAElements(window);
+
+    await import('@shoelace-style/shoelace');
   });
 
   let isDarkMode: boolean;
@@ -36,7 +38,20 @@
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
+
+  /* for SlSwitch */
+  // const onChange = (e: Event) => {
+  //   dark = (e.target as SlSwitch).checked;
+  // };
 </script>
+
+<svelte:head>
+  {#if isDarkMode}
+    <link rel="stylesheet" href="/vendor/shoelace/themes/dark.css" />
+  {:else}
+    <link rel="stylesheet" href="/vendor/shoelace/themes/light.css" />
+  {/if}
+</svelte:head>
 
 <div class="app">
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
@@ -44,10 +59,9 @@
   <Header --corner-right-width="8em">
     <DarkMode bind:isDarkMode>
       <svelte:fragment let:data>
-        <label>
+        <sl-switch checked={isDarkMode} on:sl-change={data.onToggle}>
           {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
-          <input id="cb1" type="checkbox" checked={isDarkMode} on:change={data.onToggle} />
-        </label>
+        </sl-switch>
       </svelte:fragment>
     </DarkMode>
   </Header>
