@@ -1000,6 +1000,8 @@ pnpm i konsta @fontsource/roboto
 
 Modify `tailwindcss.config.cjs` file to use konsta (see source in repo).
 
+Add example page `src/routes/konsta/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
+
 For dark mode to work in Konsta components, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
 
 ### Issue in `pnpm check`
