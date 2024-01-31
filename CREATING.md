@@ -981,7 +981,7 @@ pnpm install @shoelace-style/shoelace
 
 Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source in repo).
 
-Add example page `src/routes/shoelace/+page.svelte` (see source in repo).
+Add example page `src/routes/shoelace/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
 ### Issue in @shoelace-style/shoelace@2.13.1
 
