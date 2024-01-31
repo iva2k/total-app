@@ -971,7 +971,7 @@ If the width of your app's content doesn't match the width of the viewport, your
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
 
-### Add UI : Agnostic
+## Add UI : Agnostic
 
 ```bash
 pnpm install agnostic-svelte
@@ -980,4 +980,3 @@ pnpm install agnostic-svelte
 Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source).
 
 Add example page `src/routes/agnostic/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
-
