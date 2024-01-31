@@ -63,6 +63,13 @@
     "@capacitor/ios": "^5.6.0",
     "@fontsource/fira-mono": "^4.5.10",
     "@ionic/pwa-elements": "^3.2.2",
+    "@svelteuidev/composables": "^0.15.4",
+    "@svelteuidev/core": "^0.15.4",
+    "@svelteuidev/dates": "^0.15.4",
+    "@svelteuidev/motion": "^0.15.4",
+    "@svelteuidev/preprocessors": "^0.15.4",
+    "@svelteuidev/prism": "^0.15.4",
+    "dayjs": "^1.11.10",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
@@ -143,5 +150,10 @@
   },
   "type": "module",
   "readme": "README.md",
-  "_id": "total-app@0.0.1"
+  "_id": "total-app@0.0.1",
+  "pnpm": {
+    "patchedDependencies": {
+      "@svelteuidev/core@0.15.4": "patches/@svelteuidev__core@0.15.4.patch"
+    }
+  }
 }
