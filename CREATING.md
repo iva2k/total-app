@@ -981,7 +981,7 @@ pnpm install framework7 framework7-svelte
 
 Insert code that loads the framework into `src/routes/+layout.svelte` (see source in repo).
 
-Add example page `src/routes/framework7/+page.svelte` (see source in repo).
+Add example page `src/routes/framework7/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
 ### Issue - `framework7-svelte` is not compatible with Svelte 5
 
