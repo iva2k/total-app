@@ -989,6 +989,6 @@ Insert code that loads the framework and adds dark theme toggle into `src/routes
 
 Add example page `src/routes/carbon/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
-#### Issue - carbon-components-svelte (and possibly other packages) is not compatible with Svelte 5
+### Issue - carbon-components-svelte (and possibly other packages) is not compatible with Svelte 5
 
 Things break miserably. As of now, ui-carbon branch is useless.
