@@ -988,6 +988,8 @@ Rename ".prettierrc" to "prettier.config.сjs" and modify contents to employ `mo
 
 Add "tailwindcss: {}," to `plugins` in `postcss.config.cjs` (see source in repo).
 
+Add tailwind to src/routes/styles.css (see source in repo).
+
 ## Add UI : Konsta
 
 [Konsta](https://konstaui.com/svelte)
