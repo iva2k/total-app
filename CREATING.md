@@ -971,7 +971,7 @@ If the width of your app's content doesn't match the width of the viewport, your
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
 
-### Add UI : Bootstrap / Sveltestrap
+## Add UI : Bootstrap / Sveltestrap
 
 [Sveltestrap](https://sveltestrap.js.org/?path=/story/components--get-started)
 
@@ -994,7 +994,7 @@ Add example page `src/routes/bootstrap/+page.svelte` and add route to `src/lib/c
 
 Add some items to `assets.ts` (see source).
 
-#### Issue with `pnpm check`
+### Issue with `pnpm check`
 
 ```bash
 Error: Argument of type 'typeof Row' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'
