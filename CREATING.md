@@ -971,7 +971,7 @@ If the width of your app's content doesn't match the width of the viewport, your
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
 
-### Add UI : Bulma
+## Add UI : Bulma
 
 [Bulma](https://bulma.io/)
 
