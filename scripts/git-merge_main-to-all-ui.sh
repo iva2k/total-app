@@ -9,8 +9,6 @@ SOURCE_BRANCH="main"
 TARGET_BRANCHES=(
   "histoire"
   "storybook"
-)
-TARGET_BRANCHES_FUTURE=(
   "ui-agnostic"
   "ui-bootstrap"
   "ui-bulma"
