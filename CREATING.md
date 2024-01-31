@@ -999,3 +999,14 @@ pnpm i konsta @fontsource/roboto
 ```
 
 Modify `tailwindcss.config.cjs` file to use konsta (see source in repo).
+
+For dark mode to work in Konsta components, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
+
+### Issue in `pnpm check`
+
+```bash
+Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
+(and many other like that, for all Konsta components)
+```
+
+See <https://github.com/konstaui/konsta/issues/151>
