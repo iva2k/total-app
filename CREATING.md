@@ -979,4 +979,5 @@ pnpm install agnostic-svelte
 
 Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source).
 
-Add example page `src/routes/agnostic/+page.svelte` (see source), and add link to PureHeader (see source).
+Add example page `src/routes/agnostic/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
+
