@@ -56,6 +56,9 @@
     setColorScheme(colorScheme: string | undefined) {
       if (colorScheme && this.d) {
         this.d.firstElementChild?.setAttribute('color-scheme', colorScheme);
+        // For TailwindCSS darkMode: 'class'
+        if (colorScheme == 'dark') this.d.firstElementChild?.classList.add('dark');
+        else this.d.firstElementChild?.classList.remove('dark');
       }
     }
   }
@@ -105,6 +108,9 @@
       function setColorScheme(colorScheme: string | undefined) {
         if (colorScheme && document) {
           document.firstElementChild?.setAttribute('color-scheme', colorScheme);
+          // For TailwindCSS darkMode: 'class'
+          if (colorScheme == 'dark') document.firstElementChild?.classList.add('dark');
+          else document.firstElementChild?.classList.remove('dark');
         }
       }
       setColorScheme(getSavedOrDefaultColorScheme());
