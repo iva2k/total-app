@@ -125,3 +125,7 @@ button:focus:not(:focus-visible) {
   width: 1px;
   white-space: nowrap;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
