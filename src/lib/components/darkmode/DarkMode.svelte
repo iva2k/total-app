@@ -5,6 +5,7 @@
   import { browser } from '$app/environment';
 
   export let isDarkMode = false;
+  export let htmlDarkClass: string | undefined = undefined;
 
   const STORAGE_KEY = 'ag-color-scheme';
 
@@ -15,19 +16,21 @@
     // TODO: (when issue is fixed) Revert lib/target to "esnext" in tsconfig.json - <https://github.com/sveltejs/svelte/issues/6900>
     w: Window | undefined;
     d: Document | undefined;
+    htmlDarkClass: string | undefined;
     // w = undefined;
     // d = undefined;
-    private constructor(_window: Window, _document: Document) {
+    private constructor(_window: Window, _document: Document, _htmlDarkClass: string | undefined) {
       this.w = _window;
       this.d = _document;
+      this.htmlDarkClass = _htmlDarkClass;
       this.setColorScheme(this.getSavedOrDefaultColorScheme());
     }
 
-    static getInstance(_window: Window, _document: Document) {
+    static getInstance(_window: Window, _document: Document, _htmlDarkClass: string | undefined) {
       const w = _window as unknown as { colorSchemeManager: ColorSchemeManager | undefined };
       if (w && _document) {
         if (!w.colorSchemeManager) {
-          w.colorSchemeManager = new ColorSchemeManager(_window, _document);
+          w.colorSchemeManager = new ColorSchemeManager(_window, _document, _htmlDarkClass);
         }
         return w.colorSchemeManager;
       }
@@ -56,9 +59,10 @@
     setColorScheme(colorScheme: string | undefined) {
       if (colorScheme && this.d) {
         this.d.firstElementChild?.setAttribute('color-scheme', colorScheme);
-        // For TailwindCSS darkMode: 'class'
-        if (colorScheme == 'dark') this.d.firstElementChild?.classList.add('dark');
-        else this.d.firstElementChild?.classList.remove('dark');
+        if (this.htmlDarkClass) {
+          if (colorScheme == 'dark') this.d.firstElementChild?.classList.add(this.htmlDarkClass);
+          else this.d.firstElementChild?.classList.remove(this.htmlDarkClass);
+        }
       }
     }
   }
@@ -68,7 +72,7 @@
   let colorSchemeManager: ColorSchemeManager | undefined;
   let isMounted = false; // Hide theme controls until fully mounted.
   onMount(async () => {
-    colorSchemeManager = ColorSchemeManager.getInstance(window, document);
+    colorSchemeManager = ColorSchemeManager.getInstance(window, document, htmlDarkClass);
     const setTheme = colorSchemeManager?.getSavedOrDefaultColorScheme();
     isDarkMode = setTheme === 'dark';
     colorSchemeManager?.setColorScheme(setTheme);
@@ -89,6 +93,7 @@
 </script>
 
 <svelte:head>
+  <meta name="htmlDarkClass" content={htmlDarkClass} />
   <script lang="ts">
     // To avoid "Flash of White", we start theme loading as soon as document head using <svelte:head>
     // TODO: (when needed) For even better UX, implement cookie-based store and ssr / server-side rendering with light/dark mode.
@@ -107,7 +112,14 @@
       }
       function setColorScheme(colorScheme: string | undefined) {
         if (colorScheme && document) {
+          const htmlDarkClass = document
+            .querySelector('meta[name=htmlDarkClass]')
+            ?.getAttribute('content'); // Work around Svelte not passing variables into <svelte:head><script>.
           document.firstElementChild?.setAttribute('color-scheme', colorScheme);
+          if (htmlDarkClass) {
+            if (colorScheme == 'dark') document.firstElementChild?.classList.add(htmlDarkClass);
+            else document.firstElementChild?.classList.remove(htmlDarkClass);
+          }
         }
       }
       setColorScheme(getSavedOrDefaultColorScheme());
