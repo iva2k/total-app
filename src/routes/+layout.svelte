@@ -46,18 +46,15 @@
 </script>
 
 <svelte:head>
-  {#if isDarkMode}
-    <link rel="stylesheet" href="/vendor/shoelace/themes/dark.css" />
-  {:else}
-    <link rel="stylesheet" href="/vendor/shoelace/themes/light.css" />
-  {/if}
+  <link rel="stylesheet" href="/vendor/shoelace/themes/light.css" />
+  <link rel="stylesheet" href="/vendor/shoelace/themes/dark.css" />
 </svelte:head>
 
 <div class="app">
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
   <Header --corner-right-width="8em">
-    <DarkMode bind:isDarkMode>
+    <DarkMode bind:isDarkMode htmlDarkClass="sl-theme-dark">
       <svelte:fragment let:data>
         <sl-switch checked={isDarkMode} on:sl-change={data.onToggle}>
           {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}

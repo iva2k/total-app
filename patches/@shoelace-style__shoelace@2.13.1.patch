@@ -1,9 +1,0 @@
-diff --git a/dist/themes/dark.css b/dist/themes/dark.css
-index 9fd059e0e8ed97e59432cadfdb7003cdb901db8f..3e31dd6d778fddea61c60091722513f53e06033d 100644
---- a/dist/themes/dark.css
-+++ b/dist/themes/dark.css
-@@ -1,3 +1,4 @@
-+:root,
- :host,
- .sl-theme-dark {
-   color-scheme: dark;

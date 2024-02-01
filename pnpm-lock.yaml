@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  '@shoelace-style/shoelace@2.13.1':
-    hash: r47u2ge7uelkawya7trif3ootm
-    path: patches/@shoelace-style__shoelace@2.13.1.patch
-
 dependencies:
   '@capacitor/android':
     specifier: ^5.6.0
@@ -30,7 +25,7 @@ dependencies:
     version: 3.2.2
   '@shoelace-style/shoelace':
     specifier: ^2.13.1
-    version: 2.13.1(patch_hash=r47u2ge7uelkawya7trif3ootm)(@types/react@18.2.48)
+    version: 2.13.1(@types/react@18.2.48)
   qr-scanner:
     specifier: ^1.4.2
     version: 1.4.2
@@ -2295,7 +2290,7 @@ packages:
     resolution: {integrity: sha512-Hf45HeO+vdQblabpyZOTxJ4ZeZsmIUYXXPmoYrrR4OJ5OKxL+bhMz5mK8JXgl7HsoEowfz7+e248UGi861de9Q==}
     dev: false
 
-  /@shoelace-style/shoelace@2.13.1(patch_hash=r47u2ge7uelkawya7trif3ootm)(@types/react@18.2.48):
+  /@shoelace-style/shoelace@2.13.1(@types/react@18.2.48):
     resolution: {integrity: sha512-QMMvq7xgKzZR5+HEgZvv82V1yDKxucsW3XTbF+Tl5ckkzyXlKtKdY1k0eK9EnWPK482JXjoKeeiBJnrx+h6i4Q==}
     engines: {node: '>=14.17.0'}
     requiresBuild: true
@@ -2311,7 +2306,6 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
     dev: false
-    patched: true
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
