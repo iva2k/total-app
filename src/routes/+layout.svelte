@@ -42,7 +42,7 @@
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
   <Header --corner-right-width="8em">
-    <DarkMode bind:isDarkMode>
+    <DarkMode bind:isDarkMode htmlDarkClass="dark">
       <svelte:fragment let:data>
         <label>
           {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
