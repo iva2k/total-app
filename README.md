@@ -213,7 +213,11 @@ There are many UI frameworks that work with Svelte / SvelteKit, and choice can b
 
 <https://sveltesociety.dev/components/>
 
-This project has few of the top UI frameworks integrated in separate git branches:
+This project has few of the top UI frameworks integrated in separate git branches.
+
+Currently there are no plans to implement additional frameworks (either listed below or not). It is not too hard to add a new UI framework, as long as it supports Svelte 5 - just look at minimal changes in the existing framework branches.
+
+Note that there are 2 branches for Isolated component development - Histoire and Storybook, which can be merged into UI branch of choice for your app.
 
 <!-- prettier-ignore -->
 | Git Branch | UI Framework | Dark Theme Switch | Notes |
@@ -238,6 +242,15 @@ This project has few of the top UI frameworks integrated in separate git branche
 | | [Svelte Material](https://sveltematerialui.com/) |   | |
 | | [Svelte Flat UI](https://svelteui.js.org/#/) |   | |
 | | [Attractions](https://github.com/illright/attractions) |   | |
+| | [Melt UI](https://melt-ui.com) |   | |
+| | [Bits UI](https://bits-ui.com) |   | |
+| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | |
+
+## Conclusion
+
+This repo was started before Svelte 5 official release using the early preview releases, and few things are still broken at the time in Svelte and in some of UI framework packages. As fixes become available, they will be picked up.
+
+Note that some of the UI frameworks were implemented flawlessly in earlier Svelte 3 / 4 version of this project, but they got behind and are incompatible with Svelte 5 (those broken branches are kept to have place where to track progress).
 
 ## Enjoy! \\\_/
 

@@ -583,7 +583,9 @@ For styling to apply into the slot elements, add `:global()` clauses to some of 
 
 See sources - "src/components/darkmode/\*" and edits to "src/routes/+layout.svelte".
 
-Note: DarkMode toggles 'color-scheme' property on \<html\> tag between 'light' and 'dark'/. However, there's no effect visible, as there's no support for dark mode in current "/src/routes/style.css".
+Note: DarkMode toggles 'color-scheme' property on \<html\> tag between 'light' and 'dark'/.
+
+Add dark mode styles to "/src/routes/style.css" (see source).
 
 ### Add Github and Svelte icons to Footer links
 
