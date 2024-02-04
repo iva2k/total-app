@@ -238,6 +238,9 @@ This project has few of the top UI frameworks integrated in separate git branche
 | | [Svelte Material](https://sveltematerialui.com/) |   | |
 | | [Svelte Flat UI](https://svelteui.js.org/#/) |   | |
 | | [Attractions](https://github.com/illright/attractions) |   | |
+| | [Melt UI](https://melt-ui.com) |   | |
+| | [Bits UI](https://bits-ui.com) |   | |
+| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | |
 
 ## Enjoy! \\\_/
 
