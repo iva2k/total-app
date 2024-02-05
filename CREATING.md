@@ -747,13 +747,14 @@ See `histoire` branch.
 ```bash
 # pnpx storybook init -s --package-manager=pnpm
 pnpx storybook@next init -s --package-manager=pnpm
+# Answer "Yes" to question on installing "eslint-plugin-storybook".
 pnpm i -D @storybook/cli@next
 '''
 
 Add some additional packages:
 
 '''bash
-pnpm install -D @storybook/addon-controls@next @storybook/addon-docs@next @storybook/addon-svelte-csf eslint-plugin-storybook
+pnpm install -D @storybook/addons @storybook/addon-controls@next @storybook/addon-docs@next @storybook/addon-svelte-csf eslint-plugin-storybook
 ```
 
 Add peer dependencies (some may be already installed by `storybook init`):
