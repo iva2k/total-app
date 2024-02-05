@@ -753,7 +753,7 @@ pnpm i -D @storybook/cli@next
 Add some additional packages:
 
 '''bash
-pnpm install -D @storybook/addon-controls@next @storybook/addon-docs@next @storybook/addon-svelte-csf@next eslint-plugin-storybook@next
+pnpm install -D @storybook/addon-controls@next @storybook/addon-docs@next @storybook/addon-svelte-csf eslint-plugin-storybook
 ```
 
 Add peer dependencies (some may be already installed by `storybook init`):
