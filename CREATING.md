@@ -745,23 +745,15 @@ See `histoire` branch.
 ### Add Storybook
 
 ```bash
-pnpm i -D @storybook/cli@0.0.0-pr-24889-sha-7abeedf4 && storybook init;# Use dev version while Svelte 5 support is not released
-# Answer "Yes" to question on installing "eslint-plugin-storybook".
-```
-
-If the above install has problems, can use this workaround:
-
-```bash
-pnpx storybook init -s
-# or pnpx storybook@next init -s --package-manager=pnpm
-pnpm i
-pnpm i -D @storybook/cli
+# pnpx storybook init -s --package-manager=pnpm
+pnpx storybook@next init -s --package-manager=pnpm
+pnpm i -D @storybook/cli@next
 '''
 
 Add some additional packages:
 
 '''bash
-pnpm install -D @storybook/addon-controls @storybook/addon-docs @storybook/addon-svelte-csf eslint-plugin-storybook
+pnpm install -D @storybook/addon-controls@next @storybook/addon-docs@next @storybook/addon-svelte-csf@next eslint-plugin-storybook@next
 ```
 
 Add peer dependencies (some may be already installed by `storybook init`):
