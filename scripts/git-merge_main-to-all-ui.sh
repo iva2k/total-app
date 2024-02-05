@@ -59,7 +59,7 @@ for TARGET_BRANCH in "${TARGET_BRANCHES[@]}"; do
     # # Switch back to the source branch for the next iteration
     # git checkout "$SOURCE_BRANCH"
 
-    echo "DONE Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\".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gi"
+    echo "DONE Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"."
     echo
 done
 
