@@ -848,11 +848,62 @@ To add custom theme to Storybook app, per <https://storybook.js.org/docs/configu
 
 The theme only changes class on the root element (which can be chosen to differ from the default \<body\> tag). The actual theme should be provided and can match the app theme.
 
-It is possible to load the app theme in `.storybook/preview.ts`, just add the CSS file:
+### Add Storybook Addon Themes
+
+To change themes in Storybook component previews, use an addon [Storybook Addon Themes](https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/getting-started/tailwind.md). It can coexist with `@storybook/theming`, and will show a theme menu on the toolbar.
+
+```bash
+pnpm i -D @storybook/addon-themes
+```
+
+Add plugin to Storybook:
+
+```js
+// .storybook/main.cjs
+
+module.exports = {
+  ...
+  addons: [
+    ...
++    '@storybook/addon-themes'
+  ],
+  ...
+```
+
+Add themes preview configuration:
 
 ```js
 // .storybook/preview.ts
-+ import '../src/app.css';
+...
++import { withThemeByDataAttribut, withThemeByClassName } from '@storybook/addon-themes';
+
+const preview: Preview = {
++    decorators: [
++      withThemeByDataAttribute<Renderer>({
++        themes: {
++          light: '',
++          dark: 'dark'
++        },
++        defaultTheme: 'light',
++        attributeName: 'color-scheme'
++      }),
++      withThemeByClassName<Renderer>({
++        themes: {
++          light: '',
++          dark: 'dark',
++        },
++        defaultTheme: 'light',
++      })
++    ],
+  parameters: {
+  ...
+```
+
+The theme switch changes "class" and "color-scheme" attribute on the \<html\> element of component preview iframe. The actual theme should be provided in the app's style.css. To load the app styles, just import the CSS file in `.storybook/preview.ts`:
+
+```js
+// .storybook/preview.ts
++ import '../src/routes/style.css';
 ```
 
 ### Add @storybook/addon-a11y
