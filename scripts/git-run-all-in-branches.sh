@@ -47,7 +47,7 @@ function main() {
     LOGFILE_I="$LOGFILE.$TARGET_BRANCH"
     (rm "$LOGFILE_I" 2>/dev/null)
     errors[i]="--"
-    outputs[i]="\033[31m(did not run)"
+    outputs[i]="\033[31m(did not run)\033[36m"
   done
   # errors[0]=0 ;# for DEBUG only
   # errors[1]=1 ;# for DEBUG only
