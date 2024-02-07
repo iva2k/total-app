@@ -22,7 +22,8 @@ TARGET_BRANCHES=(
 
 function main() {
   # Check that local repo is clean
-  if output=$(git status --untracked-files=no --porcelain 2>&1) || [ -z "$output" ]; then
+  output=$(git status --untracked-files=no --porcelain 2>&1)
+  if [ "$?" -ne 0 ] || [ ! -z "$output" ]; then
     # Working directory clean excluding untracked files
     echo "Working folder is not clean. Please clean working folder and retry."
     echo "$output"
