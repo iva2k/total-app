@@ -20,6 +20,13 @@ TARGET_BRANCHES=(
   "ui-tailwindcss"
 )
 
+# alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
+function decolor() {
+  local input
+  input="$1"
+  echo -e "$input" | sed 's/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g'
+}
+
 function main() {
   # Check that local repo is clean
   output=$(git status --untracked-files=no --porcelain 2>&1)
