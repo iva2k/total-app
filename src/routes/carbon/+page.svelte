@@ -1,5 +1,5 @@
 <script lang="ts">
-  // your script goes here
+  import { type ComponentProps } from 'svelte';
   import {
     Button,
     Theme,
@@ -7,12 +7,19 @@
     RadioButton,
     breakpoints
   } from 'carbon-components-svelte';
-  import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte.js'; // TODO Fix not working import type from 'carbon-components-svelte'.
   import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
   import Add from 'carbon-icons-svelte/lib/Add.svelte';
   import Login from 'carbon-icons-svelte/lib/Login.svelte';
 
-  let theme: CarbonTheme = 'g90';
+  // TODO: (when issue is fixed) `import { type CarbonTheme } from 'carbon-components-svelte'` is not working. See <https://github.com/carbon-design-system/carbon-components-svelte/issues/1910>
+  // ? import type { CarbonTheme } from 'carbon-components-svelte'; // This should work after the issue #1910 is fixed.
+  // ? import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte.js'; // This used to work some time ago
+  // type CarbonTheme = 'white' | 'g10' | 'g80' | 'g90' | 'g100';
+  // 3 ways to work around the issue:
+  // import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
+  // let theme: CarbonTheme = 'g90';
+  // let theme = 'g90' as const;
+  let theme: ComponentProps<Theme>['theme'] = 'g90' as const;
 </script>
 
 <Theme bind:theme persist persistKey="__carbon-theme" />
