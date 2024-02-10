@@ -103,7 +103,9 @@ pnpm install -D cross-env glob rimraf minimist @types/minimist sass shx vite-plu
 pnpm install -D ts-node tsx
 ```
 
-Add assets copying to svelte.config.js (see source file).
+Add assets copying scripts `scripts/assets-copy.ts`  and `scripts/assets-clean.ts` to `package.json`.
+
+Add assets copying during dev using 'vite-plugin-static-copy' to svelte.config.js (see source file).
 
 ### Lint Error "illegal variable name"
 
@@ -240,6 +242,14 @@ Add some scripts:
 }
 ```
 
+The recommended VSCode extension Vitest "zixuanchen.vitest-explorer" provides control of unit tests in VSCode side-panel.
+
+#### Issue with Vitest VSCode extension
+
+As of 2024-0210, extension Vitest "zixuanchen.vitest-explorer" is not showing any of the tests. Of all other vitest extensions in the marketplace, none show the tests in the panel, and the ones that insert shortcuts in the source editor fail to run vitest. So there is no working integration with VSCode (tested on Windows).
+
+TODO: (now) file issue(s) for "zixuanchen.vitest-explorer".
+
 ### Playwright Reports
 
 Add few lines to `playwright.config.ts` file so HTML and .json reports are generated:
@@ -255,6 +265,8 @@ const config: PlaywrightTestConfig = {
 +    : [['list'], ['json', { outputFile: 'test-results.json' }], ['html', { open: 'on-failure' }]],
   ...
 ```
+
+The recommended VSCode extension Microsoft Playwright Test for VSCode "ms-playwright.playwright" provides control of integration tests in VSCode side-panel.
 
 ### Organize template components into `src/lib/components`
 
