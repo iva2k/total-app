@@ -1009,3 +1009,5 @@ Some styles have to be disabled in `src/routes/styles.css` (see source in repo).
 There was a breaking change in Svelte 5, removing functions such as `beforeUpdate` from `svelte/internal` that was used in `@svelteuidev/core`.
 
 FIX: @svelteuidev/core is patched, see `patches/@svelteuidev__core@0.15.4.patch`. It fixes build, but the patch is not functional, so the library remains broken.
+
+TODO: (when needed) TypeError: `forwardEvents` is not a function.
