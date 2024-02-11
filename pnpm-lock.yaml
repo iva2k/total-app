@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  konsta@3.1.2:
+    hash: qu3bclpyn5uy5fkmflwufaqklu
+    path: patches/konsta@3.1.2.patch
+
 dependencies:
   '@capacitor/android':
     specifier: ^5.6.0
@@ -28,7 +33,7 @@ dependencies:
     version: 3.2.2
   konsta:
     specifier: ^3.1.2
-    version: 3.1.2
+    version: 3.1.2(patch_hash=qu3bclpyn5uy5fkmflwufaqklu)
   qr-scanner:
     specifier: ^1.4.2
     version: 1.4.2
@@ -5115,10 +5120,11 @@ packages:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
     dev: true
 
-  /konsta@3.1.2:
+  /konsta@3.1.2(patch_hash=qu3bclpyn5uy5fkmflwufaqklu):
     resolution: {integrity: sha512-Tle0sd+awLdJHeDaCDXjhcJdABauV6bUcWpFyJJGr8WcJbw8Klfdhwi6txam4ljggkuKtPtzictQwg9fdYUVBQ==}
     engines: {node: '>= 4.7.0'}
     dev: false
+    patched: true
 
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}

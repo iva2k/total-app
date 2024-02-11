@@ -1061,3 +1061,5 @@ rm -rf node_modules/.vitest
 - See (closed, no solution) <https://github.com/vitest-dev/vitest/issues/3913>
 - See (closed, no solution) <https://github.com/sveltejs/vite-plugin-svelte/issues/710>
 - See (closed, no solution) <https://github.com/vitejs/vite/issues/1505>
+
+Workaround monkey-patch: `patches/konsta@3.1.2.patch`, adds "." entry to konsta/package.json.
