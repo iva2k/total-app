@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2059
 
 # Merge main branch into all UI branches
 
@@ -8,28 +9,28 @@ git config user.name "IVA2K"
 COMMAND=(pnpm run all)
 # COMMAND=(pnpm run check)
 
-SOURCE_BRANCH="main"
 LOGFILE=log.runallall
-
 STOP_ON_ERROR=0
 
-GOOD_SKIP_TARGET_BRANCHES=(
+SOURCE_BRANCH="main"
+
+export GOOD_SKIP_TARGET_BRANCHES=(
 )
 TARGET_BRANCHES=(
   "main"
   "histoire"
   "storybook"
-  "ui-bulma"
-  "ui-tailwindcss"
-)
-BROKEN_TARGET_BRANCHES=(
   "ui-agnostic"
-  "ui-bootstrap"
+  "ui-bulma"
   "ui-carbon"
-  "ui-framework7"
-  "ui-konsta"
   "ui-shoelace"
   "ui-svelteui"
+  "ui-tailwindcss"
+)
+export BROKEN_TARGET_BRANCHES=(
+  "ui-bootstrap" # `pnpm check`: Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
+  "ui-framework7" # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory" - service worker build fails, probably due to all components not compatible with Svelte 5, buncho "ARIA role" issues, etc.
+  "ui-konsta" # `pnpm check`: Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
 )
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
@@ -41,8 +42,7 @@ function decolor() {
 
 function main() {
   # Check that local repo is clean
-  output=$(git status --untracked-files=no --porcelain 2>&1)
-  if [ "$?" -ne 0 ] || [ ! -z "$output" ]; then
+  if ! output=$(git status --untracked-files=no --porcelain 2>&1) || [ -n "$output" ]; then
     # Working directory clean excluding untracked files
     echo "Working folder is not clean. Please clean working folder and retry."
     echo "$output"
@@ -68,8 +68,8 @@ function main() {
   git fetch origin
 
   # Loop through each target branch and run command
-  tms_user=()
-  tms_system=()
+  # tms_user=()
+  # tms_system=()
   tms_real=()
   for i in "${!TARGET_BRANCHES[@]}"; do
     # break ;# for DEBUG only
@@ -91,8 +91,8 @@ function main() {
     # echo "DEBUG: error=$error, t=$t"
     IFS=' ' read -r real user system <<< "$t"
     tms_real[i]=$real
-    tms_user[i]=$user
-    tms_system[i]=$system
+    # tms_user[i]=$user
+    # tms_system[i]=$system
     # echo "DEBUG: real=$real user=$user system: $system"
     outputs[i]=""
     errors[i]="$error"
