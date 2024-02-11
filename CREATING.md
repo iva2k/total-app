@@ -1031,6 +1031,8 @@ See <https://github.com/konstaui/konsta/issues/151>
 
 ### Issue in `pnpm test:unit`
 
+See <https://github.com/iva2k/total-app/issues/1>
+
 `vitest run` fails on first run and shows an error:
 
 ```bash
