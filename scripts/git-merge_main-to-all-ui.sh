@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2059
 
 # Merge main branch into all UI branches
 
 git config user.email "iva2k@yahoo.com"
 git config user.name "IVA2K"
-  
+
+LOGFILE=log.merge-all
+
 SOURCE_BRANCH="main"
 TARGET_BRANCHES=(
   "histoire"
