@@ -89,7 +89,8 @@ function main() {
     t=$( { time "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1; } 2>&1 )  # Captures time output into t.
     error=$?
     # echo "DEBUG: error=$error, t=$t"
-    IFS=' ' read -r real user system <<< "$t"
+    # IFS=' ' read -r real user system <<< "$t"
+    IFS=' ' read -r real <<< "$t"
     tms_real[i]=$real
     # tms_user[i]=$user
     # tms_system[i]=$system
@@ -109,7 +110,7 @@ function main() {
       fi
     fi
 
-    echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", error=$error" | tee -a "$LOGFILE"
+    echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s error=$error" | tee -a "$LOGFILE"
     echo | tee -a "$LOGFILE"
   done
 
