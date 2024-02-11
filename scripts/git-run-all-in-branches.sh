@@ -18,17 +18,17 @@ export GOOD_SKIP_TARGET_BRANCHES=(
 )
 TARGET_BRANCHES=(
   "main"
-  "histoire"
   "storybook"
   "ui-agnostic"
   "ui-bulma"
-  "ui-carbon"
   "ui-shoelace"
   "ui-svelteui"
   "ui-tailwindcss"
 )
 export BROKEN_TARGET_BRANCHES=(
+  "histoire" # CompileError: The $ name is reserved, and cannot be used for variables and imports
   "ui-bootstrap" # `pnpm check`: Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
+  "ui-carbon" # Error: The 'swSrc' file can't be read. ENOENT: no such file or directory
   "ui-framework7" # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory" - service worker build fails, probably due to all components not compatible with Svelte 5, buncho "ARIA role" issues, etc.
   "ui-konsta" # `pnpm check`: Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
 )
@@ -147,7 +147,7 @@ function main() {
     total_time=$(awk "BEGIN {print ($total_time+${tms_real[$i]})}")
     [ "$color_red" -ne 0 ] && echo -n -e "\033[31m"
     printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$LOGFILE_I" "${tms_real[$i]}" "${output:0:100}" | tee -a "$LOGFILE"
-    [ "$color_red" -ne 0 ] && echo -n -e "\033[36m"
+    [ "$color_red" -ne 0 ] && echo -n -e "\033[39m"
   done
   echo "$LINE" | tee -a "$LOGFILE"
   printf "$FORMAT\n" "Total:" "$errors_cnt" "$total_cnt" "$total_time" "" | tee -a "$LOGFILE"
