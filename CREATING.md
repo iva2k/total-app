@@ -1028,3 +1028,34 @@ Error: Argument of type 'typeof App' is not assignable to parameter of type 'Con
 ```
 
 See <https://github.com/konstaui/konsta/issues/151>
+
+### Issue in `pnpm test:unit`
+
+`vitest run` fails on first run and shows an error:
+
+```bash
+⎯⎯ Unhandled Rejection ⎯⎯
+Error: Failed to resolve entry for package "konsta". The package may have incorrect main/module/exports specified in its package.json: Missing "." specifier in "konsta" package
+ ❯ packageEntryFailure node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:29450:17
+ ❯ resolvePackageEntry node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:29445:9
+ ❯ tryNodeResolve node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:29217:20
+ ❯ Context.resolveId node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:28985:28
+ ❯ Object.resolveId node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:63629:64
+ ❯ async file:/C:/dev/svelte/total-app/node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:67637:21
+ ❯ async file:/C:/dev/svelte/total-app/node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:64286:20
+ ❯ addManuallyIncludedOptimizeDeps node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:65479:31
+ ❯ optimizeServerSsrDeps node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:65070:5
+ ❯ createDevSsrDepsOptimizer node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:64988:22
+
+⎯⎯Serialized Error: { code: 'ERR_RESOLVE_PACKAGE_ENTRY_FAIL' }
+```
+
+On second run, `vitest run` does not show any errors and hangs up. Deleting "node_modules/.vitest" resets the error:
+
+```bash
+rm -rf node_modules/.vitest
+```
+
+- See (closed, no solution) <https://github.com/vitest-dev/vitest/issues/3913>
+- See (closed, no solution) <https://github.com/sveltejs/vite-plugin-svelte/issues/710>
+- See (closed, no solution) <https://github.com/vitejs/vite/issues/1505>
