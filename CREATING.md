@@ -105,7 +105,7 @@ pnpm install -D cross-env glob rimraf minimist @types/minimist sass shx vite-plu
 pnpm install -D ts-node tsx
 ```
 
-Add assets copying scripts `scripts/assets-copy.ts`  and `scripts/assets-clean.ts` to `package.json`.
+Add assets copying scripts `scripts/assets-copy.ts` and `scripts/assets-clean.ts` to `package.json`.
 
 Add assets copying during dev using 'vite-plugin-static-copy' to svelte.config.js (see source file).
 
