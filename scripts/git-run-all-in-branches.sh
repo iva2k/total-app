@@ -89,8 +89,8 @@ function main() {
     t=$( { time "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1; } 2>&1 )  # Captures time output into t.
     error=$?
     # echo "DEBUG: error=$error, t=$t"
-    # IFS=' ' read -r real user system <<< "$t"
-    IFS=' ' read -r real <<< "$t"
+    # shellcheck disable=SC2034
+    IFS=' ' read -r real user system <<< "$t"
     tms_real[i]=$real
     # tms_user[i]=$user
     # tms_system[i]=$system
