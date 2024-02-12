@@ -12,6 +12,7 @@ Built with:
 - [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
 - [Tauri](https://tauri.studio) - Desktop Application framework
 - [Capacitor](https://capacitorjs.com) - Building crossplatform apps
+- [Histoire](https://histoire.dev) - Tool for building UI components and pages in isolation
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
