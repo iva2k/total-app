@@ -4,7 +4,7 @@
 </script>
 
 <div>
-  <!-- TODO: (when needed) Remove eslint-disable -->
+  <!-- TODO: (when fixed) Remove eslint-disable -->
   <!-- eslint-disable-next-line svelte/valid-compile -->
   <PureHeader pathname={$page.url.pathname}><slot /></PureHeader>
 </div>
