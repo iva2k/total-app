@@ -97,7 +97,6 @@ function main() {
     # echo "DEBUG: real=$real user=$user system: $system"
     outputs[i]=""
     errors[i]="$error"
-    # TODO: (now) Check for errors and stop if any.
     if [ "$error" -ne 0 ] ; then
       [ "$output" == "" ] && output=$(grep -i "error" "$LOGFILE_I" | tail -n1)
       outputs[i]="$output"
