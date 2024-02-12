@@ -228,7 +228,7 @@ Note that there are 2 branches for Isolated component development - Histoire and
 | histoire                                  | (none) | Y | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
 | storybook                                 | (none) | Y | Isolated component development. |
 | [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | Y | |
-| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | Y | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch) |
+| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | Y | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). |
 | [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | N | |
 | [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | Y | Incomplete and currently broken (w/Svelte 5) |
 | [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | N | Incomplete and currently broken (w/Svelte 5) |
