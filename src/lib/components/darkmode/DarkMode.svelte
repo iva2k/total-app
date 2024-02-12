@@ -10,10 +10,6 @@
   const STORAGE_KEY = 'ag-color-scheme';
 
   class ColorSchemeManager {
-    // Note: If this throws an error, make sure lib/target in tsconfig.json is set to not "esnext", but either to "es2021" or "es2020".
-    // @see related <https://github.com/sveltejs/svelte/issues/6900>
-    // For ESLint ParseError issue filed: @see <https://github.com/sveltejs/eslint-plugin-svelte3/issues/137>
-    // TODO: (when issue is fixed) Revert lib/target to "esnext" in tsconfig.json - <https://github.com/sveltejs/svelte/issues/6900>
     w: Window | undefined;
     d: Document | undefined;
     htmlDarkClass: string | undefined;
