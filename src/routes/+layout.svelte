@@ -20,7 +20,7 @@
     await loadIonicPWAElements(window);
   });
 
-  let isDarkMode: boolean;
+  let isDarkMode = $state(false);
 
   // Favicon params:
   const pngFavicons = [
