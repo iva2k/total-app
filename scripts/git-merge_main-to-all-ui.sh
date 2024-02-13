@@ -6,9 +6,13 @@
 git config user.email "iva2k@yahoo.com"
 git config user.name "IVA2K"
 
+COMMAND_MERGE_LOCKFILE=( git checkout HEAD -- pnpm-lock.yaml "&&" pnpm install "&&"  git add pnpm-lock.yaml )
+COMMAND_UPDATE_LOCKFILE=( git checkout HEAD -- pnpm-lock.yaml "&&" pnpm install "&&"  git add pnpm-lock.yaml "&&" git commit -m "Update pnpm-lock.yaml" )
+
 LOGFILE=log.merge-all
 
 SOURCE_BRANCH="main"
+
 TARGET_BRANCHES=(
   "histoire"
   "storybook"
@@ -61,7 +65,7 @@ function main() {
   git pull origin "$SOURCE_BRANCH"
 
   # Loop through each target branch and merge changes
-  for i in "${!TARGET_BRANCHES[@]}"; do 
+  for i in "${!TARGET_BRANCHES[@]}"; do
     TARGET_BRANCH="${TARGET_BRANCHES[$i]}"
     echo "BEGIN Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"..."
     # Switch to the target branch, Merge changes from the source branch
@@ -80,8 +84,9 @@ function main() {
     if ! git merge "$SOURCE_BRANCH" --no-edit ; then
       echo "Merge conflict detected in \"$TARGET_BRANCH\" branch."
       echo "  Recreating 'pnpm-lock.yaml' to try resolve most likely conflicts..."
-      (git checkout HEAD -- pnpm-lock.yaml && pnpm install &&  git add pnpm-lock.yaml)
-      echo "  DONE Recreating 'pnpm-lock.yaml'."
+      ( "${COMMAND_MERGE_LOCKFILE[@]}")
+      error=$?
+      echo "  DONE Recreating 'pnpm-lock.yaml', error=$error."
       if git diff --name-only --diff-filter=U | grep -q .; then
         echo "  There are remaining unresolved Git conflicts in branch \"$TARGET_BRANCH\":"
         git diff --name-only --diff-filter=U 
@@ -96,6 +101,11 @@ function main() {
         errors[i]=0
       fi
     fi
+
+    echo "  Updating 'pnpm-lock.yaml'..."
+    ( "${COMMAND_UPDATE_LOCKFILE[@]}" )
+    error=$?
+    echo "  DONE Updating 'pnpm-lock.yaml', error=$error."
 
     # Push the changes to the remote repository
     git push origin "$TARGET_BRANCH"
