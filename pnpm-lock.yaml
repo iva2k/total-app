@@ -18,8 +18,8 @@ dependencies:
     specifier: ^5.7.0
     version: 5.7.0(@capacitor/core@5.7.0)
   '@fontsource/fira-mono':
-    specifier: ^4.5.10
-    version: 4.5.10
+    specifier: ^5.0.8
+    version: 5.0.8
   '@ionic/pwa-elements':
     specifier: ^3.2.2
     version: 3.2.2
@@ -32,8 +32,8 @@ devDependencies:
     specifier: ^5.7.0
     version: 5.7.0
   '@neoconfetti/svelte':
-    specifier: ^1.0.0
-    version: 1.0.0
+    specifier: ^2.2.1
+    version: 2.2.1
   '@playwright/test':
     specifier: ^1.41.2
     version: 1.41.2
@@ -50,14 +50,14 @@ devDependencies:
     specifier: ^3.1.1
     version: 3.1.1(@sveltejs/kit@2.5.0)
   '@sveltejs/adapter-netlify':
-    specifier: ^3.0.2
-    version: 3.0.2(@sveltejs/kit@2.5.0)
+    specifier: ^4.1.0
+    version: 4.1.0(@sveltejs/kit@2.5.0)
   '@sveltejs/adapter-static':
     specifier: ^3.0.1
     version: 3.0.1(@sveltejs/kit@2.5.0)
   '@sveltejs/adapter-vercel':
-    specifier: ^4.0.5
-    version: 4.0.5(@sveltejs/kit@2.5.0)
+    specifier: ^5.1.0
+    version: 5.1.0(@sveltejs/kit@2.5.0)
   '@sveltejs/kit':
     specifier: ^2.5.0
     version: 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@5.0.0-next.41)(vite@5.1.1)
@@ -71,8 +71,8 @@ devDependencies:
     specifier: 2.0.0-alpha.20
     version: 2.0.0-alpha.20
   '@types/eslint':
-    specifier: 8.56.0
-    version: 8.56.0
+    specifier: ^8.56.2
+    version: 8.56.2
   '@types/glob':
     specifier: ^8.1.0
     version: 8.1.0
@@ -1754,8 +1754,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@fontsource/fira-mono@4.5.10:
-    resolution: {integrity: sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==}
+  /@fontsource/fira-mono@5.0.8:
+    resolution: {integrity: sha512-8OJiUK2lzJjvDlkmamEfhtpL1cyFApg1Pk4kE5Pw5UTf1ETF3Yy/pprgwV5I+LQPDjuFvinsinT9xSUZ2b/zuQ==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -1990,8 +1990,8 @@ packages:
       - supports-color
     dev: true
 
-  /@neoconfetti/svelte@1.0.0:
-    resolution: {integrity: sha512-SmksyaJAdSlMa9cTidVSIqYo1qti+WTsviNDwgjNVm+KQ3DRP2Df9umDIzC4vCcpEYY+chQe0i2IKnLw03AT8Q==}
+  /@neoconfetti/svelte@2.2.1:
+    resolution: {integrity: sha512-2Ts0Rxaf6clW2qG+AKhTwpl01AAyZEAe03XeuQ7Vp+qYIaM3ycuI94j546fmEkUxwACwGI3Zl2cZ/pncTuNcJg==}
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -2275,10 +2275,10 @@ packages:
       import-meta-resolve: 4.0.0
     dev: true
 
-  /@sveltejs/adapter-netlify@3.0.2(@sveltejs/kit@2.5.0):
-    resolution: {integrity: sha512-a2FHlWz4gREg0/IUVhS2dJOmjACdp/ZZwSsZZ3d0oQAtTZa8ZVugjMU1z03mDh2NBJwWvDu9rB/hbHy7Q9BFDg==}
+  /@sveltejs/adapter-netlify@4.1.0(@sveltejs/kit@2.5.0):
+    resolution: {integrity: sha512-TGv14O/9xumJv/q9G57ZCzl+LUWHZ9dDleugT5QQD87zJE3Y98AKyU5Z7c7WlBTjKYKEQEeOxjnSdOpMRuhd6g==}
     peerDependencies:
-      '@sveltejs/kit': ^2.0.0
+      '@sveltejs/kit': ^2.4.0
     dependencies:
       '@iarna/toml': 2.2.5
       '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@5.0.0-next.41)(vite@5.1.1)
@@ -2294,10 +2294,10 @@ packages:
       '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@5.0.0-next.41)(vite@5.1.1)
     dev: true
 
-  /@sveltejs/adapter-vercel@4.0.5(@sveltejs/kit@2.5.0):
-    resolution: {integrity: sha512-SABZvRry8pUggFrBLbIi88dCH5gP3M0O/8HvvLjOTCwTVn3E8H1ppJ8ujhj8xNuoi4rm9JVy6qYSYp2EsgOugw==}
+  /@sveltejs/adapter-vercel@5.1.0(@sveltejs/kit@2.5.0):
+    resolution: {integrity: sha512-Z9yRJ4H2/7LcBlvN2/TKu1H0hWoRGonr8kPhP1GJ23LRW76IbiiX5gs/MLc6+ZGogCZYVJ4USmx6m+RFtvQTRw==}
     peerDependencies:
-      '@sveltejs/kit': ^2.0.0
+      '@sveltejs/kit': ^2.4.0
     dependencies:
       '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@5.0.0-next.41)(vite@5.1.1)
       '@vercel/nft': 0.26.3
@@ -2507,8 +2507,8 @@ packages:
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
     dev: true
 
-  /@types/eslint@8.56.0:
-    resolution: {integrity: sha512-FlsN0p4FhuYRjIxpbdXovvHQhtlG05O1GG/RNWvdAxTboR438IOTwmrY/vLA+Xfgg06BTkP045M3vpFwTMv1dg==}
+  /@types/eslint@8.56.2:
+    resolution: {integrity: sha512-uQDwm1wFHmbBbCZCqAlq6Do9LYwByNZHWzXppSnay9SuwJ+VRbjkbLABer54kcPnMSlG6Fdiy2yaFXm/z9Z5gw==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
