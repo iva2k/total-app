@@ -22,7 +22,7 @@
     await loadIonicPWAElements(window);
   });
 
-  let isDarkMode: boolean;
+  let isDarkMode = $state(false);
 
   let config: SvelteUIProviderProps = {
     // light: { bg: 'White', color: 'Black' },
