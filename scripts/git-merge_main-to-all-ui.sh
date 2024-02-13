@@ -7,7 +7,7 @@ git config user.email "iva2k@yahoo.com"
 git config user.name "IVA2K"
 
 function rebuild_lockfile() {
-  git checkout HEAD -- pnpm-lock.yaml && pnpm install &&  git add pnpm-lock.yaml
+  git checkout HEAD -- pnpm-lock.yaml && pnpm install && git add pnpm-lock.yaml
 }
 function rebuild_lockfile_and_commit() {
   rebuild_lockfile && git commit -m "Update pnpm-lock.yaml"
@@ -41,7 +41,7 @@ function decolor() {
   echo -e "$input" | sed 's/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g'
 }
 
-function main() {
+function merge_to_all() {
   # Check that local repo is clean
   if ! output=$(git status --untracked-files=no --porcelain 2>&1) || [ -n "$output" ]; then
     # Working directory clean excluding untracked files
@@ -177,4 +177,5 @@ function main() {
   return $result
 }
 
-main "@$"
+(return 0 2>/dev/null) && sourced=1 || sourced=0
+[ "$sourced" -eq 0 ] && merge_to_all "@$"
