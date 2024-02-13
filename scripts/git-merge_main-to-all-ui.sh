@@ -6,8 +6,15 @@
 git config user.email "iva2k@yahoo.com"
 git config user.name "IVA2K"
 
-COMMAND_MERGE_LOCKFILE=( git checkout HEAD -- pnpm-lock.yaml "&&" pnpm install "&&"  git add pnpm-lock.yaml )
-COMMAND_UPDATE_LOCKFILE=( git checkout HEAD -- pnpm-lock.yaml "&&" pnpm install "&&"  git add pnpm-lock.yaml "&&" git commit -m "Update pnpm-lock.yaml" )
+function rebuild_lockfile() {
+  git checkout HEAD -- pnpm-lock.yaml && pnpm install &&  git add pnpm-lock.yaml
+}
+function rebuild_lockfile_and_commit() {
+  rebuild_lockfile && git commit -m "Update pnpm-lock.yaml"
+}
+
+COMMAND_MERGE_LOCKFILE=( "rebuild_lockfile" )
+COMMAND_UPDATE_LOCKFILE=( "rebuild_lockfile_and_commit" )
 
 LOGFILE=log.merge-all
 
@@ -74,19 +81,32 @@ function main() {
     outputs[i]=""
     errors[i]=0
 
-    # Check for merge conflicts
+    # Checkout target branch
     if ! output=$(git checkout "$TARGET_BRANCH") ; then
       echo "Error checking out branch \"$TARGET_BRANCH\"."
       outputs[i]="Error checking out branch"
       errors[i]=1
       continue
     fi
+
+    # Merge and check for conflicts
     if ! git merge "$SOURCE_BRANCH" --no-edit ; then
       echo "Merge conflict detected in \"$TARGET_BRANCH\" branch."
+
+      # Check for conflicts in package.json (which will break rebuilding pnpm-lock.yaml)
+      if git diff --name-only --diff-filter=U | grep -q "package.json"; then
+        echo " \"package.json\" file has conflicts, cannot resolve automatically."
+        echo "  Please resolve any remaining Git conflicts manually, commit and push changes, and run this script again."
+        outputs[i]="Merge conflicts in \"package.json\", can't resolve automatically"
+        errors[i]=1
+        return 1
+      fi
+
       echo "  Recreating 'pnpm-lock.yaml' to try resolve most likely conflicts..."
       ( "${COMMAND_MERGE_LOCKFILE[@]}")
       error=$?
       echo "  DONE Recreating 'pnpm-lock.yaml', error=$error."
+
       if git diff --name-only --diff-filter=U | grep -q .; then
         echo "  There are remaining unresolved Git conflicts in branch \"$TARGET_BRANCH\":"
         git diff --name-only --diff-filter=U 
