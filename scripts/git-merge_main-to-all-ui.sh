@@ -55,7 +55,7 @@ function merge_to_all() {
   if ! output=$(git rev-list "${SOURCE_BRANCH}...origin/${SOURCE_BRANCH}" 2>&1) || [ -n "$output" ]; then
     # Branch is different from origin
     echo "Branch \"$SOURCE_BRANCH\" in local repo is not synced with remote origin. Please sync local branch and retry."
-    echo "$output"
+    # echo "$output"
     return 1
   else 
     echo "Local branch is in sync."
@@ -106,7 +106,7 @@ function merge_to_all() {
     (git diff --exit-code "package.json" >/dev/null 2>&1) && pkg_updated=0 || pkg_updated=1
 
     if [ "$res" -ne 0 ] ; then
-      echo "Merge conflict detected in \"$TARGET_BRANCH\" branch."
+      echo "Merge conflict(s) detected in \"$TARGET_BRANCH\" branch."
 
       # Check for conflicts in package.json (which will break rebuilding pnpm-lock.yaml)
       if git diff --name-only --diff-filter=U | grep -q "package.json"; then
@@ -117,20 +117,24 @@ function merge_to_all() {
         return 1
       fi
 
-      echo "  Recreating \"pnpm-lock.yaml\" to try resolve most likely conflicts..."
-      ( "${COMMAND_MERGE_LOCKFILE[@]}")
-      error=$?
-      echo "  DONE Recreating \"pnpm-lock.yaml\", error=$error."
+      if git diff --name-only --diff-filter=U | grep -q "pnpm-lock.yaml"; then
+        echo "  Merge conflict(s) in \"pnpm-lock.yaml\", recreating..."
+        ( "${COMMAND_MERGE_LOCKFILE[@]}" )
+        error=$?
+        echo "  DONE Recreating \"pnpm-lock.yaml\", error=$error."
+        pkg_updated=0
+      fi
 
-      if git diff --name-only --diff-filter=U | grep -q .; then
-        echo "  There are remaining unresolved Git conflicts in branch \"$TARGET_BRANCH\":"
-        git diff --name-only --diff-filter=U 
-        echo "  Please resolve any remaining Git conflicts manually, commit and push changes, and run this script again."
+      output=$(git diff --name-only --diff-filter=U)
+      if echo "$output" | grep -q .; then
+        echo "  There are remaining unresolved Merge conflicts in branch \"$TARGET_BRANCH\":"
+        echo "$output"
+        echo "  Please resolve any remaining Merge conflicts manually, commit and push changes, and run this script again."
         outputs[i]="Merge conflicts, can't resolve automatically"
         errors[i]=1
         return 1
       else
-        echo "  No unresolved Git conflicts found, continuing..."
+        echo "  No unresolved Merge conflicts left, continuing..."
         git commit --no-edit
         outputs[i]="Merge conflicts resolved"
         errors[i]=0
