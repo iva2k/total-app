@@ -1,7 +1,7 @@
 {
   "name": "total-app",
   "description": "Cross-platform Desktop / Mobile / Web application starter.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "postinstall":                                   "echo RUN postinstall && svelte-kit sync && tsx scripts/assets-clean.ts",
     "postinstallEMPTY":                              "echo RUN postinstall && svelte-kit sync",
@@ -170,5 +170,5 @@
   },
   "type": "module",
   "readme": "README.md",
-  "_id": "total-app@0.0.1"
+  "_id": "total-app@0.0.2"
 }
