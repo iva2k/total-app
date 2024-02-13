@@ -102,7 +102,7 @@ function merge_to_all() {
     # if ! git merge "$SOURCE_BRANCH" --no-edit ; then
     git merge "$SOURCE_BRANCH" --no-commit
     res=$?
-    # Check if package.json file is updated (or conflicted)
+    # Check if package.json file is updated (ignore conflicted)
     (git diff --exit-code "package.json" >/dev/null 2>&1) && pkg_updated=0 || pkg_updated=1
 
     if [ "$res" -ne 0 ] ; then
@@ -111,7 +111,7 @@ function merge_to_all() {
       # Check for conflicts in package.json (which will break rebuilding pnpm-lock.yaml)
       if git diff --name-only --diff-filter=U | grep -q "package.json"; then
         echo " \"package.json\" file has conflicts, cannot resolve automatically."
-        echo "  Please resolve any remaining Git conflicts manually, commit and push changes, and run this script again."
+        echo "  Please resolve any remaining Merge conflicts manually, commit and push changes, and run this script again."
         outputs[i]="Merge conflicts in \"package.json\", can't resolve automatically"
         errors[i]=1
         return 1
