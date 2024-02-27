@@ -5,14 +5,35 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "pnpm test",
-      "name": "pnpm test",
+      "name": "WORKS pnpm test:unit",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "test:unit"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "BROKEN node-terminal",
+      "request": "launch",
+      "type": "node-terminal",
+      "command": "pnpm test:unit",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "command": "pnpm test:unit",
+      "name": "pnpm test:unit",
       "request": "launch",
       "type": "node-terminal"
     },
     {
-      "command": "pnpm test:debug",
-      "name": "pnpm test:debug",
+      "command": "pnpm test:integration",
+      "name": "pnpm test:integration",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "pnpm test:integration:debug",
+      "name": "pnpm test:integration:debug",
       "request": "launch",
       "type": "node-terminal"
     },
