@@ -26,7 +26,7 @@ TARGET_BRANCHES=(
   "ui-tailwindcss"
 )
 export BROKEN_TARGET_BRANCHES=(
-  "histoire" # CompileError: The $ name is reserved, and cannot be used for variables and imports
+  "histoire" # `pnpm story:build`: CompileError: The $ name is reserved, and cannot be used for variables and imports
   "ui-bootstrap" # `pnpm check`: Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
   "ui-carbon" # Error: The 'swSrc' file can't be read. ENOENT: no such file or directory
   "ui-framework7" # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory" - service worker build fails, probably due to all components not compatible with Svelte 5, buncho "ARIA role" issues, etc.
@@ -165,4 +165,5 @@ function main() {
   return $result
 }
 
-main "@$"
+(return 0 2>/dev/null) && sourced=1 || sourced=0 ;# bash only
+[ "$sourced" -eq 0 ] && main "@$"
