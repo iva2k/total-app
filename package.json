@@ -147,10 +147,5 @@
   },
   "type": "module",
   "readme": "README.md",
-  "_id": "total-app@0.0.2",
-  "pnpm": {
-    "patchedDependencies": {
-      "konsta@3.1.2": "patches/konsta@3.1.2.patch"
-    }
-  }
+  "_id": "total-app@0.0.2"
 }
