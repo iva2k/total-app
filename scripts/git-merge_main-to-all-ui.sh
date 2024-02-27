@@ -202,5 +202,5 @@ function merge_to_all() {
   return $result
 }
 
-(return 0 2>/dev/null) && sourced=1 || sourced=0
+(return 0 2>/dev/null) && sourced=1 || sourced=0 ;# bash only
 [ "$sourced" -eq 0 ] && merge_to_all "@$"
