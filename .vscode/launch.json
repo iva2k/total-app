@@ -5,6 +5,21 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "WORKS pnpm test:unit",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "test:unit"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "BROKEN node-terminal",
+      "request": "launch",
+      "type": "node-terminal",
+      "command": "pnpm test:unit",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
       "command": "pnpm test:unit",
       "name": "pnpm test:unit",
       "request": "launch",
