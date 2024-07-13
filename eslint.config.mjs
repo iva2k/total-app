@@ -50,16 +50,31 @@ function readJson(file) {
     throw e;
   }
 }
-/** @type (obj: Object, prop: string, prefix: string) => string[] */
-function arrayFilePathsDeprefix(obj, prop, prefix) {
+
+/** @type (obj: Object, prop: string, old_prefix: string, new_prefix?: string) => string[] */
+function arrayFilePathsDeprefix(obj, prop, old_prefix, new_prefix = '') {
   if (obj instanceof Object && prop in obj && Array.isArray(obj[prop]))
     return (
-      obj[prop].map((ss) => {
+      obj[prop]?.map((ss) => {
         const s = typeof ss === 'string' ? ss : '';
-        return s.startsWith(prefix) ? s.slice(prefix.length) : s;
+        return s.startsWith(old_prefix) ? new_prefix + s.slice(old_prefix.length) : s;
       }) ?? []
     );
   return [];
+}
+
+/** @type (obj_arr: Object[]) => typeof obj_arr */
+function patchFilesPrefix(obj_arr) {
+  return (
+    obj_arr?.map((obj) => {
+      const prop = 'files';
+      if (obj instanceof Object && prop in obj && Array.isArray(obj[prop])) {
+        obj[prop] = arrayFilePathsDeprefix(obj, prop, '*.', '**/*.');
+      }
+
+      return obj;
+    }) ?? obj_arr
+  );
 }
 
 // Data from tsconfig.*.json
@@ -142,6 +157,7 @@ const RULES = {
 export default tseslint.config(
   {
     // Recommended configs
+    name: 'config-recommended',
     languageOptions: {
       ecmaVersion: 'latest',
       parserOptions: {
@@ -180,11 +196,13 @@ export default tseslint.config(
 
   {
     // Basic js include files
+    name: 'config-basic-js',
     files: ['**/*.js', '**/*.cjs', '**/*.mjs']
   },
 
   {
     // Ignore on all levels
+    name: 'config-ignores',
     ignores: [
       // because of import assertion of tsconfig.json
       'eslint.config.js',
@@ -246,6 +264,7 @@ export default tseslint.config(
 
   {
     // Globals for nodejs files
+    name: 'config-nodejs',
     files: ['**/*.cjs', '**/*.cts'],
     plugins: {
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
@@ -267,6 +286,7 @@ export default tseslint.config(
 
   {
     // Globals for browser files
+    name: 'config-browser',
     files: ['**/*.js', '**/*.mjs', '**/*.ts', '**/*.mts', '**/*.svelte'],
     plugins: {
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
@@ -283,6 +303,7 @@ export default tseslint.config(
 
   {
     // Tools configs: *.config.ts files in root
+    name: 'config-tools',
     files: tsConfigForConfigFilesInclude, // Use tsconfig.configs.json
     plugins: {
       '@typescript-eslint': tsPlugin,
@@ -305,6 +326,7 @@ export default tseslint.config(
 
   {
     // Typescript
+    name: 'config-typescript',
     files: ['**/*.ts', '**/*.cts', '**/*.mts'],
     ignores: tsConfigForConfigFilesInclude,
     plugins: {
@@ -325,6 +347,7 @@ export default tseslint.config(
 
   {
     // Svelte
+    name: 'config-svelte',
     plugins: {
       svelte: sveltePlugin,
       '@typescript-eslint': tsPlugin,
@@ -352,6 +375,7 @@ export default tseslint.config(
   /**/
   {
     // Playwright and Vitest
+    name: 'config-playwright',
     ...playwright.configs['flat/recommended'],
     files: ['tests/**'], // or any other pattern
     plugins: {
