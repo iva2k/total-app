@@ -125,6 +125,60 @@ To resolve (temporarily), added eslint-disable comments to the affected lines.
 
 ### Issue with imports linting
 
+#### Update 2024
+
+Updating ESLint to v9 and flat configs.
+
+1. Use `typescript-eslint-parser-for-extra-files` to fix problems with `.svelte` files when using `project: './tsconfig.json'`.
+
+2. Plugin `eslint-plugin-import` is not compatible, and there's lack of progress in the ongoing discussions, see:
+
+- <https://github.com/eslint/eslint/issues/17953>
+- <https://github.com/import-js/eslint-plugin-import/pull/2873>
+- <https://github.com/import-js/eslint-plugin-import/pull/2996> (show comments marked as spam and off-topic, review "eslint-plugin-import-x")
+
+Decided to try `eslint-plugin-import-x`, see discussion in <https://github.com/un-ts/eslint-plugin-import-x/issues/29>.
+
+```bash
+pnpm install -D eslint-plugin-import-x
+```
+
+```js
+// This is a first appoximation. See eslint.config.mjs source for the actual.
+import eslintImportX from 'eslint-plugin-import-x'
+...
+
+export default [
+  {
+    ...
+    plugins: {
+-     import: eslintImport,
++     'import-x': eslintImportX,
+    },
+    settings: {
+      'import-x/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import-x/resolver': {
+        // Load <rootdir>/tsconfig.json
+        typescript: true,
+        node: true,
+      },
+    },
+    rules: {
+      // Error on imports that don't match the underlying file system
+-     // https://github.com/import-js/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+-     'import/no-unresolved': 'error',
++     // https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-unresolved.md
++     'import-x/no-unresolved': 'error',
+    },
+  },
+...
+]
+```
+
+#### Legacy
+
 <https://github.com/sveltejs/kit/issues/1560>
 
 Fix:
@@ -1158,21 +1212,21 @@ pnpm install @ionic/pwa-elements
 
 A typical installation involves importing the package and registering the elements, or adding a script tag to the \<head\> of the index.html for the app.
 
-There is an issue with TypeScript types, so we use `src/lib/utils.cjs` that avoids this issue.
+There is an issue with TypeScript types, so we use `src/lib/utils/ionicUtils.cjs` that avoids this issue.
 
 ```js
 // src/routes/+layout.svelte
 <script lang="ts">
   ...
 +  import { onMount } from 'svelte';
-+  import { loadIonicPWAElements } from '$lib/utils.cjs';
++  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
 +  onMount(async () => {
 +    await loadIonicPWAElements(window);
 +  });
   ...
 ```
 
-Note: `svelte-check` throws error for no type definition in `import loader ...`. See `src/lib/utils.cjs` that shuts this error up.
+Note: `svelte-check` throws error for no type definition in `import loader ...`. See `src/lib/utils/ionicUtils.cjs` that shuts this error up.
 
 #### Interesting Capacitor Community Plugins
 
