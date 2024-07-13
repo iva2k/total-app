@@ -56,6 +56,22 @@
       "type": "node-terminal"
     },
     {
+      "name": "pnpm build:only (node)",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build:only"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "pnpm postinstall (node)",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "postinstall"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
       "command": "pnpm build:only-sw",
       "name": "pnpm build:only-sw",
       "request": "launch",

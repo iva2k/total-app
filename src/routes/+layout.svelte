@@ -9,7 +9,7 @@
   import './styles.css';
   import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
   import { Input } from '@sveltestrap/sveltestrap';
-  import { loadIonicPWAElements } from '$lib/utils.cjs';
+  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
