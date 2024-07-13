@@ -51,9 +51,19 @@ function readJson(file) {
   }
 }
 
+// We have return statements in arrayFilePathsDeprefix() and patchFilesPrefix() throwing
+// eslint errors @typescript-eslint/no-unsafe-return, but they don't show errors in the
+// main branch, so VSCode removes eslint-disable-next-line directives on save.
+// Instead, we disable all eslint rules for the whole block:
+// BEGIN BLOCK
+/* eslint-disable -- because eslint does not have rule for removing unused directives. */
+{
+} // Dummy code block to force keeping `eslint-disable`
+
 /** @type (obj: Object, prop: string, old_prefix: string, new_prefix?: string) => string[] */
 function arrayFilePathsDeprefix(obj, prop, old_prefix, new_prefix = '') {
   if (obj instanceof Object && prop in obj && Array.isArray(obj[prop]))
+    // May get @typescript-eslint/no-unsafe-return
     return (
       obj[prop]?.map((ss) => {
         const s = typeof ss === 'string' ? ss : '';
@@ -65,17 +75,21 @@ function arrayFilePathsDeprefix(obj, prop, old_prefix, new_prefix = '') {
 
 /** @type (obj_arr: Object[]) => typeof obj_arr */
 function patchFilesPrefix(obj_arr) {
+  // May get @typescript-eslint/no-unsafe-return
   return (
     obj_arr?.map((obj) => {
       const prop = 'files';
       if (obj instanceof Object && prop in obj && Array.isArray(obj[prop])) {
         obj[prop] = arrayFilePathsDeprefix(obj, prop, '*.', '**/*.');
       }
-
+      // May get @typescript-eslint/no-unsafe-return
       return obj;
     }) ?? obj_arr
   );
 }
+
+/* eslint-enable */
+// END BLOCK
 
 // Data from tsconfig.*.json
 // import tsConfigForConfigFiles from './tsconfig.configs.json' assert { type: 'json' };
