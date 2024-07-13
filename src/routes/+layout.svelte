@@ -9,7 +9,7 @@
   import './styles.css';
   import 'agnostic-svelte/css/common.min.css';
   import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
-  import { loadIonicPWAElements } from '$lib/utils.cjs';
+  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
