@@ -13,6 +13,8 @@ const { plugin: tsPlugin } = tseslint;
 import sveltePlugin from 'eslint-plugin-svelte';
 // import eslintImport from 'eslint-plugin-import';
 import pluginImportX from 'eslint-plugin-import-x';
+import playwright from 'eslint-plugin-playwright';
+import vitest from 'eslint-plugin-vitest';
 
 // Parsers
 const { parser: tsParser } = tseslint;
@@ -160,7 +162,7 @@ export default tseslint.config(
       }
     }
   },
-  /**/
+
   // Rules from legacy plugins
   ...fixupConfigRules(
     compat.extends(
@@ -170,7 +172,6 @@ export default tseslint.config(
       'plugin:import-x/typescript'
     )
   ),
-  /**/
 
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
@@ -218,6 +219,7 @@ export default tseslint.config(
       // Generated
       '**/log.*',
       '**/*.log',
+      'test-results/',
       '**/test-results.json',
       'src-tauri/target/',
       'src-tauri/WixTools/',
@@ -246,8 +248,6 @@ export default tseslint.config(
     // Globals for nodejs files
     files: ['**/*.cjs', '**/*.cts'],
     plugins: {
-      // import: fixupPluginRules(eslintImport),
-      // import: legacyPlugin('eslint-plugin-import', 'import'),
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
     },
     languageOptions: {
@@ -269,8 +269,6 @@ export default tseslint.config(
     // Globals for browser files
     files: ['**/*.js', '**/*.mjs', '**/*.ts', '**/*.mts', '**/*.svelte'],
     plugins: {
-      // import: fixupPluginRules(eslintImport),
-      // import: legacyPlugin('eslint-plugin-import', 'import'),
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
     },
     languageOptions: {
@@ -288,8 +286,6 @@ export default tseslint.config(
     files: tsConfigForConfigFilesInclude, // Use tsconfig.configs.json
     plugins: {
       '@typescript-eslint': tsPlugin,
-      // import: fixupPluginRules(eslintImport),
-      // import: legacyPlugin('eslint-plugin-import', 'import'),
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
     },
     languageOptions: {
@@ -313,8 +309,6 @@ export default tseslint.config(
     ignores: tsConfigForConfigFilesInclude,
     plugins: {
       '@typescript-eslint': tsPlugin,
-      // import: fixupPluginRules(eslintImport),
-      // import: legacyPlugin('eslint-plugin-import', 'import'),
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
     },
     languageOptions: {
@@ -334,8 +328,6 @@ export default tseslint.config(
     plugins: {
       svelte: sveltePlugin,
       '@typescript-eslint': tsPlugin,
-      // import: fixupPluginRules(eslintImport),
-      // import: legacyPlugin('eslint-plugin-import', 'import'),
       import: legacyPlugin('eslint-plugin-import-x', 'import-x')
     },
     files: ['**/*.svelte'],
@@ -355,5 +347,38 @@ export default tseslint.config(
       ...sveltePlugin.configs.recommended.rules,
       ...RULES.ts
     }
+  },
+
+  /**/
+  {
+    // Playwright and Vitest
+    ...playwright.configs['flat/recommended'],
+    files: ['tests/**'], // or any other pattern
+    plugins: {
+      import: legacyPlugin('eslint-plugin-import-x', 'import-x'),
+      vitest
+    },
+    rules: {
+      ...vitest.configs.recommended.rules
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project,
+          extraFileExtensions: ['.svelte', '.Xplaywright'],
+          tsconfigRootDir: __dirname
+        }
+      },
+      vitest: {
+        typecheck: true
+      }
+    },
+    languageOptions: {
+      globals: {
+        ...vitest.environments.env.globals
+      }
+    }
   }
+  /**/
 );

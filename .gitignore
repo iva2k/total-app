@@ -30,6 +30,7 @@ vite.config.ts.timestamp-*
 log.*
 *.log
 *.nogit.*
+/test-results
 test-results.json
 /storybook-static
 /src-tauri/target
