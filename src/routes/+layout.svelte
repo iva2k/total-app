@@ -9,7 +9,7 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
-  import { loadIonicPWAElements } from '$lib/utils.cjs';
+  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';

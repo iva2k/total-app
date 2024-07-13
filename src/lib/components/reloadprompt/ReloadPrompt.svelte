@@ -1,5 +1,4 @@
 <script lang="ts">
-  // eslint-disable-next-line import/no-unresolved
   import { useRegisterSW } from 'virtual:pwa-register/svelte';
 
   // replaced dynamically

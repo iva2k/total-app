@@ -5,10 +5,12 @@
 // TODO: (soon) File a proper issue with svelte-check
 
 /** @type {import("@ionic/pwa-elements/loader").defineCustomElements} */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { defineCustomElements } from '@ionic/pwa-elements/loader/index.cjs.js';
 
 export const loadIonicPWAElements = async (
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   w
 ) => {
