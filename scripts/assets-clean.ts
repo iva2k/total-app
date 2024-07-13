@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { glob } from 'glob';
+import { glob, Glob } from 'glob';
 
 import { cleanup } from '../assets.js';
 
@@ -12,16 +12,15 @@ const reporter = console.log;
 
 async function assetsClean() {
   await Promise.all(
-    cleanup.map(async ({ dest }) => {
-      glob(dest, {}, async (e, files) => {
-        await Promise.all(
-          files.map(async (f) => {
-            const fPath = path.resolve(f);
-            reporter('%s: + Removing "%s"', scriptName, f);
-            await fs.promises.rm(fPath, { recursive: true, force: true });
-          })
-        );
-      });
+    cleanup.flatMap(async ({ dest }) => {
+      const g = new Glob(dest, {});
+      const tasks: Promise<void>[] = [];
+      for await (const f of g) {
+        const fPath = path.resolve(f);
+        reporter('%s: + Removing "%s"', scriptName, f);
+        tasks.push(fs.promises.rm(fPath, { recursive: true, force: true }));
+      }
+      return tasks;
     })
   );
 }
