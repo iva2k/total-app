@@ -1,5 +1,4 @@
 <script lang="ts">
-  // eslint-disable-next-line import/no-unresolved
   import { pwaInfo } from 'virtual:pwa-info';
   import { onMount } from 'svelte';
   import type { ComponentType, SvelteComponent } from 'svelte';

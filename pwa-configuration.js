@@ -22,7 +22,7 @@ const pwaConfigurationFnc = async (
   // For @sveltejs/adapter-static, @sveltejs/adapter-netlify, @sveltejs/adapter-vercel
   // /** @typedef {import('workbox-build').ManifestEntry} ManifestEntry */
   /** @type {import('workbox-build').ManifestTransform} */
-  const manifestTransformStatic = async (manifestEntries) => {
+  const manifestTransformStatic = /* async */ (manifestEntries) => {
     console.info('Precache Manifest Entries:');
     const manifest = manifestEntries
       .filter(

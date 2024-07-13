@@ -13,7 +13,7 @@ async function assetsCopy() {
   await Promise.all(
     assets.map(async ({ src, dest }) => {
       reporter('%s: + Copying %s to %s', scriptName, src, dest);
-      await cpy(src, dest);
+      return cpy(src, dest);
     })
   );
 }

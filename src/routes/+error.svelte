@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
 
-  // eslint-disable-next-line svelte/valid-compile
   const { message } = $page.error || { message: 'Oops, $page.error is null' };
   const title = `${$page.status}: ${message}`;
 

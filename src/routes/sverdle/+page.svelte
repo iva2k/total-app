@@ -191,7 +191,7 @@
     style="position: absolute; left: 50%; top: 30%"
     use:confetti={{
       // TODO: (when fixed) Remove eslint-disable
-      // eslint-disable-next-line svelte/valid-compile
+
       particleCount: $reduced_motion ? 0 : undefined,
       force: 0.7,
       stageWidth: window.innerWidth,
