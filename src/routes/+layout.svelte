@@ -16,7 +16,7 @@
   Framework7.use(Framework7Svelte);
   import 'framework7/css/bundle';
 
-  import { loadIonicPWAElements } from '$lib/utils.cjs';
+  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
