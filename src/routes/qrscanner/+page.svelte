@@ -205,7 +205,6 @@
     });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onStyleSelect() {
     // settings.scannerStyle = select.value;
     // reposition the highlight for cases when style sets "position: relative"
@@ -257,12 +256,13 @@
       isFlashOn = !isFlashOn;
       return;
     }
-    const fnc =
-      /* prettier-ignore */
-      enable === undefined ? scanner?.toggleFlash :
-      enable ? scanner?.turnFlashOn :
-      scanner?.turnFlashOff;
-    if (fnc) fnc().then(getFlashState);
+    if (scanner) {
+      (enable === undefined
+        ? scanner.toggleFlash.bind(scanner)
+        : enable
+          ? scanner.turnFlashOn.bind(scanner)
+          : scanner.turnFlashOff.bind(scanner))().then(getFlashState);
+    }
   }
 
   function onStart() {

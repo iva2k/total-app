@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "scripts/*.ts",
+    "assets.ts",
+    "capacitor.config.ts",
+    "eslint.config.mjs",
+    "histoire.config.ts",
+    "playwright.config.ts",
+    "postcss.config.cjs",
+    "prettier.config.cjs",
+    "pwa-configuration.js",
+    "svelte.config.js",
+    "vite.config.js"
+  ]
+}
