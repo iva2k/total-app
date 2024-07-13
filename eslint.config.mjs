@@ -50,16 +50,31 @@ function readJson(file) {
     throw e;
   }
 }
-/** @type (obj: Object, prop: string, prefix: string) => string[] */
-function arrayFilePathsDeprefix(obj, prop, prefix) {
+
+/** @type (obj: Object, prop: string, old_prefix: string, new_prefix?: string) => string[] */
+function arrayFilePathsDeprefix(obj, prop, old_prefix, new_prefix = '') {
   if (obj instanceof Object && prop in obj && Array.isArray(obj[prop]))
     return (
-      obj[prop].map((ss) => {
+      obj[prop]?.map((ss) => {
         const s = typeof ss === 'string' ? ss : '';
-        return s.startsWith(prefix) ? s.slice(prefix.length) : s;
+        return s.startsWith(old_prefix) ? new_prefix + s.slice(old_prefix.length) : s;
       }) ?? []
     );
   return [];
+}
+
+/** @type (obj_arr: Object[]) => typeof obj_arr */
+function patchFilesPrefix(obj_arr) {
+  return (
+    obj_arr?.map((obj) => {
+      const prop = 'files';
+      if (obj instanceof Object && prop in obj && Array.isArray(obj[prop])) {
+        obj[prop] = arrayFilePathsDeprefix(obj, prop, '*.', '**/*.');
+      }
+
+      return obj;
+    }) ?? obj_arr
+  );
 }
 
 // Data from tsconfig.*.json
