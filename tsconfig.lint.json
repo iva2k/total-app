@@ -6,16 +6,9 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.svelte",
+    "src/lib/utils/ionicUtils.cjs",
     "src/claims-sw.ts",
     "src/prompt-sw.ts",
-    "scripts/*.ts",
-    "tests/**/*.ts",
-    "assets.ts",
-    "capacitor.config.ts",
-    "playwright.config.ts",
-    "postcss.config.cjs",
-    "prettier.config.cjs",
-    "pwa-configuration.js",
-    "svelte.config.js"
+    "tests/**/*.ts"
   ]
 }

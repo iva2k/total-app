@@ -11,6 +11,8 @@
     "source.fixAll.html": "explicit"
   },
   "eslint.validate": ["svelte"],
+  // "eslint.experimental.useFlatConfig": true,
+  "eslint.useFlatConfig": true,
   "editor.tokenColorCustomizations": {
     "[Svelte]": {
       "textMateRules": [

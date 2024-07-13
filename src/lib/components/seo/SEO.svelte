@@ -43,8 +43,6 @@
   // causing all sorts of troubles, including failing build (prerender stage crashing with "/undefined/").
   // Protect ourselves:
   let siteUrl;
-  // TODO: (when fixed) Remove eslint-disable
-  // eslint-disable-next-line svelte/valid-compile
   if ($page.url.origin === 'http://sveltekit-prerender') {
     // We are in prerender on the server
     siteUrl = siteUrlConfig;
