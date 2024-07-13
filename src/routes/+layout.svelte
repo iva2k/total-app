@@ -9,7 +9,7 @@
   import './styles.css';
   // import '../../node_modules/bulma/css/bulma.min.css';
   // import '../../node_modules/bulma/css/bulma.css'; // Moved to style.css
-  import { loadIonicPWAElements } from '$lib/utils.cjs';
+  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
