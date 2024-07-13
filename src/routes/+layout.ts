@@ -1,10 +1,12 @@
 // `trailingSlash` moved from `svelte.config.js`:
 // Enable trailingSlash for favicon links in <head> to be absolute and not throw stray /about/favicon.ico requests
-// export const trailingSlash = 'always';
-// However, it breaks router: /about/ works, but /about throws 404.
-// To compound the problem, in Offline mode /  Service Worker, /about works, which makes it too weird.
+export const trailingSlash = 'always';
+// However, in early Svelte versions it broke router: /about/ works, but /about throws 404.
+// To compound the problem, in Offline mode / Service Worker, /about works, which makes it too weird.
 // So don't use it for now.
-// TODO: (now) File an issue on trailingSlash='always' and /about route not working
+// As of Svelte v5.0.0.-next.41, router works ok with trailingSlash='always':
+// - /about route goes to /about/
+// - /about/ route opens to /about/
 
 // There are errors in many online sources that give wrong information about prerender and ssr.
 

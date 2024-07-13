@@ -42,7 +42,7 @@ export function focusTrap(node: HTMLElement, enabled: boolean) {
   };
   onInit();
 
-  function onDestory(): void {
+  function onDestroy(): void {
     if (elemFirst) elemFirst.removeEventListener('keydown', onFirstElemKeydown);
     if (elemLast) elemLast.removeEventListener('keydown', onLastElemKeydown);
   }
@@ -51,10 +51,11 @@ export function focusTrap(node: HTMLElement, enabled: boolean) {
   return {
     update(newArgs: boolean) {
       enabled = newArgs;
-      newArgs ? onInit() : onDestory();
+      if (newArgs) onInit();
+      else onDestroy();
     },
     destroy() {
-      onDestory();
+      onDestroy();
     }
   };
 }
