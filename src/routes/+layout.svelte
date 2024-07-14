@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   // import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
@@ -15,12 +15,14 @@
   import GithubLogo from '$lib/images/github.svelte';
   import svelte_logo from '$lib/images/svelte-logo.svg';
 
+  let { children }: { children: Snippet } = $props();
+
   onMount(async () => {
     // await defineCustomElements(window);
     await loadIonicPWAElements(window);
   });
 
-  let isDarkMode = $state(false);
+  let isDarkMode = $state<boolean>(false);
 
   // Favicon params:
   const pngFavicons = [
@@ -42,18 +44,27 @@
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
   <Header --corner-right-width="8em">
-    <DarkMode bind:isDarkMode>
+    <DarkMode bind:isDarkMode htmlDarkClass="dark">
       <svelte:fragment let:data>
         <label>
           {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
-          <input id="cb1" type="checkbox" checked={isDarkMode} on:change={data.onToggle} />
+          <input id="cb1" type="checkbox" checked={isDarkMode} onchange={data.onToggle} />
         </label>
       </svelte:fragment>
     </DarkMode>
+    <!--
+    <DarkMode {isDarkMode} htmlDarkClass="dark" content={undefined}>
+      {#snippet content(data)}
+        <label>
+          {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+          <input id="cb1" type="checkbox" checked={isDarkMode} onchange={data.onToggle} />
+        </label>
+      {/snippet}
+    </DarkMode> -->
   </Header>
 
   <main>
-    <slot />
+    {@render children()}
   </main>
 
   <Offline />
