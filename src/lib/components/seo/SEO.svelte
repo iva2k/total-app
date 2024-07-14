@@ -1,4 +1,6 @@
 <script lang="ts">
+  // TODO: (now) Redesign to use: // Per Svelte's documentation: A common pattern is to return SEO-related data from page load functions, then use it (as $page.data) in a <svelte:head> in your root layout. https://kit.svelte.dev/docs/load#$page-data
+
   import {
     ogSquareImageSrc,
     ogImageSrc,
