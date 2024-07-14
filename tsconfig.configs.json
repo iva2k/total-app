@@ -10,7 +10,7 @@
     "prettier.config.cjs",
     "pwa-configuration.js",
     "svelte.config.js",
-    "tailwindcss.config.cjs",
+    "tailwind.config.cjs",
     "vite.config.js"
   ]
 }
