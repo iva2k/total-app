@@ -3,7 +3,35 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Server and Chrome",
+      "configurations": ["Launch server", "Launch Chrome against localhost:3000"]
+    },
+    {
+      "name": "Server and Edge",
+      "configurations": ["Launch server", "Launch Edge"]
+    }
+  ],
   "configurations": [
+    {
+      "name": "Launch server",
+      "request": "launch",
+      "runtimeArgs": ["run", "dev"],
+      // "runtimeExecutable": "bun",
+      "runtimeExecutable": "pnpm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "console": "internalConsole"
+    },
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Launch Edge",
+      "url": "http://127.0.0.1:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+
     {
       "name": "WORKS pnpm test:unit",
       "request": "launch",
