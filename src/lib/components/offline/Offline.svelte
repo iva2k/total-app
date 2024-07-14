@@ -1,6 +1,6 @@
 <script lang="ts">
   import { pwaInfo } from 'virtual:pwa-info';
-  import { onMount, type Component } from 'svelte';
+  import { onMount, type ComponentType, type SvelteComponent } from 'svelte';
 
   import website from '$lib/config/website';
   const { themeColor } = website;
@@ -9,7 +9,7 @@
   // const date = '__DATE__';
   // const enableSwDev = '__SW_DEV__';
 
-  let ReloadPrompt = $state<Component | undefined>(undefined);
+  let ReloadPrompt = $state<ComponentType<SvelteComponent> | undefined>(undefined);
   onMount(async () => {
     if (pwaInfo) {
       ReloadPrompt = (await import('$lib/components/reloadprompt/ReloadPrompt.svelte')).default;
