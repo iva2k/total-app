@@ -30,7 +30,7 @@
   <p>Please connect to the Internet.</p>
 
   <div>
-    <button on:click={onRetry}>Retry</button>
+    <button onclick={onRetry}>Retry</button>
   </div>
 {/if}
 
