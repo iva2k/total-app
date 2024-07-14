@@ -6,10 +6,24 @@
 git config user.email "iva2k@yahoo.com"
 git config user.name "IVA2K"
 
-COMMAND=(pnpm run all)
-# COMMAND=(pnpm run check)
+function no_prep() {
+  echo > /dev/null
+}
 
+function do_prep() {
+  pnpm install
+}
+
+COMMAND_PREP=( no_prep )
+COMMAND=(pnpm run all)
 LOGFILE=log.runallall
+
+# COMMAND_PREP=( do_prep )
+# COMMAND=(pnpm run check)
+# LOGFILE=log.runcheck
+# COMMAND=(pnpm run lint)
+# LOGFILE=log.runlint
+
 STOP_ON_ERROR=0
 
 SOURCE_BRANCH="main"
@@ -79,6 +93,27 @@ function main() {
     echo "CHECKOUT $TARGET_BRANCH" | tee -a "$LOGFILE" | tee "$LOGFILE_I"
     git checkout "$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
 
+    echo "PREP $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+    prep_t=$( { time "${COMMAND_PREP[@]}" >>"$LOGFILE_I" 2>&1; } 2>&1 )  # Captures time output into prep_t.
+    prep_error=$?
+    # shellcheck disable=SC2034
+    IFS=' ' read -r prep_real prep_user prep_system <<< "$prep_t"
+    tms_real[i]="0$prep_real"
+    # echo "DEBUG: PREP real=$prep_real user=$prep_user system=$prep_system tms_real[$i]=${tms_real[$i]}"
+    outputs[i]=""
+    errors[i]="$prep_error"
+    if [ "$prep_error" -ne 0 ] ; then
+      [ "$output" == "" ] && output=$(grep -i "error" "$LOGFILE_I" | tail -n1)
+      outputs[i]="$output"
+      if [ $STOP_ON_ERROR -ne 0 ]; then
+        echo "PREP ERROR $prep_error in branch \"$TARGET_BRANCH\", stopping." | tee -a "$LOGFILE"
+        break
+      else
+        echo "PREP ERROR $prep_error in branch \"$TARGET_BRANCH\", cleaning up and continuing." | tee -a "$LOGFILE"
+        git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+      fi
+    fi
+
     echo "BEGIN command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE"
     # output=$("${COMMAND[@]}" >>"$LOGFILE_I" 2>&1)
     # tm "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1
@@ -88,13 +123,13 @@ function main() {
     TIMEFORMAT="%3R %3U %3S"
     t=$( { time "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1; } 2>&1 )  # Captures time output into t.
     error=$?
-    # echo "DEBUG: error=$error, t=$t"
+    # echo "DEBUG: error=$error, t=$t, prep_error=$prep_error, prep_t=$prep_t"
     # shellcheck disable=SC2034
     IFS=' ' read -r real user system <<< "$t"
-    tms_real[i]=$real
+    tms_real[i]=$(awk "BEGIN {print ($real+0${tms_real[$i]})}")
     # tms_user[i]=$user
     # tms_system[i]=$system
-    # echo "DEBUG: real=$real user=$user system: $system"
+    # echo "DEBUG: real=$real user=$user system=$system tms_real[$i]=${tms_real[$i]}"
     outputs[i]=""
     errors[i]="$error"
     if [ "$error" -ne 0 ] ; then
