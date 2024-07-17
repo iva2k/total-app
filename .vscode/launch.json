@@ -116,28 +116,32 @@
       "request": "launch",
       "name": "Launch Chrome against localhost:3000",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against https://localhost:3000",
       "url": "https://localhost:3000",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost:4173",
       "url": "http://localhost:4173",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against https://localhost:4173",
       "url": "https://localhost:4173",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "enableContentValidation": false // Important to align .svelte files lines to the browser code
     }
   ]
 }
