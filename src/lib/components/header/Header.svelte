@@ -9,7 +9,7 @@
   let { content } = $props<{ content: Snippet }>();
   const { get: getLayout } = getContext<LayoutContext>('layout');
 
-  let pathname = $derived(browser ? ($page.url.pathname ?? '') : getLayout().ssrPathname);
+  let pathname = $derived(browser ? ($page.url?.pathname ?? '') : getLayout().ssrPathname);
 </script>
 
 <div>
