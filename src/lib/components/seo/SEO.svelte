@@ -16,6 +16,7 @@
   import SchemaOrg from './SchemaOrg.svelte';
   import Twitter from './Twitter.svelte';
   import { page } from '$app/stores';
+  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
   const {
     author,
