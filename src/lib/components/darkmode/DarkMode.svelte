@@ -10,7 +10,7 @@
     content
   }: {
     htmlDarkClass: string | undefined;
-    content: Snippet<typeof data> | undefined;
+    content: Snippet<[typeof data]> | undefined;
   } = $props();
 
   const STORAGE_KEY = 'ag-color-scheme';
