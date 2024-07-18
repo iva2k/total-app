@@ -65,6 +65,7 @@
    * if client-side JavaScript is enabled
    */
   function update(event: MouseEvent) {
+    event.preventDefault();
     const key = (event.target as HTMLButtonElement).getAttribute('data-key');
 
     if (key === 'backspace') {
@@ -90,7 +91,7 @@
   }
 </script>
 
-<svelte:window on:keydown={keydown} />
+<svelte:window onkeydown={keydown} />
 
 <SEO {...seoProps} />
 
@@ -154,7 +155,7 @@
         <button data-key="enter" class:selected={submittable} disabled={!submittable}>enter</button>
 
         <button
-          on:click|preventDefault={update}
+          onclick={update}
           data-key="backspace"
           formaction="?/update"
           name="key"
@@ -167,7 +168,7 @@
           <div class="row">
             {#each row as letter}
               <button
-                on:click|preventDefault={update}
+                onclick={update}
                 data-key={letter}
                 class={classnames[letter]}
                 disabled={submittable}
@@ -190,15 +191,13 @@
   <div
     style="position: absolute; left: 50%; top: 30%"
     use:confetti={{
-      // TODO: (when fixed) Remove eslint-disable
-
       particleCount: $reduced_motion ? 0 : undefined,
       force: 0.7,
       stageWidth: window.innerWidth,
       stageHeight: window.innerHeight,
       colors: ['#ff3e00', '#40b3ff', '#676778']
     }}
-  />
+  ></div>
 {/if}
 
 <style lang="scss">
