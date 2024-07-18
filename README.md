@@ -222,34 +222,34 @@ Currently there are no plans to implement additional frameworks (either listed b
 Note that there are 2 branches for Isolated component development - Histoire and Storybook, which can be merged into UI branch of choice for your app.
 
 <!-- prettier-ignore -->
-| Git Branch | UI Framework | Dark Theme Switch | Notes |
-|-|-|:-:|-|
-| main                                      | (none) | Y | |
-| histoire                                  | (none) | Y | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
-| storybook                                 | (none) | Y | Isolated component development. |
-| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | Y | |
-| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | Y | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). |
-| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | N | |
-| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | Y | Incomplete and currently broken (w/Svelte 5) |
-| [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | N | Incomplete and currently broken (w/Svelte 5) |
-| [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | Y | |
-| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | Y | Incomplete and currently broken (w/Svelte 5) |
-| [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
-| [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | Y | (Requires TailwindCSS) |
-| | [svelte-ux](https://svelte-ux.techniq.dev) | Y | (Requires TailwindCSS) |
-| | [Skeleton](https://github.com/skeletonlabs/skeleton) | Y | (Requires TailwindCSS) |
-| | [Flowbite-Svelte](https://flowbite-svelte.com) |   | (Requires TailwindCSS) |
-|                                           | Smelte       |   | (Requires TailwindCSS) Material + TailwindCSS |
-|                                           | [Ionic](https://ionicframework.com) |   | See good [example](https://github.com/Tommertom/svelte-ionic-app). Note: No SSR! |
-|                                           | [Chota](https://jenil.github.io/chota/) |   | [SvelteChota](https://alexxnb.github.io/svelte-chota/why_chota) |
-| | [Svelterial](https://github.com/svelterialjs/svelterial) |   | [Svelte Materialify](https://github.com/TheComputerM/svelte-materialify) is on a deprecation path. |
-| | [Tachyons](https://tachyons.io) |   | |
-| | [Svelte Material](https://sveltematerialui.com/) |   | |
-| | [Svelte Flat UI](https://svelteui.js.org/#/) |   | |
-| | [Attractions](https://github.com/illright/attractions) |   | |
-| | [Melt UI](https://melt-ui.com) |   | |
-| | [Bits UI](https://bits-ui.com) |   | |
-| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | |
+| Git Branch | UI Framework | Dark Theme Switch | Works With Svelte 5 | Notes |
+|-|-|:-:|:-:|-|
+| main                                      | (none) | Y | Y | |
+| [histoire](../../tree/histoire)           | (none) | Y | | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
+| [storybook](../../tree/storybook)         | (none) | Y | | Isolated component development. |
+| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | Y | | |
+| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | Y | | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). |
+| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | N | | |
+| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | Y | | Incomplete and currently broken (w/Svelte 5) |
+| [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | N | | Incomplete and currently broken (w/Svelte 5) |
+| [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | Y | | |
+| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | Y | | Incomplete and currently broken (w/Svelte 5) |
+| [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
+| [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | Y | | (Requires TailwindCSS) |
+| | [svelte-ux](https://svelte-ux.techniq.dev) | | | (Requires TailwindCSS) |
+| | [Skeleton](https://github.com/skeletonlabs/skeleton) | | | (Requires TailwindCSS) |
+| | [Flowbite-Svelte](https://flowbite-svelte.com) | |  | (Requires TailwindCSS) |
+|                                           | Smelte       |  |  | (Requires TailwindCSS) Material + TailwindCSS |
+|                                           | [Ionic](https://ionicframework.com) |   | | See good [example](https://github.com/Tommertom/svelte-ionic-app). Note: No SSR! |
+|                                           | [Chota](https://jenil.github.io/chota/) |   | | [SvelteChota](https://alexxnb.github.io/svelte-chota/why_chota) |
+| | [Svelterial](https://github.com/svelterialjs/svelterial) |   | | [Svelte Materialify](https://github.com/TheComputerM/svelte-materialify) is on a deprecation path. |
+| | [Tachyons](https://tachyons.io) |   | | |
+| | [Svelte Material](https://sveltematerialui.com/) |   | | |
+| | [Svelte Flat UI](https://svelteui.js.org/#/) |   | | |
+| | [Attractions](https://github.com/illright/attractions) |   | | |
+| | [Melt UI](https://melt-ui.com) |   | | |
+| | [Bits UI](https://bits-ui.com) |   | | |
+| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | | |
 
 ## Conclusion
 
