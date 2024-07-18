@@ -48,10 +48,10 @@
       {/if}
     </div>
     {#if $needRefresh}
-      <button on:click={() => updateServiceWorker(true)}> Reload </button>
-      <button on:click={close}> Postpone </button>
+      <button onclick={() => updateServiceWorker(true)}> Reload </button>
+      <button onclick={close}> Postpone </button>
     {:else}
-      <button on:click={close}> Got It </button>
+      <button onclick={close}> Got It </button>
     {/if}
   </div>
 {/if}
