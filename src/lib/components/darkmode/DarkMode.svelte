@@ -2,10 +2,16 @@
   // For class ColorSchemeManager to resolve properties:
   /// <reference lib="es2020" />
 
+  import { onMount, type Snippet } from 'svelte';
   import { browser } from '$app/environment';
 
-  export let isDarkMode = false;
-  export let htmlDarkClass: string | undefined = undefined;
+  let {
+    htmlDarkClass,
+    content
+  }: {
+    htmlDarkClass: string | undefined;
+    content: Snippet<[typeof data]> | undefined;
+  } = $props();
 
   const STORAGE_KEY = 'ag-color-scheme';
 
@@ -63,29 +69,27 @@
     }
   }
 
-  import { onMount } from 'svelte';
+  // data passed to the snippet
+  let data = $state({
+    isDarkMode: false,
+    onChange: () => {
+      // Current color mode change event, passed through data so snippet can use it
+      const setTheme = data.isDarkMode ? 'dark' : 'light';
+      colorSchemeManager?.setColorScheme(setTheme);
+      // Update the store (only from user choice)
+      colorSchemeManager?.setStoredColorScheme(setTheme);
+    }
+  });
 
   let colorSchemeManager: ColorSchemeManager | undefined;
-  let isMounted = false; // Hide theme controls until fully mounted.
+  let isMounted = $state(false); // Hide theme controls until fully mounted.
   onMount(async () => {
     colorSchemeManager = ColorSchemeManager.getInstance(window, document, htmlDarkClass);
     const setTheme = colorSchemeManager?.getSavedOrDefaultColorScheme();
-    isDarkMode = setTheme === 'dark';
+    data.isDarkMode = setTheme === 'dark';
     colorSchemeManager?.setColorScheme(setTheme);
     isMounted = true;
   });
-
-  const onToggleDarkMode = () => {
-    // Toggle current color mode
-    const setTheme = colorSchemeManager?.getCurrentColorScheme() === 'dark' ? 'light' : 'dark';
-    isDarkMode = setTheme === 'dark';
-    colorSchemeManager?.setColorScheme(setTheme);
-    // Update the store (only from user choice)
-    colorSchemeManager?.setStoredColorScheme(setTheme);
-  };
-
-  // Pass data to the slot
-  let data = { onToggle: onToggleDarkMode };
 </script>
 
 <svelte:head>
@@ -124,12 +128,14 @@
 </svelte:head>
 
 {#if isMounted}
-  <slot {data}>
-    <!-- Slot Fallback -->
-    <!-- <Input id="c2" type="switch" label={isDarkMode ? '🔆' : '🌙'} checked={isDarkMode} on:change={onToggleDarkMode} /> -->
+  {#if content}
+    {@render content(data)}
+  {:else}
     <label>
-      {isDarkMode ? '🔆' : '🌙'}
-      <input id="c3" type="checkbox" checked={isDarkMode} on:change={onToggleDarkMode} />
+      <!-- Snippet Fallback -->
+      {data.isDarkMode ? '🔆' : '🌙'}
+      <!-- <Input id="c2" type="switch" label={data.isDarkMode ? '🔆' : '🌙'} checked={data.isDarkMode} onchange={onChange} /> -->
+      <input id="c3" type="checkbox" bind:checked={data.isDarkMode} onchange={data.onChange} />
     </label>
-  </slot>
+  {/if}
 {/if}

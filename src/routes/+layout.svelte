@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  // import { defineCustomElements } from '@ionic/pwa-elements/loader';
+  import { onMount, setContext, type Snippet } from 'svelte';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
@@ -15,14 +14,26 @@
   import GithubLogo from '$lib/images/github.svelte';
   import svelte_logo from '$lib/images/svelte-logo.svg';
 
+  import type { LayoutData } from './$types';
+  import type { LayoutContext } from '$lib/types';
+
+  let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+
   onMount(async () => {
-    // await defineCustomElements(window);
     await loadIonicPWAElements(window);
 
     await import('@shoelace-style/shoelace');
   });
 
-  let isDarkMode = $state(false);
+  let ssrPathname = $state<string>(data?.ssrPathname ?? '');
+
+  // Use context to make ssrPathname available to child components
+  setContext<LayoutContext>('layout', {
+    get: () => {
+      console.log(`getContext(layout) ssrPathname=${ssrPathname}`);
+      return { ssrPathname };
+    }
+  });
 
   // Favicon params:
   const pngFavicons = [
@@ -54,17 +65,19 @@
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
   <Header --corner-right-width="8em">
-    <DarkMode bind:isDarkMode htmlDarkClass="sl-theme-dark">
-      <svelte:fragment let:data>
-        <sl-switch checked={isDarkMode} on:sl-change={data.onToggle}>
-          {isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
-        </sl-switch>
-      </svelte:fragment>
-    </DarkMode>
+    {#snippet content()}
+      <DarkMode htmlDarkClass="dark">
+        {#snippet content(data)}
+          <sl-switch checked={data.isDarkMode} on:sl-change={data.onToggle}>
+            {data.isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+          </sl-switch>
+        {/snippet}
+      </DarkMode>
+    {/snippet}
   </Header>
 
   <main>
-    <slot />
+    {@render children()}
   </main>
 
   <Offline />
