@@ -46,7 +46,8 @@
     "./ios/**",
     "./storybook-static/**",
     "./dev-dist/**",
-    "./coverage/**"
+    "./coverage/**",
+    "./.storybook/**"
   ]
 
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
