@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
   const { message } = $page.error || { message: 'Oops, $page.error is null' };
   const title = `${$page.status}: ${message}`;
@@ -30,7 +31,7 @@
   <p>Please connect to the Internet.</p>
 
   <div>
-    <button on:click={onRetry}>Retry</button>
+    <button onclick={onRetry}>Retry</button>
   </div>
 {/if}
 
