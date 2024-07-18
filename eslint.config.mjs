@@ -393,7 +393,6 @@ export default tseslint.config(
     }
   },
 
-  /**/
   {
     // Playwright and Vitest
     name: 'config-playwright',
@@ -425,7 +424,6 @@ export default tseslint.config(
       }
     }
   },
-  /**/
 
   ...patchFilesPrefix(storybook.configs['flat/recommended']),
   // storybook sets files: ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)', '*.story.@(ts|tsx|js|jsx|mjs|cjs)'],
