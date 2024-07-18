@@ -53,7 +53,8 @@
     "format":                                        "echo RUN format                                         && pnpm lint:css --fix && prettier --write .",
     "android:open":                                  "cap open android",
     "android:dev":                                   "cap run android",
-    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
+    "SAVEDall": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
+    "all": "pnpm i && pnpm format && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
     "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
   "dependencies": {
@@ -109,7 +110,7 @@
     "eslint-plugin-import-x": "^3.0.1",
     "eslint-plugin-playwright": "^1.6.2",
     "eslint-plugin-storybook": "^0.8.0",
-    "eslint-plugin-svelte": "^2.36.0",
+    "eslint-plugin-svelte": "^2.42.0",
     "eslint-plugin-vitest": "^0.5.4",
     "glob": "^11.0.0",
     "globals": "^15.8.0",
