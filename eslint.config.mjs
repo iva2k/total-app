@@ -386,7 +386,6 @@ export default tseslint.config(
     }
   },
 
-  /**/
   {
     // Playwright and Vitest
     name: 'config-playwright',
@@ -418,5 +417,4 @@ export default tseslint.config(
       }
     }
   }
-  /**/
 );
