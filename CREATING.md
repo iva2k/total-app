@@ -666,7 +666,7 @@ See `src/routes/+layout.svelte` source file.
 
 ESLint and Prettier is already part of Svelte Kit installation, so some of the packages below are already present, we will add some useful configuration to them.
 
-#### Stylelint and additional ESLint rules (Storybook)
+#### Stylelint and additional ESLint rules
 
 ```bash
 pnpm install -D stylelint@^14.15.0 @ronilaukkarinen/stylelint-a11y@1.2.9 stylelint-config-standard@^29.0.0 stylelint-config-recommended@^9.0.0

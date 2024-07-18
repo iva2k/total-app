@@ -41,17 +41,11 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "BROKEN node-terminal",
+      "name": "BROKEN pnpm test:unit node-terminal",
       "request": "launch",
       "type": "node-terminal",
       "command": "pnpm test:unit",
       "skipFiles": ["<node_internals>/**"]
-    },
-    {
-      "command": "pnpm test:unit",
-      "name": "pnpm test:unit",
-      "request": "launch",
-      "type": "node-terminal"
     },
     {
       "command": "pnpm test:integration",
