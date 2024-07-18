@@ -5,3 +5,7 @@ export type ImageResource = {
   height?: number;
   caption?: string;
 };
+
+export interface LayoutContext {
+  get: () => { ssrPathname: string };
+}

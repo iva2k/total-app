@@ -49,7 +49,7 @@
     on:keyup
     on:keypress
     use:focusTrap={true}
-  />
+  ></div>
   <div class="panel {placement}" class:size>
     <slot>(No items)</slot>
   </div>

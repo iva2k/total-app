@@ -216,7 +216,7 @@ export default tseslint.config(
   ...sveltePlugin.configs['flat/recommended'],
 
   {
-    // Basic js include files
+    // Basic js files
     name: 'config-basic-js',
     files: ['**/*.js', '**/*.cjs', '**/*.mjs']
   },

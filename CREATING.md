@@ -391,6 +391,10 @@ Missing Properties | The following required properties are missing: fb:app_id
 
 ### Add SSR-Safe Store Services
 
+TODO: (now) Revisit with Svelte 5 runes. For now, removing `@svelte-kits/store`.
+
+#### Outdated
+
 SvelteKit provides good server/client support for stores. They are easy to use, but have some mines to avoid when using SSR (see <https://kit.svelte.dev/docs/state-management#avoid-shared-state-on-the-server> and <https://github.com/sveltejs/kit/discussions/4339>).
 
 See package addressing the issue in the most simple to use way: `@svelte-kits/store` <https://github.com/svelte-kits/store>
