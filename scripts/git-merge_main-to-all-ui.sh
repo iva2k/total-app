@@ -38,6 +38,11 @@ TARGET_BRANCHES=(
   "ui-tailwindcss"
 )
 
+# Few Level Heading Separators for Nice Log (carriage return at the end allows
+#  echo "${SEP2}SOME HEADER " to print ---> "SOME HEADER ###########")
+# SEP1="$(printf "%100s\r" "" | tr ' ' '#')"
+SEP2="$(printf "%100s\r" "" | tr ' ' '=')"
+# SEP3="$(printf "%100s\r" "" | tr ' ' '-')"
 
 outputs=()
 errors=()
@@ -153,12 +158,12 @@ function merge_to_one() {
   errors[i]=0
 
   if [ "$is_continue" = true ]; then
-    echo
+    echo "${SEP2}"
     echo "CONTINUE Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"..."
     echo
     res=0
   else
-    echo
+    echo "${SEP2}"
     echo "BEGIN Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"..."
     echo
     # Switch to the target branch
@@ -274,6 +279,7 @@ function merge_to_all() {
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: merge_to_all() start_i=$start_i"
   if ! output=$(git status --untracked-files=no --porcelain 2>&1) || [ -n "$output" ]; then
     # Working directory clean excluding untracked files
+    echo
     echo "Working folder is not clean. Please clean working folder and retry."
     echo "$output"
     save_state 1
@@ -283,6 +289,7 @@ function merge_to_all() {
 
   if ! output=$(git rev-list "${SOURCE_BRANCH}...origin/${SOURCE_BRANCH}" 2>&1) || [ -n "$output" ]; then
     # Branch is different from origin
+    echo
     echo "Branch \"$SOURCE_BRANCH\" in local repo is not synced with remote origin. Please sync local branch and retry."
     # echo "$output"
     save_state 1
