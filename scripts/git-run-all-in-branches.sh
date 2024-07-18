@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2059
 
-# Merge main branch into all UI branches
+# Run command "pnpm run all" in all UI branches (can be patched to other commands)
 
 git config user.email "iva2k@yahoo.com"
 git config user.name "IVA2K"
@@ -40,11 +40,11 @@ TARGET_BRANCHES=(
   "ui-tailwindcss"
 )
 export BROKEN_TARGET_BRANCHES=(
-  "histoire" # `pnpm story:build`: CompileError: The $ name is reserved, and cannot be used for variables and imports
-  "ui-bootstrap" # `pnpm check`: Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
-  "ui-carbon" # Error: The 'swSrc' file can't be read. ENOENT: no such file or directory
+  "histoire"      # `pnpm story:build`: CompileError: The $ name is reserved, and cannot be used for variables and imports
+  "ui-bootstrap"  # `pnpm check`: Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
+  "ui-carbon"     # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory"
   "ui-framework7" # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory" - service worker build fails, probably due to all components not compatible with Svelte 5, buncho "ARIA role" issues, etc.
-  "ui-konsta" # `pnpm check`: Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
+  "ui-konsta"     # `pnpm check`: Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
 )
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
@@ -114,7 +114,7 @@ function main() {
       fi
     fi
 
-    echo "BEGIN command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE"
+    echo "BEGIN command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
     # output=$("${COMMAND[@]}" >>"$LOGFILE_I" 2>&1)
     # tm "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1
     # output=$(tm "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1)
@@ -144,8 +144,8 @@ function main() {
       fi
     fi
 
-    echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s error=$error" | tee -a "$LOGFILE"
-    echo | tee -a "$LOGFILE"
+    echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s error=$error" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+    echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   done
 
   (git checkout "$SOURCE_BRANCH")

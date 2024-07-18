@@ -12,7 +12,7 @@
 
 <svelte:head>
   <!-- Favicon mess -->
-  {#if pngFavicons}
+  {#if pngFavicons && pngFavicons.length > 0}
     {#each pngFavicons as pngFavicon}
       <link
         use:badge={{
@@ -38,7 +38,7 @@
   {/if}
 
   <!-- <link rel="shortcut icon" type="image/svg" href="%sveltekit.assets%/favicon.svg" /> -->
-  {#if touchFavicons}
+  {#if touchFavicons && touchFavicons.length > 0}
     {#each touchFavicons as touchFavicon}
       <link rel="apple-touch-icon" sizes={touchFavicon.sizes} href={touchFavicon.href} />
     {/each}

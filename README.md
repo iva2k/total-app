@@ -234,6 +234,7 @@ Note that there are 2 branches for Isolated component development - Histoire and
 | [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | Y | Incomplete and currently broken (w/Svelte 5) |
 | [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
 | [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | Y | (Requires TailwindCSS) |
+| | [svelte-ux](https://svelte-ux.techniq.dev) | Y | (Requires TailwindCSS) |
 | | [Skeleton](https://github.com/skeletonlabs/skeleton) | Y | (Requires TailwindCSS) |
 | | [Flowbite-Svelte](https://flowbite-svelte.com) |   | (Requires TailwindCSS) |
 |                                           | Smelte       |   | (Requires TailwindCSS) Material + TailwindCSS |

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { pwaInfo } from 'virtual:pwa-info';
-  import { onMount } from 'svelte';
-  import type { ComponentType, SvelteComponent } from 'svelte';
+  // Svelte4, 5 pre next.143: import { onMount, type ComponentType, type SvelteComponent } from 'svelte';
+  import { onMount, type Component } from 'svelte';
 
   import website from '$lib/config/website';
   const { themeColor } = website;
@@ -10,13 +10,15 @@
   // const date = '__DATE__';
   // const enableSwDev = '__SW_DEV__';
 
-  let ReloadPrompt: ComponentType<SvelteComponent> | undefined;
+  // let ReloadPrompt = $state<ComponentType<SvelteComponent> | undefined>(undefined);
+  let ReloadPrompt = $state<Component | undefined>(undefined);
   onMount(async () => {
-    pwaInfo &&
-      (ReloadPrompt = (await import('$lib/components/reloadprompt/ReloadPrompt.svelte')).default);
+    if (pwaInfo) {
+      ReloadPrompt = (await import('$lib/components/reloadprompt/ReloadPrompt.svelte')).default;
+    }
   });
 
-  $: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+  let webManifestLink = $derived(pwaInfo ? pwaInfo.webManifest.linkTag : '');
 </script>
 
 <svelte:head>

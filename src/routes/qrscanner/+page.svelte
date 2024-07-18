@@ -299,7 +299,7 @@
       on:clickAway={() => (drawerOpen = false)}
       placement="right"
     >
-      <button on:click={() => (drawerOpen = false)}>Close ></button>
+      <button onclick={() => (drawerOpen = false)}>Close ></button>
 
       <div class="demo">
         <label>
@@ -307,7 +307,7 @@
           <select
             id="scan-region-highlight-style-select"
             bind:value={settings.scannerStyle}
-            on:change={onStyleSelect}
+            onchange={onStyleSelect}
           >
             {#each scannerStyles as s}
               <option value={s.className}>{s.name}</option>
@@ -319,11 +319,7 @@
       <div class="demo">
         <label>
           <span class="label">Decoding Mode:</span>
-          <select
-            id="inversion-mode-select"
-            bind:value={settings.scanMode}
-            on:change={onModeSelect}
-          >
+          <select id="inversion-mode-select" bind:value={settings.scanMode} onchange={onModeSelect}>
             {#each scanModes as mode}
               <option value={mode.value}>{mode.name}</option>
             {/each}
@@ -338,7 +334,7 @@
       <div class="demo">
         <label>
           <span class="label">Preferred camera:</span>
-          <select id="cam-list" bind:value={selectCamera} on:change={onCamSelect}>
+          <select id="cam-list" bind:value={selectCamera} onchange={onCamSelect}>
             {#each camList as camera}
               <option value={camera.value}>{camera.name}</option>
             {/each}
@@ -372,7 +368,7 @@
             id="auto-start"
             type="checkbox"
             bind:checked={settings.doAutoStart}
-            on:change={onSettingsChange}
+            onchange={onSettingsChange}
           />
           <span class="label">AutoStart</span>
         </label>
@@ -382,7 +378,7 @@
             id="auto-stop"
             type="checkbox"
             bind:checked={settings.doAutoStop}
-            on:change={onSettingsChange}
+            onchange={onSettingsChange}
           />
           <span class="label">AutoStop</span>
         </label>
@@ -393,7 +389,7 @@
           <input
             id="show-scan-region"
             type="checkbox"
-            on:change={(e) => onRegionSelect(e.currentTarget)}
+            onchange={(e) => onRegionSelect(e.currentTarget)}
           />
           <span class="label">Show scan region image</span>
         </label>
@@ -404,7 +400,7 @@
 
 <section id="container">
   <div id="video-container" class={settings.scannerStyle}>
-    <div id="video-overlay" />
+    <div id="video-overlay"></div>
     <!-- TODO: (when needed) Use <video poster="..."></video> -->
     <video
       class:active={scanActive}
@@ -412,8 +408,8 @@
       bind:this={videoElement}
       id="qr-video"
       muted
-      on:contextmenu={() => false}
-    />
+      oncontextmenu={() => false}
+    ></video>
   </div>
 </section>
 
@@ -421,7 +417,7 @@
   <div class="toolbar-left">
     {#if scanActive}
       <div>
-        <button disabled={!haveFlash && !settings.fakeFlash} on:click={() => onFlash()}>
+        <button disabled={!haveFlash && !settings.fakeFlash} onclick={() => onFlash()}>
           {#if isFlashOn}
             {SUN_ENTITY}
           {:else}
@@ -444,7 +440,7 @@
   </div>
 
   <div class="toolbar-right">
-    <button class="drawerBtn" on:click={() => (drawerOpen = true)}>{GEARS_ENTITY}</button>
+    <button class="drawerBtn" onclick={() => (drawerOpen = true)}>{GEARS_ENTITY}</button>
   </div>
 </div>
 
@@ -454,13 +450,13 @@
       {#if scanActive}
         <div class="scan-toolbar">
           <div class="stop-button">
-            <button class="stop-button" on:click={onStopClick}>Stop</button>
+            <button class="stop-button" onclick={onStopClick}>Stop</button>
           </div>
         </div>
       {:else}
         <div class="scan-button">
           <div>
-            <button on:click={onStartClick}>Scan</button>
+            <button onclick={onStartClick}>Scan</button>
           </div>
         </div>
       {/if}

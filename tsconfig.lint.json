@@ -1,14 +1,14 @@
 {
   "extends": "./tsconfig.json",
   "include": [
-    "src/**/*.d.ts",
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.svelte",
-    "src/lib/utils/ionicUtils.cjs",
-    "src/claims-sw.ts",
-    "src/prompt-sw.ts",
-    "tests/**/*.ts"
+    "./src/**/*.d.ts",
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.svelte",
+    "./src/lib/utils/ionicUtils.cjs",
+    "./src/claims-sw.ts",
+    "./src/prompt-sw.ts",
+    "./tests/**/*.ts"
   ]
 }
