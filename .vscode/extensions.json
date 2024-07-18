@@ -17,9 +17,9 @@
     "steoates.autoimport",
     "wix.vscode-import-cost",
     "zignd.html-css-class-completion",
+    "vitest.explorer",
     "usernamehw.errorlens",
     "github.vscode-github-actions",
-    "yzhang.markdown-all-in-one",
-    "vitest.explorer"
+    "yzhang.markdown-all-in-one"
   ]
 }
