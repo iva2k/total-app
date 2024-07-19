@@ -99,15 +99,16 @@ function exit_save_state() {
   exit $((rc))
 }
 function load_state() {
+  local file="${1:-$STATE_FILE}"
   outputs=()
   errors=()
   tms_real=()
   branches_done=()
   # TARGET_BRANCHES_DEFAULT=("${TARGET_BRANCHES[@]}")
-  if [ -f "$STATE_FILE" ]; then
+  if [ -f "$file" ]; then
     # shellcheck disable=SC1090
-    source "$STATE_FILE"
-    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() loaded from file $STATE_FILE."
+    source "$file"
+    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() loaded from file $file."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: outputs=${outputs[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: tms_real=${tms_real[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: errors=${errors[*]}."
@@ -115,7 +116,7 @@ function load_state() {
     # [ "$DEBUG" -ne 0 ] && echo "DEBUG: TARGET_BRANCHES=${TARGET_BRANCHES[*]}."
     # clear_state
   else
-    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() no file $STATE_FILE."
+    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() no file $file."
   fi
 }
 
@@ -148,6 +149,64 @@ function time_it() {
   # [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name status=$return_value real=$t_real user=$t_user system=$t_system tms_real[$i]=${tms_real[$i]}"
 
   return $return_value
+}
+
+# Function to display usage information
+function usage() {
+  # echo "Usage: $0 [-h] [-v] -n <name> [-a <age>]"
+  echo "Usage: $0 [-h] [-p]"
+  echo "  -h: Display this help message"
+  # echo "  -v: Enable verbose mode"
+  # echo "  -c: Continue merge after resolving conflicts"
+  echo "  -p: Print last run summary only"
+  # echo "  -n <name>: Specify a name (required)"
+  # echo "  -a <age>: Specify an age (optional)"
+}
+
+# Function to parse command-line arguments
+function parse_arguments() {
+  local opt OPTIND OPTARG
+  OPTIND=1
+  print_last=0
+  continue_merge=0
+  # while getopts "hvcn:a:" opt; do
+  while getopts "hp" opt; do
+    case $opt in
+      h)
+        usage
+        exit 0
+        ;;
+      p)
+        print_last=1
+        ;;
+      # v)
+      #   verbose=true
+      #   ;;
+      # n)
+      #   name=$OPTARG
+      #   ;;
+      # a)
+      #   age=$OPTARG
+      #   ;;
+      \?)
+        echo "Invalid option: -$OPTARG" >&2
+        usage
+        exit 1
+        ;;
+      :)
+        echo "Option -$OPTARG requires an argument." >&2
+        usage
+        exit 1
+        ;;
+    esac
+  done
+
+  # Check if required arguments are provided
+  # if [ -z "$name" ]; then
+  #   echo "Error: Name is required" >&2
+  #   usage
+  #   exit 1
+  # fi
 }
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
@@ -339,16 +398,26 @@ function print_summary() {
 }
 
 main() {
+  parse_arguments "$@"
+  
   if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     echo >&2
     echo "Error: Not a git repository" >&2
     exit 1
   fi
 
-  load_state
   mkdir -p "$(dirname "$LOGFILE")" >/dev/null
-  echo "" >"$LOGFILE"
-  run_all 0 "$@"
+  if [ "$print_last" -ne 0 ]; then
+    [ ! -f "$STATE_FILE_BACKUP" ] && { echo "No last run file \"$STATE_FILE_BACKUP\"."; exit 1; }
+    load_state $STATE_FILE_BACKUP
+    print_summary
+    return 0
+  else
+    echo "" >"$LOGFILE"
+    load_state
+    run_all 0 "$@"
+  fi
+  
   print_summary
   rc="$?"
   
