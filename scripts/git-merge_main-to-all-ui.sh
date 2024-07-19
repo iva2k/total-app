@@ -46,10 +46,11 @@ SEP1="$(printf "%100s\r" "" | tr ' ' '#')"
 SEP2="$(printf "%100s\r" "" | tr ' ' '=')"
 # SEP3="$(printf "%100s\r" "" | tr ' ' '-')"
 
-outputs=()
-errors=()
-tms_real=()
-branches_done=()
+# Use export to make them available to child processes (so we can use sub-processes)
+export outputs=()
+export errors=()
+export tms_real=()
+export branches_done=()
 function backup_state() {
     if [ -f "$STATE_FILE" ]; then
         [ -f "$STATE_FILE_BACKUP" ] && rm "$STATE_FILE_BACKUP"
@@ -273,7 +274,7 @@ function merge_to_one() {
   # $TARGET_BRANCH should be clean
 
   # Assume we will succeed
-  outputs[i]=""
+  outputs[i]="(started)"
   errors[i]=0
 
   if [ "$is_continue" = true ]; then
@@ -354,6 +355,8 @@ function merge_to_one() {
     fi
   else
     echo "  No Merge conflicts, continuing..." | tee -a "$LOGFILE"
+    outputs[i]="(merged)"
+    errors[i]=0
     # No "-m" as merge sets up a commit message for us to use.
     git commit --no-edit 2>&1 | tee -a "$LOGFILE"
   fi
@@ -373,6 +376,7 @@ function merge_to_one() {
   res=${PIPESTATUS[0]}
   if [ "$res" -ne 0 ] ; then
     echo "Error $res in push to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    outputs[i]="${outputs[i]}, error pushing to git"
     errors[i]="$res"
     exit_save_state "$res"
   fi

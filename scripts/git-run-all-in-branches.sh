@@ -36,7 +36,7 @@ SOURCE_BRANCH="main"
 
 export GOOD_SKIP_TARGET_BRANCHES=(
 )
-TARGET_BRANCHES=(
+export TARGET_BRANCHES=(
   "main"
   "storybook"
   "ui-agnostic"
@@ -59,10 +59,11 @@ SEP1="$(printf "%100s\r" "" | tr ' ' '#')"
 SEP2="$(printf "%100s\r" "" | tr ' ' '=')"
 # SEP3="$(printf "%100s\r" "" | tr ' ' '-')"
 
-outputs=()
-errors=()
-tms_real=()
-branches_done=()
+# Use export to make them available to child processes (so we can use sub-processes)
+export outputs=()
+export errors=()
+export tms_real=()
+export branches_done=()
 function backup_state() {
     if [ -f "$STATE_FILE" ]; then
         [ -f "$STATE_FILE_BACKUP" ] && rm "$STATE_FILE_BACKUP"
