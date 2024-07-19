@@ -26,6 +26,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Generated
+.logs/
 .types
 log.*
 *.log
