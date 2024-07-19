@@ -9,6 +9,8 @@ git config user.name "IVA2K"
 DEBUG=0
 # DEBUG=1
 
+[ -z "$EPOCHREALTIME" ] && { echo "$0 needs bash>5.0(2019-01) for EPOCHREALTIME"; exit 1; }
+
 STATE_FILE=".logs/.git-run-all.state.local"
 STATE_FILE_BACKUP=".logs/.git-run-all.backup.local"
 
@@ -119,33 +121,34 @@ function load_state() {
 
 function time_it() {
   # Function to execute and time another function
+  # Captures start time, executes $2 with the rest args, captures end time, calculates time difference into tms_real[$1]
+  # If function $2 returns non-0 code, exits with that code.
+  # Args:
   local i="$1"
   local func_name="$2"
   shift 2  # Remove the first two arguments, leaving only the function arguments
 
-  # Capture start time, exec, capture end time, calculate time difference
-  TIMESTART=$(date +%s%N)
+  local t t_real TIMESTART TIMEEND TIMEDIFF
+  # For measuring time, Since bash 5.0 (2019) use EPOCHREALTIME:
+  # remove the decimal separator (s → µs), remove last 3 digits (µs → ms)
+  t=${EPOCHREALTIME/[^0-9]/}; TIMESTART=${t%???}
   "$func_name" "$@"
   local return_value="$?"
   if [ $return_value -ne 0 ]; then
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: '$func_name' exited with status $return_value" >&2
     exit "$return_value"
   fi
-  TIMEEND=$(date +%s%N)
-  TIMEDIFF=$(( TIMEEND - TIMESTART ))
-  TIMEDIFF_SEC=$(( TIMEDIFF / 1000000000 ))
-  TIMEDIFF_MSEC=$(( (TIMEDIFF % 1000000000) / 1000000 ))
-  t_real=$(printf "%d.%03d" "0$TIMEDIFF_SEC" "$TIMEDIFF_MSEC")
-  tms_real[i]="$t_real"
-  # tms_user[i]="$t_user"
-  # tms_sys[i]="$t_system"
+  t=${EPOCHREALTIME/[^0-9]/}; TIMEEND=${t%???}
 
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name status=$return_value TIMESTART=$TIMESTART TIMEEND=$TIMEEND TIMEDIFF=$TIMEDIFF TIMEDIFF_SEC=$TIMEDIFF_SEC t_real=$t_real tms_real[$i]=${tms_real[$i]}"
+  TIMEDIFF=$(( TIMEEND < TIMESTART ? TIMEEND - TIMESTART + 1000000000 : TIMEEND - TIMESTART ))
+  t_real=$(printf "%s.%s" $(( TIMEDIFF / 1000 )) $(( TIMEDIFF % 1000 )))
+  tms_real[i]="$t_real"
+
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name status=$return_value TIMESTART=$TIMESTART TIMEEND=$TIMEEND TIMEDIFF=$TIMEDIFF t_real=$t_real tms_real[$i]=${tms_real[$i]}"
   # [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name status=$return_value real=$t_real user=$t_user system=$t_system tms_real[$i]=${tms_real[$i]}"
 
-  # Return the result of the executed function
   return $return_value
-} 3>&1 4>&2
+}
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
 function decolor() {
@@ -288,8 +291,9 @@ function print_summary() {
   pass_cnt=0
   total_cnt=0
   total_time=0
+  logdir="$(dirname "$LOGFILE")"; logdir="$([ "$logdir" = "." ] && echo "" || echo "${logdir:+($logdir/)}")"
   FORMAT="| %-20s | %6s | %-30s | %9s | %-100s |"
-  HEAD=$(printf "$FORMAT" "Branch" "Error" "Log File" "Time (s)" "Output")
+  HEAD=$(printf "$FORMAT" "Branch" "Error" "Log File ${logdir}" "Time (s)" "Output")
   LINE=$(printf "$FORMAT" "" "" "" "" "")
   LINE="${LINE// /-}"
   echo | tee -a "$LOGFILE"
@@ -314,7 +318,7 @@ function print_summary() {
     fi
     total_time=$(awk "BEGIN {print ($total_time+0${tms_real[$i]})}")
     [ "$color_red" -ne 0 ] && echo -n -e "\033[31m"
-    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$LOGFILE_I" "$(format_float "${tms_real[$i]}")" "${output:0:102}" | tee -a "$LOGFILE"
+    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$(basename "$LOGFILE_I")" "$(format_float "${tms_real[$i]}")" "${output:0:102}" | tee -a "$LOGFILE"
     [ "$color_red" -ne 0 ] && echo -n -e "\033[39m"
   done
   echo "$LINE" | tee -a "$LOGFILE"
