@@ -81,13 +81,14 @@ function clear_state() {
 }
 function save_state() {
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() saving to file \"$STATE_FILE\"."
+  # Insert "-g" option into declare written to the $STATE_FILE, so load_state() makes variables in global scope.
   { declare -p outputs
     declare -p errors
     declare -p tms_real
     declare -p branches_done
     # declare -p TARGET_BRANCHES
-  } > "$STATE_FILE"
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() DONE saving to file \"$STATE_FILE\"."
+  } | sed "s/^declare -a/declare -ga/" > "$STATE_FILE"
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() DONE saving to file \"$STATE_FILE\", errors=${errors[*]}."
 }
 function exit_save_state() {
   rc="$1"
@@ -110,7 +111,7 @@ function load_state() {
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: errors=${errors[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: branches_done=${branches_done[*]}."
     # [ "$DEBUG" -ne 0 ] && echo "DEBUG: TARGET_BRANCHES=${TARGET_BRANCHES[*]}."
-    clear_state
+    # clear_state
   else
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() no file $STATE_FILE."
   fi
@@ -122,32 +123,25 @@ function time_it() {
   local func_name="$2"
   shift 2  # Remove the first two arguments, leaving only the function arguments
 
-  # Use time command to measure execution time of func_name
-  # - collect it's real/user/system times (in seconds) using `time` with `TIMEFORMAT`
-  # The format string ensures we get real, user, and sys times separately
-  TIMEFORMAT="%3R %3U %3S"
-  local time_output
-  time_output=$( { time "$func_name" "$@" 1>&3 2>&4; } 2>&1 )
-
-  # Extract the return value of the executed function
+  # Capture start time, exec, capture end time, calculate time difference
+  TIMESTART=$(date +%s%N)
+  "$func_name" "$@"
   local return_value="$?"
   if [ $return_value -ne 0 ]; then
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: '$func_name' exited with status $return_value" >&2
     exit "$return_value"
   fi
-  # Parse the time output and store in arrays
-  # shellcheck disable=SC2034
-  IFS=' ' read -r t_real t_user t_system <<< "$time_output"
-  tms_real[i]="0$t_real"
-  # tms_user[i]="0$t_user"
-  # tms_sys[i]="0$t_system"
+  TIMEEND=$(date +%s%N)
+  TIMEDIFF=$(( TIMEEND - TIMESTART ))
+  TIMEDIFF_SEC=$(( TIMEDIFF / 1000000000 ))
+  TIMEDIFF_MSEC=$(( (TIMEDIFF % 1000000000) / 1000000 ))
+  t_real=$(printf "%d.%03d" "0$TIMEDIFF_SEC" "$TIMEDIFF_MSEC")
+  tms_real[i]="$t_real"
+  # tms_user[i]="$t_user"
+  # tms_sys[i]="$t_system"
 
-  # Another way to parse:
-  # tms_real[i]=$(echo "$time_output" | grep real | awk '{print $2}')
-  # tms_user[i]=$(echo "$time_output" | grep user | awk '{print $2}')
-  # tms_sys[i]=$(echo "$time_output" | grep sys | awk '{print $2}')
-
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name real=$t_real user=$t_user system=$t_system tms_real[$i]=${tms_real[$i]}"
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name status=$return_value TIMESTART=$TIMESTART TIMEEND=$TIMEEND TIMEDIFF=$TIMEDIFF TIMEDIFF_SEC=$TIMEDIFF_SEC t_real=$t_real tms_real[$i]=${tms_real[$i]}"
+  # [ "$DEBUG" -ne 0 ] && echo "DEBUG: time_it() func=$func_name status=$return_value real=$t_real user=$t_user system=$t_system tms_real[$i]=${tms_real[$i]}"
 
   # Return the result of the executed function
   return $return_value
@@ -282,6 +276,12 @@ function run_all() {
   # Ignore errors
 }
 
+function format_float() {
+  local number="$1"
+  local decimal_places="${2:-3}"  # Default to 3 decimal places if not specified
+  printf "%.*f" "$decimal_places" "$number"
+}
+
 function print_summary() {
   result=0
   errors_cnt=0
@@ -314,7 +314,7 @@ function print_summary() {
     fi
     total_time=$(awk "BEGIN {print ($total_time+0${tms_real[$i]})}")
     [ "$color_red" -ne 0 ] && echo -n -e "\033[31m"
-    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$LOGFILE_I" "${tms_real[$i]}" "${output:0:102}" | tee -a "$LOGFILE"
+    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$LOGFILE_I" "$(format_float "${tms_real[$i]}")" "${output:0:102}" | tee -a "$LOGFILE"
     [ "$color_red" -ne 0 ] && echo -n -e "\033[39m"
   done
   echo "$LINE" | tee -a "$LOGFILE"
