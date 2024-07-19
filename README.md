@@ -220,20 +220,20 @@ Currently there are no plans to implement additional frameworks (either listed b
 Note that there are 2 branches for Isolated component development - Histoire and Storybook, which can be merged into UI branch of choice for your app.
 
 <!-- prettier-ignore -->
-| Git Branch | UI Framework | Dark Theme Switch | Works With Svelte 5 | Notes |
+| Git Branch | UI Framework | Dark Theme Switch | Works With Svelte 5 | Notes [Legend: ⬤ Yes / ⭘ No ] |
 |-|-|:-:|:-:|-|
-| main                                      | (none) | Y | Y | |
-| [histoire](../../tree/histoire)           | (none) | Y | | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
-| [storybook](../../tree/storybook)         | (none) | Y | | Isolated component development. |
-| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | Y | broken | Worked with Svelte 5 next.41|
-| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | Y | | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). |
-| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | N | | |
-| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | Y | | Incomplete and currently broken (w/Svelte 5) |
-| [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | N | | Incomplete and currently broken (w/Svelte 5) |
-| [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | Y | | |
-| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | Y | | Incomplete and currently broken (w/Svelte 5) |
+| main                                      | (none) | ⬤ | ⬤ | |
+| [histoire](../../tree/histoire)           | (none) | ⬤ | | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
+| [storybook](../../tree/storybook)         | (none) | ⬤ | | Isolated component development. |
+| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | ⬤ | ⭘ | Worked with Svelte 5 next.41|
+| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). |
+| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⭘  | | |
+| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⭘ |  |
+| [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | ⭘ | ⭘ |  |
+| [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | ⬤ | ⬤ | |
+| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ |  |
 | [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
-| [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | Y | | (Requires TailwindCSS) |
+| [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | ⬤ | | (Requires TailwindCSS) |
 | | [svelte-ux](https://svelte-ux.techniq.dev) | | | (Requires TailwindCSS) |
 | | [Skeleton](https://github.com/skeletonlabs/skeleton) | | | (Requires TailwindCSS) |
 | | [Flowbite-Svelte](https://flowbite-svelte.com) | |  | (Requires TailwindCSS) |
