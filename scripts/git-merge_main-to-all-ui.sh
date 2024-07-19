@@ -536,8 +536,10 @@ main() {
 
   mkdir -p "$(dirname "$LOGFILE")" >/dev/null
   if [ "$print_last" -ne 0 ]; then
-    [ ! -f "$STATE_FILE_BACKUP" ] && { echo "No last run file \"$STATE_FILE_BACKUP\"."; exit 1; }
-    load_state $STATE_FILE_BACKUP
+    file="$STATE_FILE"
+    [ ! -f "$file" ] && { file="$STATE_FILE_BACKUP"; }
+    [ ! -f "$file" ] && { echo "No current run file \"$STATE_FILE\" found and no last run file \"$STATE_FILE_BACKUP\" found."; exit 1; }
+    load_state "$file"
     print_summary
     return 0
   elif [ "$continue_merge" -ne 0 ]; then
