@@ -165,7 +165,7 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(eslint@9.7.0)(typescript@5.5.3)
       eslint-plugin-svelte:
-        specifier: ^2.36.0
+        specifier: ^2.42.0
         version: 2.42.0(eslint@9.7.0)(svelte@5.0.0-next.190)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3))
       eslint-plugin-vitest:
         specifier: ^0.5.4
