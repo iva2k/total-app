@@ -86,15 +86,16 @@ function exit_save_state() {
   exit $((rc))
 }
 function load_state() {
+  local file="${1:-$STATE_FILE}"
   outputs=()
   errors=()
   tms_real=()
   branches_done=()
   # TARGET_BRANCHES_DEFAULT=("${TARGET_BRANCHES[@]}")
-  if [ -f "$STATE_FILE" ]; then
+  if [ -f "$file" ]; then
     # shellcheck disable=SC1090
-    source "$STATE_FILE"
-    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() loaded from file $STATE_FILE."
+    source "$file"
+    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() loaded from file $file."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: outputs=${outputs[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: tms_real=${tms_real[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: errors=${errors[*]}."
@@ -102,7 +103,7 @@ function load_state() {
     # [ "$DEBUG" -ne 0 ] && echo "DEBUG: TARGET_BRANCHES=${TARGET_BRANCHES[*]}."
     # clear_state
   else
-    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() no file $STATE_FILE."
+    [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() no file $file."
   fi
 }
 
@@ -140,10 +141,11 @@ function time_it() {
 # Function to display usage information
 function usage() {
   # echo "Usage: $0 [-h] [-v] -n <name> [-a <age>]"
-  echo "Usage: $0 [-h] [-v] "
+  echo "Usage: $0 [-h] [-c] [-p]"
   echo "  -h: Display this help message"
   # echo "  -v: Enable verbose mode"
   echo "  -c: Continue merge after resolving conflicts"
+  echo "  -p: Print last run summary only"
   # echo "  -n <name>: Specify a name (required)"
   # echo "  -a <age>: Specify an age (optional)"
 }
@@ -152,9 +154,10 @@ function usage() {
 function parse_arguments() {
   local opt OPTIND OPTARG
   OPTIND=1
+  print_last=0
   continue_merge=0
   # while getopts "hvcn:a:" opt; do
-  while getopts "hc" opt; do
+  while getopts "hcp" opt; do
     case $opt in
       h)
         usage
@@ -162,6 +165,9 @@ function parse_arguments() {
         ;;
       c)
         continue_merge=1
+        ;;
+      p)
+        print_last=1
         ;;
       # v)
       #   verbose=true
@@ -528,13 +534,19 @@ main() {
     exit 1
   fi
 
-  load_state
   mkdir -p "$(dirname "$LOGFILE")" >/dev/null
-  if [ "$continue_merge" -ne 0 ]; then
+  if [ "$print_last" -ne 0 ]; then
+    [ ! -f "$STATE_FILE_BACKUP" ] && { echo "No last run file \"$STATE_FILE_BACKUP\"."; exit 1; }
+    load_state $STATE_FILE_BACKUP
+    print_summary
+    return 0
+  elif [ "$continue_merge" -ne 0 ]; then
     # Previous $LOGFILE is continued
+    load_state
     continue_merge_to_all "$@"
   else
     echo "" >"$LOGFILE"  ;# Clear Previous $LOGFILE
+    load_state
     merge_to_all 0 "$@"
   fi
   
