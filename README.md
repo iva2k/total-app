@@ -1,4 +1,4 @@
-# Total App | Blank SvelteKit App
+# Total App | Blank SvelteKit Starter App
 
 <!-- markdownlint-disable MD033 -->
 <!-- prettier-ignore -->
@@ -27,7 +27,7 @@ A cross-platform Desktop / Mobile / Web application starter.
 
 License: MIT License
 
-This app has very little functionality. Huh? Why? - It is a starter app and it demonstrates the technology stack, main point is it can be deployed from a single codebase to any platform. Yes, ANY platform:
+This app has very little functionality. Huh? Why? - It is a starter app to quickly get all infrastructure for new appsand start coding and designing pages and user interactions. It brings together cohesive and full technology stack which is mostly invisible, but it is ready to be deployed from a single codebase to any platform. Yes, ANY platform:
 
 - iOS
 - Android
@@ -36,18 +36,37 @@ This app has very little functionality. Huh? Why? - It is a starter app and it d
 - Linux
 - Web
 
-Is it Native? - No. It uses JavaScript / TypeScript and modern tooling to create blazingly fast websites, web apps, and allow installation as apps on any of the major platforms.
+Is it Native? - No. But it can be relased into Apple AppStore/Google PlayStore/Microsoft Store as any native app. At the core it uses JavaScript / TypeScript (and some Rust) and modern tooling to create blazingly fast websites, web apps, native apps and allow installation from web browser as an offline app on any of the major platforms. It is very powerful to have that flexibility to choose how to deliver your app.
+
+Is it SPA? SSR? PWA?- Yes, Yes, and Yes, and more - it is flexible.
+
+See, each technique on its own is not so great, trading off one improvement or functionality for lower performance in other areas.
+
+SPA (Single Page App) is bad for SEO with no routes for search crawlers and bad for UX / user experience with slow first loads (as the server will only give client an "/index.html" page and all routing is done on the client AFTER a lot of files are done loading - index.html and all framework Javascript and stylesheets, etc.).
+
+SSR (Server-Side Rendering) is slow for navigation after first page load, as each new page transition has to load whole page and its decorations like NavBars.
+
+PWA (Progressive Web App) gives experience similar to native apps with offline mode, but has many tradeoffs when SSR and SPA is not included.
+
+This app allows to mix and match SSR, CSR, SPA, PWA as best serves the purpose. It can be done for the whole app or on each individual page to have a best combination of SSR with background Offline caching for slick UX with very quick deep links / landing pages, and once any route is loaded on the client, all navigation is local as in a SPA for quick transitions without heavy server reloads. PWA offline caching provided by Service Worker allows seamless online / offline app experience when the app can work without Internet as any standalone app would.
+
+This technology does not have an established name, and parts of it were called "Universal Application" (former "Isomorphic Application") and parts called "Progressive Web App" (PWA) with Server-Side Rendering (SSR) and client-side navigation". Ugh! We need a better name...
+
+That lack of a good name situation gives me freedom to coin a new term: "TotalApp".
 
 Out of the box features:
 
-- SEO and integration with Social Networks
-- SSR / Server-Side Rendering
-- Offline mode / can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
-- Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs.
+- SEO and integration with Social Networks.
+- SSR / Server-Side Rendering [[1]](https://www.sanity.io/glossary/server-side-rendering) - for fast first load of any route and great SEO.
+- SPA / Single Page App [[2]](https://www.sanity.io/glossary/single-page-application) - for fast client-side navigation.
+- PWA / Progressive Web App [[3]](https://www.sanity.io/glossary/progressive-web-application) with Offline mode - can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
+- Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs for demo.
 - Support deep links, in online and in offline modes.
-- Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
-- Prepared for Isolated Component Development (Storybook).
-- Instrumented for quick deployment - Netlify, Vercel, NGINX, etc.
+- Great DX  (developer experience) with Svelte and Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
+- Great DDX (designer/developer experience) - Prepared for Isolated Component Development (Storybook).
+- Great DevOps - Instrumented for quick deployment - Netlify, Vercel, NGINX, etc. (CI/CD coming).
+- Prepared for UDX (UI designer experience) - see UI integrations below.
+- All deployment methods are included - build for standalone apps (iOS/Android/Windows), make a Website or a Web App, or Offline Web App, or all of them.
 
 <!-- prettier-ignore -- >
 |Storybook| [![Netlify Status](https://api.netlify.com/api/v1/badges/1efdc5eb-be6d-422f-8131-dce6f7b58068/deploy-status)](https://app.netlify.com/sites/total-app/deploys) |  [![Vercel Status](https://shields.io/github/deployments/iva2k/total-app/production?style=flat&label=vercel&logo=vercel)](https://vercel.com/iva2k/total-app) |
@@ -81,9 +100,13 @@ Enhancements not found in the foundational packages and templates:
 - Vitest coverage
 - Playwright reports
 - ESLint imports
-- SSR-safe Svelte stores
+- CSS Linting with Stylelint
+- (SSR-safe Svelte stores .. to be updated to Runes for Svelte 5)
 - Consolidated website configuration
-- Organized Favicon resolutions with notification badges support
+- Favicon component for organized Favicon resolutions with notification badges support
+- DarkMode switch naked component
+- SEO component
+- Offline component
 
 ## Install
 
@@ -220,7 +243,7 @@ Currently there are no plans to implement additional frameworks (either listed b
 Note that there are 2 branches for Isolated component development - Histoire and Storybook, which can be merged into UI branch of choice for your app.
 
 <!-- prettier-ignore -->
-| Git Branch | UI Framework | Dark Theme Switch | Works With Svelte 5 | Notes [Legend: ⬤ Yes / ⭘ No ] |
+| Git Branch | UI Framework | Dark Theme | Svelte 5 | Notes [Legend: ⬤ Yes / ⭘ No ] |
 |-|-|:-:|:-:|-|
 | main                                      | (none) | ⬤ | ⬤ | |
 | [histoire](../../tree/histoire)           | (none) | ⬤ | | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
