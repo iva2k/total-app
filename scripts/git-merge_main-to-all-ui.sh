@@ -8,8 +8,9 @@ git config user.name "IVA2K"
 
 DEBUG=0
 # DEBUG=1
-STATE_FILE="./.git-merge-all.state.local"
-STATE_FILE_BACKUP="./.git-merge-all.backup.local"
+
+STATE_FILE=".logs/.git-merge-all.state.local"
+STATE_FILE_BACKUP=".logs/.git-merge-all.backup.local"
 
 function rebuild_lockfile() {
   git checkout HEAD -- pnpm-lock.yaml && pnpm install && git add pnpm-lock.yaml
@@ -21,7 +22,7 @@ function rebuild_lockfile_and_commit() {
 COMMAND_MERGE_LOCKFILE=( "rebuild_lockfile" )
 COMMAND_UPDATE_LOCKFILE=( "rebuild_lockfile_and_commit" )
 
-LOGFILE=log.merge-all
+LOGFILE=".logs/log.merge-all"
 
 SOURCE_BRANCH="main"
 
@@ -203,8 +204,8 @@ function decolor() {
 
 function git_push_with_log() {
   local branch="$1"
-  local log_file
-  log_file="log.merge.$branch.push_$(date +%Y%m%d-%H%M%S).txt"
+  local log_file="$2"
+  mkdir -p "$(dirname "$log_file")" >/dev/null
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: git_push_with_log() branch=$branch log_file=$log_file"
 
   { echo "Push log for branch: $branch"
@@ -255,8 +256,9 @@ function git_push_with_log() {
 
   # Perform the actual push
   git push origin "$branch"
-
+  rc="$?"
   echo "Push log saved to $log_file"
+  return "$rc"
 }
 
 function merge_to_one() {
@@ -340,6 +342,13 @@ function merge_to_one() {
     else
       echo "  No unresolved Merge conflicts left, continuing..." | tee -a "$LOGFILE"
       git commit --no-edit 2>&1 | tee -a "$LOGFILE"
+      # res=$?  ;# won't work due to ` | tee ...`
+      res=${PIPESTATUS[0]}
+      if [ "$res" -ne 0 ] ; then
+        echo "Error $res in commit to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        errors[i]="$res"
+        exit_save_state "$res"
+      fi
       outputs[i]="Merge conflicts resolved"
       errors[i]=0
     fi
@@ -360,7 +369,13 @@ function merge_to_one() {
   fi
 
   # Push the changes to the remote repository
-  git_push_with_log "$TARGET_BRANCH" | tee -a "$LOGFILE"
+  git_push_with_log "$TARGET_BRANCH" ".logs/log.merge{${SOURCE_BRANCH}}-{${TARGET_BRANCH}}.$(date +%Y%m%d-%H%M%S).txt" | tee -a "$LOGFILE"
+  res=${PIPESTATUS[0]}
+  if [ "$res" -ne 0 ] ; then
+    echo "Error $res in push to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    errors[i]="$res"
+    exit_save_state "$res"
+  fi
   branches_done[i]="$TARGET_BRANCH"
 
   echo | tee -a "$LOGFILE"
@@ -507,6 +522,7 @@ main() {
   fi
 
   load_state
+  mkdir -p "$(dirname "$LOGFILE")" >/dev/null
   if [ "$continue_merge" -ne 0 ]; then
     # Previous $LOGFILE is continued
     continue_merge_to_all "$@"

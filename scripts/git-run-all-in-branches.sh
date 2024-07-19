@@ -8,8 +8,9 @@ git config user.name "IVA2K"
 
 DEBUG=0
 # DEBUG=1
-STATE_FILE="./.git-run-all.state.local"
-STATE_FILE_BACKUP="./.git-run-all.backup.local"
+
+STATE_FILE=".logs/.git-run-all.state.local"
+STATE_FILE_BACKUP=".logs/.git-run-all.backup.local"
 
 function no_prep() {
   echo > /dev/null
@@ -21,13 +22,13 @@ function do_prep() {
 
 COMMAND_PREP=( no_prep )
 COMMAND=(pnpm run all)
-LOGFILE=log.runallall
+LOGFILE=".logs/log.runallall"
 
 # COMMAND_PREP=( do_prep )
 # COMMAND=(pnpm run check)
-# LOGFILE=log.runcheck
+# LOGFILE=".logs/log.runcheck"
 # COMMAND=(pnpm run lint)
-# LOGFILE=log.runlint
+# LOGFILE=".logs/log.runlint"
 
 STOP_ON_ERROR=0
 
@@ -170,6 +171,13 @@ function run_one() {
   echo "CHECKOUT $TARGET_BRANCH" | tee -a "$LOGFILE" | tee "$LOGFILE_I"
   # git checkout "$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
   git checkout "$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  # res=$?  ;# won't work due to ` | tee ...`
+  res=${PIPESTATUS[0]}
+  if [ "$res" -ne 0 ] ; then
+    echo "Error $res in checkout to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    errors[i]="$res"
+    exit_save_state "$res"
+  fi
 
   echo "PREP $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   "${COMMAND_PREP[@]}" >>"$LOGFILE_I" 2>&1
@@ -187,6 +195,13 @@ function run_one() {
       echo "PREP ERROR $prep_error in branch \"$TARGET_BRANCH\", cleaning up and continuing." | (tee -a "$LOGFILE" >&2)
       # git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
       git reset --hard "origin/$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      # res=$?  ;# won't work due to ` | tee ...`
+      res=${PIPESTATUS[0]}
+      if [ "$res" -ne 0 ] ; then
+        echo "Error $res in checkout to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        errors[i]="$res"
+        exit_save_state "$res"
+      fi
     fi
   fi
 
@@ -208,6 +223,13 @@ function run_one() {
       echo "ERROR $error in branch \"$TARGET_BRANCH\", cleaning up and continuing." | tee -a "$LOGFILE"
       # git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
       git reset --hard "origin/$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      # res=$?  ;# won't work due to ` | tee ...`
+      res=${PIPESTATUS[0]}
+      if [ "$res" -ne 0 ] ; then
+        echo "Error $res in resetting \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        errors[i]="$res"
+        exit_save_state "$res"
+      fi
     fi
   fi
 
@@ -241,6 +263,12 @@ function run_all() {
 
   # Fetch the latest changes from the remote repository
   git fetch origin 2>&1 | tee -a "$LOGFILE"
+  # res=$?  ;# won't work due to ` | tee ...`
+  res=${PIPESTATUS[0]}
+  if [ "$res" -ne 0 ] ; then
+    echo "Error $res in git fetch." | tee -a "$LOGFILE"
+    exit_save_state "$res"
+  fi
 
   # Loop through each target branch and execute one
   for i in $(seq "$start_i" $((${#TARGET_BRANCHES[@]}-1))); do
@@ -250,6 +278,7 @@ function run_all() {
   done
 
   git checkout "$SOURCE_BRANCH" 2>&1 | tee -a "$LOGFILE"
+  # Ignore errors
 }
 
 function print_summary() {
@@ -312,6 +341,7 @@ main() {
   fi
 
   load_state
+  mkdir -p "$(dirname "$LOGFILE")" >/dev/null
   echo "" >"$LOGFILE"
   run_all 0 "$@"
   print_summary
