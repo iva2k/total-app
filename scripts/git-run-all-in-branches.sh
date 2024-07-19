@@ -8,8 +8,9 @@ git config user.name "IVA2K"
 
 DEBUG=0
 # DEBUG=1
-STATE_FILE="./.git-run-all.state.local"
-STATE_FILE_BACKUP="./.git-run-all.backup.local"
+
+STATE_FILE=".logs/.git-run-all.state.local"
+STATE_FILE_BACKUP=".logs/.git-run-all.backup.local"
 
 function no_prep() {
   echo > /dev/null
@@ -21,13 +22,13 @@ function do_prep() {
 
 COMMAND_PREP=( no_prep )
 COMMAND=(pnpm run all)
-LOGFILE=log.runallall
+LOGFILE=".logs/log.runallall"
 
 # COMMAND_PREP=( do_prep )
 # COMMAND=(pnpm run check)
-# LOGFILE=log.runcheck
+# LOGFILE=".logs/log.runcheck"
 # COMMAND=(pnpm run lint)
-# LOGFILE=log.runlint
+# LOGFILE=".logs/log.runlint"
 
 STOP_ON_ERROR=0
 
@@ -79,18 +80,18 @@ function clear_state() {
 }
 function save_state() {
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() saving to file \"$STATE_FILE\"."
-  declare -p outputs > "$STATE_FILE"
-  declare -p errors >> "$STATE_FILE"
-  declare -p tms_real >> "$STATE_FILE"
-  declare -p branches_done >> "$STATE_FILE"
-  # declare -p TARGET_BRANCHES >> "$STATE_FILE"
+  { declare -p outputs
+    declare -p errors
+    declare -p tms_real
+    declare -p branches_done
+    # declare -p TARGET_BRANCHES
+  } > "$STATE_FILE"
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() DONE saving to file \"$STATE_FILE\"."
 }
 function exit_save_state() {
   rc="$1"
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: exit_save_state($rc) saving to file \"$STATE_FILE\"."
   save_state
-  echo
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: exit_save_state($rc)."
   exit $((rc))
 }
 function load_state() {
@@ -164,11 +165,19 @@ function run_one() {
   LOGFILE_I="$LOGFILE.$TARGET_BRANCH"
   echo "${SEP2}" | tee -a "$LOGFILE"
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: run_one() i=$i TARGET_BRANCH=$TARGET_BRANCH LOGFILE_I=$LOGFILE_I"
-  save_state
+  save_state  ;# checkpoint
 
   # Switch to the target branch
   echo "CHECKOUT $TARGET_BRANCH" | tee -a "$LOGFILE" | tee "$LOGFILE_I"
-  git checkout "$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+  # git checkout "$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+  git checkout "$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  # res=$?  ;# won't work due to ` | tee ...`
+  res=${PIPESTATUS[0]}
+  if [ "$res" -ne 0 ] ; then
+    echo "Error $res in checkout to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    errors[i]="$res"
+    exit_save_state "$res"
+  fi
 
   echo "PREP $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   "${COMMAND_PREP[@]}" >>"$LOGFILE_I" 2>&1
@@ -184,14 +193,19 @@ function run_one() {
       return
     else
       echo "PREP ERROR $prep_error in branch \"$TARGET_BRANCH\", cleaning up and continuing." | (tee -a "$LOGFILE" >&2)
-      git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+      # git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+      git reset --hard "origin/$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      # res=$?  ;# won't work due to ` | tee ...`
+      res=${PIPESTATUS[0]}
+      if [ "$res" -ne 0 ] ; then
+        echo "Error $res in checkout to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        errors[i]="$res"
+        exit_save_state "$res"
+      fi
     fi
   fi
 
   echo "BEGIN command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-  # output=$("${COMMAND[@]}" >>"$LOGFILE_I" 2>&1)
-  # tm "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1
-  # output=$(tm "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1)
 
   # Run command
   "${COMMAND[@]}" >>"$LOGFILE_I" 2>&1
@@ -207,7 +221,15 @@ function run_one() {
       return
     else
       echo "ERROR $error in branch \"$TARGET_BRANCH\", cleaning up and continuing." | tee -a "$LOGFILE"
-      git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+      # git reset --hard "origin/$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2)
+      git reset --hard "origin/$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      # res=$?  ;# won't work due to ` | tee ...`
+      res=${PIPESTATUS[0]}
+      if [ "$res" -ne 0 ] ; then
+        echo "Error $res in resetting \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        errors[i]="$res"
+        exit_save_state "$res"
+      fi
     fi
   fi
 
@@ -238,12 +260,15 @@ function run_all() {
     outputs[i]="\033[31m(did not run)\033[36m"
     tms_real[i]=0
   done
-  # errors[0]=0 ;# for DEBUG only
-  # errors[1]=1 ;# for DEBUG only
-  # echo "" >"$LOGFILE"
 
   # Fetch the latest changes from the remote repository
-  git fetch origin
+  git fetch origin 2>&1 | tee -a "$LOGFILE"
+  # res=$?  ;# won't work due to ` | tee ...`
+  res=${PIPESTATUS[0]}
+  if [ "$res" -ne 0 ] ; then
+    echo "Error $res in git fetch." | tee -a "$LOGFILE"
+    exit_save_state "$res"
+  fi
 
   # Loop through each target branch and execute one
   for i in $(seq "$start_i" $((${#TARGET_BRANCHES[@]}-1))); do
@@ -252,7 +277,8 @@ function run_all() {
     echo "  run time=${tms_real[$i]}s" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   done
 
-  git checkout "$SOURCE_BRANCH"
+  git checkout "$SOURCE_BRANCH" 2>&1 | tee -a "$LOGFILE"
+  # Ignore errors
 }
 
 function print_summary() {
@@ -263,7 +289,7 @@ function print_summary() {
   total_time=0
   FORMAT="| %-20s | %6s | %-30s | %9s | %-100s |"
   HEAD=$(printf "$FORMAT" "Branch" "Error" "Log File" "Time (s)" "Output")
-  LINE=$(printf "$FORMAT" "" "" "" "")
+  LINE=$(printf "$FORMAT" "" "" "" "" "")
   LINE="${LINE// /-}"
   echo | tee -a "$LOGFILE"
   echo "${SEP1}" | tee -a "$LOGFILE"
@@ -285,7 +311,7 @@ function print_summary() {
       color_red=1
       errors_cnt=$((errors_cnt+1))
     fi
-    total_time=$(awk "BEGIN {print ($total_time+${tms_real[$i]})}")
+    total_time=$(awk "BEGIN {print ($total_time+0${tms_real[$i]})}")
     [ "$color_red" -ne 0 ] && echo -n -e "\033[31m"
     printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$LOGFILE_I" "${tms_real[$i]}" "${output:0:102}" | tee -a "$LOGFILE"
     [ "$color_red" -ne 0 ] && echo -n -e "\033[39m"
@@ -315,6 +341,7 @@ main() {
   fi
 
   load_state
+  mkdir -p "$(dirname "$LOGFILE")" >/dev/null
   echo "" >"$LOGFILE"
   run_all 0 "$@"
   print_summary
