@@ -66,18 +66,18 @@ function clear_state() {
 }
 function save_state() {
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() saving to file \"$STATE_FILE\"."
-  declare -p outputs > "$STATE_FILE"
-  declare -p errors >> "$STATE_FILE"
-  declare -p tms_real >> "$STATE_FILE"
-  declare -p branches_done >> "$STATE_FILE"
-  # declare -p TARGET_BRANCHES >> "$STATE_FILE"
+  { declare -p outputs
+    declare -p errors
+    declare -p tms_real
+    declare -p branches_done
+    # declare -p TARGET_BRANCHES
+  } > "$STATE_FILE"
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: save_state() DONE saving to file \"$STATE_FILE\"."
 }
 function exit_save_state() {
   rc="$1"
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: exit_save_state($rc) saving to file \"$STATE_FILE\"."
   save_state
-  echo
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: exit_save_state($rc)."
   exit $((rc))
 }
 function load_state() {
@@ -201,6 +201,64 @@ function decolor() {
   echo -e "$input" | sed 's/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g'
 }
 
+function git_push_with_log() {
+  local branch="$1"
+  local log_file
+  log_file="log.merge.$branch.push_$(date +%Y%m%d-%H%M%S).txt"
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: git_push_with_log() branch=$branch log_file=$log_file"
+
+  { echo "Push log for branch: $branch"
+    echo "Date: $(date +%Y%m%d-%H%M%S)"
+    echo ""
+    } > "$log_file"
+
+  # Get the range of commits being pushed
+  local range
+  range=$(git rev-parse "$branch@{push}..$branch")
+
+  local local_sha
+  local remote_sha
+  local_sha=$(git rev-parse "$branch")
+  remote_sha=$(git rev-parse "origin/$branch" 2>/dev/null || echo "")
+
+  if [ -z "$remote_sha" ]; then
+      echo "New branch, comparing with initial commit" >> "$log_file"
+      range="$(git rev-list --max-parents=0 HEAD)...$local_sha"
+  else
+      range="$remote_sha...$local_sha"
+  fi
+
+  # List of modified files
+  { echo "Modified files:"
+    git diff --name-status "$range"
+    echo ""
+  } >> "$log_file"
+
+  # List of commits being pushed
+  { echo "Commits being pushed:"
+    git log --oneline "$range"
+    echo ""
+  } >> "$log_file"
+
+  # List of merged branches
+  { echo "Merged branches:"
+    git branch --merged "$branch" | grep -v "^\*"
+    echo ""
+    } >> "$log_file"
+
+  # Additional information
+  { echo "Additional information:"
+    echo "Current user: $(git config user.name)"
+    echo "Current email: $(git config user.email)"
+    echo "Remote URL: $(git remote get-url origin)"
+  } >> "$log_file"
+
+  # Perform the actual push
+  git push origin "$branch"
+
+  echo "Push log saved to $log_file"
+}
+
 function merge_to_one() {
   is_continue="$1"
   i="$2"
@@ -225,7 +283,7 @@ function merge_to_one() {
     echo | tee -a "$LOGFILE"
     # Switch to the target branch
     # Checkout target branch
-    if ! output=$(git checkout "$TARGET_BRANCH") ; then
+    if ! output=$(git checkout "$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE") ; then
       echo | tee -a "$LOGFILE"
       echo "Error checking out branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE"
       outputs[i]="Error checking out branch"
@@ -235,8 +293,9 @@ function merge_to_one() {
 
     # Merge changes from the source branch, but not commit
     # if ! git merge "$SOURCE_BRANCH" --no-edit ; then
-    git merge "$SOURCE_BRANCH" --no-commit
-    res=$?
+    git merge "$SOURCE_BRANCH" --no-commit 2>&1 | tee -a "$LOGFILE"
+    # res=$?  ;# won't work due to ` | tee ...`
+    res=${PIPESTATUS[0]}
     if [ "$res" -ne 0 ] ; then
       echo "Merge conflict(s) detected in \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
     fi
@@ -261,8 +320,9 @@ function merge_to_one() {
 
     if git diff --name-only --diff-filter=U | grep -q "pnpm-lock.yaml"; then
       echo "  Merge conflict(s) in \"pnpm-lock.yaml\", recreating..." | tee -a "$LOGFILE"
-      ( "${COMMAND_MERGE_LOCKFILE[@]}" )
-      error=$?
+      ( "${COMMAND_MERGE_LOCKFILE[@]}" ) | tee -a "$LOGFILE"
+      # error=$?  ;# won't work due to ` | tee ...`
+      error=${PIPESTATUS[0]}
       echo "  DONE Recreating \"pnpm-lock.yaml\", error=$error." | tee -a "$LOGFILE"
       pkg_updated=0
     fi
@@ -279,25 +339,28 @@ function merge_to_one() {
       exit_save_state 1
     else
       echo "  No unresolved Merge conflicts left, continuing..." | tee -a "$LOGFILE"
-      git commit --no-edit
+      git commit --no-edit 2>&1 | tee -a "$LOGFILE"
       outputs[i]="Merge conflicts resolved"
       errors[i]=0
     fi
   else
-    git commit --no-edit
+    echo "  No Merge conflicts, continuing..." | tee -a "$LOGFILE"
+    # No "-m" as merge sets up a commit message for us to use.
+    git commit --no-edit 2>&1 | tee -a "$LOGFILE"
   fi
 
   if [ "$pkg_updated" -ne 0 ] ; then
     echo "  Changes to \"package.json\" file were merged, updating \"pnpm-lock.yaml\"..." | tee -a "$LOGFILE"
     outputs[i]="${outputs[i]}, package.json merged and lockfile updated"
 
-    ( "${COMMAND_UPDATE_LOCKFILE[@]}" )
-    error=$?
+    ( "${COMMAND_UPDATE_LOCKFILE[@]}" ) | tee -a "$LOGFILE"
+    # error=$?  ;# won't work due to ` | tee ...`
+    error=${PIPESTATUS[0]}
     echo "  DONE Updating \"pnpm-lock.yaml\", error=$error." | tee -a "$LOGFILE"
   fi
 
   # Push the changes to the remote repository
-  git push origin "$TARGET_BRANCH"
+  git_push_with_log "$TARGET_BRANCH" | tee -a "$LOGFILE"
   branches_done[i]="$TARGET_BRANCH"
 
   echo | tee -a "$LOGFILE"
@@ -366,13 +429,13 @@ function merge_to_all() {
   done
 
   # Fetch the latest changes from the remote repository
-  git fetch origin
+  git fetch origin 2>&1 | tee -a "$LOGFILE"
 
   # Switch to the source branch
-  git checkout "$SOURCE_BRANCH"
+  git checkout "$SOURCE_BRANCH" 2>&1 | tee -a "$LOGFILE"
 
   # Pull the latest changes from the source branch
-  git pull origin "$SOURCE_BRANCH"
+  git pull origin "$SOURCE_BRANCH" 2>&1 | tee -a "$LOGFILE"
 
   # Loop through each target branch and execute one
   for i in $(seq "$start_i" $((${#TARGET_BRANCHES[@]}-1))); do
@@ -380,7 +443,7 @@ function merge_to_all() {
     echo "  run time=${tms_real[$i]}s" | tee -a "$LOGFILE"  ;# | tee -a "$LOGFILE_I"
   done
 
-  git checkout "$SOURCE_BRANCH"
+  git checkout "$SOURCE_BRANCH" 2>&1 | tee -a "$LOGFILE"
 }
 
 function print_summary() {
@@ -389,10 +452,9 @@ function print_summary() {
   pass_cnt=0
   total_cnt=0
   total_time=0
-  FORMAT="| %-20s | %6s | %-100s |"
-  # FORMAT="| %-20s | %6s | %-30s | %9s | %-100s |"
-  HEAD=$(printf "$FORMAT" "Branch" "Error" "Output")
-  LINE=$(printf "$FORMAT" "" "")
+  FORMAT="| %-20s | %6s | %9s | %-100s |"
+  HEAD=$(printf "$FORMAT" "Branch" "Error" "Time (s)" "Output")
+  LINE=$(printf "$FORMAT" "" "" "" "")
   LINE="${LINE// /-}"
   echo | tee -a "$LOGFILE"
   echo "${SEP1}" | tee -a "$LOGFILE"
@@ -413,15 +475,13 @@ function print_summary() {
       color_red=1
       errors_cnt=$((errors_cnt+1))
     fi
-    total_time=$(awk "BEGIN {print ($total_time+${tms_real[$i]})}")
+    total_time=$(awk "BEGIN {print ($total_time+0${tms_real[$i]})}")
     [ "$color_red" -ne 0 ] && echo -n -e "\033[31m"
-    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "${output:0:100}" | tee -a "$LOGFILE"
-    # printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$LOGFILE_I" "${tms_real[$i]}" "${output:0:100}" | tee -a "$LOGFILE"
+    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "${tms_real[$i]}" "${output:0:100}" | tee -a "$LOGFILE"
     [ "$color_red" -ne 0 ] && echo -n -e "\033[36m"
   done
   echo "$LINE" | tee -a "$LOGFILE"
-  printf "$FORMAT\n" "Total:" "$errors_cnt" "" | tee -a "$LOGFILE"
-  # printf "$FORMAT\n" "Total:" "$errors_cnt" "$total_cnt" "$total_time" "" | tee -a "$LOGFILE"
+  printf "$FORMAT\n" "Total:" "$errors_cnt" "$total_time" "" | tee -a "$LOGFILE"
   echo "$LINE" | tee -a "$LOGFILE"
   echo | tee -a "$LOGFILE"
   total_time_m=$(awk "BEGIN {print ($total_time / 60)}")
@@ -432,7 +492,6 @@ function print_summary() {
   
   echo | tee -a "$LOGFILE"
   echo "DONE Merging branch \"$SOURCE_BRANCH\" into $total_cnt target branches, $pass_cnt passed, $errors_cnt error(s), $total_time_h:$total_time_m:$total_time_s elapsed time." | tee -a "$LOGFILE"
-  # echo "DONE command \"${COMMAND[*]}\" in $total_cnt target branches, $pass_cnt passed, $errors_cnt error(s), $total_time_h:$total_time_m:$total_time_s elapsed time." | tee -a "$LOGFILE"
   echo | tee -a "$LOGFILE"
 
   return $result
@@ -448,10 +507,11 @@ main() {
   fi
 
   load_state
-  echo "" >"$LOGFILE"
   if [ "$continue_merge" -ne 0 ]; then
+    # Previous $LOGFILE is continued
     continue_merge_to_all "$@"
   else
+    echo "" >"$LOGFILE"  ;# Clear Previous $LOGFILE
     merge_to_all 0 "$@"
   fi
   
