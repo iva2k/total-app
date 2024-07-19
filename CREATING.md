@@ -1052,3 +1052,15 @@ pnpm install agnostic-svelte
 Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source).
 
 Add example page `src/routes/agnostic/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
+
+### Svelte 5 Status: Broken in next.190 (worked in next.41)
+
+```text
+Declaring or accessing a prop starting with `$$` is illegal (they are reserved for Svelte internals)
+file: node_modules/agnostic-svelte/components/Divider/Divider.svelte:129:22
+ 127 |    export let size = "";
+ 128 |  
+ 129 |    let slots = $$props.$$slots;
+                                     ^
+ 130 |  
+```
