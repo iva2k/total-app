@@ -201,9 +201,16 @@ function parse_arguments() {
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
 function decolor() {
-  local input
-  input="$1"
+  local input="$1"
   echo -e "$input" | sed 's/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g'
+}
+function remove_utf() {
+  local input="$1"
+  echo -e "$input" | LC_ALL=C tr -cd '[:print:][:space:]'
+}
+function trim() {
+  local input="$1"
+  echo -e "$input" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
 }
 
 function git_push_with_log() {
@@ -492,6 +499,8 @@ function print_summary() {
     TARGET_BRANCH="${TARGET_BRANCHES[$i]}"
     error="${errors[$i]}"
     output=$(decolor "${outputs[$i]}")
+    output=$(remove_utf "$output")
+    output=$(trim "$output")
     total_cnt=$((total_cnt+1))
     color_red=0
     if [ "$error" == "0" ]; then
