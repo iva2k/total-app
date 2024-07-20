@@ -68,7 +68,10 @@
     {#snippet content()}
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
-          <sl-switch checked={data.isDarkMode} onsl-change={data.onChange}>
+          <sl-switch
+            checked={data.isDarkMode}
+            onsl-change={(e: Event) => data.onChange(e, !(data.isDarkMode ?? false))}
+          >
             {data.isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
           </sl-switch>
         {/snippet}
