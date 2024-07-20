@@ -4,6 +4,7 @@
 
   import { onMount, type Snippet } from 'svelte';
   import { browser } from '$app/environment';
+  import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   let {
     htmlDarkClass,
@@ -78,7 +79,10 @@
     ) => {
       // Current color mode change event, passed through data so snippet can use it
       // If arg `newIsDark` is provided, use it, otherwise use current data.isDarkMode (which should be bound to selector element value)
-      const setTheme = (newIsDark === undefined ? data.isDarkMode : newIsDark) ? 'dark' : 'light';
+      if (newIsDark !== undefined) {
+        data.isDarkMode = !!newIsDark;
+      }
+      const setTheme = data.isDarkMode ? 'dark' : 'light';
       colorSchemeManager?.setColorScheme(setTheme);
       // Update the store (only from user choice)
       colorSchemeManager?.setStoredColorScheme(setTheme);
@@ -137,9 +141,15 @@
   {:else}
     <label>
       <!-- Snippet Fallback -->
-      {data.isDarkMode ? '🔆' : '🌙'}
-      <!-- <Input id="c2" type="switch" label={data.isDarkMode ? '🔆' : '🌙'} checked={data.isDarkMode} onchange={onChange} /> -->
-      <input id="c3" type="checkbox" bind:checked={data.isDarkMode} onchange={data.onChange} />
+      <!-- <Input id="c2" type="switch" label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY} checked={data.isDarkMode} onchange={onChange} /> -->
+      <input
+        id="c3"
+        type="checkbox"
+        bind:checked={data.isDarkMode}
+        onchange={data.onChange}
+        aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
+      />
+      {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
     </label>
   {/if}
 {/if}
