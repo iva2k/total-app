@@ -11,6 +11,6 @@
     "./pwa-configuration.js",
     "./svelte.config.js",
     "./vite.config.js",
-    "./vitest.workspace.js"
+    "./vitest.workspace.ts"
   ]
 }
