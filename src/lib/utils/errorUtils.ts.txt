@@ -1,0 +1,104 @@
+//  An idea of error handling from <https://github.com/rilldata/rill>
+
+export enum MetricsEventScreenName {
+  Source = 'source',
+  Model = 'model',
+  Dashboard = 'dashboard',
+  MetricsDefinition = 'metrics-definition',
+  CLI = 'cli',
+  Splash = 'splash',
+  Home = 'home',
+  Organization = 'organization',
+  Project = 'project',
+  Report = 'report',
+  ReportExport = 'report-export',
+  Unknown = 'unknown'
+}
+
+export class ErrorEventHandler {
+  public constructor(
+    private readonly metricsService: MetricsService,
+    private readonly commonUserMetrics: CommonUserFields
+  ) {
+    this.commonUserMetrics = commonUserMetrics;
+  }
+
+  public fireSourceErrorEvent(
+    space: MetricsEventSpace,
+    screen_name: MetricsEventScreenName,
+    error_code: SourceErrorCodes,
+    connection_type: SourceConnectionType,
+    file_type: SourceFileType,
+    glob: boolean
+  ) {
+    return this.metricsService.dispatch('sourceErrorEvent', [
+      this.commonUserMetrics,
+      space,
+      screen_name,
+      error_code,
+      connection_type,
+      file_type,
+      glob
+    ]);
+  }
+
+  public fireHTTPErrorBoundaryEvent(
+    api: string,
+    status: string,
+    message: string,
+    screenName: MetricsEventScreenName
+  ) {
+    return this.metricsService.dispatch('httpErrorEvent', [
+      this.commonUserMetrics,
+      screenName,
+      api,
+      status,
+      message
+    ]);
+  }
+
+  public fireJavascriptErrorBoundaryEvent(
+    stack: string,
+    message: string,
+    screenName: MetricsEventScreenName
+  ) {
+    return this.metricsService.dispatch('javascriptErrorEvent', [
+      this.commonUserMetrics,
+      screenName,
+      stack,
+      message
+    ]);
+  }
+}
+
+export let errorEvent: ErrorEventHandler;
+
+export function addJavascriptErrorListeners() {
+  const errorHandler = (errorEvt: ErrorEvent) => {
+    errorEvent?.fireJavascriptErrorBoundaryEvent(
+      errorEvt.error?.stack ?? '',
+      errorEvt.message,
+      getScreenNameFromPage(get(page))
+    );
+  };
+  const unhandledRejectionHandler = (rejectionEvent: PromiseRejectionEvent) => {
+    let stack = '';
+    let message = '';
+    if (typeof rejectionEvent.reason === 'string') {
+      message = rejectionEvent.reason;
+    } else if (rejectionEvent.reason instanceof Error) {
+      stack = rejectionEvent.reason.stack ?? '';
+      message = rejectionEvent.reason.message;
+    } else {
+      message = String.toString.apply(rejectionEvent.reason);
+    }
+    errorEvent?.fireJavascriptErrorBoundaryEvent(stack, message, getScreenNameFromPage(get(page)));
+  };
+
+  window.addEventListener('error', errorHandler);
+  window.addEventListener('unhandledrejection', unhandledRejectionHandler);
+  return () => {
+    window.removeEventListener('error', errorHandler);
+    window.removeEventListener('unhandledrejection', unhandledRejectionHandler);
+  };
+}

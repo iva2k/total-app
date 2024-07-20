@@ -71,13 +71,16 @@
         <DarkMode htmlDarkClass="dark">
           {#snippet content(data)}
             <label>
-              {data.isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
               <input
-                id="cb1"
-                type="checkbox"
-                bind:checked={data.isDarkMode}
-                onchange={data.onChange}
+              id="cb1"
+              type="checkbox"
+              checked={data.isDarkMode}
+              onchange={(e) => {
+                data.onChange(e, !(data.isDarkMode ?? false));
+                return;
+              }}
               />
+              {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
             </label>
           {/snippet}
         </DarkMode>
