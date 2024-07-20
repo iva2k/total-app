@@ -22,9 +22,9 @@
       href="/"
       on:click={onBurgerButton}
     >
-      <span aria-hidden="true" />
-      <span aria-hidden="true" />
-      <span aria-hidden="true" />
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </a>
   </div>
 
@@ -69,7 +69,7 @@
 
     <span class="icon-text">
       <span class="icon">
-        <i class="fas fa-home" />
+        <i class="fas fa-home"></i>
       </span>
       <span>Home</span>
     </span>
