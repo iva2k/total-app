@@ -43,6 +43,7 @@ export function withEffect(fn: () => void) {
     let promise;
     const cleanup = $effect.root(() => (promise = fn()));
     try {
+      // eslint-disable-next-line @typescript-eslint/await-thenable
       return await promise;
     } finally {
       cleanup();

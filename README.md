@@ -241,7 +241,7 @@ This repository was initiated using early preview releases of Svelte 5. As Svelt
 
 If you are interested in a stable version with Svelte 3/4, please refer to the earlier [Svelte 3/4 version of this project](https://github.com/iva2k/svelte-blank-20221125) at commit [#64eb11a](https://github.com/iva2k/svelte-blank-20221125/tree/64eb11af86cc81931d21e3f7c8851c2094044574). This version includes fully functional UI frameworks.
 
-As updates and fixes for Svelte 5 and the UI frameworks are released, they will be incorporated into this project. 
+As updates and fixes for Svelte 5 and the UI frameworks are released, they will be incorporated into this project.
 
 See Q & A below and file issues and submit PRs on [Github](https://github.com/iva2k/total-app/issues)!
 
