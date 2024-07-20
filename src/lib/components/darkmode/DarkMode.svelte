@@ -72,9 +72,13 @@
   // data passed to the snippet
   let data = $state({
     isDarkMode: false,
-    onChange: () => {
+    onChange: (
+      _event: Event | undefined = undefined,
+      newIsDark: boolean | undefined = undefined
+    ) => {
       // Current color mode change event, passed through data so snippet can use it
-      const setTheme = data.isDarkMode ? 'dark' : 'light';
+      // If arg `newIsDark` is provided, use it, otherwise use current data.isDarkMode (which should be bound to selector element value)
+      const setTheme = (newIsDark === undefined ? data.isDarkMode : newIsDark) ? 'dark' : 'light';
       colorSchemeManager?.setColorScheme(setTheme);
       // Update the store (only from user choice)
       colorSchemeManager?.setStoredColorScheme(setTheme);
