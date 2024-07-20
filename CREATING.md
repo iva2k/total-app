@@ -1,4 +1,4 @@
-# Creating: Total App | Blank SvelteKit App
+# Creating: Total App | Blank SvelteKit Starter App
 
 This file describes how this app was created.
 
