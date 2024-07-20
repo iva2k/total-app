@@ -60,8 +60,8 @@
             <input
               id="cb1"
               type="checkbox"
-              bind:checked={data.isDarkMode}
-              onchange={data.onChange}
+              checked={data.isDarkMode}
+              onchange={(e) => data.onChange(e, !(data.isDarkMode ?? false))}
               aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
             />
             {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
