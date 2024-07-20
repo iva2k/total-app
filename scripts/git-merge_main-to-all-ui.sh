@@ -233,26 +233,24 @@ function git_push_with_log() {
       range="$remote_sha...$local_sha"
   fi
 
-  # List of modified files
-  { echo "Modified files:"
+  {
+    # List of modified files
+    echo "Modified files:"
     git diff --name-status "$range"
     echo ""
-  } >> "$log_file"
 
-  # List of commits being pushed
-  { echo "Commits being pushed:"
+    # List of commits being pushed
+    echo "Commits being pushed:"
     git log --oneline "$range"
     echo ""
-  } >> "$log_file"
 
-  # List of merged branches
-  { echo "Merged branches:"
+    # List of merged branches
+    echo "Merged branches:"
     git branch --merged "$branch" | grep -v "^\*"
     echo ""
-    } >> "$log_file"
 
-  # Additional information
-  { echo "Additional information:"
+    # Additional information
+    echo "Additional information:"
     echo "Current user: $(git config user.name)"
     echo "Current email: $(git config user.email)"
     echo "Remote URL: $(git remote get-url origin)"

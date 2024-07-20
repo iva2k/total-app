@@ -69,9 +69,12 @@
         {#snippet content(data)}
           <Input
             type="switch"
-            label={data.isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+            label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
             checked={data.isDarkMode}
-            on:change={data.onToggle}
+            onchange={(e) => {
+              data.onChange(e, !(data.isDarkMode ?? false));
+              return;
+            }}
           />
         {/snippet}
       </DarkMode>

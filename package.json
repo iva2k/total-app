@@ -53,15 +53,14 @@
     "format":                                        "echo RUN format                                         && pnpm lint:css --fix && prettier --write .",
     "android:open":                                  "cap open android",
     "android:dev":                                   "cap run android",
-    "SAVEDall": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
-    "all": "pnpm i && pnpm format && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
+    "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
     "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
   },
   "dependencies": {
-    "@capacitor/android": "^6.1.0",
-    "@capacitor/core": "^6.1.0",
+    "@capacitor/android": "^6.1.1",
+    "@capacitor/core": "^6.1.1",
     "@capacitor/geolocation": "^6.0.0",
-    "@capacitor/ios": "^6.1.0",
+    "@capacitor/ios": "^6.1.1",
     "@fontsource/fira-mono": "^5.0.13",
     "@ionic/pwa-elements": "^3.3.0",
     "bootstrap-icons": "^1.11.3",
@@ -69,7 +68,7 @@
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
-    "@capacitor/cli": "^6.1.0",
+    "@capacitor/cli": "^6.1.1",
     "@eslint/compat": "^1.1.0",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.7.0",
@@ -106,7 +105,7 @@
     "eslint-plugin-import-x": "^3.0.1",
     "eslint-plugin-playwright": "^1.6.2",
     "eslint-plugin-storybook": "^0.8.0",
-    "eslint-plugin-svelte": "^2.42.0",
+    "eslint-plugin-svelte": "^2.43.0",
     "eslint-plugin-vitest": "^0.5.4",
     "glob": "^11.0.0",
     "globals": "^15.8.0",
