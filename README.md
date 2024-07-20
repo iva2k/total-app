@@ -11,11 +11,22 @@
             <td align=center>Storybook</td>
             <td align=center><a href="https://app.netlify.com/sites/total-app/deploys"><img src="https://api.netlify.com/api/v1/badges/1efdc5eb-be6d-422f-8131-dce6f7b58068/deploy-status" alt="Netlify shield"/></a></td>
             <td align=center><a href="https://vercel.com/iva2k/total-app"><img src="https://shields.io/github/deployments/iva2k/total-app/production?style=flat&label=vercel&logo=vercel" alt="Vercel shield"/></a></td>
+            <td align=center>
+<a href="https://github.com/iva2k/total-app/issues"><img src="https://img.shields.io/github/issues/iva2k/total-app.svg" alt="Github"></a>
+            </td>
+            <td align=center>
+<a href="https://github.com/iva2k/total-app/pulls"><img src="https://img.shields.io/github/issues-pr/iva2k/total-app.svg" ="Github"></a>
+            </td>
+            <td align=center><a href="https://discord.gg/https://discord.gg/7mAdkjhC"><img src="https://discord.com/api/guilds/1264001379853406270/widget.png" alt="Discord Shield"></a></td>
         </tr>
         <tr>
             <td align=center><a href=https://www.chromatic.com/builds?appId=65a02a765c0010e653425b30>Chromatic</a></td>
             <td align=center><a href="https://total-app.netlify.app">App Demo</a></td>
             <td align=center><a href="https://total-app.vercel.app">App Demo</a></td>
+            <td align=center colspan=2><a href="https://github.com/iva2k/total-app">Github
+               <!-- <img src="https://img.shields.io/badge/GitHub--181717?style=for-the-badge&logo=github&logoColor=white" alt="Github"> -->
+            </a></td>
+            <td align=center><a href="https://discord.gg/https://discord.gg/7mAdkjhC">Discord</a></td>
         </tr>
     </tbody>
 </table>
@@ -25,9 +36,11 @@
 
 A cross-platform Desktop / Mobile / Web application starter.
 
-License: MIT License
+**License:** MIT License
 
-This app has very little functionality. Huh? Why? - It is a starter app to quickly get all infrastructure for new appsand start coding and designing pages and user interactions. It brings together cohesive and full technology stack which is mostly invisible, but it is ready to be deployed from a single codebase to any platform. Yes, ANY platform:
+## Introduction
+
+Total App is a versatile starter app designed to streamline the development process. Out of the box it provides a full technology stack to deploy from a single codebase to any device across all major platforms:
 
 - iOS
 - Android
@@ -36,83 +49,34 @@ This app has very little functionality. Huh? Why? - It is a starter app to quick
 - Linux
 - Web
 
-Is it Native? - No. But it can be relased into Apple AppStore/Google PlayStore/Microsoft Store as any native app. At the core it uses JavaScript / TypeScript (and some Rust) and modern tooling to create blazingly fast websites, web apps, native apps and allow installation from web browser as an offline app on any of the major platforms. It is very powerful to have that flexibility to choose how to deliver your app.
+## Key Features
 
-Is it SPA? SSR? PWA?- Yes, Yes, and Yes, and more - it is flexible.
-
-See, each technique on its own is not so great, trading off one improvement or functionality for lower performance in other areas.
-
-SPA (Single Page App) is bad for SEO with no routes for search crawlers and bad for UX / user experience with slow first loads (as the server will only give client an "/index.html" page and all routing is done on the client AFTER a lot of files are done loading - index.html and all framework Javascript and stylesheets, etc.).
-
-SSR (Server-Side Rendering) is slow for navigation after first page load, as each new page transition has to load whole page and its decorations like NavBars.
-
-PWA (Progressive Web App) gives experience similar to native apps with offline mode, but has many tradeoffs when SSR and SPA is not included.
-
-This app allows to mix and match SSR, CSR, SPA, PWA as best serves the purpose. It can be done for the whole app or on each individual page to have a best combination of SSR with background Offline caching for slick UX with very quick deep links / landing pages, and once any route is loaded on the client, all navigation is local as in a SPA for quick transitions without heavy server reloads. PWA offline caching provided by Service Worker allows seamless online / offline app experience when the app can work without Internet as any standalone app would.
-
-This technology does not have an established name, and parts of it were called "Universal Application" (former "Isomorphic Application") and parts called "Progressive Web App" (PWA) with Server-Side Rendering (SSR) and client-side navigation". Ugh! We need a better name...
-
-That lack of a good name situation gives me freedom to coin a new term: "TotalApp".
-
-Out of the box features:
-
-- SEO and integration with Social Networks.
-- SSR / Server-Side Rendering [[1]](https://www.sanity.io/glossary/server-side-rendering) - for fast first load of any route and great SEO.
-- SPA / Single Page App [[2]](https://www.sanity.io/glossary/single-page-application) - for fast client-side navigation.
-- PWA / Progressive Web App [[3]](https://www.sanity.io/glossary/progressive-web-application) with Offline mode - can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
-- Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs for demo.
-- Support deep links, in online and in offline modes.
-- Great DX  (developer experience) with Svelte and Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
-- Great DDX (designer/developer experience) - Prepared for Isolated Component Development (Storybook).
-- Great DevOps - Instrumented for quick deployment - Netlify, Vercel, NGINX, etc. (CI/CD coming).
-- Prepared for UDX (UI designer experience) - see UI integrations below.
-- All deployment methods are included - build for standalone apps (iOS/Android/Windows), make a Website or a Web App, or Offline Web App, or all of them.
-
-<!-- prettier-ignore -- >
-|Storybook| [![Netlify Status](https://api.netlify.com/api/v1/badges/1efdc5eb-be6d-422f-8131-dce6f7b58068/deploy-status)](https://app.netlify.com/sites/total-app/deploys) |  [![Vercel Status](https://shields.io/github/deployments/iva2k/total-app/production?style=flat&label=vercel&logo=vercel)](https://vercel.com/iva2k/total-app) |
-|:-:|:-:|:-:|
-|[Chromatic](https://www.chromatic.com/builds?appId=65a02a765c0010e653425b30)| [App Demo](https://total-app.netlify.app) | [App Demo](https://total-app.vercel.app)  |
-<!-- -->
+- **SEO and Social Integration:** Optimized for search engines and social networks.
+- **Flexible Rendering:** Supports SSR, SPA, and PWA (mix & match as needed) for various use cases.
+- **Native Features:** Includes support for camera, GPS, and other native capabilities via Capacitor.
+- **Great Developer Experience (DX):** Built with SvelteKit with linting, formatting, and comprehensive testing, isolated component development.
+- **Ready for Deployment:** Configured for quick deployment on Netlify, Vercel, or building standalone apps for AppStore/PlayStore and more.
 
 ## Technology Stack
 
 Built with:
 
-- [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
-- [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
-- [Tauri](https://tauri.studio) - Desktop Application framework
-- [Capacitor](https://capacitorjs.com) - Building crossplatform apps
-- [Prettier](https://prettier.io/) - Opinionated Code Formatter
-- [ESLint](https://eslint.org) - Pluggable JavaScript linter
-- [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
-- [Postcss](https://postcss.org/) - Transforming styles with JS plugins
-- [Playwright](https://playwright.dev) - Fast and reliable end-to-end testing for modern web apps
-- [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
+- [Svelte](https://svelte.dev)
+- [Svelte Kit](https://kit.svelte.dev)
+- [Tauri](https://tauri.studio)
+- [Capacitor](https://capacitorjs.com)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org)
+- [Stylelint](https://stylelint.io/)
+- [Postcss](https://postcss.org/)
+- [Playwright](https://playwright.dev)
+- [Vitest](https://vitest.dev)
+- [Storybook](https://storybook.js.org) and [Histoire](https://histoire.dev/) | [(choose a branch)](#styling--ui-components)
+- UI Components | [choose a branch](#styling--ui-components)
 
-Continuous Integrations and Deployments:
+## Start TotalApp from Github
 
-- [Netlify](https://total-app.netlify.app) - App Demo
-- [Vercel](https://total-app.vercel.app) - App Demo
-
-Enhancements not found in the foundational packages and templates:
-
-- HTTPS support in development
-- Vitest coverage
-- Playwright reports
-- ESLint imports
-- CSS Linting with Stylelint
-- (SSR-safe Svelte stores .. to be updated to Runes for Svelte 5)
-- Consolidated website configuration
-- Favicon component for organized Favicon resolutions with notification badges support
-- DarkMode switch naked component
-- SEO component
-- Offline component
-
-## Install
-
-### Quick Start
-
-To start with this app as a template:
+To try this app locally, clone it from Github, execute in your terminal (need `git` and `nodejs` installed):
 
 ```bash
 git clone https://github.com/iva2k/total-app.git my-new-total-app
@@ -122,28 +86,27 @@ cp .env.EXAMPLE .env
 pnpm run dev -- --open
 ```
 
-... or do the steps in [Start Your App](#start-your-app)
+## Start Your App
 
-### Start Your App
-
-To start your app from this project as a template:
+To start your app from `TotalApp` as a template, choose UI framework branch to use (after '#') and execute in your terminal:
 
 ```bash
-mkdir my-app && cd my-app
-npx degit iva2k/total-app#ui-agnostic
-# or
-npx degit iva2k/total-app#ui-bootstrap
-# or
-npx degit iva2k/total-app#ui-bulma
-# or ... (see other UI framework branches below)
+MY_APP="my-app"  # Any name you like for the app (will be a folder name)
+# Any UI branch you like to use, choose one:
+UI_BRANCH="ui-agnostic"
+UI_BRANCH="ui-bootstrap"
+UI_BRANCH="ui-bulma"
+# (see other UI framework branches below)
+
+cd ~ && mkdir "$MY_APP" && cd "$MY_APP"
+npx degit "iva2k/total-app#${UI_BRANCH}"
+
+# Then you can make a new repo and push the folder to your Guthub account (google it to learn how)
 ```
 
-### Or Clone the Repo
+### Or Fork the Repo on Github
 
-```bash
-git clone https://github.com/iva2k/total-app.git
-cd total-app
-```
+Visit [Github](https://github.com/iva2k/total-app/fork) and follow instructions.
 
 ### Setup Configuration File
 
@@ -155,7 +118,7 @@ Copy provided `.env.EXAMPLE` to `.env` (may also create `.env.production` and `.
 cp .env.EXAMPLE .env
 ```
 
-When deploying your website to any provider (Netlify, Vercel), make sure to set all the variables listed in `.env.EXAMPLE` with the provider's UI to keep them secure.
+When deploying your website to any provider (Netlify, Vercel), make sure to set all the variables listed in `.env.EXAMPLE` with the provider's UI to keep them secure. DO NOT COMMIT .env files to repo!
 
 ## Developing Locally
 
@@ -188,7 +151,7 @@ pnpm run build
 
 To preview the production build of the web app, execute `pnpm run preview`.
 
-To deploy the app, need to install an [adapter](https://kit.svelte.dev/docs/adapters) for the target environment. Netlify and Vercel adapters are already installed and automatically selected when deploying to these providers.
+To deploy the app, you will need to install an [adapter](https://kit.svelte.dev/docs/adapters) for the target environment. Netlify and Vercel adapters are already installed and automatically selected when deploying to these providers.
 
 ## Desktop App
 
@@ -274,9 +237,23 @@ Note that there are 2 branches for Isolated component development - Histoire and
 
 ## Conclusion
 
-This repo was started before Svelte 5 official release using the early preview releases, and few things are still broken at the time in Svelte and in some of UI framework packages. As fixes become available, they will be picked up.
+This repository was initiated using early preview releases of Svelte 5. As Svelte 5 is still in the release candidate stage, there are some incompatibilities and broken features in both Svelte 5 and various UI framework packages used here. Some upstream packages are also lagging in updates, and many UI frameworks are not yet fully compatible with Svelte 5.
 
-Note that some of the UI frameworks were implemented flawlessly in earlier Svelte 3 / 4 version of this project, but they got behind and are incompatible with Svelte 5 (those broken branches are kept to have place where to track progress).
+If you are interested in a stable version with Svelte 3/4, please refer to the earlier [Svelte 3/4 version of this project](https://github.com/iva2k/svelte-blank-20221125) at commit [#64eb11a](https://github.com/iva2k/svelte-blank-20221125/tree/64eb11af86cc81931d21e3f7c8851c2094044574). This version includes fully functional UI frameworks.
+
+As updates and fixes for Svelte 5 and the UI frameworks are released, they will be incorporated into this project. 
+
+See Q & A below and file issues and submit PRs on [Github](https://github.com/iva2k/total-app/issues)!
+
+[![GitHub issues](https://img.shields.io/github/issues/iva2k/total-app.svg)](https://github.com/iva2k/total-app/issues)
+[![GitHub issues](https://img.shields.io/github/issues-pr/iva2k/total-app.svg)](https://github.com/iva2k/total-app/pulls)
+[![GitHub issues](https://img.shields.io/badge/GitHub-YourText-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iva2k/total-app/pulls)
+
+## Questions?
+
+See [Q & A](./QANDA.md) for more or reach out on Discord:
+
+[![Discord Banner](https://discord.com/api/guilds/1264001379853406270/widget.png?style=banner2)](https://discord.gg/https://discord.gg/7mAdkjhC)
 
 ## Enjoy! \\\_/
 
