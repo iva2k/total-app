@@ -20,6 +20,9 @@
   import type { LayoutContext } from '$lib/types';
 
   let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let isDarkMode = $state(false);
+  const DARK_CSS = '/vendor/bootstrap/themes/darkly/bootstrap.min.css';
+  const LIGHT_CSS = '/vendor/bootstrap/themes/flatly/bootstrap.min.css';
 
   onMount(async () => {
     await loadIonicPWAElements(window);
@@ -54,9 +57,9 @@
 <svelte:head>
   <!-- <link rel="stylesheet" href="vendor/bootstrap/themes/{isDarkMode ? 'darkly' : 'flatly'}/bootstrap.min.css" /> -->
   {#if isDarkMode}
-    <link rel="stylesheet" href="/vendor/bootstrap/themes/darkly/bootstrap.min.css" />
+    <link rel="stylesheet" href={DARK_CSS} />
   {:else}
-    <link rel="stylesheet" href="/vendor/bootstrap/themes/flatly/bootstrap.min.css" />
+    <link rel="stylesheet" href={LIGHT_CSS} />
   {/if}
 </svelte:head>
 
@@ -73,6 +76,7 @@
             checked={data.isDarkMode}
             onchange={(e) => {
               data.onChange(e, !(data.isDarkMode ?? false));
+              isDarkMode = data.isDarkMode; // For switching the stylesheet in <svelte:head>
               return;
             }}
           />
