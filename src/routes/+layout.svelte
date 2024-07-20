@@ -60,10 +60,13 @@
         {#snippet content(data)}
           <Switch
             id="switch-1"
-            label={data.isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
+            label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
             labelPosition="left"
-            bind:isChecked={data.isDarkMode}
-            on:change={data.onToggle}
+            isChecked={data.isDarkMode}
+            onchange={(e) => {
+              data.onChange(e, !(data.isDarkMode ?? false));
+              return;
+            }}
           />
         {/snippet}
       </DarkMode>

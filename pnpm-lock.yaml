@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@capacitor/android':
-        specifier: ^6.1.0
-        version: 6.1.0(@capacitor/core@6.1.0)
+        specifier: ^6.1.1
+        version: 6.1.1(@capacitor/core@6.1.1)
       '@capacitor/core':
-        specifier: ^6.1.0
-        version: 6.1.0
+        specifier: ^6.1.1
+        version: 6.1.1
       '@capacitor/geolocation':
         specifier: ^6.0.0
-        version: 6.0.0(@capacitor/core@6.1.0)
+        version: 6.0.0(@capacitor/core@6.1.1)
       '@capacitor/ios':
-        specifier: ^6.1.0
-        version: 6.1.0(@capacitor/core@6.1.0)
+        specifier: ^6.1.1
+        version: 6.1.1(@capacitor/core@6.1.1)
       '@fontsource/fira-mono':
         specifier: ^5.0.13
         version: 5.0.13
@@ -34,8 +34,8 @@ importers:
         version: 1.4.2
     devDependencies:
       '@capacitor/cli':
-        specifier: ^6.1.0
-        version: 6.1.0
+        specifier: ^6.1.1
+        version: 6.1.1
       '@eslint/compat':
         specifier: ^1.1.0
         version: 1.1.1
@@ -142,8 +142,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(eslint@9.7.0)(typescript@5.5.3)
       eslint-plugin-svelte:
-        specifier: ^2.42.0
-        version: 2.42.0(eslint@9.7.0)(svelte@5.0.0-next.190)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3))
+        specifier: ^2.43.0
+        version: 2.43.0(eslint@9.7.0)(svelte@5.0.0-next.190)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3))
       eslint-plugin-vitest:
         specifier: ^0.5.4
         version: 0.5.4(@typescript-eslint/eslint-plugin@7.16.1(@typescript-eslint/parser@7.16.1(eslint@9.7.0)(typescript@5.5.3))(eslint@9.7.0)(typescript@5.5.3))(eslint@9.7.0)(typescript@5.5.3)(vitest@2.0.3(@types/node@20.14.11)(sass@1.77.8)(terser@5.31.2))
@@ -856,26 +856,26 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@capacitor/android@6.1.0':
-    resolution: {integrity: sha512-S4PW4N5xtKHTrICjG7bkBhI70jdXbb+8nbm1pJpuXChCD0gkCcofJhPaw4bCoO0egcugBN1U7DkegNw5jWpHcw==}
+  '@capacitor/android@6.1.1':
+    resolution: {integrity: sha512-rhO/nH6NJizGV5KizoIoGxCmkos3HnyUzI9TNv8IVy/C8h6lPM5Gt9cxGclb6k0OBTtgv6iJVo654+m4kzv0Qg==}
     peerDependencies:
       '@capacitor/core': ^6.1.0
 
-  '@capacitor/cli@6.1.0':
-    resolution: {integrity: sha512-HEKDh3+FuNZKFHmSDZ7nAnaX3bzhtznYk9GsZBMac1y4CTAxIykPX9wzZ3DzLeM/EbMBGFClUbefkIkimAyfYg==}
+  '@capacitor/cli@6.1.1':
+    resolution: {integrity: sha512-rsRqEadfnBSUX90RZj59oXvi30bpSusLMfIcgbOIArOloTgfaaWr9R471F6m3gGWF7BhNoskJpZcCgSUsfywwA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  '@capacitor/core@6.1.0':
-    resolution: {integrity: sha512-Kt4ONm0X9xxJXn9Q73oBaKdzep5B/VJw3VjXa2eGul4cD2k37mJwgjpXSMRnLH0Aju5bCiRL8J/hMAfTlokO6A==}
+  '@capacitor/core@6.1.1':
+    resolution: {integrity: sha512-b1s4WDMy3Y1/owTG2/XNGCI6G5SDpF2NT1JMAgcShue13fiAuHA+Ans7Wfei6McvR0KdopAE6tMHmDAfL5PM8Q==}
 
   '@capacitor/geolocation@6.0.0':
     resolution: {integrity: sha512-8wrZe6gqfZmsCdvOvrqmezi2Pa8Nz6bQUFbDWsjUKHRzs+qreYNXngzhgKO83GEhHvodiJMnoDJrD2JeQt7FZg==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
 
-  '@capacitor/ios@6.1.0':
-    resolution: {integrity: sha512-ex2q0LAyDDgfJj4fKDQuSNUYSpic3939/8A/sIIIxslwuRBF5i5fuhAngu6BhCt/pQSfEETcHtg2j2vD+YEZ2w==}
+  '@capacitor/ios@6.1.1':
+    resolution: {integrity: sha512-he6+Fhj6x1dSnOzM98xaPvioOU8MNO+qpodCJwnHE3mIRonTpFutXJK8DP8fnNhjDPk2km9VafLSfOeiZXNv3Q==}
     peerDependencies:
       '@capacitor/core': ^6.1.0
 
@@ -2458,12 +2458,12 @@ packages:
     peerDependencies:
       eslint: '>=6'
 
-  eslint-plugin-svelte@2.42.0:
-    resolution: {integrity: sha512-mHP6z0DWq97KZvoQcApZHdF9m9epcDV/ICKufeEH18Vh+8vl7S+gwt8WdUohEqKNVMuXRkbvy1suMcVvUDiOGw==}
+  eslint-plugin-svelte@2.43.0:
+    resolution: {integrity: sha512-REkxQWvg2pp7QVLxQNa+dJ97xUqRe7Y2JJbSWkHSuszu0VcblZtXkPBPckkivk99y5CdLw4slqfPylL2d/X4jQ==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0 || ^9.0.0-0
-      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.181
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.191
     peerDependenciesMeta:
       svelte:
         optional: true
@@ -4086,11 +4086,11 @@ packages:
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
 
-  svelte-eslint-parser@0.40.0:
-    resolution: {integrity: sha512-M+v1HhC5T1WKYVxWexUCS4o6oIBS88XKzOZuhl2ew+eGxol7eC21e+VE8TC4rXJ3iT3iXT0qlZsZcpKjVo5/zQ==}
+  svelte-eslint-parser@0.41.0:
+    resolution: {integrity: sha512-L6f4hOL+AbgfBIB52Z310pg1d2QjRqm7wy3kI1W6hhdhX5bvu7+f0R6w4ykp5HoDdzq+vGhIJmsisaiJDGmVfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
-      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.181
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.191
     peerDependenciesMeta:
       svelte:
         optional: true
@@ -5433,11 +5433,11 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@capacitor/android@6.1.0(@capacitor/core@6.1.0)':
+  '@capacitor/android@6.1.1(@capacitor/core@6.1.1)':
     dependencies:
-      '@capacitor/core': 6.1.0
+      '@capacitor/core': 6.1.1
 
-  '@capacitor/cli@6.1.0':
+  '@capacitor/cli@6.1.1':
     dependencies:
       '@ionic/cli-framework-output': 2.2.8
       '@ionic/utils-fs': 3.1.7
@@ -5460,17 +5460,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@capacitor/core@6.1.0':
+  '@capacitor/core@6.1.1':
     dependencies:
       tslib: 2.6.3
 
-  '@capacitor/geolocation@6.0.0(@capacitor/core@6.1.0)':
+  '@capacitor/geolocation@6.0.0(@capacitor/core@6.1.1)':
     dependencies:
-      '@capacitor/core': 6.1.0
+      '@capacitor/core': 6.1.1
 
-  '@capacitor/ios@6.1.0(@capacitor/core@6.1.0)':
+  '@capacitor/ios@6.1.1(@capacitor/core@6.1.1)':
     dependencies:
-      '@capacitor/core': 6.1.0
+      '@capacitor/core': 6.1.1
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -7206,7 +7206,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-svelte@2.42.0(eslint@9.7.0)(svelte@5.0.0-next.190)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3)):
+  eslint-plugin-svelte@2.43.0(eslint@9.7.0)(svelte@5.0.0-next.190)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3)):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.7.0)
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -7219,7 +7219,7 @@ snapshots:
       postcss-safe-parser: 6.0.0(postcss@8.4.39)
       postcss-selector-parser: 6.1.1
       semver: 7.6.2
-      svelte-eslint-parser: 0.40.0(svelte@5.0.0-next.190)
+      svelte-eslint-parser: 0.41.0(svelte@5.0.0-next.190)
     optionalDependencies:
       svelte: 5.0.0-next.190
     transitivePeerDependencies:
@@ -8878,7 +8878,7 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-eslint-parser@0.40.0(svelte@5.0.0-next.190):
+  svelte-eslint-parser@0.41.0(svelte@5.0.0-next.190):
     dependencies:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3

@@ -45,7 +45,7 @@ Out of the box features:
 - PWA / Progressive Web App [[3]](https://www.sanity.io/glossary/progressive-web-application) with Offline mode - can work without Internet connection (after the user visits the app when connected, the app's service worker caches all files for offline operation).
 - Support native features (camera, GPS, etc.) - Capacitor included. Check Geolocation and QR Scanner tabs for demo.
 - Support deep links, in online and in offline modes.
-- Great DX  (developer experience) with Svelte and Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
+- Great DX (developer experience) with Svelte and Codebase support features - Linting, Formatting, Unit Testing, End-to-End testing.
 - Great DDX (designer/developer experience) - Prepared for Isolated Component Development (Storybook).
 - Great DevOps - Instrumented for quick deployment - Netlify, Vercel, NGINX, etc. (CI/CD coming).
 - Prepared for UDX (UI designer experience) - see UI integrations below.
