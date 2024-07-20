@@ -72,13 +72,13 @@
           {#snippet content(data)}
             <label>
               <input
-              id="cb1"
-              type="checkbox"
-              checked={data.isDarkMode}
-              onchange={(e) => {
-                data.onChange(e, !(data.isDarkMode ?? false));
-                return;
-              }}
+                id="cb1"
+                type="checkbox"
+                checked={data.isDarkMode}
+                onchange={(e) => {
+                  data.onChange(e, !(data.isDarkMode ?? false));
+                  return;
+                }}
               />
               {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
             </label>
