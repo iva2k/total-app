@@ -61,7 +61,10 @@
               id="cb1"
               type="checkbox"
               checked={data.isDarkMode}
-              onchange={(e) => data.onChange(e, !(data.isDarkMode ?? false))}
+              onchange={(e) => {
+                data.onChange(e, !(data.isDarkMode ?? false));
+                return;
+              }}
               aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
             />
             {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
