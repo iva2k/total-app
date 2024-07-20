@@ -199,10 +199,10 @@ importers:
         specifier: ^9.0.5
         version: 9.0.5(stylelint@15.11.0(typescript@5.5.3))
       stylelint-config-recommended:
-        specifier: ^14.0.0
+        specifier: ^14.0.1
         version: 14.0.1(stylelint@15.11.0(typescript@5.5.3))
       stylelint-config-standard:
-        specifier: ^36.0.0
+        specifier: ^36.0.1
         version: 36.0.1(stylelint@15.11.0(typescript@5.5.3))
       svelte:
         specifier: 5.0.0-next.190
