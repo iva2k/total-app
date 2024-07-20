@@ -212,8 +212,8 @@ Note that there are 2 branches for Isolated component development - Histoire and
 | [histoire](../../tree/histoire)           | (none) | ⬤ | | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
 | [storybook](../../tree/storybook)         | (none) | ⬤ | | Isolated component development. |
 | [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | ⬤ | ⭘ | Worked with Svelte 5 next.41|
-| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). |
-| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⭘  | | |
+| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | ⭘ | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). [[sveltestrap#79]](https://github.com/sveltestrap/sveltestrap/issues/79) |
+| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⭘ | | |
 | [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⭘ |  |
 | [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | ⭘ | ⭘ |  |
 | [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | ⬤ | ⬤ | |
