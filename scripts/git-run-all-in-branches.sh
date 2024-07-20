@@ -210,9 +210,16 @@ function parse_arguments() {
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
 function decolor() {
-  local input
-  input="$1"
+  local input="$1"
   echo -e "$input" | sed 's/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g'
+}
+function remove_utf() {
+  local input="$1"
+  echo -e "$input" | LC_ALL=C tr -cd '[:print:][:space:]'
+}
+function trim() {
+  local input="$1"
+  echo -e "$input" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
 }
 
 function run_one() {
@@ -242,7 +249,7 @@ function run_one() {
   errors[i]="$prep_error"
 
   if [ "$prep_error" -ne 0 ] ; then
-    [ "$output" == "" ] && output=$(grep -i "error" "$LOGFILE_I" | tail -n1)
+    output=$(grep -i "error" "$LOGFILE_I" | tail -n1)
     outputs[i]="$output"
     if [ $STOP_ON_ERROR -ne 0 ]; then
       echo "PREP ERROR $prep_error in branch \"$TARGET_BRANCH\", stopping." | tee -a "$LOGFILE"
@@ -270,7 +277,7 @@ function run_one() {
   outputs[i]=""
   errors[i]="$error"
   if [ "$error" -ne 0 ] ; then
-    [ "$output" == "" ] && output=$(grep -i "error" "$LOGFILE_I" | tail -n1)
+    output=$(grep -i "error" "$LOGFILE_I" | tail -n1)
     outputs[i]="$output"
     if [ $STOP_ON_ERROR -ne 0 ]; then
       echo "ERROR $error in branch \"$TARGET_BRANCH\", stopping." | (tee -a "$LOGFILE" >&2)
@@ -365,6 +372,8 @@ function print_summary() {
     LOGFILE_I="$LOGFILE.$TARGET_BRANCH"
     error="${errors[$i]}"
     output=$(decolor "${outputs[$i]}")
+    output=$(remove_utf "$output")
+    output=$(trim "$output")
     total_cnt=$((total_cnt+1))
     color_red=0
     if [ "$error" == "0" ]; then
@@ -376,7 +385,7 @@ function print_summary() {
     fi
     total_time=$(awk "BEGIN {print ($total_time+0${tms_real[$i]})}")
     [ "$color_red" -ne 0 ] && echo -n -e "\033[31m"
-    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$(basename "$LOGFILE_I")" "$(format_float "${tms_real[$i]}")" "${output:0:102}" | tee -a "$LOGFILE"
+    printf "$FORMAT\n" "$TARGET_BRANCH" "$error" "$(basename "$LOGFILE_I")" "$(format_float "${tms_real[$i]}")" "${output:0:100}" | tee -a "$LOGFILE"
     [ "$color_red" -ne 0 ] && echo -n -e "\033[39m"
   done
   echo "$LINE" | tee -a "$LOGFILE"
