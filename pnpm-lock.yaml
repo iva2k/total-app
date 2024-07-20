@@ -27,8 +27,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       bulma:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^1.0.1
+        version: 1.0.1
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -2098,8 +2098,8 @@ packages:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
     engines: {node: '>=6'}
 
-  bulma@0.9.4:
-    resolution: {integrity: sha512-86FlT5+1GrsgKbPLRRY7cGDg8fsJiP/jzTqXXVqiUZZ2aZT8uemEOHlU1CDU+TxklPEZ11HZNNWclRBBecP4CQ==}
+  bulma@1.0.1:
+    resolution: {integrity: sha512-+xv/BIAEQakHkR0QVz+s+RjNqfC53Mx9ZYexyaFNFo9wx5i76HXArNdwW7bccyJxa5mgV/T5DcVGqsAB19nBJQ==}
 
   cac@6.7.14:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
@@ -6812,7 +6812,7 @@ snapshots:
 
   builtin-modules@3.3.0: {}
 
-  bulma@0.9.4: {}
+  bulma@1.0.1: {}
 
   cac@6.7.14: {}
 

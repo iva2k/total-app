@@ -6,8 +6,7 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
-  // import '../../node_modules/bulma/css/bulma.min.css';
-  // import '../../node_modules/bulma/css/bulma.css'; // Moved to style.css
+  // import "bulma/css/bulma.css";  // Moved to style.css
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
@@ -73,7 +72,7 @@
 
   <Header --corner-right-width="8em">
     {#snippet content()}
-      <DarkMode htmlDarkClass="dark">
+      <DarkMode htmlDarkClass="theme-dark">
         {#snippet content(data)}
           <label>
             <input
