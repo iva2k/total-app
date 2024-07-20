@@ -57,13 +57,14 @@
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
           <label>
-            {data.isDarkMode ? BRIGHT_ENTITY : CRESCENT_MOON_ENTITY}
             <input
               id="cb1"
               type="checkbox"
               bind:checked={data.isDarkMode}
               onchange={data.onChange}
+              aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
             />
+            {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
           </label>
         {/snippet}
       </DarkMode>
