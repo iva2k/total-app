@@ -27,8 +27,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       '@shoelace-style/shoelace':
-        specifier: ^2.13.1
-        version: 2.13.1(@types/react@18.2.48)
+        specifier: ^2.15.1
+        version: 2.15.1(@types/react@18.2.48)
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -1484,8 +1484,8 @@ packages:
   '@shoelace-style/localize@3.1.2':
     resolution: {integrity: sha512-Hf45HeO+vdQblabpyZOTxJ4ZeZsmIUYXXPmoYrrR4OJ5OKxL+bhMz5mK8JXgl7HsoEowfz7+e248UGi861de9Q==}
 
-  '@shoelace-style/shoelace@2.13.1':
-    resolution: {integrity: sha512-QMMvq7xgKzZR5+HEgZvv82V1yDKxucsW3XTbF+Tl5ckkzyXlKtKdY1k0eK9EnWPK482JXjoKeeiBJnrx+h6i4Q==}
+  '@shoelace-style/shoelace@2.15.1':
+    resolution: {integrity: sha512-3ecUw8gRwOtcZQ8kWWkjk4FTfObYQ/XIl3aRhxprESoOYV1cYhloYPsmQY38UoL3+pwJiZb5+LzX0l3u3Zl0GA==}
     engines: {node: '>=14.17.0'}
 
   '@sindresorhus/merge-streams@1.0.0':
@@ -6136,7 +6136,7 @@ snapshots:
 
   '@shoelace-style/localize@3.1.2': {}
 
-  '@shoelace-style/shoelace@2.13.1(@types/react@18.2.48)':
+  '@shoelace-style/shoelace@2.15.1(@types/react@18.2.48)':
     dependencies:
       '@ctrl/tinycolor': 4.0.3
       '@floating-ui/dom': 1.6.1
