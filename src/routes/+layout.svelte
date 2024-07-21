@@ -70,7 +70,7 @@
         {#snippet content(data)}
           <sl-switch
             checked={data.isDarkMode}
-            onsl-change={(e) => {
+            onsl-change={(e: Event) => {
               data.onChange(e, !(data.isDarkMode ?? false));
               return;
             }}
