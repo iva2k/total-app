@@ -1064,3 +1064,5 @@ file: node_modules/agnostic-svelte/components/Divider/Divider.svelte:129:22
                                      ^
  130 |
 ```
+
+Note: Going back to svelte@5.0.0-next.41 is not possible due to number of breaking changes.
