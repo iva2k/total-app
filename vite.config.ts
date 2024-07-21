@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { optimizeCss } from 'carbon-preprocess-svelte';
 import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 import type { UserConfig, Plugin } from 'vite';
@@ -20,6 +21,7 @@ export default defineConfig(async ({ mode }) => {
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
     replace(replaceOptions) as Plugin, // Convert rollup.Plugin into vite.Plugin
+    optimizeCss(),
 
     // copy is needed for vite to work in dev (especially under "tauri:dev")
     // All copy commands are duplicated in package.json:scripts.svelte:prebuild, for dev to work correctly.
@@ -42,10 +44,22 @@ export default defineConfig(async ({ mode }) => {
     },
     plugins,
     optimizeDeps: {
-      // carbon-components-svelte is large, prebundle
-      // include: ['carbon-components-svelte'],
-      // carbon-icons-svelte is huge and takes 12s to prebundle, better use deep imports for the icons you need
-      // exclude: ['carbon-icons-svelte']
+      // To prebundle:
+      include: [
+        // 'carbon-components-svelte', // carbon-components-svelte is large, good to prebundle (if in `include`, remove from `exclude`)
+      ],
+
+      // Optional: since we use the `optimizeImports` preprocessor, we can exclude
+      // `carbon-components-svelte` and `carbon-pictograms-svelte` from the
+      // `optimizeDeps` configuration for even faster cold starts.
+      exclude: [
+        // Obsoltete: '@carbon/telemetry', // Disable IBM telemetry (not sure if this has any effect, see .env.EXAMPLE file)
+        '@ibm/telemetry-js', // Disable IBM telemetry (also see .env.EXAMPLE file)
+        'carbon-components-svelte',
+        'carbon-pictograms-svelte',
+        // carbon-icons-svelte is huge and takes 12s to prebundle, better use deep imports for the icons you need
+        'carbon-icons-svelte'
+      ]
     },
     test: {
       include: ['src/**/*.{test,spec}.{js,ts}']

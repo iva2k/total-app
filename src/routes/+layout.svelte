@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { onMount, setContext, type Snippet } from 'svelte';
+  import { onMount, setContext, type Snippet, type ComponentProps } from 'svelte';
+
+  import { Theme, RadioButtonGroup, RadioButton } from 'carbon-components-svelte';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
@@ -47,9 +49,24 @@
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
+
+  const themes = ['white', 'g10', 'g80', 'g90', 'g100'];
+  // See <https://github.com/carbon-design-system/carbon-components-svelte/issues/1910>
+  // let theme: ComponentProps<Theme>['theme'] = 'g90' as const;
+  let theme = $state<ComponentProps<Theme>['theme']>('g90' as const);
+  let theme_css = $derived(
+    `/vendor/carbon-components-svelte/css/${theme}.css` // see `assets.ts`
+    // All themes: "carbon-components-svelte/css/all.css"
+    // From CDN: `https://unpkg.com/carbon-components-svelte/css/${theme}.css`
+  );
 </script>
 
+<svelte:head>
+  <link rel="stylesheet" href={theme_css} />
+</svelte:head>
+
 <div class="app">
+  <Theme bind:theme persist persistKey="__carbon-theme" />
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
   <Header --corner-right-width="8em">
@@ -63,12 +80,33 @@
               checked={data.isDarkMode}
               onchange={(e) => {
                 data.onChange(e, !(data.isDarkMode ?? false));
+                theme = (data.isDarkMode ?? false) ? 'g90' : 'g10';
                 return;
               }}
               aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
             />
             {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
           </label>
+
+          <RadioButtonGroup
+            legendText="Carbon theme"
+            bind:selected={theme}
+            onchange={(e) => {
+              if (theme) {
+                // const theme1 = theme;
+                if (['white', 'g10'].includes(theme)) {
+                  data.onChange(e, false);
+                } else {
+                  data.onChange(e, true);
+                }
+                // theme = theme1;
+              }
+            }}
+          >
+            {#each themes as value}
+              <RadioButton labelText={value} {value} />
+            {/each}
+          </RadioButtonGroup>
         {/snippet}
       </DarkMode>
     {/snippet}

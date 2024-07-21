@@ -112,17 +112,17 @@ importers:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.39)
       carbon-components-svelte:
-        specifier: ^0.82.8
-        version: 0.82.8
+        specifier: ^0.85.0
+        version: 0.85.0
       carbon-icons-svelte:
-        specifier: ^12.4.2
-        version: 12.4.2
-      carbon-pictograms-svelte:
         specifier: ^12.10.0
         version: 12.10.0
+      carbon-pictograms-svelte:
+        specifier: ^12.11.0
+        version: 12.11.0
       carbon-preprocess-svelte:
-        specifier: ^0.10.0
-        version: 0.10.0(@babel/core@7.24.9)(postcss-load-config@5.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@5.0.0-next.190)
+        specifier: ^0.11.3
+        version: 0.11.3
       comment-json:
         specifier: ^4.2.4
         version: 4.2.4
@@ -1182,6 +1182,10 @@ packages:
   '@iarna/toml@2.2.5':
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
 
+  '@ibm/telemetry-js@1.6.0':
+    resolution: {integrity: sha512-XXdsXhoZwKaJ1/24w/uCqx/YeDQeTu8SAl+7bHQxn62yiFUQ6/D20HhpQVdlG9/Jpv3nYJHFiDH0vGkQbXNFWg==}
+    hasBin: true
+
   '@ionic/cli-framework-output@2.2.8':
     resolution: {integrity: sha512-TshtaFQsovB4NWRBydbNFawql6yul7d5bMiW1WYYf17hd99V6xdDdk3vtF51bw6sLkxON3bDQpWsnUc9/hVo3g==}
     engines: {node: '>=16.0.0'}
@@ -2127,17 +2131,17 @@ packages:
   caniuse-lite@1.0.30001642:
     resolution: {integrity: sha512-3XQ0DoRgLijXJErLSl+bLnJ+Et4KqV1PY6JJBGAFlsNsz31zeAIncyeZfLCabHK/jtSh+671RM9YMldxjUPZtA==}
 
-  carbon-components-svelte@0.82.8:
-    resolution: {integrity: sha512-fl2pkdD7DGtu9IBY0QsJLDWv5XsktssyH2I5EpCRby53jVoafGcatxP/jIBy3fM3ahyOYKtXam8//1TQz2GJ4g==}
+  carbon-components-svelte@0.85.0:
+    resolution: {integrity: sha512-inJs4RE7ubiOafuiDkUkiV/np8ab63nzDNp+x2k+7kUhewtrYNTTyMHsMM/y2eQS042riXLzAxNsqF7MXm+kfA==}
 
-  carbon-icons-svelte@12.4.2:
-    resolution: {integrity: sha512-NSGcRkbKkJvkfEatHlNh2Gn0pyBGlKkd828kH5HYMh+cwJQLtaAabCT+TcykL4DnSHUKJiXTw7H1CUN5tlNJKg==}
+  carbon-icons-svelte@12.10.0:
+    resolution: {integrity: sha512-GOPRBVm3klnaLksVFRvECKOvAXpdjF5FBKo/knQ/WG3LTehg6zvVButW+MdYZtxrtpg8Iqt95BRDmGBimiweWA==}
 
-  carbon-pictograms-svelte@12.10.0:
-    resolution: {integrity: sha512-DPt6HRn7J8/vXTwIhtNq4VLfftS9BGeWxR1aJjHOzPkHBSooBy7SeUQK1BGJSIb/X5x3Plemq6TSBMlzvQdpbA==}
+  carbon-pictograms-svelte@12.11.0:
+    resolution: {integrity: sha512-JWu/wcaq2nCWvre6FACGk2mXv1yEUTSoPfX+ioRpZlsDY4pFvCQOep8ozOLh/zJ1682AzkLbqv24S22fkKWDvQ==}
 
-  carbon-preprocess-svelte@0.10.0:
-    resolution: {integrity: sha512-jsmVvLcCKuxyoEkyRXvBux4JdatglTuqlDt95TiXiXmOS4XCcrHYSNiBzJ9vsOHpQIaRy8lGQxx6mh6G1lr6FQ==}
+  carbon-preprocess-svelte@0.11.3:
+    resolution: {integrity: sha512-gzzXNFUCrhYUNWxcuPRACWzDw/1CyyEUMrovXuS5jOTxmUC+m6XlElqbW8BR8+dznzFbwH/8dTfTuCbcixI3/A==}
 
   chai@5.1.1:
     resolution: {integrity: sha512-pT1ZgP8rPNqUgieVaEY+ryQr6Q4HXNg8Ei9UnLUrjN4IA7dvQC5JB+/kxVcPNDHyBcc/26CXPkbNzq3qwrOEKA==}
@@ -2197,10 +2201,6 @@ packages:
   commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
-
-  commander@8.3.0:
-    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
-    engines: {node: '>= 12'}
 
   commander@9.5.0:
     resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
@@ -3665,6 +3665,12 @@ packages:
     peerDependencies:
       postcss: ^8.0.0
 
+  postcss-discard-empty@6.0.3:
+    resolution: {integrity: sha512-znyno9cHKQsK6PtxL5D19Fj9uwSzC2mB74cpT66fhgOadEUPyXFkbgwm5tvc3bt3NAy8ltE5MrghxovZRVnOjQ==}
+    engines: {node: ^14 || ^16 || >=18.0}
+    peerDependencies:
+      postcss: ^8.4.31
+
   postcss-html@1.7.0:
     resolution: {integrity: sha512-MfcMpSUIaR/nNgeVS8AyvyDugXlADjN9AcV7e5rDfrF1wduIAGSkL4q2+wgrZgA3sHVAHLDO9FuauHhZYW2nBw==}
     engines: {node: ^12 || >=14}
@@ -3775,10 +3781,6 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
-
-  purgecss@4.1.3:
-    resolution: {integrity: sha512-99cKy4s+VZoXnPxaoM23e5ABcP851nC2y2GROkkjS8eJaJtlciGavd7iYAw2V84WeBqggZ12l8ef44G99HmTaw==}
-    hasBin: true
 
   qr-scanner@1.4.2:
     resolution: {integrity: sha512-kV1yQUe2FENvn59tMZW6mOVfpq9mGxGf8l6+EGaXUOd4RBOLg7tRC83OrirM5AtDvZRpdjdlXURsHreAOSPOUw==}
@@ -4443,11 +4445,6 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
-
-  typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
 
   typescript@5.5.3:
     resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
@@ -5750,6 +5747,8 @@ snapshots:
 
   '@iarna/toml@2.2.5': {}
 
+  '@ibm/telemetry-js@1.6.0': {}
+
   '@ionic/cli-framework-output@2.2.8':
     dependencies:
       '@ionic/utils-terminal': 2.3.5
@@ -6846,30 +6845,21 @@ snapshots:
 
   caniuse-lite@1.0.30001642: {}
 
-  carbon-components-svelte@0.82.8:
+  carbon-components-svelte@0.85.0:
     dependencies:
+      '@ibm/telemetry-js': 1.6.0
       flatpickr: 4.6.9
 
-  carbon-icons-svelte@12.4.2: {}
+  carbon-icons-svelte@12.10.0: {}
 
-  carbon-pictograms-svelte@12.10.0: {}
+  carbon-pictograms-svelte@12.11.0: {}
 
-  carbon-preprocess-svelte@0.10.0(@babel/core@7.24.9)(postcss-load-config@5.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@5.0.0-next.190):
+  carbon-preprocess-svelte@0.11.3:
     dependencies:
-      purgecss: 4.1.3
-      svelte-preprocess: 5.1.3(@babel/core@7.24.9)(postcss-load-config@5.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@5.0.0-next.190)(typescript@4.9.5)
-      typescript: 4.9.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
-      - svelte
+      estree-walker: 2.0.2
+      magic-string: 0.30.10
+      postcss: 8.4.39
+      postcss-discard-empty: 6.0.3(postcss@8.4.39)
 
   chai@5.1.1:
     dependencies:
@@ -6935,8 +6925,6 @@ snapshots:
   commander@2.20.3: {}
 
   commander@7.2.0: {}
-
-  commander@8.3.0: {}
 
   commander@9.5.0: {}
 
@@ -8439,6 +8427,10 @@ snapshots:
     transitivePeerDependencies:
       - jiti
 
+  postcss-discard-empty@6.0.3(postcss@8.4.39):
+    dependencies:
+      postcss: 8.4.39
+
   postcss-html@1.7.0:
     dependencies:
       htmlparser2: 8.0.2
@@ -8530,13 +8522,6 @@ snapshots:
       sisteransi: 1.0.5
 
   punycode@2.3.1: {}
-
-  purgecss@4.1.3:
-    dependencies:
-      commander: 8.3.0
-      glob: 7.2.3
-      postcss: 8.4.39
-      postcss-selector-parser: 6.0.15
 
   qr-scanner@1.4.2:
     dependencies:
@@ -9039,26 +9024,11 @@ snapshots:
     dependencies:
       svelte: 5.0.0-next.190
 
-  svelte-preprocess@5.1.3(@babel/core@7.24.9)(postcss-load-config@5.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@5.0.0-next.190)(typescript@4.9.5):
-    dependencies:
-      '@types/pug': 2.0.10
-      detect-indent: 6.1.0
-      magic-string: 0.30.5
-      sorcery: 0.11.0
-      strip-indent: 3.0.0
-      svelte: 5.0.0-next.190
-    optionalDependencies:
-      '@babel/core': 7.24.9
-      postcss: 8.4.39
-      postcss-load-config: 5.0.2(postcss@8.4.39)
-      sass: 1.77.8
-      typescript: 4.9.5
-
   svelte-preprocess@5.1.3(@babel/core@7.24.9)(postcss-load-config@5.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@5.0.0-next.190)(typescript@5.5.3):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
-      magic-string: 0.30.5
+      magic-string: 0.30.10
       sorcery: 0.11.0
       strip-indent: 3.0.0
       svelte: 5.0.0-next.190
@@ -9279,8 +9249,6 @@ snapshots:
     transitivePeerDependencies:
       - eslint
       - supports-color
-
-  typescript@4.9.5: {}
 
   typescript@5.5.3: {}
 

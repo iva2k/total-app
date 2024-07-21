@@ -4,7 +4,7 @@ import netlify from '@sveltejs/adapter-netlify';
 import vercel from '@sveltejs/adapter-vercel';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-// import { optimizeImports } from 'carbon-preprocess-svelte';
+import { optimizeImports } from 'carbon-preprocess-svelte';
 import { loadEnv } from 'vite';
 import { pwaConfigurationFnc } from './pwa-configuration.js';
 
@@ -24,8 +24,8 @@ const config = {
       preserve: ['ld+json'], // For SEO header meta tags
       postcss: true,
       scss: { includePaths: ['src', 'node_modules'] }
-    })
-    //, optimizeImports()
+    }),
+    optimizeImports()
   ],
 
   prerender: {

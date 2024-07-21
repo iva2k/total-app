@@ -1051,16 +1051,12 @@ If the width of your app's content doesn't match the width of the viewport, your
 pnpm install -D carbon-components-svelte carbon-icons-svelte carbon-pictograms-svelte carbon-preprocess-svelte
 ```
 
-Add optimizeImports preprocessor from carbon-preprocess-svelte to `svelte.config.js` (see source in repo).
+Add `optimizeImports` preprocessor from `carbon-preprocess-svelte` to `svelte.config.js` (see source in repo).
 
-To get started on custom themes, see <https://github.com/carbon-design-system/carbon-components-svelte/issues/713>.
+To get started on custom themes using scss, see <https://github.com/carbon-design-system/carbon-components-svelte/issues/713>.
 
-For dynamic theme with SSR, see <https://github.com/carbon-design-system/carbon-components-svelte/issues/651>.
-
-Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source in repo).
+Insert code that loads the framework and adds theme and dark mode toggle into `src/routes/+layout.svelte` (see source in repo).
 
 Add example page `src/routes/carbon/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
-### Issue - carbon-components-svelte (and possibly other packages) is not compatible with Svelte 5
-
-Things break miserably. As of now, ui-carbon branch is useless.
+Add `CARBON_TELEMETRY_DISABLED=1` to your ".env*" files and CI/CD evironment variables if desired. IBM packages, such as `carbon-components-svelte`, by default collect anonymous usage data, if telemetry is not disabled.
