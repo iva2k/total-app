@@ -217,7 +217,7 @@ Note that there are 2 branches for Isolated component development - Histoire and
 | [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⭘ |  |
 | [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | ⭘ | ⭘ |  |
 | [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | ⬤ | ⬤ | |
-| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ |  |
+| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ | [[svelteuidev#491]](https://github.com/svelteuidev/svelteui/issues/491) |
 | [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
 | [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | ⬤ | | (Requires TailwindCSS) |
 | | [svelte-ux](https://svelte-ux.techniq.dev) | | | (Requires TailwindCSS) |
