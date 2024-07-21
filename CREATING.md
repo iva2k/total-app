@@ -1059,8 +1059,8 @@ Add example page `src/routes/agnostic/+page.svelte` and add route to `src/lib/co
 Declaring or accessing a prop starting with `$$` is illegal (they are reserved for Svelte internals)
 file: node_modules/agnostic-svelte/components/Divider/Divider.svelte:129:22
  127 |    export let size = "";
- 128 |  
+ 128 |
  129 |    let slots = $$props.$$slots;
                                      ^
- 130 |  
+ 130 |
 ```
