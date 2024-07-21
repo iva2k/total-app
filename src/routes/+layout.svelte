@@ -20,6 +20,7 @@
   import type { LayoutContext } from '$lib/types';
 
   let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let isDarkMode = $state(false);
 
   onMount(async () => {
     await loadIonicPWAElements(window);
@@ -77,6 +78,7 @@
                 checked={data.isDarkMode}
                 onchange={(e) => {
                   data.onChange(e, !(data.isDarkMode ?? false));
+                  isDarkMode = data.isDarkMode; // Mirror in local state for SvelteUIProvider.themeObserver
                   return;
                 }}
               />

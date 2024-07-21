@@ -14,6 +14,16 @@ const { pwaConfiguration } = await pwaConfigurationFnc(env);
 import websiteFnc from './src/lib/config/websiteFnc.js';
 const { websiteUrl } = websiteFnc(process.env);
 
+function isWebComponentSvelte(code) {
+  const svelteOptionsIdx = code.indexOf('<svelte:options');
+  if (svelteOptionsIdx < 0) {
+    return false;
+  }
+  const tagOptionIdx = code.indexOf('tag:', svelteOptionsIdx);
+  const svelteOptionsEndIdx = code.indexOf('>', svelteOptionsIdx);
+  return tagOptionIdx > svelteOptionsIdx && tagOptionIdx < svelteOptionsEndIdx;
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
@@ -72,6 +82,14 @@ const config = {
     // exclude: ['./node_modules/**']
     // experimental options
     // experimental: {}
+    dynamicCompileOptions({ code }) {
+      // See https://github.com/sveltejs/vite-plugin-svelte/issues/270#issuecomment-1033190138
+      if (isWebComponentSvelte(code)) {
+        return {
+          customElement: true
+        };
+      }
+    }
   }
 };
 

@@ -63,13 +63,13 @@
     "@capacitor/ios": "^6.1.1",
     "@fontsource/fira-mono": "^5.0.13",
     "@ionic/pwa-elements": "^3.3.0",
-    "@svelteuidev/composables": "^0.15.4",
-    "@svelteuidev/core": "^0.15.4",
-    "@svelteuidev/dates": "^0.15.4",
-    "@svelteuidev/motion": "^0.15.4",
-    "@svelteuidev/preprocessors": "^0.15.4",
-    "@svelteuidev/prism": "^0.15.4",
-    "dayjs": "^1.11.10",
+    "@svelteuidev/composables": "^0.15.7",
+    "@svelteuidev/core": "^0.15.7",
+    "@svelteuidev/dates": "^0.15.7",
+    "@svelteuidev/motion": "^0.15.7",
+    "@svelteuidev/preprocessors": "^0.15.7",
+    "@svelteuidev/prism": "^0.15.7",
+    "dayjs": "^1.11.12",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
@@ -162,7 +162,7 @@
   "_id": "total-app@0.0.2",
   "pnpm": {
     "patchedDependencies": {
-      "@svelteuidev/core@0.15.4": "patches/@svelteuidev__core@0.15.4.patch"
+      "@svelteuidev/core@0.15.7": "patches/@svelteuidev__core@0.15.7.patch"
     }
   }
 }

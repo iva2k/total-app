@@ -5,9 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@svelteuidev/core@0.15.4':
-    hash: gieqbsx3lj6etykle4r4ljzy3y
-    path: patches/@svelteuidev__core@0.15.4.patch
+  '@svelteuidev/core@0.15.7':
+    hash: jkoqgdci24lxgq4immayodzr2y
+    path: patches/@svelteuidev__core@0.15.7.patch
 
 importers:
 
@@ -32,26 +32,26 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       '@svelteuidev/composables':
-        specifier: ^0.15.4
-        version: 0.15.4(svelte@5.0.0-next.190)
+        specifier: ^0.15.7
+        version: 0.15.7(svelte@5.0.0-next.190)
       '@svelteuidev/core':
-        specifier: ^0.15.4
-        version: 0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+        specifier: ^0.15.7
+        version: 0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       '@svelteuidev/dates':
-        specifier: ^0.15.4
-        version: 0.15.4(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+        specifier: ^0.15.7
+        version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       '@svelteuidev/motion':
-        specifier: ^0.15.4
-        version: 0.15.4(svelte@5.0.0-next.190)
+        specifier: ^0.15.7
+        version: 0.15.7(svelte@5.0.0-next.190)
       '@svelteuidev/preprocessors':
-        specifier: ^0.15.4
-        version: 0.15.4(svelte@5.0.0-next.190)
+        specifier: ^0.15.7
+        version: 0.15.7(svelte@5.0.0-next.190)
       '@svelteuidev/prism':
-        specifier: ^0.15.4
-        version: 0.15.4(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+        specifier: ^0.15.7
+        version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       dayjs:
-        specifier: ^1.11.10
-        version: 1.11.10
+        specifier: ^1.11.12
+        version: 1.11.12
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -1543,39 +1543,39 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       vite: ^5.0.0
 
-  '@svelteuidev/composables@0.15.4':
-    resolution: {integrity: sha512-GN7ZiUOCptgeLXs2HGcg6iuxo4aVeiV02tynofFNeVAFKSHX10FXhN1kWx8cDDJlW3/BjEP2qXa2qn4XrYNqTA==}
+  '@svelteuidev/composables@0.15.7':
+    resolution: {integrity: sha512-tVA+0bNtsYsJqlpNx9ZArzHFBJYfoKM+nspkv+wzOx40HsCg33MutqNexOvrMYSj5/tSxxBefLQKdwNumErF6Q==}
     peerDependencies:
       svelte: '>=3.55.0'
 
-  '@svelteuidev/core@0.15.4':
-    resolution: {integrity: sha512-TwGlFg3mlIMFKy+gm0+MzVF5DOU22coi4cT0wtcKCfV5oGzAkasAxhjLm+ZtUBb52b/lHgVDGv7bjmN7I17UUA==}
+  '@svelteuidev/core@0.15.7':
+    resolution: {integrity: sha512-lTUjQdGhiNK5as3mBZgsixNsgH/RcwhGdSQpc7wNEASkgJSyPsv2hiak/m4a78pDJ3owrRAWbURu17hE9eF/tw==}
     peerDependencies:
-      '@svelteuidev/composables': 0.15.4
+      '@svelteuidev/composables': 0.15.7
       svelte: '>=3.55.0'
 
-  '@svelteuidev/dates@0.15.4':
-    resolution: {integrity: sha512-OLVz623oJ63JJyQv2b4MLXYmdp293F76NNcSreqJmdihbGm2TZEgwfbnWnv6rIhxW8e7iw648oRDt27fi1Rb8Q==}
+  '@svelteuidev/dates@0.15.7':
+    resolution: {integrity: sha512-EVMQ1tklbq3Az+ja8cOuiB6BZFoqkW6b4C42QJMhoXSUVcBS3bP5jccBZ5mgGTeiEG+jaxr2RVuxzBHr0nw3qQ==}
     peerDependencies:
-      '@svelteuidev/composables': 0.15.4
-      '@svelteuidev/core': 0.15.4
+      '@svelteuidev/composables': 0.15.7
+      '@svelteuidev/core': 0.15.7
       svelte: '>=3.55.0'
 
-  '@svelteuidev/motion@0.15.4':
-    resolution: {integrity: sha512-Q49C1HCsEUWOswcYEdz2z7hREKQsN9QJOcj/6NURNNijXbQezd8C2VI+H7eSKFk3W9FjwtKlEhe7/GWHfH2oPg==}
-    peerDependencies:
-      svelte: '>=3.55.0'
-
-  '@svelteuidev/preprocessors@0.15.4':
-    resolution: {integrity: sha512-Y+D0A6CXRfwp0NRSO7t/mTJQ1H1C72QhxAMIhRJVEXAHmenozILoWOo22lbPqheCU5R/bghZF1onc8a7itseCw==}
+  '@svelteuidev/motion@0.15.7':
+    resolution: {integrity: sha512-95JVD0e7m+MoTK3d6P6g0Z3d9ZR3l+NFBR/YnmFXekpMQmSR8Qq5Oluyfpir4uyoxl1g7T3TCrOQg0dbtWKiXw==}
     peerDependencies:
       svelte: '>=3.55.0'
 
-  '@svelteuidev/prism@0.15.4':
-    resolution: {integrity: sha512-xfE+9uCFZaclSO/OOmVznffR91iRvr3UkhR0pBwDzOEE/70eUecPdoeypCxAGLJTkG/ZEBj+ws+aipvV5gvQFg==}
+  '@svelteuidev/preprocessors@0.15.7':
+    resolution: {integrity: sha512-VdLV7IP+PmdBRaZguCZ+HvxEowIm+b65s7hnj4qHlHDsEEufzL/u+wZuhHHhk77LqaBpde61AWMYj5RAMdZ8lw==}
     peerDependencies:
-      '@svelteuidev/composables': 0.15.4
-      '@svelteuidev/core': 0.15.4
+      svelte: '>=3.55.0'
+
+  '@svelteuidev/prism@0.15.7':
+    resolution: {integrity: sha512-iYrG7OTeZqkxm6LmOchMFEZ0dXimOqP7MMIY4CuFTOgEK1sajOp+BV0E88fEs3VFOShenaUQfk6BRSiUiZcBeQ==}
+    peerDependencies:
+      '@svelteuidev/composables': 0.15.7
+      '@svelteuidev/core': 0.15.7
       svelte: '>=3.55.0'
 
   '@tauri-apps/api@2.0.0-alpha.13':
@@ -2342,8 +2342,8 @@ packages:
   dayjs@1.11.1:
     resolution: {integrity: sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==}
 
-  dayjs@1.11.10:
-    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
+  dayjs@1.11.12:
+    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -6222,36 +6222,36 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190)':
+  '@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190)':
     dependencies:
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/core@0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
+  '@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
     dependencies:
       '@floating-ui/dom': 1.2.8
       '@stitches/core': 1.2.8
-      '@svelteuidev/composables': 0.15.4(svelte@5.0.0-next.190)
+      '@svelteuidev/composables': 0.15.7(svelte@5.0.0-next.190)
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/dates@0.15.4(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
+  '@svelteuidev/dates@0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
     dependencies:
-      '@svelteuidev/composables': 0.15.4(svelte@5.0.0-next.190)
-      '@svelteuidev/core': 0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+      '@svelteuidev/composables': 0.15.7(svelte@5.0.0-next.190)
+      '@svelteuidev/core': 0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       dayjs: 1.11.1
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/motion@0.15.4(svelte@5.0.0-next.190)':
+  '@svelteuidev/motion@0.15.7(svelte@5.0.0-next.190)':
     dependencies:
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/preprocessors@0.15.4(svelte@5.0.0-next.190)':
+  '@svelteuidev/preprocessors@0.15.7(svelte@5.0.0-next.190)':
     dependencies:
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/prism@0.15.4(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
+  '@svelteuidev/prism@0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
     dependencies:
-      '@svelteuidev/composables': 0.15.4(svelte@5.0.0-next.190)
-      '@svelteuidev/core': 0.15.4(patch_hash=gieqbsx3lj6etykle4r4ljzy3y)(@svelteuidev/composables@0.15.4(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+      '@svelteuidev/composables': 0.15.7(svelte@5.0.0-next.190)
+      '@svelteuidev/core': 0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       prism-svelte: 0.5.0
       prismjs: 1.28.0
       svelte: 5.0.0-next.190
@@ -7096,7 +7096,7 @@ snapshots:
 
   dayjs@1.11.1: {}
 
-  dayjs@1.11.10: {}
+  dayjs@1.11.12: {}
 
   debug@3.2.7:
     dependencies:
