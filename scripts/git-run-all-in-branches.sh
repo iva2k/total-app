@@ -206,6 +206,10 @@ function parse_arguments() {
   #   usage
   #   exit 1
   # fi
+
+  # The rest are positional arguments (shift the processed options)
+  # shift $((OPTIND-1))
+  # positional_args=("$@")  
 }
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
@@ -226,7 +230,7 @@ function run_one() {
   i="$1"
   TARGET_BRANCH="${TARGET_BRANCHES[$i]}"
   LOGFILE_I="$LOGFILE.$TARGET_BRANCH"
-  echo "${SEP2}" | tee -a "$LOGFILE"
+  echo "${SEP2}$TARGET_BRANCH " | tee -a "$LOGFILE"
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: run_one() i=$i TARGET_BRANCH=$TARGET_BRANCH LOGFILE_I=$LOGFILE_I"
   save_state  ;# checkpoint
 
