@@ -42,6 +42,7 @@ export TARGET_BRANCHES=(
   "main"
   "storybook"
   "ui-bulma"
+  "ui-carbon"
   "ui-shoelace"
   "ui-svelteui"
   "ui-tailwindcss"
@@ -50,7 +51,6 @@ export BROKEN_TARGET_BRANCHES=(
   "histoire"      # `pnpm story:build`: CompileError: The $ name is reserved, and cannot be used for variables and imports
   "ui-agnostic"   # `pnpm build`: CompileError: Declaring or accessing a prop starting with `$$` is illegal ($$props.$$slots)
   "ui-bootstrap"  # `pnpm check`: Error: Argument of type 'typeof Col' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
-  "ui-carbon"     # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory"
   "ui-framework7" # `pnpm build:base`: "Error: The 'swSrc' file can't be read. ENOENT: no such file or directory" - service worker build fails, probably due to all components not compatible with Svelte 5, buncho "ARIA role" issues, etc.
   "ui-konsta"     # `pnpm check`: Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
 )
