@@ -63,7 +63,8 @@
     "@capacitor/ios": "^6.1.1",
     "@fontsource/fira-mono": "^5.0.13",
     "@ionic/pwa-elements": "^3.3.0",
-    "qr-scanner": "^1.4.2"
+    "qr-scanner": "^1.4.2",
+    "svelte-ux": "^0.73.3"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.1.1",

@@ -1063,3 +1063,21 @@ Add "tailwindcss: {}," to `plugins` in `postcss.config.cjs` (see source in repo)
 Add tailwind to src/routes/styles.css (see source in repo).
 
 For dark mode to work in tailwind, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
+
+## Add UI : Svelte UX
+
+[Svelte UX](https://svelte-ux.techniq.dev/)
+
+First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailwind-css)). Then, install Svelte UX:
+
+```bash
+pnpm install svelte-ux
+```
+
+Modify `tailwind.config.cjs` file to use konsta (see source in repo).
+
+?? Insert `SvelteUIProvider` wrapper element from the framework into `src/routes/+layout.svelte` (see source in repo).
+
+Add example page `src/routes/svelteux/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
+
+For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
