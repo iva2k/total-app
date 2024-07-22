@@ -109,7 +109,7 @@
     "globals": "^15.8.0",
     "minimist": "^1.2.8",
     "object-hash": "^3.0.0",
-    "pnpm": "^9.5.0",
+    "pnpm": "^9.6.0",
     "postcss": "^8.4.39",
     "postcss-cli": "^11.0.0",
     "postcss-html": "^1.7.0",
@@ -145,10 +145,10 @@
     "workbox-routing": "^7.1.0",
     "workbox-window": "^7.1.0"
   },
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.6.0",
   "engines": {
     "npm": ">=7.0.0",
-    "pnpm": ">=8.14.0",
+    "pnpm": ">=9.0.0",
     "node": ">=20.0.0"
   },
   "type": "module",
