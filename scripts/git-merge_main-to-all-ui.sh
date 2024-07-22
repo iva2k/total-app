@@ -197,6 +197,10 @@ function parse_arguments() {
   #   usage
   #   exit 1
   # fi
+
+  # The rest are positional arguments (shift the processed options)
+  # shift $((OPTIND-1))
+  # positional_args=("$@")  
 }
 
 # alias decolor='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
@@ -274,7 +278,7 @@ function merge_to_one() {
   is_continue="$1"
   i="$2"
   TARGET_BRANCH="${TARGET_BRANCHES[$i]}"
-  echo "${SEP2}" | tee -a "$LOGFILE"
+  echo "${SEP2}$TARGET_BRANCH " | tee -a "$LOGFILE"
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: merge_to_one() is_continue=$is_continue i=$i TARGET_BRANCH=$TARGET_BRANCH"
   save_state  ;# checkpoint
 
