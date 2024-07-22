@@ -62,9 +62,9 @@
     "@capacitor/geolocation": "^6.0.0",
     "@capacitor/ios": "^6.1.1",
     "@fontsource/fira-mono": "^5.0.13",
-    "@fontsource/roboto": "^5.0.8",
+    "@fontsource/roboto": "^5.0.13",
     "@ionic/pwa-elements": "^3.3.0",
-    "konsta": "^3.1.2",
+    "konsta": "^3.1.3",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
