@@ -1061,4 +1061,4 @@ Insert code that loads the framework and adds theme and dark mode toggle into `s
 
 Add example page `src/routes/carbon/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
-Add `CARBON_TELEMETRY_DISABLED=1` to the local ".env*" files and to CI/CD evironment variables if desired. IBM packages, such as `carbon-components-svelte`, by default collect anonymous usage data, if telemetry is not disabled.
+Add `CARBON_TELEMETRY_DISABLED=1` to the local ".env\*" files and to CI/CD evironment variables if desired. IBM packages, such as `carbon-components-svelte`, by default collect anonymous usage data, if telemetry is not disabled.
