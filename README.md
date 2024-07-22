@@ -205,19 +205,20 @@ Currently there are no plans to implement additional frameworks (either listed b
 
 Note that there are 2 branches for Isolated component development - Histoire and Storybook, which can be merged into UI branch of choice for your app.
 
+<!-- markdownlint-disable MD033 -->
 <!-- prettier-ignore -->
 | Git Branch | UI Framework | Dark Theme | Svelte 5 | Notes [Legend: ⬤ Yes / ⭘ No ] |
 |-|-|:-:|:-:|-|
 | main                                      | (none) | ⬤ | ⬤ | |
-| [histoire](../../tree/histoire)           | (none) | ⬤ | | Isolated component development. `pnpm story:build` fails (w/Svelte 5). |
-| [storybook](../../tree/storybook)         | (none) | ⬤ | | Isolated component development. |
-| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | ⬤ | ⭘ | Worked with Svelte 5 next.41|
-| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | ⭘ | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch). `pnpm check` fails (w/Svelte 5). [[sveltestrap#79]](https://github.com/sveltestrap/sveltestrap/issues/79) |
-| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⬤ | ⬤ | |
-| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⭘ |  |
+| [histoire](../../tree/histoire)           | (none) | ⬤ | ⭘ | Isolated component development. |
+| [storybook](../../tree/storybook)         | (none) | ⬤ | ⬤ | Isolated component development. |
+| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | ⬤ | ⭘ |  |
+| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | ⭘ | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch).<br>⭘ [[sveltestrap#79]](https://github.com/sveltestrap/sveltestrap/issues/79) |
+| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⬤ | ⬤ |  |
+| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⬤ |  |
 | [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | ⭘ | ⭘ |  |
 | [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | ⬤ | ⬤ | |
-| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ | [[svelteuidev#491]](https://github.com/svelteuidev/svelteui/issues/491) |
+| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ | ⭘ [[svelteuidev#491]](https://github.com/svelteuidev/svelteui/issues/491) |
 | [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
 | [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | ⬤ | | (Requires TailwindCSS) |
 | | [svelte-ux](https://svelte-ux.techniq.dev) | | | (Requires TailwindCSS) |
@@ -234,6 +235,7 @@ Note that there are 2 branches for Isolated component development - Histoire and
 | | [Melt UI](https://melt-ui.com) |   | | |
 | | [Bits UI](https://bits-ui.com) |   | | |
 | | [shadcn-svelte](https://www.shadcn-svelte.com) |   | | |
+<!-- markdownlint-enable MD033 -->
 
 ## Conclusion
 
