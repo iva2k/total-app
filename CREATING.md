@@ -1068,13 +1068,13 @@ For dark mode to work in tailwind, add code into `src/lib/components/darkmode/Da
 
 [Konsta](https://konstaui.com/svelte)
 
-First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailwind-css)).
+First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailwind-css)). Then, install Konsta:
 
 ```bash
 pnpm i konsta @fontsource/roboto
 ```
 
-Modify `tailwindcss.config.cjs` file to use konsta (see source in repo).
+Modify `tailwind.config.cjs` file to use konsta (see source in repo).
 
 Add example page `src/routes/konsta/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
