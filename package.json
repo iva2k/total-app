@@ -62,7 +62,9 @@
     "@capacitor/geolocation": "^6.0.0",
     "@capacitor/ios": "^6.1.1",
     "@fontsource/fira-mono": "^5.0.13",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@ionic/pwa-elements": "^3.3.0",
+    "@mdi/js": "^7.4.47",
     "qr-scanner": "^1.4.2",
     "svelte-ux": "^0.73.3"
   },

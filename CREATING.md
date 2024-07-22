@@ -1074,6 +1074,12 @@ First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailw
 pnpm install svelte-ux
 ```
 
+Install some Icon libraries:
+
+```bash
+pnpm install @mdi/js @fortawesome/free-solid-svg-icons
+```
+
 Modify `tailwind.config.cjs` file to use konsta (see source in repo).
 
 ?? Insert `SvelteUIProvider` wrapper element from the framework into `src/routes/+layout.svelte` (see source in repo).
