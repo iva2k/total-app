@@ -221,20 +221,19 @@ Note that there are 2 branches for Isolated component development - Histoire and
 | [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ | ⭘ [[svelteuidev#491]](https://github.com/svelteuidev/svelteui/issues/491) |
 | [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | |   | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
 | [ui-konsta](../../tree/ui-konsta)     | [Konsta](https://konstaui.com/svelte) | ⬤ | | (Requires TailwindCSS) |
-| | [svelte-ux](https://svelte-ux.techniq.dev) | | | (Requires TailwindCSS) |
-| | [Skeleton](https://github.com/skeletonlabs/skeleton) | | | (Requires TailwindCSS) |
-| | [Flowbite-Svelte](https://flowbite-svelte.com) | |  | (Requires TailwindCSS) |
-|                                           | Smelte       |  |  | (Requires TailwindCSS) Material + TailwindCSS |
-|                                           | [Ionic](https://ionicframework.com) |   | | See good [example](https://github.com/Tommertom/svelte-ionic-app). Note: No SSR! |
-|                                           | [Chota](https://jenil.github.io/chota/) |   | | [SvelteChota](https://alexxnb.github.io/svelte-chota/why_chota) |
-| | [Svelterial](https://github.com/svelterialjs/svelterial) |   | | [Svelte Materialify](https://github.com/TheComputerM/svelte-materialify) is on a deprecation path. |
-| | [Tachyons](https://tachyons.io) |   | | |
-| | [Svelte Material](https://sveltematerialui.com/) |   | | |
-| | [Svelte Flat UI](https://svelteui.js.org/#/) |   | | |
-| | [Attractions](https://github.com/illright/attractions) |   | | |
-| | [Melt UI](https://melt-ui.com) |   | | |
-| | [Bits UI](https://bits-ui.com) |   | | |
-| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | | |
+| | [svelte-ux](https://svelte-ux.techniq.dev) | | ⬤ | (Requires TailwindCSS) |
+| | [Skeleton](https://github.com/skeletonlabs/skeleton) | | ⬤ | (Requires TailwindCSS)<br>⬤ Note [[skeleton#2640]](https://github.com/skeletonlabs/skeleton/discussions/2640) |
+| | [Flowbite-Svelte](https://flowbite-svelte.com) |  | ⬤ | (Requires TailwindCSS) |
+|                                           | [Smelte](https://smeltejs.com/) |  | ⭘ | (Requires TailwindCSS) Material + TailwindCSS |
+|                                           | [Ionic](https://ionicframework.com) |   | ⭘ | See good [example](https://github.com/Tommertom/svelte-ionic-app). Note: No SSR! |
+|                                           | [Chota](https://jenil.github.io/chota/) |   | ⭘ | [SvelteChota](https://alexxnb.github.io/svelte-chota/why_chota) |
+| | [Tachyons](https://tachyons.io) |   | ⭘ | |
+| | [Svelte Material](https://sveltematerialui.com/) |   | ⬤ | [`pnpm i -D @smui/\*\*@alpha`](https://github.com/hperrin/svelte-material-ui/tree/v8#readme) |
+| | [Svelte Flat UI](https://svelteui.js.org/#/) |   | ⭘ | |
+| | [Attractions](https://github.com/illright/attractions) |   | ⭘ | |
+| | [Melt UI](https://melt-ui.com) |   | ⭘ | ⭘ [[melt-ui#1001]](https://github.com/melt-ui/melt-ui/issues/1001) |
+| | [Bits UI](https://bits-ui.com) |   | ⭘ | ⭘ [[bits-ui#287]](https://github.com/huntabyte/bits-ui/issues/287) |
+| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | ⭘ | ⭘ [[shadcn-svelte#1182]](https://github.com/huntabyte/shadcn-svelte/pull/1182) |
 <!-- markdownlint-enable MD033 -->
 
 ## Conclusion
