@@ -1062,7 +1062,7 @@ Add "tailwindcss: {}," to `plugins` in `postcss.config.cjs` (see source in repo)
 
 Add tailwind to src/routes/styles.css (see source in repo).
 
-For dark mode to work in tailwind, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
+For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
 
 ## Add UI : Konsta
 
