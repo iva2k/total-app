@@ -1,6 +1,6 @@
 <script lang="ts">
-  // import { onMount, setContext, type Snippet } from 'svelte';
-  import { type Snippet } from 'svelte';
+  // import { onMount, setContext, type Snippet, type ComponentProps } from 'svelte';
+  import { type Snippet, type ComponentProps } from 'svelte';
 
   // import Favicon from '$lib/components/favicon/Favicon.svelte';
   // import Offline from '$lib/components/offline/Offline.svelte';
