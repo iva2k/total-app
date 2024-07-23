@@ -6,7 +6,8 @@
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
   const pages = [
-    { path: '/', title: 'Home' },
+    // { path: '/', title: 'Home' }, // '/' redirects to '/home'
+    { path: '/home', title: 'Home' },
     { path: '/about', title: 'About' },
     { path: '/sverdle', title: 'Sverdle' },
     { path: '/geolocation', title: 'Geolocation' },
