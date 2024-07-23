@@ -3,18 +3,18 @@
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
-  import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
-  import Header from '$lib/components/header/Header.svelte';
+  // import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
+  // import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
   import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
   import { Input } from '@sveltestrap/sveltestrap';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
-  import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
+  // import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
-  const { githubRepo } = website;
-  import GithubLogo from '$lib/images/github.svelte';
-  import svelte_logo from '$lib/images/svelte-logo.svg';
+  // const { githubRepo } = website;
+  // import GithubLogo from '$lib/images/github.svelte';
+  // import svelte_logo from '$lib/images/svelte-logo.svg';
 
   import type { LayoutData } from './$types';
   import type { LayoutContext } from '$lib/types';
@@ -63,97 +63,17 @@
   {/if}
 </svelte:head>
 
-<div class="app">
-  <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
+<!-- <div class="app"> -->
+<Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 
-  <Header --corner-right-width="8em">
-    {#snippet content()}
-      <DarkMode htmlDarkClass="dark">
-        {#snippet content(data)}
-          <Input
-            type="switch"
-            label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
-            checked={data.isDarkMode}
-            onchange={(e) => {
-              data.onChange(e, !(data.isDarkMode ?? false));
-              isDarkMode = data.isDarkMode; // For switching the stylesheet in <svelte:head>
-              return;
-            }}
-          />
-        {/snippet}
-      </DarkMode>
-    {/snippet}
-  </Header>
+<main>
+  {@render children()}
+</main>
 
-  <main>
-    {@render children()}
-  </main>
+<Offline />
 
-  <Offline />
-
-  <footer>
-    <p>
-      visit
-      <a href={githubRepo}>
-        <GithubLogo />
-        <span>App GitHub Repo</span>
-      </a>
-      for details | visit
-      <a href="https://kit.svelte.dev">
-        <img src={svelte_logo} alt="SvelteKit" aria-hidden="true" role="presentation" />
-        <span>kit.svelte.dev</span>
-      </a>
-      to learn SvelteKit
-    </p>
-  </footer>
-</div>
+<!-- </div> -->
 
 <style lang="scss">
-  .app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    width: 100%;
-    max-width: 64rem;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 12px;
-  }
-
-  footer a {
-    display: inline-block; /* Place link and image inline */
-    text-decoration: none; /* Remove default underline for links */
-    font-weight: bold;
-  }
-  footer a span {
-    margin-top: 10px; /* Adjust the margin as needed */
-  }
-
-  footer a :global(img),
-  footer a :global(svg) {
-    vertical-align: middle; /* Aligns image vertically with the text */
-    width: 2em;
-    height: 3em;
-    --fill_color: var(--color-text);
-  }
-
-  @media (min-width: 480px) {
-    footer {
-      padding: 12px 0;
-    }
-  }
+  /* Placeholder for styles */
 </style>
