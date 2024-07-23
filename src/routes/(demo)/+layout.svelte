@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { onMount, setContext, type Snippet } from 'svelte';
+  // import { onMount, setContext, type Snippet } from 'svelte';
+  import { type Snippet } from 'svelte';
 
-  import Favicon from '$lib/components/favicon/Favicon.svelte';
-  import Offline from '$lib/components/offline/Offline.svelte';
+  // import Favicon from '$lib/components/favicon/Favicon.svelte';
+  // import Offline from '$lib/components/offline/Offline.svelte';
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
   import 'agnostic-svelte/css/common.min.css';
   import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
-  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
+  // import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
@@ -16,15 +17,19 @@
   import GithubLogo from '$lib/images/github.svelte';
   import svelte_logo from '$lib/images/svelte-logo.svg';
 
-  import type { LayoutData } from './$types';
-  import type { LayoutContext } from '$lib/types';
+  // import type { LayoutData } from './$types';
+  // import type { LayoutContext } from '$lib/types';
 
-  let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let { children } = $props<{ children: Snippet }>();
 
+  /* DISABLED (see root +layout.svelte)
   onMount(async () => {
     await loadIonicPWAElements(window);
   });
+  */
 
+  /* DISABLED (see root +layout.svelte)
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
   // Use context to make ssrPathname available to child components
@@ -34,7 +39,9 @@
       return { ssrPathname };
     }
   });
+  */
 
+  /* DISABLED (see root +layout.svelte)
   // Favicon params:
   const pngFavicons = [
     { sizes: '32x32', href: '/favicon-32x32.png', imgSize: 32 },
@@ -49,10 +56,13 @@
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
+  */
 </script>
 
 <div class="app">
+  <!-- DISABLED (see root +layout.svelte)
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
+  -->
 
   <Header --corner-right-width="8em">
     {#snippet content()}
@@ -77,7 +87,9 @@
     {@render children()}
   </main>
 
+  <!-- DISABLED (see root +layout.svelte)
   <Offline />
+  -->
 
   <footer>
     <p>
