@@ -659,7 +659,7 @@ See sources - "src/components/darkmode/\*" and edits to "src/routes/+layout.svel
 
 Note: DarkMode toggles 'color-scheme' property on \<html\> tag between 'light' and 'dark'/.
 
-Add dark mode styles to "/src/routes/style.css" (see source).
+Add dark mode styles to "/src/routes/styles.css" (see source).
 
 ### Add Github and Svelte icons to Footer links
 
@@ -969,11 +969,12 @@ const preview: Preview = {
   ...
 ```
 
-The theme switch changes "class" and "color-scheme" attribute on the \<html\> element of component preview iframe. The actual theme should be provided in the app's style.css. To load the app styles, just import the CSS file in `.storybook/preview.ts`:
+The theme switch changes "class" and "color-scheme" attribute on the \<html\> element of component preview iframe. The actual theme should be provided in the app's styles.css. To load the app styles, just import the CSS file in `.storybook/preview.ts`:
 
 ```js
 // .storybook/preview.ts
-+ import '../src/routes/style.css';
++ import '../src/routes/styles.css';
++ import '../src/routes/(demo)/styles.css';
 ```
 
 ### Add @storybook/addon-a11y

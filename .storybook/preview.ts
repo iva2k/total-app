@@ -1,4 +1,5 @@
 import '../src/routes/styles.css';
+import '../src/routes/(demo)/styles.css';
 
 import type { Preview, SvelteRenderer as Renderer } from '@storybook/svelte';
 // import { themes } from '@storybook/theming';
