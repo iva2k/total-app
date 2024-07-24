@@ -237,15 +237,6 @@ Note that there are 2 branches for Isolated component development - Histoire and
 
 <!-- markdownlint-enable MD033 -->
 
-![Vercel](http://deploy-badge.vercel.app/vercel/total-app/?app=total-app&branch=main)
-
-![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=total-app&branch=storybook)
-
-[![Vercel](https://vercelbadge.vercel.app/api/iva2k/total-app)](https://vercel.com/iva2k/total-app)
-
-[![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-svelteux)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-svelteux)
-
-
 ## Conclusion
 
 This repository was initiated using early preview releases of Svelte 5. As Svelte 5 is still in the release candidate stage, there are some incompatibilities and broken features in both Svelte 5 and various UI framework packages used here. Some upstream packages are also lagging in updates, and many UI frameworks are not yet fully compatible with Svelte 5.
