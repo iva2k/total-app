@@ -207,35 +207,44 @@ Note that there are 2 branches for Isolated component development - Histoire and
 
 <!-- markdownlint-disable MD033 -->
 <!-- prettier-ignore -->
-| Git Branch | UI Framework | Dark Theme | Svelte 5 | Notes [Legend: ⬤ Yes / ⭘ No ] |
-|-|-|:-:|:-:|-|
-| main                                      | (none) | ⬤ | ⬤ | |
-| [histoire](../../tree/histoire)           | (none) | ⬤ | ⭘ | Isolated component development. |
-| [storybook](../../tree/storybook)         | (none) | ⬤ | ⬤ | Isolated component development. |
-| [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | ⬤ | ⭘ |  |
-| [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | ⭘ | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch).<br>⭘ [[sveltestrap#79]](https://github.com/sveltestrap/sveltestrap/issues/79) |
-| [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⬤ | ⬤ |  |
-| [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⬤ |  |
-| [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | ⭘ | ⭘ |  |
-| [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | ⬤ | ⬤ | |
-| [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ | ⭘ [[svelteuidev#491]](https://github.com/svelteuidev/svelteui/issues/491) |
-| [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | ⬤ | ⬤ | May use components, e.g. [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
-| [ui-konsta](../../tree/ui-konsta)         | [Konsta](https://konstaui.com/svelte) | ⬤ | ⬤\|⭘ | (Requires TailwindCSS)<br>⬤ `pnpm build/dev` \| ⭘ `pnpm check` |
-| [ui-svelteux](../../tree/ui-svelteux)     | [svelte-ux](https://svelte-ux.techniq.dev) | ⬤ | ⬤ | (Requires TailwindCSS) |
-| | [Skeleton](https://github.com/skeletonlabs/skeleton) | | ⬤ | (Requires TailwindCSS)<br>⬤ Note [[skeleton#2640]](https://github.com/skeletonlabs/skeleton/discussions/2640) |
-| | [Flowbite-Svelte](https://flowbite-svelte.com) |  | ⬤ | (Requires TailwindCSS) |
-|                                           | [Smelte](https://smeltejs.com/) |  | ⭘ | (Requires TailwindCSS) Material + TailwindCSS |
-|                                           | [Ionic](https://ionicframework.com) |   | ⭘ | See good [example](https://github.com/Tommertom/svelte-ionic-app). Note: No SSR! |
-|                                           | [Chota](https://jenil.github.io/chota/) |   | ⭘ | [SvelteChota](https://alexxnb.github.io/svelte-chota/why_chota) |
-| | [Tachyons](https://tachyons.io) |   | ⭘ | |
-| | [Svelte Material](https://sveltematerialui.com/) |   | ⬤ | [`pnpm i -D @smui/\*\*@alpha`](https://github.com/hperrin/svelte-material-ui/tree/v8#readme) |
-| | [Svelte Flat UI](https://svelteui.js.org/#/) |   | ⭘ | |
-| | [Attractions](https://github.com/illright/attractions) |   | ⭘ | |
-| | [Melt UI](https://melt-ui.com) |   | ⭘ | ⭘ [[melt-ui#1001]](https://github.com/melt-ui/melt-ui/issues/1001) |
-| | [Bits UI](https://bits-ui.com) |   | ⭘ | ⭘ [[bits-ui#287]](https://github.com/huntabyte/bits-ui/issues/287) |
-| | [shadcn-svelte](https://www.shadcn-svelte.com) |   | ⭘ | ⭘ [[shadcn-svelte#1182]](https://github.com/huntabyte/shadcn-svelte/pull/1182) |
+| Status | Git Branch | UI Framework | Dark Theme | Svelte 5 | Notes [Legend: ⬤ Yes / ⭘ No ] |
+|-|-|-|:-:|:-:|-|
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=main)](https://total-app.vercel.app/api/getDeployment?w=url&b=main)                     | main                                      | (none) | ⬤ | ⬤ | |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=hitoire)](https://total-app.vercel.app/api/getDeployment?w=url&b=histoire)              | [histoire](../../tree/histoire)           | (none) | ⬤ | ⭘ | Isolated component development. |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=storybook)](https://total-app.vercel.app/api/getDeployment?w=url&b=storybook)           | [storybook](../../tree/storybook)         | (none) | ⬤ | ⬤ | Isolated component development. |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-agnostic)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-agnostic)       | [ui-agnostic](../../tree/ui-agnostic)     | [AgnosticUI](https://github.com/AgnosticUI/agnosticui) | ⬤ | ⭘ |  |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-bootstrap)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-bootstrap)     | [ui-bootstrap](../../tree/ui-bootstrap)   | [Bootstrap](https://github.com/twbs/bootstrap) | ⬤ | ⭘ | [Sveltestrap](https://github.com/sveltestrap/sveltestrap), Themes from [Bootswatch](https://github.com/thomaspark/bootswatch).<br>⭘ [[sveltestrap#79]](https://github.com/sveltestrap/sveltestrap/issues/79) |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-bulma)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-bulma)             | [ui-bulma](../../tree/ui-bulma)           | [Bulma](https://bulma.io/) | ⬤ | ⬤ |  |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-carbon)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-carbon)           | [ui-carbon](../../tree/ui-carbon)         | [Carbon](https://carbon-components-svelte.onrender.com/) | ⬤ | ⬤ |  |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-framework7)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-framework7)   | [ui-framework7](../../tree/ui-framework7) | [Framework7](https://framework7.io/svelte/introduction.html) | ⭘ | ⭘ |  |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-shoelace)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-shoelace)       | [ui-shoelace](../../tree/ui-shoelace)     | [Shoelace](https://shoelace.style/) | ⬤ | ⬤ | |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-svelteui)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-svelteui)       | [ui-svelteui](../../tree/ui-svelteui)     | [SvelteUI](https://www.svelteui.org) | ⬤ | ⭘ | ⭘ [[svelteuidev#491]](https://github.com/svelteuidev/svelteui/issues/491) |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-tailwindcss)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-tailwindcss) | [ui-tailwindcss](../../tree/ui-tailwindcss) | [TailwindCSS](https://tailwindcss.com)  | ⬤ | ⬤ | May use components, e.g. | [Flowbite](https://flowbite.com/docs/getting-started/introduction/) |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-konsta)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-konsta)           | [ui-konsta](../../tree/ui-konsta)         | [Konsta](https://konstaui.com/svelte) | ⬤ | ⬤\|⭘ | (Requires TailwindCSS)<br>⬤ `pnpm build/dev` \| ⭘ `pnpm check` |
+| [![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-svelteux)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-svelteux)       | [ui-svelteux](../../tree/ui-svelteux)     | [svelte-ux](https://svelte-ux.techniq.dev) | ⬤ | ⬤ | (Requires TailwindCSS) |
+| | | [Skeleton](https://github.com/skeletonlabs/skeleton) | | ⬤ | (Requires TailwindCSS)<br>⬤ Note [[skeleton#2640]](https://github.com/skeletonlabs/skeleton/discussions/2640) |
+| | | [Flowbite-Svelte](https://flowbite-svelte.com) |  | ⬤ | (Requires TailwindCSS) |
+| |                                           | [Smelte](https://smeltejs.com/) |  | ⭘ | (Requires TailwindCSS) Material + TailwindCSS |
+| |                                           | [Ionic](https://ionicframework.com) |   | ⭘ | See good [example](https://github.com/Tommertom/svelte-ionic-app). Note: No SSR! |
+| |                                           | [Chota](https://jenil.github.io/chota/) |   | ⭘ | [SvelteChota](https://alexxnb.github.io/svelte-chota/why_chota) |
+| | | [Tachyons](https://tachyons.io) |   | ⭘ | |
+| | | [Svelte Material](https://sveltematerialui.com/) |   | ⬤ | [`pnpm i -D @smui/\*\*@alpha`](https://github.com/hperrin/svelte-material-ui/tree/v8#readme) |
+| | | [Svelte Flat UI](https://svelteui.js.org/#/) |   | ⭘ | |
+| | | [Attractions](https://github.com/illright/attractions) |   | ⭘ | |
+| | | [Melt UI](https://melt-ui.com) |   | ⭘ | ⭘ [[melt-ui#1001]](https://github.com/melt-ui/melt-ui/issues/1001) |
+| | | [Bits UI](https://bits-ui.com) |   | ⭘ | ⭘ [[bits-ui#287]](https://github.com/huntabyte/bits-ui/issues/287) |
+| | | [shadcn-svelte](https://www.shadcn-svelte.com) |   | ⭘ | ⭘ [[shadcn-svelte#1182]](https://github.com/huntabyte/shadcn-svelte/pull/1182) |
 
 <!-- markdownlint-enable MD033 -->
+
+![Vercel](http://deploy-badge.vercel.app/vercel/total-app/?app=total-app&branch=main)
+
+![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=total-app&branch=storybook)
+
+[![Vercel](https://vercelbadge.vercel.app/api/iva2k/total-app)](https://vercel.com/iva2k/total-app)
+
+[![Vercel](https://total-app.vercel.app/api/getDeployment?w=svg&b=ui-svelteux)](https://total-app.vercel.app/api/getDeployment?w=url&b=ui-svelteux)
+
 
 ## Conclusion
 
