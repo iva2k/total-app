@@ -1063,3 +1063,26 @@ Add "tailwindcss: {}," to `plugins` in `postcss.config.cjs` (see source in repo)
 Add tailwind to src/routes/styles.css (see source in repo).
 
 For dark mode to work in tailwind, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
+
+## Add UI : Flowbite
+
+[Flowbite Svelte](https://flowbite-svelte.com)
+
+First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailwind-css)). Then, install Flowbite Svelte:
+
+```bash
+pnpm install -D flowbite-svelte flowbite
+```
+
+Install some Icon libraries:
+
+```bash
+pnpm install -D flowbite-svelte-icons
+# optional: pnpm install @mdi/js @fortawesome/free-solid-svg-icons
+```
+
+Modify `tailwind.config.cjs` file to use Flowbite (see source in repo).
+
+Add example page `src/routes/flowbite/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
+
+For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
