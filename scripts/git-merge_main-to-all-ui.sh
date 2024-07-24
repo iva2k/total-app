@@ -276,6 +276,7 @@ function git_push_with_log() {
   } >> "$LOGFILE_I"
 
   # Perform the actual push
+  echo "PUSH $branch" | tee -a "$LOGFILE_I"
   git push origin "$branch" >>"$LOGFILE_I" 2>&1; rc="$?"
   echo "DONE 'git push', result=$rc" | tee -a "$LOGFILE_I"
   return "$rc"
@@ -316,30 +317,36 @@ function merge_to_one() {
     st_logfiles[i]="$LOGFILE_I"
     echo "BEGIN Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
     echo | tee -a "$LOGFILE"
-    # Switch to the target branch
-    # Checkout target branch
-    if ! output=$(git checkout "$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE") ; then
+
+    # Switch to / Checkout target branch
+    echo "CHECKOUT $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+    git checkout "$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
+    if [ "$res" -ne 0 ] ; then
       echo | tee -a "$LOGFILE"  | tee -a "$LOGFILE_I"
-      echo "Error checking out branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      echo "Error $res checking out branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
       st_outputs[i]="Error checking out branch"
-      st_errors[i]=1
+      st_errors[i]="$res"
       exit_save_state 1
     fi
 
     # Pull target branch
-    if ! output=$(git pull 2>&1 | tee -a "$LOGFILE") ; then
+    echo "PULL $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+    git pull 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
+    if [ "$res" -ne 0 ] ; then
       echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-      echo "Error pulling branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      echo "Error $res pulling branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
       st_outputs[i]="Error pulling out branch"
-      st_errors[i]=1
+      st_errors[i]="$res"
       exit_save_state 1
     fi
 
     # Merge changes from the source branch, but not commit
+    echo "MERGE $SOURCE_BRANCH to $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
     git merge "$SOURCE_BRANCH" --no-commit 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
     if [ "$res" -ne 0 ] ; then
       echo "Merge conflict(s) detected in \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
     fi
+    # Use $res below
   fi
 
   # Check if package.json file is updated (ignore conflicted)
@@ -379,6 +386,7 @@ function merge_to_one() {
       exit_save_state 1
     else
       echo "  No unresolved Merge conflicts left, continuing..." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      echo "COMMIT $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
       git commit --no-edit 2>&1 | tee -a "$LOGFILE"; res="${PIPESTATUS[0]}"
       if [ "$res" -ne 0 ] ; then
         echo "Error $res in commit to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
@@ -393,6 +401,7 @@ function merge_to_one() {
     st_outputs[i]="(merged)"
     st_errors[i]=0
     # No "-m" as merge sets up a commit message for us to use.
+    echo "COMMIT $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
     git commit --no-edit 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   fi
 
