@@ -27,13 +27,12 @@ async function createBadge(badge: Badge) {
 const ShieldsIO = { createBadge };
 // export default ShieldsIO;
 
-const generateBadge = async (
-  statusCode: number = 404,
-  statusText: string | null = null,
+async function generateBadge(
+  statusText: string, // 'success' | 'error' | 'failure' | 'pending' | 'inactive'
   badgeName: string,
   badgeStyle: string | null = null,
   badgeLogo: string | null = null
-) => {
+) {
   const badgeOptions = {
     label: badgeName,
     message: statusText ?? 'deployed',
@@ -42,22 +41,24 @@ const generateBadge = async (
     logo: badgeLogo
   };
 
-  if (statusCode <= 599 && statusCode >= 500) {
-    // 500 - 599 -> Server Errors
-    badgeOptions.message = statusText ?? 'failed';
-    badgeOptions.color = 'red';
-  } else if (statusCode <= 499 && statusCode >= 400) {
-    // 400 - 499 -> Client Errors
-    badgeOptions.message = statusText ?? 'not found';
-    badgeOptions.color = 'lightgrey';
-  } else if (statusCode <= 399 && statusCode >= 300) {
-    // 300 - 399 -> Redirects
+  switch (statusText.toLowerCase()) {
+    case 'success': // The deployment was successful and completed without any issues.
+      break;
+    case 'error': // The deployment encountered an error and failed to complete.
+    case 'failure': // The deployment failed, possibly due to tests not passing or other criteria not being met.
+    default:
+      badgeOptions.message = statusText ?? 'failed';
+      badgeOptions.color = 'red';
+      break;
+    case 'pending': // The deployment is still in progress or waiting to be processed.
+    case 'inactive': // This state is specific to transient deployments. When you set a transient deployment to inactive, it will be shown as destroyed in GitHub
+      badgeOptions.message = statusText ?? 'not found';
+      badgeOptions.color = 'lightgrey';
+      break;
   }
 
-  // 200 - 299 -> Successful Responses
-  // 100 - 199 -> Informational Responses
   return await ShieldsIO.createBadge(badgeOptions);
-};
+}
 
 export const GET: RequestHandler = async ({ url }) => {
   const what = url.searchParams.get('what') ?? url.searchParams.get('w') ?? 'svg';
@@ -143,20 +144,7 @@ export const GET: RequestHandler = async ({ url }) => {
     const deploymentUrl = status.environment_url ?? '';
 
     // Step 5: Generate badge
-    let statusCode = 200;
-    if (latestStatus.toLowerCase() === 'success') statusCode = 200;
-    else if (latestStatus.toLowerCase() === 'error') statusCode = 500;
-    else if (latestStatus.toLowerCase() === 'failure') statusCode = 500;
-    else if (latestStatus.toLowerCase() === 'pending') statusCode = 400;
-    else if (latestStatus.toLowerCase() === 'inactive') statusCode = 400;
-    /*
-    "success": The deployment was successful and completed without any issues.
-    "error": The deployment encountered an error and failed to complete.
-    "failure": The deployment failed, possibly due to tests not passing or other criteria not being met.
-    "pending": The deployment is still in progress or waiting to be processed.
-    "inactive": This state is specific to transient deployments. When you set a transient deployment to inactive, it will be shown as destroyed in GitHub
-    */
-    const badge = await generateBadge(statusCode, latestStatus, 'vercel', 'vercel', style);
+    const badge = await generateBadge(latestStatus, 'vercel', 'vercel', style);
     if (what.toLowerCase() === 'svg' && badge) {
       return new Response(badge, {
         headers: {
@@ -181,7 +169,7 @@ export const GET: RequestHandler = async ({ url }) => {
       { status: 200 }
     );
   } catch (error) {
-    if (isRedirect(error)) throw error;
+    if (isRedirect(error)) throw error as unknown as Error;
     function isErrorWithMessage(error: unknown): error is { message: string } {
       return (
         typeof error === 'object' &&
