@@ -5,8 +5,8 @@
   "outputDirectory": ".vercel/output",
   "git": {
     "deploymentEnabled": {
-      "ui-agnostic": false,
-      "ui-framework7": false
+      "ui-agnostic": true,
+      "ui-framework7": true
     }
   }
 }
