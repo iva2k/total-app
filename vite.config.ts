@@ -5,6 +5,7 @@ import type { UserConfig, Plugin } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
+import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
@@ -20,6 +21,7 @@ export default defineConfig(async ({ mode }) => {
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
     replace(replaceOptions) as Plugin, // Convert rollup.Plugin into vite.Plugin
+    purgeCss(),
 
     // copy is needed for vite to work in dev (especially under "tauri:dev")
     // All copy commands are duplicated in package.json:scripts.svelte:prebuild, for dev to work correctly.

@@ -1086,3 +1086,19 @@ Modify `tailwind.config.cjs` file to use Flowbite (see source in repo).
 Add example page `src/routes/flowbite/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
 
 For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
+
+### Optimizations
+
+Check CSS files size (after `pnpm run build`):
+
+```bash
+find .svelte-kit/output/client/_app/immutable -type f -name "*.css" -exec du -h {} +
+```
+
+Add `vite-plugin-tailwind-purgecss`:
+
+```bash
+pnpm install -D vite-plugin-tailwind-purgecss
+```
+
+Modify `vite.config.ts` (see source in repo).
