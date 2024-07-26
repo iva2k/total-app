@@ -1,4 +1,4 @@
-// This file exports websiteAsync() which is intended to be used from vite.config.js
+// This file exports websiteAsync() which is intended to be used from vite.config.ts
 
 const websiteAsync = async (
   /** @type {Record<string, string>} */
