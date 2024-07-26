@@ -112,16 +112,6 @@
             />
           {/if}
         </ToolbarLink>
-
-        <span>
-          {link?.prefix ?? ''}
-          <a href={link.href}>
-            {#if link?.title}
-              <span>{link.title}</span>
-            {/if}
-          </a>
-          {link?.suffix ?? ''}
-        </span>
       {/each}
 
       <!-- <ToolbarLink
