@@ -1,0 +1,55 @@
+@import '@fontsource/fira-mono';
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply scroll-smooth bg-surface-200 accent-primary;
+  /* background-image:
+      radial-gradient(at 0% 0%, hsl(var(--color-secondary) / 0.33) 0px, transparent 50%),
+      radial-gradient(at 98% 1%, hsl(var(--color-primary) / 0.33) 0px, transparent 50%); */
+}
+
+nav h1 {
+  @apply mt-4 border-b border-t bg-surface-200 py-2 pl-4 text-sm font-bold text-surface-content;
+}
+
+nav h2 {
+  @apply pb-2 pl-4 pt-4 text-xs font-bold text-surface-content;
+}
+
+main :is(h1, h2, h3):not(.prose *, .related *, .ApiDocs *) {
+  scroll-margin-top: calc(var(--headerHeight) + 148px); /* app header + docs header */
+}
+
+main h1:not(.prose *, .related *, .ApiDocs *) {
+  @apply mb-2 mt-4 border-b pb-1 text-xl font-semibold;
+}
+
+main h2:not(.prose *, .related *, .ApiDocs *) {
+  @apply mb-1 mt-4 text-lg font-semibold;
+}
+
+main h3:not(.prose *, .related *, .ApiDocs *) {
+  @apply mb-1 text-xs text-surface-content/50;
+}
+main :not(.prose) h2 + h3 {
+  @apply -mt-1;
+}
+
+main small {
+  @apply inline-block text-xs text-surface-content/50;
+}
