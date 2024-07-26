@@ -4,7 +4,7 @@
  * const { author, ogLanguage, siteLanguage, siteTitle, siteTitleAlt } = websiteFnc(env);
  */
 
-// Do not use this file in `vite.config.js`, instead use "./websiteAsync.js".
+// Do not use this file in `vite.config.ts`, instead use "./websiteAsync.js".
 // For regular modules, it is easier to use "./website.js".
 
 const websiteFnc = (
@@ -70,7 +70,15 @@ const websiteFnc = (
     googleSiteVerificationVercel,
     githubRepo,
     websiteUrlBase,
-    websiteUrl
+    websiteUrl,
+    siteNav: [
+      // { href: '/', title: 'Home' }, // '/' redirects to '/home'
+      { href: '/home', title: 'Home' },
+      { href: '/about', title: 'About' },
+      { href: '/sverdle', title: 'Sverdle' },
+      { href: '/geolocation', title: 'Geolocation' },
+      { href: '/qrscanner', title: 'QR Scanner' }
+    ]
   };
   // console.log('DEBUG websiteFnc.js website=%o, env=%o', website, env);
   return website;
