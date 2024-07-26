@@ -44,6 +44,7 @@ export TARGET_BRANCHES=(
   "storybook"
   "ui-bulma"
   "ui-carbon"
+  "ui-flowbite"
   "ui-shoelace"
   "ui-svelteui"
   "ui-svelteux"
