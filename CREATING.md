@@ -107,13 +107,13 @@ Add assets copying scripts `scripts/assets-copy.ts` and `scripts/assets-clean.ts
 
 Add assets copying during dev using 'vite-plugin-static-copy' to svelte.config.js (see source file).
 
-### Add SVG loader
+### Add Icons & SVG loader
 
 ```bash
 pnpm install -D unplugin-icons
 ```
 
-Add setup for `unplugin-icons` plugin into `vite.config.ts` and add types to `src/app.d.ts` (see sources in repo).
+Add setup for `unplugin-icons` plugin into `vite.config.ts`, add types to `src/app.d.ts` and add types to `tsconfig.json` (see sources in repo).
 
 With `unplugin-icons` plugin, can use `import SvelteLogo from 'virtual:icons/images/svelte-icon';` and get a Svelte component, so can use it as `<SvelteLogo />` in any `.svelte` file.
 
