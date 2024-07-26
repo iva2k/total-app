@@ -17,17 +17,17 @@
     {
       "name": "Launch server",
       "request": "launch",
-      "runtimeArgs": ["run", "dev"],
+      "type": "node",
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev"],
       "skipFiles": ["<node_internals>/**"],
-      "type": "node",
       "console": "internalConsole"
     },
     {
-      "type": "msedge",
-      "request": "launch",
       "name": "Launch Edge",
+      "request": "launch",
+      "type": "msedge",
       "url": "http://127.0.0.1:3000",
       "webRoot": "${workspaceFolder}"
     },
