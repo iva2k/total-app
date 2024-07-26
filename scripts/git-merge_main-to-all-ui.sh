@@ -36,6 +36,7 @@ TARGET_BRANCHES=(
   "ui-bootstrap"
   "ui-bulma"
   "ui-carbon"
+  "ui-flowbite"
   "ui-framework7"
   "ui-konsta"
   "ui-shoelace"
