@@ -27,7 +27,7 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       bulma:
-        specifier: ^1.0.1
+        specifier: ^1.0.2
         version: 1.0.2
       qr-scanner:
         specifier: ^1.4.2
