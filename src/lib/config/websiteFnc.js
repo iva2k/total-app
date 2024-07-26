@@ -42,6 +42,27 @@ const websiteFnc = (
   const googleSiteVerificationNetlify = '';
   const googleSiteVerificationVercel = 'BXO06YUfaqiMbQ-FgBPqQAgWB7giDX-pLEDSz89vUng';
 
+  /** @typedef {import('../types').SiteLink} SiteLink */
+  /** @type SiteLink[] */
+  const siteLinks = [
+    {
+      href: githubRepo,
+      title: 'App GitHub Repo',
+      img_import: '../images/github.svelte',
+      img_alt: '',
+      prefix: 'visit',
+      suffix: 'for details'
+    },
+    {
+      href: 'https://kit.svelte.dev',
+      title: 'kit.svelte.dev',
+      img_import: '../images/svelte-logo.svelte', // Using wrapper component. Works.
+      // img_import: 'virtual:icons/images/svelte-logo', // Using unplugin-icons. Does not work (no run-time dynamic imports in unplugin-icons)
+      img_alt: 'SvelteKit',
+      prefix: 'visit',
+      suffix: 'to learn SvelteKit'
+    }
+  ];
   const website = {
     siteUrl: PUBLIC_SITE_URL,
     isNetlify: NETLIFY,
@@ -71,6 +92,7 @@ const websiteFnc = (
     githubRepo,
     websiteUrlBase,
     websiteUrl,
+    siteLinks,
     siteNav: [
       // { href: '/', title: 'Home' }, // '/' redirects to '/home'
       { href: '/home', title: 'Home' },
