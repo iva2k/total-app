@@ -13,9 +13,10 @@
   import type { PageData } from './$types';
   import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
-  export let data;
+  // export let data;
   // console.log('posts: ', data);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const posts: Record<string, any[]> = {}; // data.posts || {};
   const drawerHidden: Writable<boolean> = getContext('drawer');
 

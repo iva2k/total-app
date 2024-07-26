@@ -25,6 +25,3 @@
     -->
   </ResponsiveSidebarLayout>
 </NavbarLayout>
-
-<style>
-</style>
