@@ -107,6 +107,30 @@ Add assets copying scripts `scripts/assets-copy.ts` and `scripts/assets-clean.ts
 
 Add assets copying during dev using 'vite-plugin-static-copy' to svelte.config.js (see source file).
 
+### Add Icons & SVG loader
+
+```bash
+pnpm install -D unplugin-icons
+```
+
+Package `unpligin-icons` internally uses `@iconify/svelte`, but generates icons on the server during build.
+
+Add setup for `unplugin-icons` plugin into `vite.config.ts`, add types to `src/app.d.ts` and add types to `tsconfig.json` (see sources in repo).
+
+`unplugin-icons` plugin creates Svelte component for any icon, and automatically maintains used icon libraries.
+
+With `Iconify IntelliSense` VSCode extension (see `.vscode/extensions.json`) can preview the selected icon and can quickly locate icons from within the VSCode IDE.
+
+Example icon use:
+
+```js
+<script>
+...
+import CustomIcon from 'virtual:icons/<set>/<icon>'; // <- this will show icon preview inline, and IntelliSense will show auto-complete dropdown.
+</script>
+<CustomIcon />
+```
+
 ### Lint Error "illegal variable name"
 
 ```bash
@@ -334,9 +358,9 @@ Move `src/routes/Header.svelte` to `src/lib/components/header/` and change paths
 
 Config files help organize site-wide settings. SvelteKit and Vite use .env files underneath, and we will build a helper file `$lib/config/website.js` to collect the relevant settings into one abstraction, similar to <https://rodneylab.com/sveltekit-blog-starter/#src-lib>.
 
-Adding such a config would have been an easy task, if not for the Service Worker in the following section, which needs access to the config file from within `vite.config.js` which is loaded during build time, before vite builder and SvelteKit load `.env` files into the environment, because it first determines the settings that choose which environment files to load. Luckily, there is a mechanism in Vite to access the .env settings from `vite.config.js`.
+Adding such a config would have been an easy task, if not for the Service Worker in the following section, which needs access to the config file from within `vite.config.ts` which is loaded during build time, before vite builder and SvelteKit load `.env` files into the environment, because it first determines the settings that choose which environment files to load. Luckily, there is a mechanism in Vite to access the .env settings from `vite.config.ts`.
 
-To achieve that, we will convert static config assignments to an async function in `vite.config.js`, so it could use [`loadEnv()`](https://vitejs.dev/config/#environment-variables) and [`defineConfig( async () /> {...})`](https://vitejs.dev/config/#async-config) (see the source of `vite.config.js`) and then make an async wrapper `$lib/src/websiteAsync.js` over sync function in `$lib/src/websiteFnc.js`. The async is needed for await of the import of `$lib/src/websiteFnc.js` inside the function. We will use the async wrapper in the next section for the Service Worker.
+To achieve that, we will convert static config assignments to an async function in `vite.config.ts`, so it could use [`loadEnv()`](https://vitejs.dev/config/#environment-variables) and [`defineConfig( async () /> {...})`](https://vitejs.dev/config/#async-config) (see the source of `vite.config.ts`) and then make an async wrapper `$lib/src/websiteAsync.js` over sync function in `$lib/config/websiteFnc.js`. The async is needed for await of the import of `$lib/config/websiteFnc.js` inside the function. We will use the async wrapper in the next section for the Service Worker.
 
 This solution creates a small overhead for using `$lib/config/websiteFnc.js`, but we can wrap it in `$lib/config/website.js` which can be simply imported into all other files and desructured to get the needed setting variables:
 
@@ -649,6 +673,10 @@ For styling to apply into the slot elements, add `:global()` clauses to some of 
 
 (See sources).
 
+### Rework PureHeader to use Site Pages List
+
+Add `siteNav` (a list of Site Pages) to `$lib/config/websiteFnc.js` file, use it in PureHeader.svelte.
+
 ### Add DarkMode Component
 
 See sources - "src/components/darkmode/\*" and edits to "src/routes/+layout.svelte".
@@ -895,16 +923,14 @@ npx cap sync
 
 Create `src/routes/geolocation/+page.svelte` (see source file in repo)
 
-Add the page to the PureHeader pages array:
+Add the page to the `siteNav` pages array in `$src/config/websiteFnc.js`:
 
 ```js
-<script lang="ts">
   ...
-  const pages = [
+  siteNav: [
     ...
-+    { path: '/geolocation', title: 'Geolocation' },
++    { href: '/geolocation', title: 'Geolocation' },
   ];
-</script>
 ```
 
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
@@ -952,16 +978,14 @@ pnpm install qr-scanner
 
 Create `src/routes/qrscanner/+page.svelte` (see source file in repo).
 
-Add the page to the PureHeader pages array:
+Add the page to the `siteNav` pages array in `$src/config/websiteFnc.js`:
 
 ```js
-<script lang="ts">
   ...
-  const pages = [
+  siteNav: [
     ...
 +    { path: '/qrscanner', title: 'QR Scanner' }
   ];
-</script>
 ```
 
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
@@ -1053,7 +1077,7 @@ pnpm install framework7 framework7-svelte
 
 Insert code that loads the framework into `src/routes/+layout.svelte` (see source in repo).
 
-Add example page `src/routes/framework7/+page.svelte` and add route to `src/lib/components/header/PureHeader.svelte` (see sources in repo).
+Add example page `src/routes/framework7/+page.svelte` and add route to `siteNav` in `src/lib/config/websiteFnc.js` (see sources in repo).
 
 ### Issue - `framework7-svelte` is not compatible with Svelte 5
 
