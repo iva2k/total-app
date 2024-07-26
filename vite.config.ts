@@ -7,6 +7,9 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 
+import Icons from 'unplugin-icons/vite';
+import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 import { pwaConfigurationFnc } from './pwa-configuration.js';
@@ -20,6 +23,20 @@ export default defineConfig(async ({ mode }) => {
     // basicSsl(),
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
+    Icons({
+      // experimental
+      autoInstall: true,
+      compiler: 'svelte',
+      customCollections: {
+        // Add your custom collection here
+        images: FileSystemIconLoader(
+          './src/lib/images',
+          (svg) => svg // No processing
+          // To do any processing: (svg) => svg.replace(/^<svg /, '<svg fill="currentColor" ')
+        )
+      }
+    }),
+
     replace(replaceOptions) as Plugin, // Convert rollup.Plugin into vite.Plugin
     purgeCss(),
 
