@@ -10,7 +10,7 @@
     "./prettier.config.cjs",
     "./pwa-configuration.js",
     "./svelte.config.js",
-    "./vite.config.js",
+    "./vite.config.ts",
     "./vitest.workspace.ts"
   ]
 }
