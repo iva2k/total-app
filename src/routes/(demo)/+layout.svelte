@@ -11,24 +11,27 @@
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
-  const { githubRepo } = website;
-  import GithubLogo from '$lib/images/github.svelte';
-  import svelte_logo from '$lib/images/svelte-logo.svg';
+  import { getSiteLinksComponents } from '$lib/config/configUtils';
+  const { siteLinks } = website;
 
   // import type { LayoutData } from './$types';
   // import type { LayoutContext } from '$lib/types';
 
   // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
   let { children } = $props<{ children: Snippet }>();
+  import { type SiteLink } from '$lib/types';
+  let siteLinksLoaded = $state<SiteLink[]>([]);
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
+    const mypath = import.meta.url;
+    siteLinksLoaded = await getSiteLinksComponents(siteLinks, mypath);
+    console.log('DEBUG: siteLinksLoaded=%o', siteLinksLoaded);
 
     await import('@shoelace-style/shoelace');
   });
-
   /* DISABLED (see root +layout.svelte)
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
@@ -102,17 +105,30 @@
 
   <footer>
     <p>
-      visit
-      <a href={githubRepo}>
-        <GithubLogo />
-        <span>App GitHub Repo</span>
-      </a>
-      for details | visit
-      <a href="https://kit.svelte.dev">
-        <img src={svelte_logo} alt="SvelteKit" aria-hidden="true" role="presentation" />
-        <span>kit.svelte.dev</span>
-      </a>
-      to learn SvelteKit
+      {#each siteLinksLoaded as link, i}
+        {#if i > 0}
+          <span>&nbsp;| </span>
+        {/if}
+        <span>
+          {link?.prefix ?? ''}
+          <a href={link.href}>
+            {#if link?.imp}
+              <svelte:component this={link?.imp} />
+            {:else if link?.img_src}
+              <img
+                src={link.img_src}
+                alt={link?.img_alt ?? ''}
+                aria-hidden="true"
+                role="presentation"
+              />
+            {/if}
+            {#if link?.title}
+              <span>{link.title}</span>
+            {/if}
+          </a>
+          {link?.suffix ?? ''}
+        </span>
+      {/each}
     </p>
   </footer>
 </div>
