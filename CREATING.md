@@ -113,9 +113,23 @@ Add assets copying during dev using 'vite-plugin-static-copy' to svelte.config.j
 pnpm install -D unplugin-icons
 ```
 
+Package `unpligin-icons` internally uses `@iconify/svelte`, but generates icons on the server during build.
+
 Add setup for `unplugin-icons` plugin into `vite.config.ts`, add types to `src/app.d.ts` and add types to `tsconfig.json` (see sources in repo).
 
-With `unplugin-icons` plugin, can use `import SvelteLogo from 'virtual:icons/images/svelte-icon';` and get a Svelte component, so can use it as `<SvelteLogo />` in any `.svelte` file.
+`unplugin-icons` plugin creates Svelte component for any icon, and automatically maintains used icon libraries.
+
+With `Iconify IntelliSense` VSCode extension (see `.vscode/extensions.json`) can preview the selected icon and can quickly locate icons from within the VSCode IDE.
+
+Example icon use:
+
+```js
+<script>
+...
+import CustomIcon from 'virtual:icons/<set>/<icon>'; // <- this will show icon preview inline, and IntelliSense will show auto-complete dropdown.
+</script>
+<CustomIcon />
+```
 
 ### Lint Error "illegal variable name"
 
