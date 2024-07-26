@@ -20,6 +20,7 @@
       "$lib": ["./src/lib"],
       "$lib/*": ["./src/lib/*"],
       "@vite-pwa/sveltekit": ["./node_modules/@vite-pwa/sveltekit/dist"],
+      "virtual:icons/images/*": ["./src/lib/images/*"],
       "virtual:pwa-client": ["./node_modules/vite-plugin-pwa/client.d.ts"],
       "virtual:pwa-info": ["./node_modules/vite-plugin-pwa/info.d.ts"],
       "virtual:pwa-register/svelte": ["./node_modules/vite-plugin-pwa/svelte.d.ts"]
@@ -35,7 +36,8 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "outDir": ".types"
+    "outDir": ".types",
+    "types": ["unplugin-icons/types/svelte"]
   },
   "exclude": [
     "./node_modules/**",

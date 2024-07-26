@@ -1,19 +1,10 @@
 <script lang="ts">
   import logo from '$lib/images/logo.svg';
   import website from '$lib/config/website';
-  const { websiteUrlBase } = website;
+  const { websiteUrlBase, siteNav } = website;
 
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
-  const pages = [
-    // { path: '/', title: 'Home' }, // '/' redirects to '/home'
-    { path: '/home', title: 'Home' },
-    { path: '/about', title: 'About' },
-    { path: '/sverdle', title: 'Sverdle' },
-    { path: '/geolocation', title: 'Geolocation' },
-    { path: '/qrscanner', title: 'QR Scanner' },
-    { path: '/svelteux', title: 'Svelte UX' }
-  ];
 </script>
 
 <header>
@@ -28,9 +19,9 @@
       <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
     </svg>
     <ul>
-      {#each pages as page}
-        <li aria-current={path1st === page.path ? 'page' : undefined}>
-          <a href={page.path}>{page.title}</a>
+      {#each siteNav as page}
+        <li aria-current={path1st === page.href ? 'page' : undefined}>
+          <a href={page.href}>{page.title}</a>
         </li>
       {/each}
     </ul>
