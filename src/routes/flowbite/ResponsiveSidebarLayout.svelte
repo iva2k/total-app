@@ -13,6 +13,11 @@
   import type { PageData } from './$types';
   import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
+  import website from '$lib/config/website';
+  // import { getSiteLinksComponents } from '$lib/config/configUtils';
+  // const { siteLinks, siteNav } = website;
+  const { siteNav } = website;
+
   // export let data;
   // console.log('posts: ', data);
 
@@ -93,13 +98,16 @@
             {/each}
           </SidebarDropdownWrapper>
         {/each}
-        <SidebarItem
-          label="Admin Dashboard"
-          href="/admin-dashboard"
-          spanClass="w-full text-sm font-semibold tracking-wide uppercase hover:text-primary-700 dark:hover:text-primary-600 text-gray-900 dark:text-white"
-          {activeClass}
-          active={activeMainSidebar === '/admin-dashboard'}
-        />
+
+        {#each siteNav as page}
+          <SidebarItem
+            label={page.title}
+            href={page.href}
+            spanClass="w-full text-sm font-semibold tracking-wide uppercase hover:text-primary-700 dark:hover:text-primary-600 text-gray-900 dark:text-white"
+            {activeClass}
+            active={activeMainSidebar === page.href}
+          />
+        {/each}
       </SidebarGroup>
     </nav>
   </SidebarWrapper>

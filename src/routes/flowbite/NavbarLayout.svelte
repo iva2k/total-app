@@ -4,11 +4,15 @@
   import { writable, type Writable } from 'svelte/store';
   import { DarkMode, Navbar, NavBrand, NavHamburger, NavLi, NavUl, Tooltip } from 'flowbite-svelte';
 
+  import website from '$lib/config/website';
+  import { getSiteLinksComponents } from '$lib/config/configUtils';
+  const { siteLinks, siteNav } = website;
+
   //   import DocBadge from '../utils/DocBadge.svelte';
   //   import Discord from '../utils/icons/Discord.svelte';
   //   import GitHub from '../utils/icons/GitHub.svelte';
   //   import YouTube from '../utils/icons/YouTube.svelte';
-  //   import ToolbarLink from '../utils/ToolbarLink.svelte';
+  import ToolbarLink from './ToolbarLink.svelte';
   //   import AlgoliaSearch from '../utils/AlgoliaSearch.svelte';
 
   let isHomePage: boolean;
@@ -29,7 +33,10 @@
     drawerHiddenStore.update((state) => !state);
   };
 
-  onMount(() => {
+  import { type SiteLink } from '$lib/types';
+  // let siteLinksLoaded = $state<SiteLink[]>([]);
+  let siteLinksLoaded: SiteLink[] = [];
+  onMount(async () => {
     // Workaround until https://github.com/sveltejs/kit/issues/2664 is fixed
     if (typeof window !== 'undefined' && window.location.hash) {
       const deepLinkedElement = document.getElementById(window.location.hash.substring(1));
@@ -38,6 +45,10 @@
         window.setTimeout(() => deepLinkedElement.scrollIntoView(), 100);
       }
     }
+
+    const mypath = import.meta.url;
+    siteLinksLoaded = await getSiteLinksComponents(siteLinks, mypath);
+    console.log('DEBUG: siteLinksLoaded=%o', siteLinksLoaded);
   });
 </script>
 
@@ -74,19 +85,45 @@
       {divClass}
       {ulClass}
       {activeUrl}
-      on:click={() => setTimeout(toggle, 1)}
+      onclick={() => setTimeout(toggle, 1)}
       nonActiveClass="md:!ps-3 md:!py-2 lg:!ps-0 text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:text-white lg:dark:hover:text-primary-700 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
       activeClass="md:!ps-3 md:!py-2 lg:!ps-0 text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:dark:text-primary-700 dark:bg-primary-600 lg:dark:bg-transparent cursor-default"
     >
-      <NavLi class="lg:mb-0 lg:px-2" href="/">Home</NavLi>
-      <NavLi class="lg:mb-0 lg:px-2" href="/docs/pages/introduction">Docs</NavLi>
-      <NavLi class="lg:mb-0 lg:px-2" href="/docs/components/accordion">Components</NavLi>
-      <NavLi class="lg:mb-0 lg:px-2" href="/icons/svelte-4">Icons</NavLi>
-      <NavLi class="lg:mb-0 lg:px-2" href="/blocks">Blocks</NavLi>
-      <NavLi class="lg:mb-0 lg:px-2" href="/admin-dashboard">Dashboard</NavLi>
+      {#each siteNav as page}
+        <NavLi class="lg:mb-0 lg:px-2" href={page.href}>{page.title}</NavLi>
+      {/each}
     </NavUl>
 
     <div class="ms-auto flex items-center">
+      {#each siteLinksLoaded as link, i}
+        <ToolbarLink
+          class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white sm:inline-block"
+          name={link.title}
+          href={link.href}
+        >
+          {#if link?.imp}
+            <svelte:component this={link?.imp} />
+          {:else if link?.img_src}
+            <img
+              src={link.img_src}
+              alt={link?.img_alt ?? ''}
+              aria-hidden="true"
+              role="presentation"
+            />
+          {/if}
+        </ToolbarLink>
+
+        <span>
+          {link?.prefix ?? ''}
+          <a href={link.href}>
+            {#if link?.title}
+              <span>{link.title}</span>
+            {/if}
+          </a>
+          {link?.suffix ?? ''}
+        </span>
+      {/each}
+
       <!-- <ToolbarLink
         class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white sm:inline-block"
         name="View on GitHub"
