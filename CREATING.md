@@ -762,7 +762,9 @@ const config = {
   ...
 ```
 
-Change all `<style>` tags in `*.svelte` files to `<style lang="scss">`.
+Change all `<style>` tags in `*.svelte` files to `<style lang="scss">` to use `sass` preprocessor (it handles both `sass` and `scss` formats).
+
+Note: Using `<style lang="scss">` will pass the styles through `sass` preprocessor, which will be BEFORE `postcss`. If you plan to use `postcss` plugins for special syntax extensions (like TailwindCSS), do not use `<style lang="scss">`, as `sass` preprocessor will not understand those special syntax extensions.
 
 #### Prettier and additional Stylelint rules
 
