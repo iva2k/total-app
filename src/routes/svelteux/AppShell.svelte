@@ -9,13 +9,17 @@
     AppBar,
     AppLayout,
     Button,
+    Icon,
     ListItem,
+    MenuButton,
     NavItem,
     ThemeInit,
     ThemeSelect,
-    ThemeSwitch
+    ThemeSwitch,
+    Tooltip,
+    lgScreen
   } from 'svelte-ux';
-  import { mdiRefresh } from '@mdi/js';
+  import { mdiArrowTopRight, mdiDotsVertical, mdiGithub, mdiTwitter, mdiRefresh } from '@mdi/js';
   //   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
   import './styles.css';
@@ -83,30 +87,63 @@
 
     <div slot="actions">
       <!-- App actions -->
-      {#each siteLinksLoaded as link}
-        <a href={link.href}>
-          {#if link?.img_component}
-            <svelte:component this={link?.img_component} />
-          {:else if link?.img_html}
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html link?.img_html}
-          {:else if link?.img_src}
-            <img
-              src={link.img_src}
-              alt={link?.img_alt ?? ''}
-              aria-hidden="true"
-              role="presentation"
-            />
-          {/if}
-          {#if link?.title}
-            <span>{link.title}</span>
-          {/if}
-        </a>
-      {/each}
+      {#if $lgScreen}
+        {#each siteLinksLoaded as link}
+          <Tooltip
+            title={link?.prefix + ' ' + link?.title + ' ' + link?.suffix}
+            placement="left"
+            offset={2}
+          >
+            <!-- Hand-craft Button, span, Icon to use our custom component/svg -->
+            <Button href={link.href} class="p-2" target="_blank">
+              <span>
+                {#if link?.img_icon}
+                  <Icon data={link?.img_icon} />
+                {:else if link?.img_component}
+                  <Icon>
+                    <svelte:component this={link?.img_component} />
+                    <!-- class="Icon inline-block flex-shrink-0 fill-current pointer-events-none" -->
+                  </Icon>
+                {:else if link?.img_html}
+                  <Icon>
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                    {@html link?.img_html}
+                  </Icon>
+                {:else if link?.img_src}
+                  <Icon>
+                    <img
+                      src={link.img_src}
+                      alt={link?.img_alt ?? ''}
+                      aria-hidden="true"
+                      role="presentation"
+                    />
+                  </Icon>
+                {/if}
+              </span>
+            </Button>
+          </Tooltip>
+        {/each}
+      {/if}
 
-      <Button icon={mdiRefresh} class="p-2 hover:bg-surface-100/10" />
       <ThemeSelect lightThemes={['light']} darkThemes={['dark']} />
       <ThemeSwitch />
+      {#if !$lgScreen}
+        <MenuButton
+          icon={mdiDotsVertical}
+          menuIcon={null}
+          iconOnly={true}
+          options={siteLinksLoaded.map((l) => ({
+            label: l?.title,
+            value: l?.href,
+            icon: l?.img_icon ?? l?.img_html ?? l?.img_src
+          }))}
+          onchange={(e) => {
+            e?.detail?.value && window.open(e.detail.value || '', '_blank');
+          }}
+        >
+          <span slot="selection" class="hidden"></span>
+        </MenuButton>
+      {/if}
     </div>
   </AppBar>
 
