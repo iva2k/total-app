@@ -112,38 +112,38 @@
     <Offline />
   -->
 
-    <footer>
-      <p>
-        {#each siteLinksLoaded as link, i}
-          {#if i > 0}
-            <span>&nbsp;| </span>
-          {/if}
-          <span>
-            {link?.prefix ?? ''}
-            <a href={link.href}>
-              {#if link?.img_component}
-                <svelte:component this={link?.img_component} />
-              {:else if link?.img_html}
-                {@html link?.img_html}
-              {:else if link?.img_src}
-                <img
-                  src={link.img_src}
-                  alt={link?.img_alt ?? ''}
-                  aria-hidden="true"
-                  role="presentation"
-                />
-              {/if}
-              {#if link?.title}
-                <span>{link.title}</span>
-              {/if}
-            </a>
-            {link?.suffix ?? ''}
-          </span>
-        {/each}
-      </p>
-    </footer>
-  </div>
-</SvelteUIProvider>
+  <footer>
+    <p>
+      {#each siteLinksLoaded as link, i}
+        {#if i > 0}
+          <span>&nbsp;| </span>
+        {/if}
+        <span>
+          {link?.prefix ?? ''}
+          <a href={link.href}>
+            {#if link?.img_component}
+              <svelte:component this={link?.img_component} />
+            {:else if link?.img_html}
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+              {@html link?.img_html}
+            {:else if link?.img_src}
+              <img
+                src={link.img_src}
+                alt={link?.img_alt ?? ''}
+                aria-hidden="true"
+                role="presentation"
+              />
+            {/if}
+            {#if link?.title}
+              <span>{link.title}</span>
+            {/if}
+          </a>
+          {link?.suffix ?? ''}
+        </span>
+      {/each}
+    </p>
+  </footer>
+</div>
 
 <style lang="scss">
   .app {
