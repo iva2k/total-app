@@ -34,7 +34,7 @@ const websiteFnc = (
   const twitterUserId = '1234567890';
   const wireUsername = '@iva2k';
   const githubRepo = 'https://github.com/iva2k/total-app';
-  const websiteUrlBase = 'https://total-app.iva2k.com';
+  const websiteUrlBase = 'https://total-app.vercel.app';
   const websiteUrlNetlify = 'https://total-app.netlify.app';
   const websiteUrlVercel = 'https://total-app.vercel.app';
   const websiteUrl = NETLIFY ? websiteUrlNetlify : VERCEL ? websiteUrlVercel : websiteUrlBase;
@@ -56,7 +56,8 @@ const websiteFnc = (
     {
       href: 'https://kit.svelte.dev',
       title: 'kit.svelte.dev',
-      img_import: '../images/svelte-logo.svelte', // Using wrapper component. Works.
+      // img_import: '../images/svelte-logo.svelte', // Using wrapper component. Works.
+      img_import: '../images/svelte-logo.svg', // Using SVG file directly. Works (with {@html item.img_import})
       // img_import: 'virtual:icons/images/svelte-logo', // Using unplugin-icons. Does not work (no run-time dynamic imports in unplugin-icons)
       img_alt: 'SvelteKit',
       prefix: 'visit',
