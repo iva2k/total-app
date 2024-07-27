@@ -116,7 +116,8 @@
             {#if link?.img_component}
               <svelte:component this={link?.img_component} />
             {:else if link?.img_html}
-              {@html link?.img_html /* eslint-disable-line svelte/no-at-html-tags */}
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+              {@html link?.img_html}
             {:else if link?.img_src}
               <img
                 src={link.img_src}
