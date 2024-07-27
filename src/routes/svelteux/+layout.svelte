@@ -34,6 +34,7 @@
 
   import type { LayoutData } from './$types';
   import type { LayoutContext, SiteLink } from '$lib/types';
+  import { getSiteLinksComponents } from '$lib/config/configUtils';
 
   let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
 
@@ -149,8 +150,11 @@
       <!-- App actions -->
       {#each siteLinksLoaded as link}
         <a href={link.href}>
-          {#if link?.imp}
-            <svelte:component this={link?.imp} />
+          {#if link?.img_component}
+            <svelte:component this={link?.img_component} />
+          {:else if link?.img_html}
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            {@html link?.img_html}
           {:else if link?.img_src}
             <img
               src={link.img_src}
