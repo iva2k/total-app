@@ -20,23 +20,20 @@
 
   // import Favicon from '$lib/components/favicon/Favicon.svelte';
   // import Offline from '$lib/components/offline/Offline.svelte';
-  // import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
-  // import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
-  // import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
-  // const { githubRepo } = website;
   const { siteLinks, siteNav } = website;
-  // import GithubLogo from '$lib/images/github.svelte';
-  // import svelte_logo from '$lib/images/svelte-logo.svg';
 
-  import type { LayoutData } from './$types';
-  import type { LayoutContext, SiteLink } from '$lib/types';
+  // DISABLED (see root +layout.svelte)
+  // import type { LayoutData } from './$types';
+  // import type { LayoutContext, SiteLink } from '$lib/types';
+  import type { SiteLink } from '$lib/types';
   import { getSiteLinksComponents } from '$lib/config/configUtils';
 
-  let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let { children } = $props<{ children: Snippet }>();
 
   let siteLinksLoaded = $state<SiteLink[]>([]);
 
@@ -75,6 +72,7 @@
     }
   });
 
+  /* DISABLED (see root +layout.svelte)
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
   // Use context to make ssrPathname available to child components
@@ -84,6 +82,7 @@
       return { ssrPathname };
     }
   });
+  */
 
   /* DISABLED
   // Favicon params:
@@ -110,27 +109,6 @@
 -->
 
 <!-- <div class="app"> -->
-<!-- <Header --corner-right-width="8em">
-    {#snippet content()}
-      <DarkMode htmlDarkClass="dark">
-        {#snippet content(data)}
-          <label>
-            <input
-              id="cb1"
-              type="checkbox"
-              checked={data.isDarkMode}
-              onchange={(e) => {
-                data.onChange(e, !(data.isDarkMode ?? false));
-                return;
-              }}
-              aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
-            />
-            {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
-          </label>
-        {/snippet}
-      </DarkMode>
-    {/snippet}
-  </Header> -->
 
 <AppLayout areas="'header header' 'aside main'">
   <svelte:fragment slot="nav">
