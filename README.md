@@ -17,7 +17,7 @@
             <td align=center>
 <a href="https://github.com/iva2k/total-app/pulls"><img src="https://img.shields.io/github/issues-pr/iva2k/total-app.svg" ="Github"></a>
             </td>
-            <td align=center><a href="https://discord.gg/https://discord.gg/7mAdkjhC"><img src="https://discord.com/api/guilds/1264001379853406270/widget.png" alt="Discord Shield"></a></td>
+            <td align=center><a href="https://discord.gg/n4vjyhmg"><img src="https://discord.com/api/guilds/1264001379853406270/widget.png" alt="Discord Shield"></a></td>
         </tr>
         <tr>
             <td align=center><a href=https://www.chromatic.com/builds?appId=65a02a765c0010e653425b30>Chromatic</a></td>
@@ -26,7 +26,7 @@
             <td align=center colspan=2><a href="https://github.com/iva2k/total-app">Github
                <!-- <img src="https://img.shields.io/badge/GitHub--181717?style=for-the-badge&logo=github&logoColor=white" alt="Github"> -->
             </a></td>
-            <td align=center><a href="https://discord.gg/https://discord.gg/7mAdkjhC">Discord</a></td>
+            <td align=center><a href="https://discord.gg/n4vjyhmg">Discord</a></td>
         </tr>
     </tbody>
 </table>
@@ -255,7 +255,7 @@ See Q & A below and file issues and submit PRs on [Github](https://github.com/iv
 
 See [Q & A](./QANDA.md) for more or reach out on Discord:
 
-[![Discord Banner](https://discord.com/api/guilds/1264001379853406270/widget.png?style=banner2)](https://discord.gg/https://discord.gg/7mAdkjhC)
+[![Discord Banner](https://discord.com/api/guilds/1264001379853406270/widget.png?style=banner2)](https://discord.gg/n4vjyhmg)
 
 ## Enjoy! \\\_/
 
