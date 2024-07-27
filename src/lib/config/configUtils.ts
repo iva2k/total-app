@@ -59,6 +59,7 @@ export async function getSiteLinksComponents(
   const specifiers_nostr = ['component'];
   const siteLinksLoaded = await Promise.all(
     siteLinks.map(async (l) => {
+      const l1: SiteLink = { ...l };
       if (l.img_import) {
         try {
           const [prefix, img_import1] = l.img_import.includes(':')
@@ -91,15 +92,47 @@ export async function getSiteLinksComponents(
               // throw new Error(`Expected Component, got ${typeof im} from ${pathname}`);
               throw new Error(`Expected Component, got ${typeof im} from ${img_import}`);
             }
-            return { ...l, img_html: im };
+            l1.img_html = im;
+          } else {
+            l1.img_component = im;
           }
-          return { ...l, img_component: im };
         } catch (e) {
           console.log(`Error "${e}" loading module "${l.img_import}"`);
         }
       }
-      return l;
+      if (l.img_icon) {
+        if (typeof l.img_icon === 'string') {
+          // Also conveniently accept `path`, `svg`, or `svgUrl` as `data`
+          const dataStr = l.img_icon.toLowerCase();
+          if (dataStr.includes('<svg')) {
+            l1.img_html = l.img_icon;
+          } else if (dataStr.includes('http')) {
+            l1.img_src = l.img_icon;
+          } else {
+            const path = l.img_icon;
+            const html = pathsToSvg([path]);
+            l1.img_html = html;
+          }
+        }
+      }
+      return l1;
     })
   );
   return siteLinksLoaded;
+}
+
+function pathsToSvg(paths: string[]): string {
+  const size: string | number = '1.5em';
+  const width = size;
+  const height = size;
+
+  const viewBox = '0 0 24 24'; // Need something to size it
+  let html = `<svg width="${width}" height="${height}" viewBox="${viewBox}" role="presentation">`;
+  paths.forEach((d) => {
+    // html += `<path fill-rule="evenodd" clip-rule="evenodd" stroke="none" d="${d}" fill="currentColor"></path>`;
+    html += `<path d="${d}" fill="currentColor"></path>`;
+  });
+  html += `</svg>`;
+
+  return html;
 }
