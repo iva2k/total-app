@@ -15,6 +15,40 @@ function getExtension(path: string) {
   return path.slice(((path.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
+// All paths with *.svelte components that need to be loaded dynamically by loadComponent(), e.g. in `website.siteLinks`
+const componentPaths: ComponentMap[] = [
+  import.meta.glob('../images/*.svelte') as ComponentMap,
+  import.meta.glob('../images/*.svg', { as: 'raw' }) as ComponentMap
+  // import.meta.glob('../assets/home/*.svelte') as ComponentMap,
+  // Add more paths here as needed, inside `import.meta.glob(...) as ComponentMap`
+];
+
+type ComponentModule = () => Promise<{ default: Component }>;
+type RawModule = () => Promise<string>;
+interface ComponentMap {
+  [key: string]: ComponentModule | RawModule;
+}
+
+// Static `components` is necessary for the dynamic import to work. It tells the bundler to
+// include in the bundle all the components found in `components`.
+// Create a merged component map from all paths
+const components: ComponentMap = componentPaths.reduce((acc, map) => {
+  const modules = map;
+  return { ...acc, ...modules };
+}, {});
+
+export async function loadComponent(componentPath: string): Promise<Component | string | null> {
+  // const componentPath = `../images/${name}.svelte`;
+  if (components[componentPath]) {
+    const module = await components[componentPath]();
+    return typeof module === 'string' ? module : module.default;
+  }
+  // throw new Error(`Component ${name} not found`);
+  // throw new Error(`Component ${componentPath} not found`);
+  console.error(`Component ${componentPath} not found`);
+  return null;
+}
+
 export async function getSiteLinksComponents(
   siteLinks: SiteLink[],
   callerPath: string
@@ -36,6 +70,7 @@ export async function getSiteLinksComponents(
           const specifier = specifier1.toLowerCase();
           const extension = getExtension(img_import);
 
+          // What type of import data to expect?
           let stringOk = false;
           if (specifiers_nostr.includes(specifier) || exts_nostr.includes(extension)) {
             stringOk = false;
@@ -43,20 +78,22 @@ export async function getSiteLinksComponents(
             stringOk = true;
           }
 
-          let pathname = getComponentPath(img_import, callerPath);
-          if (prefix) {
-            // pathname = prefix + ':' + pathname; // restore prefix that getComponentPath() does not preserve.
+          const im = await loadComponent(img_import);
+          if (!im) {
+            throw new Error(`Component ${img_import} not found`);
           }
-          if (specifier) {
-            pathname = pathname + '?' + specifier; // restore specifier that getComponentPath() does not preserve.
+          if (typeof im === 'string') {
+            // string type can be returned for svg files - either ?raw - then it's file contents, or url.
+            // There's no easy way to distinguish contents from url here, so decided to not handle urls here.
+            if (!stringOk) {
+              // Unfortunately, we can't currently import SVG files as components in runtime.
+              // Perhaps we can do `svelte.compile()` here? Or need a plugin that compiles dynamic SVG into component in build time based on dynamic import.
+              // throw new Error(`Expected Component, got ${typeof im} from ${pathname}`);
+              throw new Error(`Expected Component, got ${typeof im} from ${img_import}`);
+            }
+            return { ...l, img_html: im };
           }
-          const im: Component = (await import(/* @vite-ignore */ pathname)).default;
-          if (!im || (!stringOk && typeof im === 'string')) {
-            // Unfortunately, we can't currently import SVG files as components in runtime.
-            // Perhaps we can do `svelte.compile()` here? Or need a plugin that compiles dynamic SVG into component in build time based on dynamic import.
-            throw new Error(`Expected Component, got ${typeof im} from ${pathname}`);
-          }
-          return { ...l, imp: im };
+          return { ...l, img_component: im };
         } catch (e) {
           console.log(`Error "${e}" loading module "${l.img_import}"`);
         }
