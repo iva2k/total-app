@@ -56,7 +56,8 @@ const websiteFnc = (
     {
       href: 'https://kit.svelte.dev',
       title: 'kit.svelte.dev',
-      img_import: '../images/svelte-logo.svelte', // Using wrapper component. Works.
+      // img_import: '../images/svelte-logo.svelte', // Using wrapper component. Works.
+      img_import: '../images/svelte-logo.svg', // Using SVG file directly. Works (with {@html item.img_import})
       // img_import: 'virtual:icons/images/svelte-logo', // Using unplugin-icons. Does not work (no run-time dynamic imports in unplugin-icons)
       img_alt: 'SvelteKit',
       prefix: 'visit',
