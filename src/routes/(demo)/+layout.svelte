@@ -116,8 +116,10 @@
         <span>
           {link?.prefix ?? ''}
           <a href={link.href}>
-            {#if link?.imp}
-              <svelte:component this={link?.imp} />
+            {#if link?.img_component}
+              <svelte:component this={link?.img_component} />
+            {:else if link?.img_html}
+              {@html link?.img_html /* eslint-disable-line svelte/no-at-html-tags */}
             {:else if link?.img_src}
               <img
                 src={link.img_src}
