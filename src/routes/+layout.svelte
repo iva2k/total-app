@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount, setContext, type Snippet, type ComponentProps } from 'svelte';
+  // import { onMount, setContext, type Snippet, type ComponentProps } from 'svelte';
+  import { onMount, setContext, type Snippet } from 'svelte';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
@@ -50,6 +51,7 @@
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
 
+  /* DISABLED
   let select_theme_id = $state(0);
   const themes: { id: number; theme: CarbonTheme; title: string }[] = [
     { id: 0, theme: 'white', title: 'White' },
@@ -66,11 +68,14 @@
     // All themes: "carbon-components-svelte/css/all.css"
     // From CDN: `https://unpkg.com/carbon-components-svelte/css/${theme}.css`
   );
+  */
 </script>
 
+<!-- DISABLED
 <svelte:head>
   <link rel="stylesheet" href={theme_css} />
-</svelte:head>
+</svelte:head> 
+-->
 
 <!-- <div class="app"> -->
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
