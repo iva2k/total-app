@@ -15,61 +15,24 @@
     ThemeSelect,
     ThemeSwitch
   } from 'svelte-ux';
-  import { mdiRefresh } from '@mdi/js';
-  //   import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+  import AppShell from './AppShell.svelte';
 
   // import Favicon from '$lib/components/favicon/Favicon.svelte';
   // import Offline from '$lib/components/offline/Offline.svelte';
-  import './styles.css';
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
-
-  import website from '$lib/config/website';
-  const { siteLinks, siteNav } = website;
 
   // DISABLED (see root +layout.svelte)
   // import type { LayoutData } from './$types';
-  // import type { LayoutContext, SiteLink } from '$lib/types';
-  import type { SiteLink } from '$lib/types';
-  import { getSiteLinksComponents } from '$lib/config/configUtils';
+  // import type { LayoutContext } from '$lib/types';
 
   // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
   let { children } = $props<{ children: Snippet }>();
-
-  let siteLinksLoaded = $state<SiteLink[]>([]);
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
-    const mypath = import.meta.url;
-    siteLinksLoaded = await getSiteLinksComponents(siteLinks, mypath);
-    console.log('DEBUG: siteLinksLoaded=%o', siteLinksLoaded);
-  });
-
-  settings({
-    components: {
-      AppLayout: {
-        classes: {
-          aside: 'border-r',
-          nav: 'bg-surface-300 py-2'
-        }
-      },
-      AppBar: {
-        classes:
-          'bg-primary text-primary-content shadow-md [text-shadow:1px_1px_2px_theme(colors.primary-700)]'
-      },
-      NavItem: {
-        classes: {
-          root: 'text-sm text-surface-content/70 pl-6 py-2 hover:bg-surface-100/70 relative',
-          active:
-            'text-primary bg-surface-100 font-medium before:absolute before:bg-primary before:rounded-full before:w-1 before:h-2/3 before:left-[6px] shadow z-10'
-        }
-      }
-    },
-    themes: {
-      light: ['light', 'emerald', 'hamlindigo-light'],
-      dark: ['dark', 'forest', 'hamlindigo-dark']
-    }
   });
 
   /* DISABLED (see root +layout.svelte)
@@ -102,61 +65,16 @@
   */
 </script>
 
-<ThemeInit />
-
 <!-- DISABLED
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 -->
 
-<!-- <div class="app"> -->
-
-<AppLayout areas="'header header' 'aside main'">
-  <svelte:fragment slot="nav">
-    <!-- Nav menu -->
-    {#each siteNav as item}
-      <NavItem text={item.title} currentUrl={$page.url} path={item.href} />
-    {/each}
-  </svelte:fragment>
-
-  <!-- <AppBar title="Example"> -->
-  <AppBar title={['Example', 'Page', 'Section']} class="bg-primary text-primary-content">
-    <!-- <div slot="title">
-        <ListItem title="Example" subheading="Page" />
-      </div> -->
-
-    <div slot="actions">
-      <!-- App actions -->
-      {#each siteLinksLoaded as link}
-        <a href={link.href}>
-          {#if link?.img_component}
-            <svelte:component this={link?.img_component} />
-          {:else if link?.img_html}
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html link?.img_html}
-          {:else if link?.img_src}
-            <img
-              src={link.img_src}
-              alt={link?.img_alt ?? ''}
-              aria-hidden="true"
-              role="presentation"
-            />
-          {/if}
-          {#if link?.title}
-            <span>{link.title}</span>
-          {/if}
-        </a>
-      {/each}
-
-      <!-- <Button icon={mdiRefresh} class="p-2 hover:bg-surface-100/10" /> -->
-      <ThemeSelect lightThemes={['light']} darkThemes={['dark']} />
-      <ThemeSwitch />
-    </div>
-  </AppBar>
-
+<AppShell>
+  <!-- <div class="app"> -->
   <main class="isolate">
     {@render children()}
   </main>
-</AppLayout>
+</AppShell>
 
 <!-- DISABLED
 <Offline />
