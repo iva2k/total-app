@@ -129,6 +129,41 @@ function load_state() {
   fi
 }
 
+function retry_it() {
+  # Function to retry a command
+  local max_retries="$1"
+  local command_name="$2"
+  shift 2
+  local command_args=("$@")
+
+  # Check if file descriptor 3 is open, if not, redirect it to stderr
+  if ! { true >&3; } 2>/dev/null; then
+    exec 3>&2
+  fi
+    
+  local rc
+  local retry_count=0
+
+  while true; do
+      # Call the function with its arguments
+      $command_name "${command_args[@]}"; rc="$?"
+
+      if [ $rc -eq 0 ]; then
+          return 0
+      fi
+
+      retry_count=$((retry_count + 1))
+      if [ "$retry_count" -ge "$max_retries" ]; then
+        echo "Command $command_name error code $rc, tried $max_retries times, giving up." >&3
+        break
+      fi
+      echo "Command $command_name error code $rc, try $retry_count of $max_retries" >&3
+  done
+
+  # If we reach here, all retries failed
+  return "$rc"
+}
+
 function time_it() {
   # Function to execute and time another function
   # Captures start time, executes $2 with the rest args, captures end time, calculates time difference into st_times[$1]
@@ -268,16 +303,19 @@ function run_one() {
   # git checkout "$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
   if [ "$res" -ne 0 ] ; then
     echo "Error $res in checkout to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    st_outputs[i]="Error checking out branch"
     st_errors[i]="$res"
     exit_save_state "$res"
   fi
 
   # Pull the target branch
   echo "PULL $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-  git checkout "$TARGET_BRANCH" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2);  res="$?"
+  # There are sporadic fails in `git pull` (due to background `git fetch`), retry few times
+  retry_it 3 git pull 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2);  res="$?"
   # git pull 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
   if [ "$res" -ne 0 ] ; then
-    echo "Error $res in pulling \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    echo "Error $res pulling \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+    st_outputs[i]="Error pulling out branch"
     st_errors[i]="$res"
     exit_save_state "$res"
   fi
@@ -300,6 +338,7 @@ function run_one() {
       git reset --hard "origin/$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
       if [ "$res" -ne 0 ] ; then
         echo "Error $res in checkout to \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        st_outputs[i]="Error in checkout of branch"
         st_errors[i]="$res"
         exit_save_state "$res"
       fi
@@ -325,6 +364,7 @@ function run_one() {
       git reset --hard "origin/$TARGET_BRANCH" 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
       if [ "$res" -ne 0 ] ; then
         echo "Error $res in resetting \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE"
+        st_outputs[i]="${st_outputs[i]}, error resetting branch"
         st_errors[i]="$res"
         exit_save_state "$res"
       fi
