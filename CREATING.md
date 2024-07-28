@@ -1114,7 +1114,7 @@ pnpm install -D flowbite-svelte-icons
 
 Modify `tailwind.config.cjs` file to use Flowbite (see source in repo).
 
-Add example page `src/routes/flowbite/+page.svelte` and add route to `siteNav` in `src/lib/config/websiteFnc.js` (see sources in repo).
+Add example page `src/routes/flowbite/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
 
 For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
 
