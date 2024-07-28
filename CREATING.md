@@ -1090,6 +1090,6 @@ To get started on custom themes using scss, see <https://github.com/carbon-desig
 
 Insert code that loads the framework and adds theme and dark mode toggle into `src/routes/+layout.svelte` (see source in repo).
 
-Add example page `src/routes/carbon/+page.svelte` and add route to `siteNav` in `src/lib/config/websiteFnc.js` (see sources in repo).
+Add example page `src/routes/carbon/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
 
 Add `CARBON_TELEMETRY_DISABLED=1` to the local ".env\*" files and to CI/CD evironment variables if desired. IBM packages, such as `carbon-components-svelte`, by default collect anonymous usage data, if telemetry is not disabled.
