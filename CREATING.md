@@ -1093,7 +1093,7 @@ import { Card } from 'sveltestrap/src';
 
 Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source).
 
-Add example page `src/routes/bootstrap/+page.svelte` and add route to `siteNav` in `src/lib/config/websiteFnc.js` (see sources in repo).
+Add example page `src/routes/bootstrap/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
 
 Add some items to `assets.ts` (see source).
 
