@@ -28,19 +28,33 @@
   import './styles.css';
 
   import website from '$lib/config/website';
-  const { siteLinks, siteNav, websiteUrlBase } = website;
+  const { siteLinks, websiteUrlBase } = website;
 
   import type { SiteLink } from '$lib/types';
-  import { getSiteLinksComponents } from '$lib/config/configUtils';
+  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
 
   let { children } = $props<{ children: Snippet }>();
 
-  let siteLinksLoaded = $state<SiteLink[]>([]);
+  let headerLinks = $state<typeof siteLinks>([]);
+  let footerLinks = $state<typeof siteLinks>([]);
+  let sidebarLinks = $state<typeof siteLinks>([]);
 
   onMount(async () => {
     const mypath = import.meta.url;
-    siteLinksLoaded = await getSiteLinksComponents(siteLinks, mypath);
-    console.log('DEBUG: siteLinksLoaded=%o', siteLinksLoaded);
+    headerLinks = (await getSiteLinksComponents(
+      getSiteLinksFiltered(siteLinks, 'header', 2, true, true),
+      mypath
+    )).filter((l) => l?.href);
+    footerLinks = (await getSiteLinksComponents(
+      getSiteLinksFiltered(siteLinks, 'footer', 1, true, true),
+      mypath
+    )).filter((l) => l?.href);
+    sidebarLinks = (await getSiteLinksComponents(
+      getSiteLinksFiltered(siteLinks, 'sidebar', 2, true, true),
+      mypath
+    )).filter((l) => l?.href);
+    console.log('DEBUG: footerLinks=%o', footerLinks);
+
   });
 
   settings({
@@ -80,7 +94,7 @@
 <AppLayout>
   <svelte:fragment slot="nav">
     <!-- Nav menu -->
-    {#each siteNav as item}
+    {#each sidebarLinks as item}
       <NavItem text={item.title} currentUrl={$page.url} path={item.href} />
     {/each}
   </svelte:fragment>
@@ -103,7 +117,7 @@
 
     <div slot="actions" class="flex gap-0">
       <!-- App actions main sections-->
-      {#each siteNav as item, i}
+      {#each headerLinks as item, i}
         <Button
           variant1={isActive($page.url, item.href) ? 'fill-light' : undefined}
           class={isActive($page.url, item.href)
@@ -117,7 +131,7 @@
 
       <!-- App actions on large screen-->
       {#if $lgScreen}
-        {#each siteLinksLoaded as link}
+        {#each footerLinks as link}
           <Tooltip
             title={link?.prefix + ' ' + link?.title + ' ' + link?.suffix}
             placement="left"
@@ -162,7 +176,7 @@
           icon={mdiDotsVertical}
           menuIcon={null}
           iconOnly={true}
-          options={siteLinksLoaded.map((l) => ({
+          options={headerLinks.map((l) => ({
             label: l?.title,
             value: l?.href,
             icon: l?.img_icon ?? l?.img_html ?? l?.img_src
