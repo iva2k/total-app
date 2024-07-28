@@ -8,6 +8,7 @@
     settings,
     AppBar,
     AppLayout,
+    Breadcrumb,
     Button,
     Icon,
     ListItem,
@@ -19,13 +20,15 @@
     Tooltip,
     lgScreen
   } from 'svelte-ux';
+  import { isActive } from 'svelte-ux/utils/routing';
   import { mdiArrowTopRight, mdiDotsVertical, mdiGithub, mdiTwitter, mdiRefresh } from '@mdi/js';
   //   import { faUser } from '@fortawesome/free-solid-svg-icons';
+  import logo from '$lib/images/logo.svg?raw';
 
   import './styles.css';
 
   import website from '$lib/config/website';
-  const { siteLinks, siteNav } = website;
+  const { siteLinks, siteNav, websiteUrlBase } = website;
 
   import type { SiteLink } from '$lib/types';
   import { getSiteLinksComponents } from '$lib/config/configUtils';
@@ -65,13 +68,16 @@
       dark: ['dark', 'forest', 'hamlindigo-dark']
     }
   });
+  // let title = 'Example';
+  let title = ['Total App', 'Svelte UX', 'Section'];
 </script>
 
 <ThemeInit />
 
 <!-- <div class="app"> -->
 
-<AppLayout areas="'header header' 'aside main'">
+<!-- <AppLayout areas="'header header' 'aside main'"> -->
+<AppLayout>
   <svelte:fragment slot="nav">
     <!-- Nav menu -->
     {#each siteNav as item}
@@ -80,13 +86,36 @@
   </svelte:fragment>
 
   <!-- <AppBar title="Example"> -->
-  <AppBar title={['Example', 'Page', 'Section']} class="bg-primary text-primary-content">
+  <AppBar {title} class="bg-primary text-primary-content">
+    <div slot="title" class="ml-0 inline-flex text-lg font-medium">
+      <!-- <ListItem title="Example" subheading="Page" /> -->
+      <Button icon={logo} href={websiteUrlBase} class="mr-2 p-3"></Button>
+      {#if typeof title === 'string' || typeof title === 'number'}
+        {title}
+      {:else}
+        <Breadcrumb items={title} class="inline-flex gap-2" />
+      {/if}
+    </div>
+
     <!-- <div slot="title">
         <ListItem title="Example" subheading="Page" />
       </div> -->
 
-    <div slot="actions">
-      <!-- App actions -->
+    <div slot="actions" class="flex gap-0">
+      <!-- App actions main sections-->
+      {#each siteNav as item, i}
+        <Button
+          variant1={isActive($page.url, item.href) ? 'fill-light' : undefined}
+          class={isActive($page.url, item.href)
+            ? '[--bg-color:theme(colors.surface-content/20%)]'
+            : ''}
+          href={item.href}
+        >
+          {item.title}
+        </Button>
+      {/each}
+
+      <!-- App actions on large screen-->
       {#if $lgScreen}
         {#each siteLinksLoaded as link}
           <Tooltip
@@ -128,6 +157,7 @@
       <ThemeSelect lightThemes={['light']} darkThemes={['dark']} />
       <ThemeSwitch />
       {#if !$lgScreen}
+        <!-- App actions Menu on small screen -->
         <MenuButton
           icon={mdiDotsVertical}
           menuIcon={null}
