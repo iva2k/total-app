@@ -1086,4 +1086,4 @@ Note: This implementation is not using [svelma](https://github.com/c0bra/svelma)
 
 Insert code that loads the framework into `src/routes/+layout.svelte` (see source).
 
-Add example page `src/routes/bulma/+page.svelte` and add route to `siteNav` in `src/lib/config/websiteFnc.js` (see sources in repo).
+Add example page `src/routes/bulma/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
