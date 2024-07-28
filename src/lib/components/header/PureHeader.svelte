@@ -1,10 +1,25 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import logo from '$lib/images/logo.svg';
   import website from '$lib/config/website';
-  const { websiteUrlBase, siteNav } = website;
+  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  const { websiteUrlBase, siteLinks } = website;
 
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
+
+  let headerLinks: typeof siteLinks = [];
+  onMount(async () => {
+    /* DISABLED (see root +layout.svelte)
+    await loadIonicPWAElements(window);
+    */
+    const mypath = import.meta.url;
+    headerLinks = await getSiteLinksComponents(
+      getSiteLinksFiltered(siteLinks, 'header', 2, true, /* flatten */ true),
+      mypath
+    );
+    console.log('DEBUG: headerLinks=%o', headerLinks);
+  });
 </script>
 
 <header>
@@ -19,9 +34,9 @@
       <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
     </svg>
     <ul>
-      {#each siteNav as page}
-        <li aria-current={path1st === page.href ? 'page' : undefined}>
-          <a href={page.href}>{page.title}</a>
+      {#each headerLinks.filter((l) => l?.href) as link}
+        <li aria-current={path1st === link.href ? 'page' : undefined}>
+          <a href={link.href}>{link.title}</a>
         </li>
       {/each}
     </ul>
