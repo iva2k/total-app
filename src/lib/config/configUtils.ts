@@ -1,6 +1,6 @@
 // Attention! Do not move this file away from website.js, websiteAsync.js, websiteFnc.js files. It must remain in the same directory, so getComponentPath() works properly
 import { type Component } from 'svelte';
-import { type SiteLink } from '$lib/types';
+import type { SiteLink, SiteLinkFlatGroup, SiteLinkGroup } from '$lib/types';
 
 function getComponentPath(path: string, callerPath: string): string {
   // Resolve path to a resource specified relative to config/ directory, to the user module's callerPath
@@ -50,16 +50,16 @@ export async function loadComponent(componentPath: string): Promise<Component | 
 }
 
 export async function getSiteLinksComponents(
-  siteLinks: SiteLink[],
+  siteLinks: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[],
   callerPath: string
-): Promise<SiteLink[]> {
+): Promise<typeof siteLinks> {
   const exts_str = ['svg'];
   const exts_nostr = ['svelte'];
   const specifiers_str = ['raw'];
   const specifiers_nostr = ['component'];
   const siteLinksLoaded = await Promise.all(
     siteLinks.map(async (l) => {
-      const l1: SiteLink = { ...l };
+      const l1: SiteLinkGroup = { ...l };
       if (l.img_import) {
         try {
           const [prefix, img_import1] = l.img_import.includes(':')
@@ -115,6 +115,9 @@ export async function getSiteLinksComponents(
           }
         }
       }
+      if ('items' in l && Array.isArray(l.items)) {
+        l1.items = await getSiteLinksComponents(l.items, callerPath);
+      }
       return l1;
     })
   );
@@ -135,4 +138,63 @@ function pathsToSvg(paths: string[]): string {
   html += `</svg>`;
 
   return html;
+}
+
+// TODO: (now) This function badly needs UNIT TESTS for all kinds of arg combinations and siteLinks structures.
+export function getSiteLinksFiltered(
+  siteLinks: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[],
+  filter: 'header' | 'footer' | 'actions' | 'sidebar',
+  treeDepth: number = 0, // 0 - will keep all depth branches, non-0 will prune the tree to the depth
+  nodeFilter: boolean = true, // true will filter out nodes based on filter only (igmoring if any children match the filter), false will keep nodes that have children matching the filter
+  flatten: boolean = false
+): typeof siteLinks {
+  // const filterField = ('displayIn' + filter[0].toUpperCase() + filter.slice(1)) as keyof (SiteLink | SiteLinkGroup | SiteLinkFlatGroup) ;
+  const filterField = {
+    header: 'displayInHeader',
+    footer: 'displayInFooter',
+    actions: 'displayInActions',
+    sidebar: 'displayInSidebar'
+  }?.[filter] as keyof (SiteLink | SiteLinkGroup | SiteLinkFlatGroup);
+  if (!filterField) {
+    return [];
+  }
+
+  function filterRecursively(
+    elements: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[],
+    currentDepth: number
+  ): typeof elements {
+    if (treeDepth !== 0 && currentDepth >= treeDepth) {
+      return [];
+    }
+
+    let result: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[] = [];
+
+    for (const element of elements) {
+      const elem_filter_match = element[filterField];
+      const filteredChildren: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[] =
+        (elem_filter_match || !nodeFilter) && 'items' in element && element?.items
+          ? filterRecursively(element.items, currentDepth + 1)
+          : [];
+
+      const filteredElement: SiteLinkGroup | SiteLinkFlatGroup = { ...element };
+      if (elem_filter_match || (!nodeFilter && filteredChildren.length > 0)) {
+        if (flatten) {
+          delete filteredElement.items;
+          result.push(filteredElement);
+          result = result.concat(filteredChildren);
+        } else {
+          if (filteredChildren.length > 0) {
+            filteredElement.items = filteredChildren;
+          } else {
+            delete filteredElement.items;
+          }
+          result.push(filteredElement);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  return filterRecursively(siteLinks, 0);
 }
