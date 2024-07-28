@@ -8,15 +8,14 @@
     SidebarWrapper,
     SidebarDropdownWrapper
   } from 'flowbite-svelte';
-  import { getContext } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import type { Writable } from 'svelte/store';
   import type { PageData } from './$types';
   import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
   import website from '$lib/config/website';
-  // import { getSiteLinksComponents } from '$lib/config/configUtils';
-  // const { siteLinks, siteNav } = website;
-  const { siteNav } = website;
+  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  const { siteLinks } = website;
 
   // export let data;
   // console.log('posts: ', data);
@@ -37,6 +36,16 @@
 
   $: mainSidebarUrl = $page.url.pathname;
   let activeMainSidebar: string;
+
+  let headerLinks: typeof siteLinks = [];
+
+  onMount(async () => {
+    const mypath = import.meta.url;
+    headerLinks = (
+      await getSiteLinksComponents(getSiteLinksFiltered(siteLinks, 'header', 2, true, true), mypath)
+    ).filter((l) => l?.href);
+    console.log('DEBUG: headerLinks=%o', headerLinks);
+  });
 
   afterNavigate((navigation) => {
     // this fixes https://github.com/themesberg/flowbite-svelte/issues/364
@@ -99,13 +108,13 @@
           </SidebarDropdownWrapper>
         {/each}
 
-        {#each siteNav as page}
+        {#each headerLinks as link}
           <SidebarItem
-            label={page.title}
-            href={page.href}
+            label={link.title}
+            href={link.href}
             spanClass="w-full text-sm font-semibold tracking-wide uppercase hover:text-primary-700 dark:hover:text-primary-600 text-gray-900 dark:text-white"
             {activeClass}
-            active={activeMainSidebar === page.href}
+            active={activeMainSidebar === link.href}
           />
         {/each}
       </SidebarGroup>

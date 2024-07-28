@@ -5,8 +5,8 @@
   import { DarkMode, Navbar, NavBrand, NavHamburger, NavLi, NavUl, Tooltip } from 'flowbite-svelte';
 
   import website from '$lib/config/website';
-  import { getSiteLinksComponents } from '$lib/config/configUtils';
-  const { siteLinks, siteNav } = website;
+  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  const { siteLinks } = website;
 
   //   import DocBadge from '../utils/DocBadge.svelte';
   //   import Discord from '../utils/icons/Discord.svelte';
@@ -34,8 +34,8 @@
   };
 
   import { type SiteLink } from '$lib/types';
-  // let siteLinksLoaded = $state<SiteLink[]>([]);
-  let siteLinksLoaded: SiteLink[] = [];
+  let headerLinks: typeof siteLinks = []; //  = $state<typeof siteLinks>([]);
+  let footerLinks: typeof siteLinks = []; //  = $state<typeof siteLinks>([]);
   onMount(async () => {
     // Workaround until https://github.com/sveltejs/kit/issues/2664 is fixed
     if (typeof window !== 'undefined' && window.location.hash) {
@@ -47,8 +47,13 @@
     }
 
     const mypath = import.meta.url;
-    siteLinksLoaded = await getSiteLinksComponents(siteLinks, mypath);
-    console.log('DEBUG: siteLinksLoaded=%o', siteLinksLoaded);
+    headerLinks = (
+      await getSiteLinksComponents(getSiteLinksFiltered(siteLinks, 'header', 2, true, true), mypath)
+    ).filter((l) => l?.href);
+    footerLinks = (
+      await getSiteLinksComponents(getSiteLinksFiltered(siteLinks, 'footer', 1), mypath)
+    ).filter((l) => l?.href);
+    console.log('DEBUG: footerLinks=%o', footerLinks);
   });
 </script>
 
@@ -89,13 +94,13 @@
       nonActiveClass="md:!ps-3 md:!py-2 lg:!ps-0 text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:text-white lg:dark:hover:text-primary-700 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
       activeClass="md:!ps-3 md:!py-2 lg:!ps-0 text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:dark:text-primary-700 dark:bg-primary-600 lg:dark:bg-transparent cursor-default"
     >
-      {#each siteNav as page}
+      {#each headerLinks as page}
         <NavLi class="lg:mb-0 lg:px-2" href={page.href}>{page.title}</NavLi>
       {/each}
     </NavUl>
 
     <div class="ms-auto flex items-center">
-      {#each siteLinksLoaded as link, i}
+      {#each footerLinks as link, i}
         <ToolbarLink
           class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white sm:inline-block"
           name={link.title}
