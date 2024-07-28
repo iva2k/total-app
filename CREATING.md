@@ -1089,7 +1089,7 @@ pnpm i @svelteuidev/prism
 
 Insert `SvelteUIProvider` wrapper element from the framework into `src/routes/+layout.svelte` (see source in repo).
 
-Add example page `src/routes/svelteui/+page.svelte` and add route to `siteNav` in `src/lib/config/websiteFnc.js` (see sources in repo).
+Add example page `src/routes/svelteui/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
 
 Some styles have to be disabled in `src/routes/styles.css` (see source in repo).
 
