@@ -12,7 +12,7 @@
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
-  import { getSiteLinksComponents } from '$lib/config/configUtils';
+  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
   const { siteLinks } = website;
 
   // import type { LayoutData } from './$types';
@@ -20,17 +20,20 @@
 
   // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
   let { children } = $props<{ children: Snippet }>();
-  import { type SiteLink } from '$lib/types';
-  let siteLinksLoaded = $state<SiteLink[]>([]);
+  let footerLinks = $state<typeof siteLinks>([]);
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
     const mypath = import.meta.url;
-    siteLinksLoaded = await getSiteLinksComponents(siteLinks, mypath);
-    console.log('DEBUG: siteLinksLoaded=%o', siteLinksLoaded);
+    footerLinks = await getSiteLinksComponents(
+      getSiteLinksFiltered(siteLinks, 'footer', 1),
+      mypath
+    );
+    console.log('DEBUG: footerLinks=%o', footerLinks);
   });
+
   /* DISABLED (see root +layout.svelte)
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
@@ -115,7 +118,7 @@
 
   <footer>
     <p>
-      {#each siteLinksLoaded as link, i}
+      {#each footerLinks.filter((l) => l?.href) as link, i}
         {#if i > 0}
           <span>&nbsp;| </span>
         {/if}

@@ -675,7 +675,7 @@ For styling to apply into the slot elements, add `:global()` clauses to some of 
 
 ### Rework PureHeader to use Site Pages List
 
-Add `siteNav` (a list of Site Pages) to `$lib/config/websiteFnc.js` file, use it in PureHeader.svelte.
+Add `siteLinks` (a hierarchical list of Site Pages for various sections) to `$lib/config/websiteFnc.js` file, use it in PureHeader.svelte and in `src/routes/(demo)/+layout.svelte`.
 
 ### Add DarkMode Component
 
@@ -925,14 +925,16 @@ npx cap sync
 
 Create `src/routes/geolocation/+page.svelte` (see source file in repo)
 
-Add the page to the `siteNav` pages array in `$src/config/websiteFnc.js`:
+Add the page to the `siteLinks` pages array in `$src/config/websiteFnc.js`:
 
 ```js
   ...
-  siteNav: [
-    ...
-+    { href: '/geolocation', title: 'Geolocation' },
-  ];
+  const siteLinks = [
+    { title: 'Demo App',
+      ...
+      items: [
+        ...
++       { href: '/geolocation', title: 'Geolocation', displayInHeader: true, dispayInSidebar: true },
 ```
 
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
@@ -980,13 +982,16 @@ pnpm install qr-scanner
 
 Create `src/routes/qrscanner/+page.svelte` (see source file in repo).
 
-Add the page to the `siteNav` pages array in `$src/config/websiteFnc.js`:
+Add the page to the `siteLinks` pages array in `$src/config/websiteFnc.js`:
 
 ```js
   ...
-  siteNav: [
-    ...
-+    { path: '/qrscanner', title: 'QR Scanner' }
+  const siteLinks = [
+    { title: 'Demo App',
+      ...
+      items: [
+        ...
++       { path: '/qrscanner', title: 'QR Scanner', displayInHeader: true, dispayInSidebar: true },
   ];
 ```
 
