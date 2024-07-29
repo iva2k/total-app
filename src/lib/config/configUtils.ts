@@ -24,7 +24,7 @@ function getExtension(path: string) {
 // All paths with *.svelte components that need to be loaded dynamically by loadComponent(), e.g. in `website.siteLinks`
 const componentPaths: ComponentMap[] = [
   import.meta.glob('../images/*.svelte') as ComponentMap,
-  import.meta.glob('../images/*.svg', { as: 'raw' }) as ComponentMap
+  import.meta.glob('../images/*.svg', { query: '?raw' }) as ComponentMap
   // import.meta.glob('../assets/home/*.svelte') as ComponentMap,
   // Add more paths here as needed, inside `import.meta.glob(...) as ComponentMap`
 ];
