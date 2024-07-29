@@ -1,6 +1,12 @@
 // Attention! Do not move this file away from website.js, websiteAsync.js, websiteFnc.js files. It must remain in the same directory, so getComponentPath() works properly
 import { type Component } from 'svelte';
-import type { SiteLink, SiteLinkFlatGroup, SiteLinkGroup } from '$lib/types';
+import type {
+  SiteLinkAny,
+  SiteLink,
+  SiteLinkFlatGroup,
+  SiteLinkGroup,
+  SiteLinkFilter
+} from '$lib/types';
 
 function getComponentPath(path: string, callerPath: string): string {
   // Resolve path to a resource specified relative to config/ directory, to the user module's callerPath
@@ -49,17 +55,57 @@ export async function loadComponent(componentPath: string): Promise<Component | 
   return null;
 }
 
+// Typeguard functions
+function isSiteLink(link: SiteLinkAny): link is SiteLink {
+  return (link as SiteLink)?.href !== undefined;
+}
+function isSiteLinkGroup(link: SiteLinkAny): link is SiteLinkGroup {
+  return (
+    (link as SiteLinkGroup)?.items !== undefined && Array.isArray((link as SiteLinkGroup)?.items)
+  );
+}
+function isSiteLinkFlatGroup(link: SiteLinkAny): link is SiteLinkFlatGroup {
+  const items = (link as SiteLinkGroup)?.items;
+  return items !== undefined && Array.isArray(items);
+}
+
+function getSiteLinkGroupItems(link: SiteLink): undefined;
+function getSiteLinkGroupItems(link: SiteLinkFlatGroup): SiteLink[] | undefined;
+function getSiteLinkGroupItems(link: SiteLinkGroup): SiteLinkAny[] | undefined;
+function getSiteLinkGroupItems(link: SiteLinkAny): SiteLinkAny[] | undefined {
+  const items = (link as SiteLinkGroup)?.items;
+  return items;
+}
+
+type UnwrapArray<T> = T extends (infer U)[] ? U : T;
+
 export async function getSiteLinksComponents(
-  siteLinks: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[],
+  siteLinks: SiteLink[],
   callerPath: string
-): Promise<typeof siteLinks> {
+): Promise<SiteLink[]>;
+export async function getSiteLinksComponents(
+  siteLinks: SiteLinkFlatGroup[],
+  callerPath: string
+): Promise<SiteLinkFlatGroup[]>;
+export async function getSiteLinksComponents(
+  siteLinks: SiteLinkGroup[],
+  callerPath: string
+): Promise<SiteLinkGroup[]>;
+export async function getSiteLinksComponents(
+  siteLinks: SiteLinkAny[],
+  callerPath: string
+): Promise<typeof siteLinks>;
+export async function getSiteLinksComponents(
+  siteLinks: SiteLinkAny[],
+  callerPath: string
+): Promise<SiteLinkAny[]> {
   const exts_str = ['svg'];
   const exts_nostr = ['svelte'];
   const specifiers_str = ['raw'];
   const specifiers_nostr = ['component'];
-  const siteLinksLoaded = await Promise.all(
+  const siteLinksLoaded: typeof siteLinks = await Promise.all(
     siteLinks.map(async (l) => {
-      const l1: SiteLinkGroup = { ...l };
+      const l1: UnwrapArray<typeof siteLinks> = { ...l };
       if (l.img_import) {
         try {
           const [prefix, img_import1] = l.img_import.includes(':')
@@ -115,8 +161,9 @@ export async function getSiteLinksComponents(
           }
         }
       }
-      if ('items' in l && Array.isArray(l.items)) {
-        l1.items = await getSiteLinksComponents(l.items, callerPath);
+      const items = getSiteLinkGroupItems(l);
+      if (items && items.length > 0) {
+        (l1 as unknown as SiteLinkGroup).items = await getSiteLinksComponents(items, callerPath);
       }
       return l1;
     })
@@ -142,36 +189,80 @@ function pathsToSvg(paths: string[]): string {
 
 // TODO: (now) This function badly needs UNIT TESTS for all kinds of arg combinations and siteLinks structures.
 export function getSiteLinksFiltered(
-  siteLinks: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[],
-  filter: 'header' | 'footer' | 'actions' | 'sidebar',
+  siteLinks: SiteLinkAny[],
+  filter: SiteLinkFilter,
+  treeDepth: number,
+  nodeFilter?: boolean,
+  flatten?: true
+): SiteLink[];
+
+export function getSiteLinksFiltered(
+  siteLinks: SiteLinkAny[],
+  filter: SiteLinkFilter,
+  treeDepth: 1,
+  nodeFilter?: boolean,
+  flatten?: false
+): SiteLink[];
+
+export function getSiteLinksFiltered(
+  siteLinks: SiteLink[],
+  filter: SiteLinkFilter,
+  treeDepth: number,
+  nodeFilter?: boolean,
+  flatten?: boolean
+): SiteLink[];
+
+export function getSiteLinksFiltered(
+  siteLinks: SiteLinkFlatGroup[] | SiteLinkGroup[],
+  filter: SiteLinkFilter,
+  treeDepth: 2,
+  nodeFilter?: boolean,
+  flatten?: boolean
+): SiteLinkFlatGroup[];
+
+export function getSiteLinksFiltered(
+  siteLinks: SiteLinkFlatGroup[],
+  filter: SiteLinkFilter,
+  treeDepth: number,
+  nodeFilter?: boolean,
+  flatten?: boolean
+): SiteLinkFlatGroup[];
+
+export function getSiteLinksFiltered(
+  siteLinks: SiteLinkGroup[],
+  filter: SiteLinkFilter,
+  treeDepth?: number,
+  nodeFilter?: boolean,
+  flatten?: boolean
+): SiteLinkGroup[];
+
+export function getSiteLinksFiltered(
+  siteLinks: SiteLinkAny[],
+  filter: SiteLinkFilter,
   treeDepth: number = 0, // 0 - will keep all depth branches, non-0 will prune the tree to the depth
   nodeFilter: boolean = true, // true will filter out nodes based on filter only (igmoring if any children match the filter), false will keep nodes that have children matching the filter
   flatten: boolean = false
-): typeof siteLinks {
-  // const filterField = ('displayIn' + filter[0].toUpperCase() + filter.slice(1)) as keyof (SiteLink | SiteLinkGroup | SiteLinkFlatGroup) ;
+): SiteLinkAny[] {
   const filterField = {
     header: 'displayInHeader',
     footer: 'displayInFooter',
     actions: 'displayInActions',
     sidebar: 'displayInSidebar'
-  }?.[filter] as keyof (SiteLink | SiteLinkGroup | SiteLinkFlatGroup);
+  }?.[filter] as keyof SiteLinkAny;
   if (!filterField) {
     return [];
   }
 
-  function filterRecursively(
-    elements: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[],
-    currentDepth: number
-  ): typeof elements {
+  function filterRecursively(elements: SiteLinkAny[], currentDepth: number): typeof elements {
     if (treeDepth !== 0 && currentDepth >= treeDepth) {
       return [];
     }
 
-    let result: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[] = [];
+    let result: typeof elements = [];
 
     for (const element of elements) {
       const elem_filter_match = element[filterField];
-      const filteredChildren: (SiteLink | SiteLinkGroup | SiteLinkFlatGroup)[] =
+      const filteredChildren: SiteLinkAny[] =
         (elem_filter_match || !nodeFilter) && 'items' in element && element?.items
           ? filterRecursively(element.items, currentDepth + 1)
           : [];
@@ -197,4 +288,87 @@ export function getSiteLinksFiltered(
   }
 
   return filterRecursively(siteLinks, 0);
+}
+
+export async function prepSiteLinks(
+  siteLinks: SiteLinkAny[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth: number,
+  nodeFilter: boolean,
+  flatten: true,
+  prune?: boolean
+): Promise<SiteLink[]>;
+
+export async function prepSiteLinks(
+  siteLinks: SiteLinkAny[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth: 1,
+  nodeFilter?: boolean,
+  flatten?: boolean,
+  prune?: boolean
+): Promise<SiteLink[]>;
+
+export async function prepSiteLinks(
+  siteLinks: SiteLink[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth: number,
+  nodeFilter?: boolean,
+  flatten?: boolean,
+  prune?: boolean
+): Promise<SiteLink[]>;
+
+export async function prepSiteLinks(
+  siteLinks: SiteLinkGroup[] | SiteLinkFlatGroup[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth: 2,
+  nodeFilter?: boolean,
+  flatten?: false,
+  prune?: boolean
+): Promise<SiteLinkFlatGroup[]>;
+
+export async function prepSiteLinks(
+  siteLinks: SiteLinkFlatGroup[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth: number,
+  nodeFilter?: boolean,
+  flatten?: boolean,
+  prune?: boolean
+): Promise<SiteLinkFlatGroup[]>;
+
+export async function prepSiteLinks(
+  siteLinks: SiteLinkGroup[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth?: number,
+  nodeFilter?: boolean,
+  flatten?: boolean,
+  prune?: boolean
+): Promise<SiteLinkGroup[]>;
+
+export async function prepSiteLinks(
+  siteLinks: SiteLinkAny[],
+  callerPath: string,
+  filter: SiteLinkFilter,
+  treeDepth: number = 0, // 0 - will keep all depth branches, non-0 will prune the tree to the depth
+  nodeFilter: boolean = true, // true - remove nodes that don't match filter (ignoring any children matching the filter), false - keep nodes that have any children matching the filter
+  flatten: boolean = false,
+  prune: boolean = true // Remove elements with empty .href (only when flatten = true)
+): Promise<SiteLink[] | SiteLinkFlatGroup[] | SiteLinkGroup[]> {
+  const filtered = getSiteLinksFiltered(siteLinks, filter, treeDepth, nodeFilter, flatten);
+  const pruned = flatten && prune ? pruneSiteLinks(filtered) : filtered;
+  const result = await getSiteLinksComponents(pruned, callerPath);
+  return result;
+}
+
+export function pruneSiteLinks(siteLinks: SiteLinkFlatGroup[]): SiteLinkFlatGroup[];
+export function pruneSiteLinks(siteLinks: SiteLinkGroup[]): SiteLinkGroup[];
+export function pruneSiteLinks(siteLinks: SiteLinkAny[]): SiteLinkAny[] {
+  // TODO: (when needed) Implement pruning non-flatened SiteLinkGroup[]:
+  const result = siteLinks.filter((l) => !!l?.href);
+  return result;
 }
