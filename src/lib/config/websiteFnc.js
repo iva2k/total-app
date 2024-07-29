@@ -43,7 +43,9 @@ const websiteFnc = (
   const googleSiteVerificationNetlify = '';
   const googleSiteVerificationVercel = 'BXO06YUfaqiMbQ-FgBPqQAgWB7giDX-pLEDSz89vUng';
 
-  /** @typedef {import('../types').SiteLinkFlatGroup} SiteLinkFlatGroup */
+  /** @typedef {import('../types').SiteLink         } SiteLink          */ // Use for non-nests
+  /** @typedef {import('../types').SiteLinkGroup    } SiteLinkGroup     */ // Use for deep-nested hierarchical
+  /** @typedef {import('../types').SiteLinkFlatGroup} SiteLinkFlatGroup */ // Use for 1-level-nested hierarchical
   /** @type SiteLinkFlatGroup[] */
   const siteLinks = [
     {

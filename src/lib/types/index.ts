@@ -11,9 +11,7 @@ export interface LayoutContext {
 }
 
 import { type Component } from 'svelte';
-export interface SiteLink {
-  href?: string;
-
+export interface _SiteLinkBase {
   prefix?: string;
   title: string;
   suffix?: string;
@@ -32,9 +30,21 @@ export interface SiteLink {
   displayInSidebar?: boolean;
 }
 
-export interface SiteLinkFlatGroup extends SiteLink {
+export type SiteLinkFilter = 'header' | 'footer' | 'actions' | 'sidebar';
+
+export interface _SiteLink extends _SiteLinkBase {
+  href: string;
+}
+export interface _SiteLinkFlatGroup extends _SiteLinkBase {
+  href?: string;
   items?: SiteLink[];
 }
-export interface SiteLinkGroup extends SiteLink {
+export interface _SiteLinkGroup extends _SiteLinkBase {
+  href?: string;
   items?: (SiteLink | SiteLinkGroup)[];
 }
+
+export type SiteLink = _SiteLink;
+export type SiteLinkGroup = _SiteLinkGroup;
+export type SiteLinkFlatGroup = _SiteLinkFlatGroup;
+export type SiteLinkAny = _SiteLink | _SiteLinkGroup | _SiteLinkFlatGroup;
