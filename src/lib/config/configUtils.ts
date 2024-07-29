@@ -244,6 +244,7 @@ export function getSiteLinksFiltered(
   flatten: boolean = false
 ): SiteLinkAny[] {
   const filterField = {
+    brand: 'displayInBrand',
     header: 'displayInHeader',
     footer: 'displayInFooter',
     actions: 'displayInActions',
