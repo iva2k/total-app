@@ -121,7 +121,7 @@
         {/if}
         <span>
           {link?.prefix ?? ''}
-          <a href={link.href}>
+          <a href={link.href} target={link.target ?? '_self'}>
             {#if link?.img_component}
               <svelte:component this={link?.img_component} />
             {:else if link?.img_html}

@@ -6,9 +6,10 @@
 2. Auth?
 3. Backend Server (non-SvelteKit)?
 4. Push Notifications?
-5. Explore turborepo <https://www.npmjs.com/package/turbo>
-6. Explore Histoire <https://histoire.dev/guide/svelte3/getting-started.html> instead of Storybook
-7. SVG icons, see src/lib/components/image/\* and <https://www.npmjs.com/package/@poppanator/sveltekit-svg>, <https://joshuatz.com/posts/2021/using-svg-files-in-svelte/>
+5. Explore turborepo <https://www.npmjs.com/package/turbo> and `concurrently` for faster builds
+6. Github actions for CI/CD
+7. Explore Histoire <https://histoire.dev/guide/svelte3/getting-started.html> instead of Storybook
+8. SVG icons, see src/lib/components/image/\* and <https://www.npmjs.com/package/@poppanator/sveltekit-svg>, <https://joshuatz.com/posts/2021/using-svg-files-in-svelte/>
 
 ## Package Updates
 
