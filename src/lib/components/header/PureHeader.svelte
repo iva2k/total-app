@@ -2,21 +2,27 @@
   import { onMount } from 'svelte';
   import logo from '$lib/images/logo.svg';
   import website from '$lib/config/website';
-  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  import { prepSiteLinks } from '$lib/config/configUtils';
+  import type { SiteLink } from '$lib/types';
   const { websiteUrlBase, siteLinks } = website;
 
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
 
-  let headerLinks: typeof siteLinks = [];
+  let headerLinks: SiteLink[] = [];
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
     const mypath = import.meta.url;
-    headerLinks = await getSiteLinksComponents(
-      getSiteLinksFiltered(siteLinks, 'header', 2, true, /* flatten */ true),
-      mypath
+    headerLinks = await prepSiteLinks(
+      siteLinks,
+      mypath,
+      'header',
+      2,
+      true,
+      /* flatten */ true,
+      /* prune */ true
     );
     console.log('DEBUG: headerLinks=%o', headerLinks);
   });
