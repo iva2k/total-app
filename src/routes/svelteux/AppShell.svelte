@@ -13,6 +13,7 @@
     Icon,
     ListItem,
     MenuButton,
+    type MenuOption,
     NavItem,
     ThemeInit,
     ThemeSelect,
@@ -30,31 +31,24 @@
   import website from '$lib/config/website';
   const { siteLinks, websiteUrlBase } = website;
 
-  import type { SiteLink } from '$lib/types';
-  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  import type { SiteLink, SiteLinkGroup, SiteLinkFlatGroup, SiteLinkAny } from '$lib/types';
+  import { prepSiteLinks } from '$lib/config/configUtils';
 
   let { children } = $props<{ children: Snippet }>();
 
-  let headerLinks = $state<typeof siteLinks>([]);
-  let footerLinks = $state<typeof siteLinks>([]);
-  let sidebarLinks = $state<typeof siteLinks>([]);
+  let headerLinks = $state<SiteLink[]>([]);
+  let footerLinks = $state<SiteLink[]>([]);
+  let sidebarLinks = $state<SiteLink[]>([]);
 
   onMount(async () => {
     const mypath = import.meta.url;
-    headerLinks = (await getSiteLinksComponents(
-      getSiteLinksFiltered(siteLinks, 'header', 2, true, true),
-      mypath
-    )).filter((l) => l?.href);
-    footerLinks = (await getSiteLinksComponents(
-      getSiteLinksFiltered(siteLinks, 'footer', 1, true, true),
-      mypath
-    )).filter((l) => l?.href);
-    sidebarLinks = (await getSiteLinksComponents(
-      getSiteLinksFiltered(siteLinks, 'sidebar', 2, true, true),
-      mypath
-    )).filter((l) => l?.href);
-    console.log('DEBUG: footerLinks=%o', footerLinks);
-
+    headerLinks = await prepSiteLinks(siteLinks, mypath, 'header', 2, true, true, true);
+    footerLinks = await prepSiteLinks(siteLinks, mypath, 'footer', 1, true, true, true);
+    sidebarLinks = await prepSiteLinks(siteLinks, mypath, 'sidebar', 2, true, true, true);
+    sidebarLinks = [...headerLinks, ...sidebarLinks]; // Show header links in the sidebar
+    // console.log('DEBUG: headerLinks=%o', headerLinks);
+    // console.log('DEBUG: sidebarLinks=%o', sidebarLinks);
+    // console.log('DEBUG: footerLinks=%o', footerLinks);
   });
 
   settings({
@@ -84,6 +78,19 @@
   });
   // let title = 'Example';
   let title = ['Total App', 'Svelte UX', 'Section'];
+
+  function onMenuSelected(
+    e: CustomEvent<{
+      value: string;
+      option: MenuOption;
+    }>
+  ) {
+    const link = headerLinks.filter((l) => l?.href === e?.detail?.value)?.[0];
+    if (link) {
+      window.open(link?.href || '', '_blank');
+    }
+    // e?.detail?.value && window.open(e.detail.value || '', '_blank');
+  }
 </script>
 
 <ThemeInit />
@@ -94,8 +101,8 @@
 <AppLayout>
   <svelte:fragment slot="nav">
     <!-- Nav menu -->
-    {#each sidebarLinks as item}
-      <NavItem text={item.title} currentUrl={$page.url} path={item.href} />
+    {#each sidebarLinks as link}
+      <NavItem text={link.title} currentUrl={$page.url} path={link.href} />
     {/each}
   </svelte:fragment>
 
@@ -117,15 +124,14 @@
 
     <div slot="actions" class="flex gap-0">
       <!-- App actions main sections-->
-      {#each headerLinks as item, i}
+      {#each headerLinks as link, i}
         <Button
-          variant1={isActive($page.url, item.href) ? 'fill-light' : undefined}
-          class={isActive($page.url, item.href)
+          class={isActive($page.url, link?.href ?? '')
             ? '[--bg-color:theme(colors.surface-content/20%)]'
             : ''}
-          href={item.href}
+          href={link?.href}
         >
-          {item.title}
+          {link.title}
         </Button>
       {/each}
 
@@ -138,7 +144,7 @@
             offset={2}
           >
             <!-- Hand-craft Button, span, Icon to use our custom component/svg -->
-            <Button href={link.href} class="p-2" target="_blank">
+            <Button href={link?.href} class="p-2" target="_blank">
               <span>
                 {#if link?.img_icon}
                   <Icon data={link?.img_icon} />
@@ -181,9 +187,7 @@
             value: l?.href,
             icon: l?.img_icon ?? l?.img_html ?? l?.img_src
           }))}
-          onchange={(e) => {
-            e?.detail?.value && window.open(e.detail.value || '', '_blank');
-          }}
+          onchange={onMenuSelected}
         >
           <span slot="selection" class="hidden"></span>
         </MenuButton>
