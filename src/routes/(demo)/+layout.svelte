@@ -11,7 +11,8 @@
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
-  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  import { prepSiteLinks } from '$lib/config/configUtils';
+  import type { SiteLink } from '$lib/types';
   const { siteLinks } = website;
 
   // import type { LayoutData } from './$types';
@@ -21,16 +22,21 @@
 
   // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
   let { children } = $props<{ children: Snippet }>();
-  let footerLinks = $state<typeof siteLinks>([]);
+  let footerLinks = $state<SiteLink[]>([]);
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
     const mypath = import.meta.url;
-    footerLinks = await getSiteLinksComponents(
-      getSiteLinksFiltered(siteLinks, 'footer', 1),
-      mypath
+    footerLinks = await prepSiteLinks(
+      siteLinks,
+      mypath,
+      'footer',
+      1,
+      /* nodeFilter */ true,
+      /* flatten */ true,
+      /* prune */ true
     );
     console.log('DEBUG: footerLinks=%o', footerLinks);
   });
