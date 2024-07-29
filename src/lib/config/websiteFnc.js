@@ -49,6 +49,13 @@ const websiteFnc = (
   /** @type SiteLinkFlatGroup[] */
   const siteLinks = [
     {
+      // Brand / Site icon and URL
+      href: '/home',
+      title: siteShortTitle,
+      img_import: '../images/logo.svg',
+      displayInBrand: true
+    },
+    {
       // href: '/',
       // prefix: 'visit',
       title: 'Demo App',
@@ -58,6 +65,7 @@ const websiteFnc = (
       // prettier-ignore
       items: [
         // { href: '/', title: 'Home' }, // '/' redirects to '/home'
+        // See "Brand" item above for another `/home` route:
         { href: '/home'          , title: 'Home'            , displayInHeader: true, displayInSidebar: true },
         { href: '/about'         , title: 'About'           , displayInHeader: true, displayInSidebar: true },
         { href: '/sverdle'       , title: 'Sverdle'         , displayInHeader: true, displayInSidebar: true },
@@ -68,6 +76,7 @@ const websiteFnc = (
     },
     {
       href: discord,
+      target: '_blank',
       prefix: 'visit',
       title: 'Discord',
       suffix: 'for support',
@@ -80,6 +89,7 @@ const websiteFnc = (
     },
     {
       href: githubRepo,
+      target: '_blank',
       prefix: 'visit',
       title: 'App GitHub Repo',
       suffix: 'for details',
@@ -92,6 +102,7 @@ const websiteFnc = (
     },
     {
       href: 'https://kit.svelte.dev',
+      target: '_blank',
       prefix: 'visit',
       title: 'kit.svelte.dev',
       suffix: 'to learn SvelteKit',

@@ -9,12 +9,24 @@
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
 
+  let brandLink: SiteLink;
   let headerLinks: SiteLink[] = [];
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
     const mypath = import.meta.url;
+    brandLink = (
+      await prepSiteLinks(
+        siteLinks,
+        mypath,
+        'brand',
+        1,
+        /* nodeFilter */ true,
+        /* flatten */ true,
+        /* prune */ false // Allow brand without a link
+      )
+    )?.[0];
     headerLinks = await prepSiteLinks(
       siteLinks,
       mypath,
@@ -30,9 +42,28 @@
 
 <header>
   <div class="corner corner-left">
-    <a href={websiteUrlBase}>
-      <img src={logo} alt="Total App" />
-    </a>
+    {#if brandLink}
+      <!-- {brandLink.prefix ?? ''} -->
+      <a href={brandLink.href} target={brandLink.target ?? '_self'}>
+        {#if brandLink.img_component}
+          <svelte:component this={brandLink.img_component} />
+        {:else if brandLink.img_html}
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html brandLink.img_html}
+        {:else if brandLink.img_src}
+          <img
+            src={brandLink.img_src}
+            alt={brandLink.img_alt ?? ''}
+            aria-hidden="true"
+            role="presentation"
+          />
+        {/if}
+        <!-- {#if brandLink.title}
+          <span>{brandLink.title}</span>
+        {/if} -->
+      </a>
+      <!-- {brandLink.suffix ?? ''} -->
+    {/if}
   </div>
 
   <nav>
@@ -42,7 +73,7 @@
     <ul>
       {#each headerLinks.filter((l) => l?.href) as link}
         <li aria-current={path1st === link.href ? 'page' : undefined}>
-          <a href={link.href}>{link.title}</a>
+          <a href={link.href} target={brandLink.target ?? '_self'}>{link.title}</a>
         </li>
       {/each}
     </ul>
