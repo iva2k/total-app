@@ -18,18 +18,18 @@
   };
 </script>
 
-<Button on:click={() => (clicked = true)}>
+<Button onclick={() => (clicked = true)}>
   {clicked ? "Don't click me anymore" : 'Click me'}
 </Button>
 
 <Title {override} align="center">Hello CodeSandbox</Title>
 <Title {override} align="center" order={2}>Start editing to see some magic happen!</Title>
 <div class="my-container">
-  <Button on:click={increment}>Click Me</Button>
+  <Button onclick={increment}>Click Me</Button>
   <Text>Count: {count}</Text>
 </div>
 <div class="my-container">
-  <Switch size="lg" label="{isDark ? 'dark' : 'light'} mode" on:change={toggleTheme} />
+  <Switch size="lg" label="{isDark ? 'dark' : 'light'} mode" onchange={toggleTheme} />
 </div>
 
 <style>

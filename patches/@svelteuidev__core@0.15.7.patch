@@ -233,7 +233,7 @@ index 928133d8a3404b0332b98fa36ceff019783798fa..0618b6ac0cdce211336b626e08dd4271
      slots: {
          default: {};
 diff --git a/dist/components/Accordion/AccordionItem/AccordionItem.svelte b/dist/components/Accordion/AccordionItem/AccordionItem.svelte
-index 27123b9e889f59d62ad7bde9fef54be9766c3f2d..23db6d704d6074a2393014066816ab31e67df53d 100644
+index 27123b9e889f59d62ad7bde9fef54be9766c3f2d..aab8431e88e5795b346d8f1def4b205bae73e1b1 100644
 --- a/dist/components/Accordion/AccordionItem/AccordionItem.svelte
 +++ b/dist/components/Accordion/AccordionItem/AccordionItem.svelte
 @@ -1,5 +1,19 @@
@@ -262,8 +262,8 @@ index 27123b9e889f59d62ad7bde9fef54be9766c3f2d..23db6d704d6074a2393014066816ab31
  export let use = [], element = undefined, className = '', override = {}, value = undefined, chevron = undefined, disabled = false;
  export { className as class };
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  const ctx = getContext(key);
  function onClick() {
@@ -510,7 +510,7 @@ index a14cd6525c0604b98bb5e8c78fe5add10c0c0cfa..47b8dc48f4e8b4c18a699d544f624a9b
          hreflang?: string;
          media?: string;
 diff --git a/dist/components/ActionIcon/ActionIcon.svelte b/dist/components/ActionIcon/ActionIcon.svelte
-index 9fb9757331d42cb6c5be1429a831819d13f5bd90..b749275526848c7260da3583484d4b08237972f9 100644
+index 9fb9757331d42cb6c5be1429a831819d13f5bd90..6f31b2de8cad2a5c5f82c1ee31d7660fd400ba37 100644
 --- a/dist/components/ActionIcon/ActionIcon.svelte
 +++ b/dist/components/ActionIcon/ActionIcon.svelte
 @@ -1,7 +1,21 @@
@@ -541,8 +541,8 @@ index 9fb9757331d42cb6c5be1429a831819d13f5bd90..b749275526848c7260da3583484d4b08
  }, loading = false, disabled = false, href = '', external = false;
  export { className as class };
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  // --------------Error Handling-------------------
  let observable = false;
@@ -769,7 +769,7 @@ index 7d2fc7443739cf2f659686f4d5b543828b2e6c1f..03e080e7edeaddfd0a75ffd2749823ff
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/ActionIcon/CloseButton/CloseButton.svelte b/dist/components/ActionIcon/CloseButton/CloseButton.svelte
-index 98e99e741325dc7ac5cfbe447c8edcbe7a88493b..5ed09568a886956ac64829f2b8f46479e654f03b 100644
+index 98e99e741325dc7ac5cfbe447c8edcbe7a88493b..f3467e723b522713e050936cd65765b7e850d78d 100644
 --- a/dist/components/ActionIcon/CloseButton/CloseButton.svelte
 +++ b/dist/components/ActionIcon/CloseButton/CloseButton.svelte
 @@ -1,7 +1,21 @@
@@ -800,8 +800,8 @@ index 98e99e741325dc7ac5cfbe447c8edcbe7a88493b..5ed09568a886956ac64829f2b8f46479
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  const iconSizes = {
      xs: 12,
@@ -3472,7 +3472,7 @@ index bf846d6d8d5ba9e921e26ec4aaf4a4c04c287036..493d4943e3558839caf450e245792a47
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Badge/Badge.svelte b/dist/components/Badge/Badge.svelte
-index b3cf433576df8db32f7d5dcabfeb21bd0b54e676..40634668c2a2bd4f711c9f50eb99444792c7f74a 100644
+index b3cf433576df8db32f7d5dcabfeb21bd0b54e676..2332209cabcb4c28ee420ff13e3e891762dcb90a 100644
 --- a/dist/components/Badge/Badge.svelte
 +++ b/dist/components/Badge/Badge.svelte
 @@ -1,11 +1,27 @@
@@ -3499,8 +3499,8 @@ index b3cf433576df8db32f7d5dcabfeb21bd0b54e676..40634668c2a2bd4f711c9f50eb994447
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: ({ cx, classes } = useStyles({
      color,
@@ -3952,7 +3952,7 @@ index 9d3de32f7e871f3559fdeba1f708b910e4ba98fb..7af170a732c8b7868fe8376b07b9b337
      };
      events: {
 diff --git a/dist/components/Box/Box.svelte b/dist/components/Box/Box.svelte
-index db58ff736f0a89708fbf5a8a1f5211f4df4e88a1..50b245f542000b1cf7927bc75415f9b33f83debb 100644
+index db58ff736f0a89708fbf5a8a1f5211f4df4e88a1..21fe57515a68c309fc06c20e930110cd3b9a4beb 100644
 --- a/dist/components/Box/Box.svelte
 +++ b/dist/components/Box/Box.svelte
 @@ -1,11 +1,27 @@
@@ -3979,8 +3979,8 @@ index db58ff736f0a89708fbf5a8a1f5211f4df4e88a1..50b245f542000b1cf7927bc75415f9b3
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  /** workaround for root type errors, this should be replaced by a better type system */
  const castRoot = () => root;
@@ -4688,7 +4688,7 @@ index 8d7b2e319aba7b73082e0899c19d70da58b369a7..e5978baa4a20d58082869858c79578af
  		Menu
  	</Button>
 diff --git a/dist/components/Burger/Burger.svelte b/dist/components/Burger/Burger.svelte
-index 7140d4c4a0740ffdc5b9e67a1a963f000412319c..1c34ce02feea16ea756ed5f2b819f86e80d3f668 100644
+index 7140d4c4a0740ffdc5b9e67a1a963f000412319c..5101cdeb1c7d4236d0a94f7a625e4c9354cfe1b2 100644
 --- a/dist/components/Burger/Burger.svelte
 +++ b/dist/components/Burger/Burger.svelte
 @@ -1,12 +1,28 @@
@@ -4716,8 +4716,8 @@ index 7140d4c4a0740ffdc5b9e67a1a963f000412319c..1c34ce02feea16ea756ed5f2b819f86e
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: _color = color ? color : $colorScheme === 'dark' ? 'white' : 'black';
  $: ({ classes, getStyles, cx } = useStyles({ color: _color, size, opened }, { name: 'Burger' }));
@@ -4955,7 +4955,7 @@ index c7351d76722f73f2ce8e278db7913f755dfc8806..90fb737ea1053001872beadb3771bed5
          hreflang?: string;
          media?: string;
 diff --git a/dist/components/Button/Button.svelte b/dist/components/Button/Button.svelte
-index 1a36bc8789b7479d54b8f75757b48b387f6c8be4..49e645c6c00110e706d0f10828165a5b6f4e4376 100644
+index 1a36bc8789b7479d54b8f75757b48b387f6c8be4..f8f10d02a5a29a2c9ea3e24fadf3d4c8e5bfa9cf 100644
 --- a/dist/components/Button/Button.svelte
 +++ b/dist/components/Button/Button.svelte
 @@ -1,5 +1,19 @@
@@ -4984,8 +4984,8 @@ index 1a36bc8789b7479d54b8f75757b48b387f6c8be4..49e645c6c00110e706d0f10828165a5b
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  // --------------Error Handling-------------------
  let observable = false;
@@ -5229,7 +5229,7 @@ index 24b8d4d925e5daf512cc12600de2de647c1d47f3..5288b212c6400397a549f02392fea174
  <style>
  	.ripple {
 diff --git a/dist/components/Button/UnstyledButton/UnstyledButton.svelte b/dist/components/Button/UnstyledButton/UnstyledButton.svelte
-index feef7d986136b5e8c5f8e91641ba445ed0b83355..843db237226e7daffa2be128f06575f86555cb98 100644
+index feef7d986136b5e8c5f8e91641ba445ed0b83355..bfdbeb48d1f5aced999aeec3776bcc47ecac4832 100644
 --- a/dist/components/Button/UnstyledButton/UnstyledButton.svelte
 +++ b/dist/components/Button/UnstyledButton/UnstyledButton.svelte
 @@ -1,11 +1,27 @@
@@ -5256,8 +5256,8 @@ index feef7d986136b5e8c5f8e91641ba445ed0b83355..843db237226e7daffa2be128f06575f8
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: ({ cx, classes, getStyles } = useStyles(null, { name: 'UnstyledButton' }));
  </script>
@@ -6151,7 +6151,7 @@ index 0290224cf1d867132ebe1130d87a27ac72cc50b0..b0e1adc04b106fe729601247bc42fcc9
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Checkbox/Checkbox.svelte b/dist/components/Checkbox/Checkbox.svelte
-index 1d6f732c8b9ae095b3c8b64d6ec20bc02bc72696..e571aab56ac475ca7b3294e2fd573a6dd5eda7b7 100644
+index 1d6f732c8b9ae095b3c8b64d6ec20bc02bc72696..d94b5a0410439e42ae132cc481d85ac45b389bc3 100644
 --- a/dist/components/Checkbox/Checkbox.svelte
 +++ b/dist/components/Checkbox/Checkbox.svelte
 @@ -1,6 +1,20 @@
@@ -6181,8 +6181,8 @@ index 1d6f732c8b9ae095b3c8b64d6ec20bc02bc72696..e571aab56ac475ca7b3294e2fd573a6d
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: checked = indeterminate || checked;
  $: ({ cx, classes, getStyles } = useStyles({ color, radius, size, transitionDuration }, { name: 'Checkbox' }));
@@ -6643,7 +6643,7 @@ index 8c3baee371607ecdec1fcdae90e01f5564681a33..81e390d747e4229fc83a5d5cb0dee144
          alt?: string;
          autocomplete?: string;
 diff --git a/dist/components/Chip/Chip.svelte b/dist/components/Chip/Chip.svelte
-index f60aceb5c15829ec4c402934629d7827c1edf5d9..67a26e8db779b5e14fd62c30d4da99ff73650bca 100644
+index f60aceb5c15829ec4c402934629d7827c1edf5d9..ff15fa3f944b003edb4d128d1b32615e0d1f9bac 100644
 --- a/dist/components/Chip/Chip.svelte
 +++ b/dist/components/Chip/Chip.svelte
 @@ -1,12 +1,28 @@
@@ -6671,8 +6671,8 @@ index f60aceb5c15829ec4c402934629d7827c1edf5d9..67a26e8db779b5e14fd62c30d4da99ff
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: ({ cx, classes, getStyles } = useStyles({ color, radius, size, transitionDuration }, { name: 'Chip' }));
  </script>
@@ -7140,7 +7140,7 @@ index f2c2425f0375b18fe02f3af1316dd8ef86fddf72..5cbcb68ad5a0daaa2bdd81516abcd97a
      events: {
          change: CustomEvent<any>;
 diff --git a/dist/components/Code/Code.svelte b/dist/components/Code/Code.svelte
-index 2647e9e3afaf44ecc9d401f35fefc7daf1a5255e..6af0156fa60063b8db1f2ad3d0f7e2242a306515 100644
+index 2647e9e3afaf44ecc9d401f35fefc7daf1a5255e..086bbaa2806d3bb1a60440274b40648f8583625d 100644
 --- a/dist/components/Code/Code.svelte
 +++ b/dist/components/Code/Code.svelte
 @@ -1,4 +1,18 @@
@@ -7168,8 +7168,8 @@ index 2647e9e3afaf44ecc9d401f35fefc7daf1a5255e..6af0156fa60063b8db1f2ad3d0f7e224
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  /** Copy logic */
  let copied = false;
@@ -7436,7 +7436,7 @@ index d903e3520bf4a6dca8fa1c0b4851c5b79d69a557..daf7bd1034fdeb766fa6f52d01791177
  				}}>Toggle nested collapse</Button
  			>
 diff --git a/dist/components/Collapse/Collapse.svelte b/dist/components/Collapse/Collapse.svelte
-index f01ed93e2b70ba90722c52ae5c496e59b8ef892b..b9d06f29e1d9c83544497dd8545efd3a456d6db5 100644
+index f01ed93e2b70ba90722c52ae5c496e59b8ef892b..2819a899becd54a1142b3dcb00fba6281510cf34 100644
 --- a/dist/components/Collapse/Collapse.svelte
 +++ b/dist/components/Collapse/Collapse.svelte
 @@ -1,10 +1,26 @@
@@ -7462,8 +7462,8 @@ index f01ed93e2b70ba90722c52ae5c496e59b8ef892b..b9d06f29e1d9c83544497dd8545efd3a
  export let use = [], element = undefined, className = '', override = {}, open, animateOpacity = true, transitionDuration = 200, slideTransitionOptions = { duration: transitionDuration };
  export { className as class };
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  </script>
  
@@ -8154,7 +8154,7 @@ index 93b28fdaec41015c75a643b1cae0539f34d94580..30079859fded0ab18a314a320b8244aa
  					</Button>
  				</li>
 diff --git a/dist/components/FileUpload/FileUpload.svelte b/dist/components/FileUpload/FileUpload.svelte
-index be8d869168ff019257acae0dac08c81e8e84c690..960360cb6ec7f8bf6842dce460613c9bf9af7c4e 100644
+index be8d869168ff019257acae0dac08c81e8e84c690..bd465a642fee78c94b8dc68cffe797ef13cccc23 100644
 --- a/dist/components/FileUpload/FileUpload.svelte
 +++ b/dist/components/FileUpload/FileUpload.svelte
 @@ -1,10 +1,25 @@
@@ -8193,8 +8193,8 @@ index be8d869168ff019257acae0dac08c81e8e84c690..960360cb6ec7f8bf6842dce460613c9b
 -    'removed',
 -    'reset'
 -]);
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component, [
 +	'selected',
 +	'removed',
@@ -9373,7 +9373,7 @@ index 6384babb9516436a7c395b2ae54e8e86ab65873f..fa4723114ca0b88955163564892ae104
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Image/BackgroundImage/BackgroundImage.svelte b/dist/components/Image/BackgroundImage/BackgroundImage.svelte
-index a08509fd5e6fa06752e4c609d635a7e4f2f26070..8f4a20d4b9c963ac28f29a341e1398405b853006 100644
+index a08509fd5e6fa06752e4c609d635a7e4f2f26070..d12a1e64a0b057635fa4d604a46df666096208f5 100644
 --- a/dist/components/Image/BackgroundImage/BackgroundImage.svelte
 +++ b/dist/components/Image/BackgroundImage/BackgroundImage.svelte
 @@ -1,10 +1,26 @@
@@ -9399,8 +9399,8 @@ index a08509fd5e6fa06752e4c609d635a7e4f2f26070..8f4a20d4b9c963ac28f29a341e139840
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: ({ cx, classes, getStyles } = useStyles({ height, radius, src, width }, { name: 'BackgroundImage' }));
  </script>
@@ -9627,7 +9627,7 @@ index 784730125bc67f732c7932d9eba3be0d7d18d2b7..7d10b0aa19d677ea2e87a7f20789cbec
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Image/Image.svelte b/dist/components/Image/Image.svelte
-index aedb23ba9e31b692d0fae52de27f81b593920927..4a29fb831632de7000b061c03931c360833da69e 100644
+index aedb23ba9e31b692d0fae52de27f81b593920927..dea6342df8431a50bc191ab87761cd92f3211468 100644
 --- a/dist/components/Image/Image.svelte
 +++ b/dist/components/Image/Image.svelte
 @@ -1,4 +1,18 @@
@@ -9655,8 +9655,8 @@ index aedb23ba9e31b692d0fae52de27f81b593920927..4a29fb831632de7000b061c03931c360
  export let use = [], element = undefined, override = {}, radius = 0, className = '', src = undefined, alt = '', fit = 'cover', width = '100%', height = 'auto', caption = undefined, usePlaceholder = false, loader = false;
  export { className as class };
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  let loaded = false;
  let error = false;
@@ -9907,7 +9907,7 @@ index 5006781bc37321dfc72ba379b3549c11b5a79e2e..56a1e45b9ae8e61e414c54a14d350abf
  	</Input>
  </Story>
 diff --git a/dist/components/Input/Input.svelte b/dist/components/Input/Input.svelte
-index c1f23e3f8eb8dbc2971ecdb972ad9f69444e6718..ce1b73dda7aadff5d2617488f05b623ea106a72f 100644
+index c1f23e3f8eb8dbc2971ecdb972ad9f69444e6718..0c52c66a64dd18562af917d9de192e51065d6d6f 100644
 --- a/dist/components/Input/Input.svelte
 +++ b/dist/components/Input/Input.svelte
 @@ -1,4 +1,18 @@
@@ -9935,8 +9935,8 @@ index c1f23e3f8eb8dbc2971ecdb972ad9f69444e6718..ce1b73dda7aadff5d2617488f05b623e
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  function castRoot() {
      return root;
@@ -10884,7 +10884,7 @@ index f659c9dbd2689fceddf85cc7b923d70b03dee182..aa44c4854707dd7bde9ba83a2fc928f7
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Loader/Loader.svelte b/dist/components/Loader/Loader.svelte
-index 1fd7bf742087ef9a8e5c56d55f42222b8ef3357f..d2003fe6b22ed3053077d39f9079a6035131e5e0 100644
+index 1fd7bf742087ef9a8e5c56d55f42222b8ef3357f..00991bd70052aa0c884606bc5b83cc6aa2e0ead9 100644
 --- a/dist/components/Loader/Loader.svelte
 +++ b/dist/components/Loader/Loader.svelte
 @@ -1,4 +1,18 @@
@@ -10912,8 +10912,8 @@ index 1fd7bf742087ef9a8e5c56d55f42222b8ef3357f..d2003fe6b22ed3053077d39f9079a603
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  /** Loader logic */
  const LOADERS = {
@@ -11609,7 +11609,7 @@ index 4ddbc0ea49fd431ee136f3d4f3fc08ea63114f19..98f391c881d09e99c25a40d5e8e6c074
  	<Menu bind:this={element}>
  		<Menu.Item icon={Gear}>Settings</Menu.Item>
 diff --git a/dist/components/Menu/Menu.svelte b/dist/components/Menu/Menu.svelte
-index a48e70138b685b75d7ceefc02cce7de31c0b304f..fc8965ba882dfd356ed896f12c995be2ed3f75f7 100644
+index a48e70138b685b75d7ceefc02cce7de31c0b304f..f75152749762a719671afdf1ff0b0a4301b52416 100644
 --- a/dist/components/Menu/Menu.svelte
 +++ b/dist/components/Menu/Menu.svelte
 @@ -1,6 +1,20 @@
@@ -11646,8 +11646,8 @@ index a48e70138b685b75d7ceefc02cce7de31c0b304f..fc8965ba882dfd356ed896f12c995be2
  };
  const uuid = useHash(menuId);
 -const forwardEvents = createEventForwarder(get_current_component(), ['open', 'close']);
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
  const castKeyboardEvent = (event) => event;
  // can be turned into an action
  const focusReference = () => window.setTimeout(() => referenceElement?.focus(), 0);
@@ -11918,7 +11918,7 @@ index 461de01de3e130e2871714efbed6fd935034ea07..56505d2a26a54bf2084abb2663e53f77
          withArrow?: boolean;
          gutter?: number;
 diff --git a/dist/components/Menu/MenuIcon.svelte b/dist/components/Menu/MenuIcon.svelte
-index 7987ed7b83127794d2f31c5bf21c9c36541bdbd7..86cdf7a5a094533940c2b4358a4ee55de732f6b5 100644
+index 7987ed7b83127794d2f31c5bf21c9c36541bdbd7..6bb0ea0ff365398ad73a93541ac82d4c0c824f2d 100644
 --- a/dist/components/Menu/MenuIcon.svelte
 +++ b/dist/components/Menu/MenuIcon.svelte
 @@ -1,11 +1,27 @@
@@ -11945,8 +11945,8 @@ index 7987ed7b83127794d2f31c5bf21c9c36541bdbd7..86cdf7a5a094533940c2b4358a4ee55d
  export let className = '';
  export { className as class };
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  </script>
  
@@ -12173,7 +12173,7 @@ index 02124de9f3a1034f906bee1acc9aeddcc2269957..57b2c8249f4e5101bcf867599dd80e6c
          external?: boolean;
          formaction?: string;
 diff --git a/dist/components/Menu/MenuItem/MenuItem.svelte b/dist/components/Menu/MenuItem/MenuItem.svelte
-index a2fc36754919d8c9444abde8666c4848ea47b250..9470e0274aca026bef03d5632f7ba599d342d1c9 100644
+index a2fc36754919d8c9444abde8666c4848ea47b250..305bd85a6e94c3ecd9b9dcec2fac29fb61ed4804 100644
 --- a/dist/components/Menu/MenuItem/MenuItem.svelte
 +++ b/dist/components/Menu/MenuItem/MenuItem.svelte
 @@ -1,5 +1,19 @@
@@ -12202,8 +12202,8 @@ index a2fc36754919d8c9444abde8666c4848ea47b250..9470e0274aca026bef03d5632f7ba599
  export { className as class };
  const state = getContext(ctx);
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  const castKeyboardEvent = (event) => event;
  $: itemIndex = getContextItemIndex({ elementSelector: '.svelteui-MenuItem-root', parentClassName: 'svelteui-Menu-body' }, element);
@@ -12948,7 +12948,7 @@ index 514c9894de9d47c3dd3ef29ea5b500f590f9c235..7717ab92da727e52b2e98836c9002f78
      slots: {
          title: {};
 diff --git a/dist/components/NativeSelect/NativeSelect.svelte b/dist/components/NativeSelect/NativeSelect.svelte
-index 3e124703cdde40c63d32b7d15b82f1b71cc9b849..5e5e93c4aed2c2f686bd0a9f12c5e907ee63391b 100644
+index 3e124703cdde40c63d32b7d15b82f1b71cc9b849..25746b7f5249b6a827dbb76b60fbf228fba8515a 100644
 --- a/dist/components/NativeSelect/NativeSelect.svelte
 +++ b/dist/components/NativeSelect/NativeSelect.svelte
 @@ -1,6 +1,20 @@
@@ -12978,8 +12978,8 @@ index 3e124703cdde40c63d32b7d15b82f1b71cc9b849..5e5e93c4aed2c2f686bd0a9f12c5e907
      (formattedData = data.map((item) => typeof item === 'string' ? { label: item, value: item } : item));
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  /** When no icon is present give the left section 12px of padding*/
  const base = { '& .input': { paddingLeft: 12 } };
@@ -13444,7 +13444,7 @@ index 9596378b9b0c1851a3ebaf68e04c2b65e0decf4c..d3080961693af44592a6f9f3b4961bfc
      slots: {
          icon: {};
 diff --git a/dist/components/NumberInput/NumberInput.svelte b/dist/components/NumberInput/NumberInput.svelte
-index 0e4b17a42df57aae0e39aa84481c87d4a98e17fd..adc6929edeacf31ff21da3a7aeb23c68c1586085 100644
+index 0e4b17a42df57aae0e39aa84481c87d4a98e17fd..27a78aeb44ebf04de7c0966a5a6d74bd07773e33 100644
 --- a/dist/components/NumberInput/NumberInput.svelte
 +++ b/dist/components/NumberInput/NumberInput.svelte
 @@ -1,5 +1,18 @@
@@ -13473,8 +13473,8 @@ index 0e4b17a42df57aae0e39aa84481c87d4a98e17fd..adc6929edeacf31ff21da3a7aeb23c68
  }
  const dispatch = createEventDispatcher();
 -const forwardEvents = createEventForwarder(get_current_component(), ['change']);
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component, ['change']));
  let isKeyDown = false;
  let stepCount = 0;
@@ -14030,7 +14030,7 @@ index 95f67f2b517d0e16a8b59b11ff456c215b8c993c..f384d17f43a558721276f85876c35b09
              size: number;
              color: string;
 diff --git a/dist/components/Overlay/Overlay.svelte b/dist/components/Overlay/Overlay.svelte
-index 21fdfc94719a48fbe0337337917e5a3b51516aa7..c22f7fc2a0383d2595e6a5aafa19be70823182f2 100644
+index 21fdfc94719a48fbe0337337917e5a3b51516aa7..f0bc1da90fe746c2c9d40df8c6e978fdb184abd6 100644
 --- a/dist/components/Overlay/Overlay.svelte
 +++ b/dist/components/Overlay/Overlay.svelte
 @@ -1,4 +1,18 @@
@@ -14058,8 +14058,8 @@ index 21fdfc94719a48fbe0337337917e5a3b51516aa7..c22f7fc2a0383d2595e6a5aafa19be70
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: background = gradient ? { backgroundImage: gradient } : { backgroundColor: color };
  $: baseStyles = {
@@ -14507,7 +14507,7 @@ index fcb000e7d8d103f5d5871162c7b189b0ced19d1e..da2d105e0e768d4f6afa09cc504c4d18
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/PasswordInput/PasswordInput.svelte b/dist/components/PasswordInput/PasswordInput.svelte
-index a1239f832e1f3a2aeb19678779880da9c1ec21be..70cb8cde4294e6de5f37168e25abb68e07d3ace9 100644
+index a1239f832e1f3a2aeb19678779880da9c1ec21be..18fcd858f73d3124e6f264e1c1d76b2049c5c825 100644
 --- a/dist/components/PasswordInput/PasswordInput.svelte
 +++ b/dist/components/PasswordInput/PasswordInput.svelte
 @@ -1,4 +1,18 @@
@@ -14535,8 +14535,8 @@ index a1239f832e1f3a2aeb19678779880da9c1ec21be..70cb8cde4294e6de5f37168e25abb68e
  let uncontrolledVisible = defaultVisible !== undefined ? defaultVisible : false;
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: _invalid = invalid || !!error;
  $: _visible = visible === undefined ? uncontrolledVisible : visible;
@@ -14551,7 +14551,7 @@ index a1239f832e1f3a2aeb19678779880da9c1ec21be..70cb8cde4294e6de5f37168e25abb68e
  					<slot name="visibilityToggleIcon" visible={_visible}>
  						<PasswordToggleIcon reveal={_visible} size={getIconSize(size)} />
 diff --git a/dist/components/Popper/Popper.svelte b/dist/components/Popper/Popper.svelte
-index a36b3a296d2a6fe03ab6670289f17cf2eea5a067..e97b52fc745dab613e8565f3a7377d8d48fd46dd 100644
+index a36b3a296d2a6fe03ab6670289f17cf2eea5a067..188dfd17d5f1b8cf62b3f89c677cc675d9223cff 100644
 --- a/dist/components/Popper/Popper.svelte
 +++ b/dist/components/Popper/Popper.svelte
 @@ -1,13 +1,29 @@
@@ -14580,8 +14580,8 @@ index a36b3a296d2a6fe03ab6670289f17cf2eea5a067..e97b52fc745dab613e8565f3a7377d8d
  let cleanup = () => { };
  let arrowElement;
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  onDestroy(() => {
      cleanup();
@@ -15056,7 +15056,7 @@ index ff92fe0c9a2290e4d00ff5c29e0ff6f746fd62c1..5dcc6d1e9024a955e60d5b2f49b19e75
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Portal/Portal.svelte b/dist/components/Portal/Portal.svelte
-index aff271814889221d18d6a3977ef93c997e93fb48..c1d06e8569ed8c2a4cd31df6ea2361d3184f1701 100644
+index aff271814889221d18d6a3977ef93c997e93fb48..9a7e863cb1c7374a5039f6e8ca1d79fc857a4077 100644
 --- a/dist/components/Portal/Portal.svelte
 +++ b/dist/components/Portal/Portal.svelte
 @@ -1,10 +1,26 @@
@@ -15082,8 +15082,8 @@ index aff271814889221d18d6a3977ef93c997e93fb48..c1d06e8569ed8c2a4cd31df6ea2361d3
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  </script>
  
@@ -15531,7 +15531,7 @@ index 2c6dead2dc767b39fec282469d77f9c35903a1e0..7ba54cfe8e8bfdfe154f22ba56e974d0
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Radio/Radio.svelte b/dist/components/Radio/Radio.svelte
-index e7885eec19df19a7402723db233855d420d515c3..2bf835111f1be2e11bd76ac476fdb240942686bf 100644
+index e7885eec19df19a7402723db233855d420d515c3..ef250c4aa9344f126bf41545b6bc211e1266f124 100644
 --- a/dist/components/Radio/Radio.svelte
 +++ b/dist/components/Radio/Radio.svelte
 @@ -1,7 +1,21 @@
@@ -15562,8 +15562,8 @@ index e7885eec19df19a7402723db233855d420d515c3..2bf835111f1be2e11bd76ac476fdb240
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: ({ cx, classes, getStyles } = useStyles({ color, size, labelDirection, error }, { name: 'Radio' }));
  function onChange(e) {
@@ -16923,7 +16923,7 @@ index 98fd0432d1c1a9212fa88c8b376d2a5d1dd756cb..b6e7d3ed09db2c30d28d490c13de7fe1
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/Switch/Switch.svelte b/dist/components/Switch/Switch.svelte
-index 9028390b53e40f0da814bb3cd29e36832154a111..1ebfcc21586b5d0747fd87d2c098b634ee7b1726 100644
+index 9028390b53e40f0da814bb3cd29e36832154a111..7c924b245d1aea1b3f0e2fe1217655799efba769 100644
 --- a/dist/components/Switch/Switch.svelte
 +++ b/dist/components/Switch/Switch.svelte
 @@ -1,11 +1,27 @@
@@ -16950,8 +16950,8 @@ index 9028390b53e40f0da814bb3cd29e36832154a111..1ebfcc21586b5d0747fd87d2c098b634
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  $: ({ cx, classes, getStyles } = useStyles({
      color,
@@ -17631,7 +17631,7 @@ index e4eedad59f54c48a7ca8cb83d57cf5e9658b1852..428cd034e6927fe9afc475c8e3c5914d
      slots: {
          default: {};
 diff --git a/dist/components/Text/Text.svelte b/dist/components/Text/Text.svelte
-index 8afdb4958f3d351f4304cac8e7495df3b97701b5..7a5c502d933cd714542a6fac4d3e2f3372d1782d 100644
+index 8afdb4958f3d351f4304cac8e7495df3b97701b5..6958505d81321258181791bb0cfb2b42ae31082a 100644
 --- a/dist/components/Text/Text.svelte
 +++ b/dist/components/Text/Text.svelte
 @@ -1,4 +1,18 @@
@@ -17659,8 +17659,8 @@ index 8afdb4958f3d351f4304cac8e7495df3b97701b5..7a5c502d933cd714542a6fac4d3e2f33
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  // --------------Error Handling-------------------
  let observable = false;
@@ -17887,7 +17887,7 @@ index e14c3718822cc1f1413322d8d8afdc5595131beb..089a48e14e586a928b302d7291d49e19
      events: {
          [evt: string]: CustomEvent<any>;
 diff --git a/dist/components/TextInput/TextInput.svelte b/dist/components/TextInput/TextInput.svelte
-index d53e087c766d0f2796b5d96bd5636f8b4e80698e..647f037c929a960f5765b7159fc2e0dde8e50b34 100644
+index d53e087c766d0f2796b5d96bd5636f8b4e80698e..c7303d0885a575d6e7f55b38bdc7fbf1d62e7c63 100644
 --- a/dist/components/TextInput/TextInput.svelte
 +++ b/dist/components/TextInput/TextInput.svelte
 @@ -1,4 +1,18 @@
@@ -17915,8 +17915,8 @@ index d53e087c766d0f2796b5d96bd5636f8b4e80698e..647f037c929a960f5765b7159fc2e0dd
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  // Flag that enables the override of the right section slot
  // of the Input component only if it was provided
@@ -18171,7 +18171,7 @@ index e6d818c1c50379dde36a73c5eee2944e00e47b9c..45d868e1e8a45aa881686cd3ff8ca31f
   * ```
   */
 diff --git a/dist/components/Textarea/Textarea.svelte b/dist/components/Textarea/Textarea.svelte
-index da228c601a82ed7f0faaa98b01cb288155afce45..233eade3255bafd1f99e86d862451a1f90bbeef9 100644
+index da228c601a82ed7f0faaa98b01cb288155afce45..4db46943188130c9fa5a83adea9a8f3777982127 100644
 --- a/dist/components/Textarea/Textarea.svelte
 +++ b/dist/components/Textarea/Textarea.svelte
 @@ -1,4 +1,18 @@
@@ -18199,8 +18199,8 @@ index da228c601a82ed7f0faaa98b01cb288155afce45..233eade3255bafd1f99e86d862451a1f
  export { className as class };
  /** An action that forwards inner dom node events from parent component */
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  // Flag that enables the override of the right section slot
  // of the Input component only if it was provided
@@ -19370,7 +19370,7 @@ index 9d9fe7ebd35d7de60c4ff800f8bf1838ea76b32e..bbf71910a228925b653cfd033c59467e
  export function createEventForwarder(component, except = []) {
      // This is our pseudo $on function. It is defined on component mount.
 diff --git a/dist/styles/theme/SvelteUIProvider/SvelteUIProvider.svelte b/dist/styles/theme/SvelteUIProvider/SvelteUIProvider.svelte
-index f787933afe089f74b81ed0464519bf0f864a2df6..7109bf4d595c0f10f4aae8243d1e7c5ead1adc5f 100644
+index f787933afe089f74b81ed0464519bf0f864a2df6..215235fa032afa2b740c8e195c13da07344b8941 100644
 --- a/dist/styles/theme/SvelteUIProvider/SvelteUIProvider.svelte
 +++ b/dist/styles/theme/SvelteUIProvider/SvelteUIProvider.svelte
 @@ -1,5 +1,5 @@
@@ -19406,8 +19406,8 @@ index f787933afe089f74b81ed0464519bf0f864a2df6..7109bf4d595c0f10f4aae8243d1e7c5e
  const ctx = useSvelteUIThemeContext();
  const useStyles = createStyles(() => ({ root: {} }));
 -const forwardEvents = createEventForwarder(get_current_component());
-+let component;
-+let forwardEvents;
++export let component = {};
++let forwardEvents = (node) => {return { destroy: () => {} }; } // Dummy function until onMount
 +onMount( async () => forwardEvents = createEventForwarder(component));
  const DEFAULT_THEME = useSvelteUITheme();
  let currentTheme = null;

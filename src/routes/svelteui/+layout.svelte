@@ -1,6 +1,8 @@
 <script lang="ts">
   // import { onMount, setContext, type Snippet } from 'svelte';
   import { onMount, type Snippet } from 'svelte';
+  import { SvelteUIProvider, Switch } from '@svelteuidev/core';
+  import type { SvelteUIProviderProps } from '@svelteuidev/core';
 
   // import Favicon from '$lib/components/favicon/Favicon.svelte';
   // import Offline from '$lib/components/offline/Offline.svelte';
@@ -22,7 +24,20 @@
   let { children } = $props<{ children: Snippet }>();
   let footerLinks = $state<SiteLink[]>([]);
 
+  // BEGIN load 'vanilla-lazyload' lib
+  import lazyload from 'vanilla-lazyload';
+  import type { ILazyLoadInstance } from 'vanilla-lazyload';
+  let lazyloadInstance: ILazyLoadInstance;
+  import { browser } from '$app/environment';
+  // END load 'vanilla-lazyload' lib
+
+  let isDarkMode = $state(false);
+
   onMount(async () => {
+    if (browser) {
+      lazyloadInstance = new lazyload();
+      lazyloadInstance?.update();
+    }
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
@@ -51,6 +66,11 @@
   });
   */
 
+  let config: SvelteUIProviderProps = {
+    // light: { bg: 'White', color: 'Black' },
+    // dark: { bg: '#1A1B1E', color: '#C1C2C5' }
+  };
+
   /* DISABLED (see root +layout.svelte)
   // Favicon params:
   const pngFavicons = [
@@ -69,73 +89,91 @@
   */
 </script>
 
-<div class="app">
-  <!-- DISABLED (see root +layout.svelte)
-  <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
-  -->
+<SvelteUIProvider
+  {config}
+  themeObserver={isDarkMode ? 'dark' : 'light'}
+  ssr
+  withNormalizeCSS
+  withGlobalStyles
+>
+  <div class="app">
+    <!-- DISABLED (see root +layout.svelte)
+    <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
+    -->
 
-  <Header --corner-right-width="8em">
-    {#snippet content()}
-      <DarkMode htmlDarkClass="dark">
-        {#snippet content(data)}
-          <label>
-            <input
-              id="cb1"
-              type="checkbox"
-              checked={data.isDarkMode}
-              onchange={(e) => {
+    <Header --corner-right-width="8em">
+      {#snippet content()}
+        <DarkMode htmlDarkClass="dark">
+          {#snippet content(data)}
+            <Switch
+              size="lg"
+              label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
+              on:change={(e) => {
                 data.onChange(e, !(data.isDarkMode ?? false));
+                isDarkMode = data.isDarkMode; // Mirror in local state for SvelteUIProvider.themeObserver
                 return;
               }}
-              aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
             />
-            {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
-          </label>
-        {/snippet}
-      </DarkMode>
-    {/snippet}
-  </Header>
-
-  <main>
-    {@render children()}
-  </main>
-
-  <!-- DISABLED (see root +layout.svelte)
-  <Offline />
-  -->
-
-  <footer>
-    <p>
-      {#each footerLinks.filter((l) => l?.href) as link, i}
-        {#if i > 0}
-          <span>&nbsp;| </span>
-        {/if}
-        <span>
-          {link?.prefix ?? ''}
-          <a href={link.href} target={link.target ?? '_self'}>
-            {#if link?.img_component}
-              <svelte:component this={link?.img_component} />
-            {:else if link?.img_html}
-              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-              {@html link?.img_html}
-            {:else if link?.img_src}
-              <img
-                src={link.img_src}
-                alt={link?.img_alt ?? ''}
-                aria-hidden="true"
-                role="presentation"
+            <label>
+              <input
+                id="cb1"
+                type="checkbox"
+                checked={data.isDarkMode}
+                onchange={(e) => {
+                  data.onChange(e, !(data.isDarkMode ?? false));
+                  isDarkMode = data.isDarkMode; // Mirror in local state for SvelteUIProvider.themeObserver
+                  return;
+                }}
+                aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
               />
-            {/if}
-            {#if link?.title}
-              <span>{link.title}</span>
-            {/if}
-          </a>
-          {link?.suffix ?? ''}
-        </span>
-      {/each}
-    </p>
-  </footer>
-</div>
+              {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
+            </label>
+          {/snippet}
+        </DarkMode>
+      {/snippet}
+    </Header>
+
+    <main>
+      {@render children()}
+    </main>
+
+    <!-- DISABLED (see root +layout.svelte)
+    <Offline />
+    -->
+
+    <footer>
+      <p>
+        {#each footerLinks.filter((l) => l?.href) as link, i}
+          {#if i > 0}
+            <span>&nbsp;| </span>
+          {/if}
+          <span>
+            {link?.prefix ?? ''}
+            <a href={link.href} target={link.target ?? '_self'}>
+              {#if link?.img_component}
+                <svelte:component this={link?.img_component} />
+              {:else if link?.img_html}
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html link?.img_html}
+              {:else if link?.img_src}
+                <img
+                  src={link.img_src}
+                  alt={link?.img_alt ?? ''}
+                  aria-hidden="true"
+                  role="presentation"
+                />
+              {/if}
+              {#if link?.title}
+                <span>{link.title}</span>
+              {/if}
+            </a>
+            {link?.suffix ?? ''}
+          </span>
+        {/each}
+      </p>
+    </footer>
+  </div>
+</SvelteUIProvider>
 
 <style lang="scss">
   .app {

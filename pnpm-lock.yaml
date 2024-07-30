@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@svelteuidev/core@0.15.7':
-    hash: jkoqgdci24lxgq4immayodzr2y
+    hash: lx3mm7qztji6hhc77sogkp3i64
     path: patches/@svelteuidev__core@0.15.7.patch
 
 importers:
@@ -36,10 +36,10 @@ importers:
         version: 0.15.7(svelte@5.0.0-next.190)
       '@svelteuidev/core':
         specifier: ^0.15.7
-        version: 0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+        version: 0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       '@svelteuidev/dates':
         specifier: ^0.15.7
-        version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+        version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       '@svelteuidev/motion':
         specifier: ^0.15.7
         version: 0.15.7(svelte@5.0.0-next.190)
@@ -48,7 +48,7 @@ importers:
         version: 0.15.7(svelte@5.0.0-next.190)
       '@svelteuidev/prism':
         specifier: ^0.15.7
-        version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+        version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       dayjs:
         specifier: ^1.11.12
         version: 1.11.12
@@ -6362,17 +6362,17 @@ snapshots:
     dependencies:
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
+  '@svelteuidev/core@0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
     dependencies:
       '@floating-ui/dom': 1.2.8
       '@stitches/core': 1.2.8
       '@svelteuidev/composables': 0.15.7(svelte@5.0.0-next.190)
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/dates@0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
+  '@svelteuidev/dates@0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
     dependencies:
       '@svelteuidev/composables': 0.15.7(svelte@5.0.0-next.190)
-      '@svelteuidev/core': 0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+      '@svelteuidev/core': 0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       dayjs: 1.11.1
       svelte: 5.0.0-next.190
 
@@ -6384,10 +6384,10 @@ snapshots:
     dependencies:
       svelte: 5.0.0-next.190
 
-  '@svelteuidev/prism@0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
+  '@svelteuidev/prism@0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(@svelteuidev/core@0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)':
     dependencies:
       '@svelteuidev/composables': 0.15.7(svelte@5.0.0-next.190)
-      '@svelteuidev/core': 0.15.7(patch_hash=jkoqgdci24lxgq4immayodzr2y)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
+      '@svelteuidev/core': 0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.190))(svelte@5.0.0-next.190)
       prism-svelte: 0.5.0
       prismjs: 1.28.0
       svelte: 5.0.0-next.190

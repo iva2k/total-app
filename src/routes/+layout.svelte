@@ -1,7 +1,5 @@
 <script lang="ts">
   import { onMount, setContext, type Snippet } from 'svelte';
-  import { SvelteUIProvider } from '@svelteuidev/core';
-  import type { SvelteUIProviderProps } from '@svelteuidev/core';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
@@ -20,7 +18,6 @@
   import type { LayoutContext } from '$lib/types';
 
   let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
-  let isDarkMode = $state(false);
 
   onMount(async () => {
     await loadIonicPWAElements(window);
@@ -35,11 +32,6 @@
       return { ssrPathname };
     }
   });
-
-  let config: SvelteUIProviderProps = {
-    // light: { bg: 'White', color: 'Black' },
-    // dark: { bg: '#1A1B1E', color: '#C1C2C5' }
-  };
 
   // Favicon params:
   const pngFavicons = [
