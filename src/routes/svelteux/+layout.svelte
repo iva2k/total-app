@@ -4,17 +4,7 @@
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
-  import {
-    settings,
-    AppBar,
-    AppLayout,
-    Button,
-    ListItem,
-    NavItem,
-    ThemeInit,
-    ThemeSelect,
-    ThemeSwitch
-  } from 'svelte-ux';
+  import { settings } from 'svelte-ux';
 
   import AppShell from './AppShell.svelte';
 
@@ -63,13 +53,18 @@
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
   */
+
+  const themes = {
+    light: ['light', 'emerald', 'hamlindigo-light'],
+    dark: ['dark', 'forest', 'hamlindigo-dark']
+  };
 </script>
 
 <!-- DISABLED
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 -->
 
-<AppShell>
+<AppShell {themes}>
   <!-- <div class="app"> -->
   <main class="isolate">
     {@render children()}

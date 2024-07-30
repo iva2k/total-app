@@ -22,33 +22,48 @@
     lgScreen
   } from 'svelte-ux';
   import { isActive } from 'svelte-ux/utils/routing';
-  import { mdiArrowTopRight, mdiDotsVertical, mdiGithub, mdiTwitter, mdiRefresh } from '@mdi/js';
+  import { mdiDotsGrid, mdiDotsVertical } from '@mdi/js';
   //   import { faUser } from '@fortawesome/free-solid-svg-icons';
-  import logo from '$lib/images/logo.svg?raw';
 
   import './styles.css';
 
   import website from '$lib/config/website';
-  const { siteLinks, websiteUrlBase } = website;
+  const { siteLinks, websiteUrl, siteUrl, siteShortTitle, siteTitle } = website;
 
-  import type { SiteLink, SiteLinkGroup, SiteLinkFlatGroup, SiteLinkAny } from '$lib/types';
+  import type { SiteLink } from '$lib/types';
   import { prepSiteLinks } from '$lib/config/configUtils';
 
-  let { children } = $props<{ children: Snippet }>();
+  // let title_default = siteTitle;
+  const title_default = [siteShortTitle, 'Svelte UX'];
+  const themes_default = {
+    light: ['light', 'emerald', 'hamlindigo-light'],
+    dark: ['dark', 'forest', 'hamlindigo-dark']
+  };
+  let {
+    title = title_default,
+    themes = themes_default,
+    children
+  } = $props<{
+    title?: string[] | string;
+    themes?: {
+      light?: string[];
+      dark?: string[];
+    };
+    children: Snippet;
+  }>();
 
+  let brandLink = $state<SiteLink>();
   let headerLinks = $state<SiteLink[]>([]);
   let footerLinks = $state<SiteLink[]>([]);
   let sidebarLinks = $state<SiteLink[]>([]);
 
   onMount(async () => {
     const mypath = import.meta.url;
+    brandLink = (await prepSiteLinks(siteLinks, mypath, 'brand', 1, true, true, true))?.[0];
     headerLinks = await prepSiteLinks(siteLinks, mypath, 'header', 2, true, true, true);
     footerLinks = await prepSiteLinks(siteLinks, mypath, 'footer', 1, true, true, true);
     sidebarLinks = await prepSiteLinks(siteLinks, mypath, 'sidebar', 2, true, true, true);
     sidebarLinks = [...headerLinks, ...sidebarLinks]; // Show header links in the sidebar
-    // console.log('DEBUG: headerLinks=%o', headerLinks);
-    // console.log('DEBUG: sidebarLinks=%o', sidebarLinks);
-    // console.log('DEBUG: footerLinks=%o', footerLinks);
   });
 
   settings({
@@ -71,25 +86,21 @@
         }
       }
     },
-    themes: {
-      light: ['light', 'emerald', 'hamlindigo-light'],
-      dark: ['dark', 'forest', 'hamlindigo-dark']
-    }
+    themes
   });
-  // let title = 'Example';
-  let title = ['Total App', 'Svelte UX', 'Section'];
 
-  function onMenuSelected(
-    e: CustomEvent<{
-      value: string;
-      option: MenuOption;
-    }>
-  ) {
-    const link = headerLinks.filter((l) => l?.href === e?.detail?.value)?.[0];
-    if (link) {
-      window.open(link?.href || '', '_blank');
+  type MenuEvent = CustomEvent<{
+    value: string;
+    option: MenuOption;
+  }>;
+  function onMenuSelected(e: MenuEvent, links: SiteLink[]) {
+    const value = e?.detail?.value;
+    if (value) {
+      const link = links.filter((l) => l.href === value)?.[0];
+      if (link) {
+        window.open(link?.href || '', link.target || '_self');
+      }
     }
-    // e?.detail?.value && window.open(e.detail.value || '', '_blank');
   }
 </script>
 
@@ -109,12 +120,21 @@
   <!-- <AppBar title="Example"> -->
   <AppBar {title} class="bg-primary text-primary-content">
     <div slot="title" class="ml-0 inline-flex text-lg font-medium">
+      <!-- Emulate AppBar default title slot, with added Branding / Logo Button -->
       <!-- <ListItem title="Example" subheading="Page" /> -->
-      <Button icon={logo} href={websiteUrlBase} class="mr-2 p-3"></Button>
+      {#if brandLink}
+        <Button
+          icon={brandLink.img_icon ?? brandLink.img_html ?? brandLink.img_src}
+          href={brandLink.href ?? siteUrl ?? websiteUrl}
+          class="mr-2 p-3"
+        ></Button>
+      {/if}
       {#if typeof title === 'string' || typeof title === 'number'}
         {title}
       {:else}
-        <Breadcrumb items={title} class="inline-flex gap-2" />
+        <Breadcrumb items={title} class="flex-nowrap gap-2">
+          <span slot="item" class="text-nowrap last:truncate" let:item>{item}</span>
+        </Breadcrumb>
       {/if}
     </div>
 
@@ -123,17 +143,34 @@
       </div> -->
 
     <div slot="actions" class="flex gap-0">
-      <!-- App actions main sections-->
-      {#each headerLinks as link, i}
-        <Button
-          class={isActive($page.url, link?.href ?? '')
-            ? '[--bg-color:theme(colors.surface-content/20%)]'
-            : ''}
-          href={link?.href}
+      <!-- App actions main sections on large screen -->
+      {#if $lgScreen}
+        {#each headerLinks as link, i}
+          <Button
+            class={isActive($page.url, link.href ?? '')
+              ? '[--bg-color:theme(colors.surface-content/20%)]'
+              : ''}
+            href={link.href}
+          >
+            {link.title}
+          </Button>
+        {/each}
+      {:else}
+        <!-- App actions main sections Menu n small screen -->
+        <MenuButton
+          icon={mdiDotsGrid}
+          menuIcon={null}
+          iconOnly={true}
+          options={headerLinks.map((l) => ({
+            label: l?.title,
+            value: l?.href,
+            icon: l?.img_icon ?? l?.img_html ?? l?.img_src
+          }))}
+          on:change={(e: MenuEvent) => onMenuSelected(e, headerLinks)}
         >
-          {link.title}
-        </Button>
-      {/each}
+          <span slot="selection" class="hidden"></span>
+        </MenuButton>
+      {/if}
 
       <!-- App actions on large screen-->
       {#if $lgScreen}
@@ -175,19 +212,22 @@
       {/if}
 
       <ThemeSelect lightThemes={['light']} darkThemes={['dark']} />
-      <ThemeSwitch />
+      <div class="inline-flex h-auto items-center">
+        <!-- Fixer div for ThemeSwitch to properly center vertically -->
+        <ThemeSwitch />
+      </div>
       {#if !$lgScreen}
         <!-- App actions Menu on small screen -->
         <MenuButton
           icon={mdiDotsVertical}
           menuIcon={null}
           iconOnly={true}
-          options={headerLinks.map((l) => ({
+          options={footerLinks.map((l) => ({
             label: l?.title,
             value: l?.href,
             icon: l?.img_icon ?? l?.img_html ?? l?.img_src
           }))}
-          onchange={onMenuSelected}
+          on:change={(e: MenuEvent) => onMenuSelected(e, footerLinks)}
         >
           <span slot="selection" class="hidden"></span>
         </MenuButton>
