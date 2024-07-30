@@ -24,23 +24,27 @@ export interface _SiteLinkBase {
   img_component?: Component;
   img_html?: string;
 
+  displayInBrand?: boolean;
   displayInHeader?: boolean;
   displayInFooter?: boolean;
   displayInActions?: boolean;
   displayInSidebar?: boolean;
 }
 
-export type SiteLinkFilter = 'header' | 'footer' | 'actions' | 'sidebar';
+export type SiteLinkFilter = 'brand' | 'header' | 'footer' | 'actions' | 'sidebar';
 
 export interface _SiteLink extends _SiteLinkBase {
   href: string;
+  target?: '_blank' | '_parent' | '_self' | '_top';
 }
 export interface _SiteLinkFlatGroup extends _SiteLinkBase {
   href?: string;
+  target?: '_blank' | '_parent' | '_self' | '_top';
   items?: SiteLink[];
 }
 export interface _SiteLinkGroup extends _SiteLinkBase {
   href?: string;
+  target?: '_blank' | '_parent' | '_self' | '_top';
   items?: (SiteLink | SiteLinkGroup)[];
 }
 
