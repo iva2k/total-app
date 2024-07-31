@@ -2,40 +2,39 @@
   import { onMount } from 'svelte';
   import logo from '$lib/images/logo.svg';
   import website from '$lib/config/website';
-  import { prepSiteLinks } from '$lib/config/configUtils';
+  import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   import type { SiteLink } from '$lib/types';
   const { websiteUrlBase, siteLinks } = website;
 
   export let pathname = '/';
   $: path1st = '/' + (pathname ?? '').split('/')[1];
 
-  let brandLink: SiteLink;
-  let headerLinks: SiteLink[] = [];
+  let brandLink: SiteLink = prepSiteLinks(
+    siteLinks,
+    'brand',
+    1,
+    /* nodeFilter */ true,
+    /* flatten */ true,
+    /* prune */ false // Allow brand without a link
+  )?.[0];
+  let headerLinks: SiteLink[] = prepSiteLinks(
+    siteLinks,
+    'header',
+    2,
+    true,
+    /* flatten */ true,
+    /* prune */ true
+  );
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
     */
     const mypath = import.meta.url;
-    brandLink = (
-      await prepSiteLinks(
-        siteLinks,
-        mypath,
-        'brand',
-        1,
-        /* nodeFilter */ true,
-        /* flatten */ true,
-        /* prune */ false // Allow brand without a link
-      )
-    )?.[0];
-    headerLinks = await prepSiteLinks(
-      siteLinks,
-      mypath,
-      'header',
-      2,
-      true,
-      /* flatten */ true,
-      /* prune */ true
-    );
+    // [brandLink, ... headerLinks] =
+    await Promise.all([
+      loadSiteLinks([brandLink], mypath)?.[0],
+      ...loadSiteLinks(headerLinks, mypath)
+    ]);
     console.log('DEBUG: headerLinks=%o', headerLinks);
   });
 </script>
