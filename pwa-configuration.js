@@ -86,8 +86,7 @@ const pwaConfigurationFnc = async (
     // default: minify: true,
 
     devOptions: {
-      // enabled: process.env.SW_DEV === 'true',
-      enabled: true,
+      enabled: process.env.SW_DEV === 'true',
       /* when using generateSW the PWA plugin will switch to classic */
       type: 'module',
       navigateFallback: scope
