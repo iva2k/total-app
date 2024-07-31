@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount, setContext, type Snippet } from 'svelte';
+  // import { onMount, setContext, type Snippet } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
 
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
