@@ -6,7 +6,7 @@
 
   import { settings } from 'svelte-ux';
 
-  import AppShell from './AppShell.svelte';
+  import AppShell from '$lib/components/svelteux/AppShell.svelte';
 
   // import Favicon from '$lib/components/favicon/Favicon.svelte';
   // import Offline from '$lib/components/offline/Offline.svelte';
