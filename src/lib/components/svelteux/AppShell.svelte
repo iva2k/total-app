@@ -31,7 +31,7 @@
   const { siteLinks, websiteUrl, siteUrl, siteShortTitle, siteTitle } = website;
 
   import type { SiteLink } from '$lib/types';
-  import { prepSiteLinks } from '$lib/config/configUtils';
+  import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
 
   // let title_default = siteTitle;
   const title_default = [siteShortTitle, 'Svelte UX'];
@@ -52,18 +52,24 @@
     children: Snippet;
   }>();
 
-  let brandLink = $state<SiteLink>();
-  let headerLinks = $state<SiteLink[]>([]);
-  let footerLinks = $state<SiteLink[]>([]);
-  let sidebarLinks = $state<SiteLink[]>([]);
+  let brandLink = $state<SiteLink>(prepSiteLinks(siteLinks, 'brand', 1, true, true, true)?.[0]);
+  let footerLinks = $state<SiteLink[]>(prepSiteLinks(siteLinks, 'footer', 1, true, true, true));
+
+  const headerLinksIni = prepSiteLinks(siteLinks, 'header', 2, true, true, true);
+  let headerLinks = $state<SiteLink[]>(headerLinksIni);
+  let sidebarLinks = $state<SiteLink[]>([
+    ...headerLinksIni, // Show header links in the sidebar
+    ...prepSiteLinks(siteLinks, 'sidebar', 2, true, true, true)
+  ]);
 
   onMount(async () => {
     const mypath = import.meta.url;
-    brandLink = (await prepSiteLinks(siteLinks, mypath, 'brand', 1, true, true, true))?.[0];
-    headerLinks = await prepSiteLinks(siteLinks, mypath, 'header', 2, true, true, true);
-    footerLinks = await prepSiteLinks(siteLinks, mypath, 'footer', 1, true, true, true);
-    sidebarLinks = await prepSiteLinks(siteLinks, mypath, 'sidebar', 2, true, true, true);
-    sidebarLinks = [...headerLinks, ...sidebarLinks]; // Show header links in the sidebar
+    await Promise.all([
+      ...loadSiteLinks([brandLink], mypath),
+      ...loadSiteLinks(headerLinks, mypath),
+      ...loadSiteLinks(footerLinks, mypath),
+      ...loadSiteLinks(sidebarLinks, mypath)
+    ]);
   });
 
   settings({
