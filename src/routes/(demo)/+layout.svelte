@@ -13,7 +13,7 @@
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
-  import { prepSiteLinks } from '$lib/config/configUtils';
+  import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   import type { SiteLink } from '$lib/types';
   const { siteLinks } = website;
 
@@ -22,7 +22,16 @@
 
   // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
   let { children } = $props<{ children: Snippet }>();
-  let footerLinks = $state<SiteLink[]>([]);
+  let footerLinks = $state<SiteLink[]>(
+    prepSiteLinks(
+      siteLinks,
+      'footer',
+      1,
+      /* nodeFilter */ true,
+      /* flatten */ true,
+      /* prune */ true
+    )
+  );
 
   let isDarkMode = $state(false);
   const DARK_CSS = '/vendor/bootstrap/themes/darkly/bootstrap.min.css';
@@ -33,15 +42,8 @@
     await loadIonicPWAElements(window);
     */
     const mypath = import.meta.url;
-    footerLinks = await prepSiteLinks(
-      siteLinks,
-      mypath,
-      'footer',
-      1,
-      /* nodeFilter */ true,
-      /* flatten */ true,
-      /* prune */ true
-    );
+    // footerLinks =
+    await Promise.all(loadSiteLinks(footerLinks, mypath));
     console.log('DEBUG: footerLinks=%o', footerLinks);
   });
 
