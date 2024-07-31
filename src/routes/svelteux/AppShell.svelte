@@ -156,7 +156,7 @@
           </Button>
         {/each}
       {:else}
-        <!-- App actions main sections Menu n small screen -->
+        <!-- App actions main sections Menu on small screen -->
         <MenuButton
           icon={mdiDotsGrid}
           menuIcon={null}
