@@ -21,8 +21,8 @@
     "usernamehw.errorlens",
     "github.vscode-github-actions",
     "yzhang.markdown-all-in-one",
-    "trunk.io",
     "antfu.iconify",
-    "crystal-spider.jsdoc-generator"
+    "crystal-spider.jsdoc-generator",
+    "esbenp.prettier-vscode"
   ]
 }

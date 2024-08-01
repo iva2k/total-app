@@ -16,7 +16,7 @@
   // import svelte_logo from '$lib/images/svelte-logo.svg';
 
   import type { LayoutData } from './$types';
-  import type { LayoutContext } from '$lib/types';
+  import { useState } from '$lib/utils/state.svelte';
   import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
   import { Dropdown, Theme } from 'carbon-components-svelte';
 
@@ -28,13 +28,9 @@
 
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
-  // Use context to make ssrPathname available to child components
-  setContext<LayoutContext>('layout', {
-    get: () => {
-      console.log(`getContext(layout) ssrPathname=${ssrPathname}`);
-      return { ssrPathname };
-    }
-  });
+  // Make ssrPathname available to child components
+  // const _ssrPathname =
+  useState('ssrPathname', ssrPathname);
 
   // Favicon params:
   const pngFavicons = [

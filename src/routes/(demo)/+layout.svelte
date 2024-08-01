@@ -16,7 +16,7 @@
   const { siteLinks } = website;
 
   // import type { LayoutData } from './$types';
-  // import type { LayoutContext } from '$lib/types';
+  // import { useState } from '$lib/utils/state.svelte';
   import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
   import { Dropdown, Theme } from 'carbon-components-svelte';
 
@@ -46,13 +46,9 @@
   /* DISABLED (see root +layout.svelte)
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
-  // Use context to make ssrPathname available to child components
-  setContext<LayoutContext>('layout', {
-    get: () => {
-      console.log(`getContext(layout) ssrPathname=${ssrPathname}`);
-      return { ssrPathname };
-    }
-  });
+  // useState() uses rune in a context to make ssrPathname available to child components
+  // let _ssrPathname =
+  useState('ssrPathname', { ssrPathname });
   */
 
   /* DISABLED (see root +layout.svelte)
