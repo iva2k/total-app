@@ -415,23 +415,33 @@ Missing Properties | The following required properties are missing: fb:app_id
 
 ### Add SSR-Safe Store Services
 
-TODO: (now) Revisit with Svelte 5 runes. For now, removing `@svelte-kits/store`.
-
-#### Outdated
-
 SvelteKit provides good server/client support for stores. They are easy to use, but have some mines to avoid when using SSR (see <https://kit.svelte.dev/docs/state-management#avoid-shared-state-on-the-server> and <https://github.com/sveltejs/kit/discussions/4339>).
 
-See package addressing the issue in the most simple to use way: `@svelte-kits/store` <https://github.com/svelte-kits/store>
+See `src/lib/util/state.svelte.ts` for handy helper functions that wrap rune `$state()` and readable & writable stores in a context, that are safe across server and client components and modules (adopted from <https://dev.to/jdgamble555/using-sharable-runes-with-typescript-in-svelte5-5hcp>).
 
-```bash
-pnpm install -D @svelte-kits/store
+#### Usage
+
+```ts
+// Component 1
+<script>
+  import { useUser } from '$lib/utils/state.svelte';
+  let user = new User();
+  const _user = useState('user', user); // Initializes 'user' context, creates writable `_user` var
+  ...
+  onLogin() {
+    ...
+    _user.value = new User(); // when user changes
+  }
+</script>
 ```
 
-Then just replace `svelte/store` with `@svelte-kits/store`, for all store uses (though only `writable` store is affected by SSR).
-
-Also see <https://dev.to/jdgamble555/the-correct-way-to-use-stores-in-sveltekit-3h6i>.
-
-For upcoming v5.0 Svelte runes, see <https://dev.to/jdgamble555/create-the-perfect-sharable-rune-in-svelte-ij8>.
+```ts
+// Component 2
+<script>
+  import { useUser } from '$lib/utils/state.svelte';
+  const user = $derived<User>(useState('user').value); // Observes 'user' context, creates observable `user` var that can be consumed directly, e.g. `if (user.loggedIn) {...}`
+</script>
+```
 
 ### Add Service Worker for Offline Operation
 
