@@ -257,6 +257,7 @@ export default tseslint.config(
       'src-tauri/WixTools/',
       'src-tauri/Cargo.lock',
       'playwright-report/',
+      '/.trunk/tmp',
 
       // Vite
       '**/vite.config.js.timestamp-*',
