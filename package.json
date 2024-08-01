@@ -61,7 +61,7 @@
     "story:build":                                   "echo RUN story:build                                    && histoire build",
     "quick": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm check",
     "all": "pnpm i && pnpm format && pnpm lint && pnpm build:only-sw && pnpm tauri info && pnpm tauri:build && pnpm story:build && pnpm build:netlify && pnpm build:vercel && pnpm test:unit && pnpm test:integration && pnpm check",
-    "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg \""
+    "icons:build": "bash -c \"./scripts/icon-generator.sh .logo/logo.svg .logo/icon.svg .logo/icon_bg.svg .logo/icon+texture.svg .logo/icon+texture-wide.svg \""
   },
   "dependencies": {
     "@capacitor/android": "^6.1.1",

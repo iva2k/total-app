@@ -6,10 +6,6 @@ export type ImageResource = {
   caption?: string;
 };
 
-export interface LayoutContext {
-  get: () => { ssrPathname: string };
-}
-
 import { type Component } from 'svelte';
 export interface _SiteLinkBase {
   prefix?: string;
