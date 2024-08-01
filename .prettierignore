@@ -40,6 +40,7 @@ test-results.json
 /coverage
 /android
 /ios
+/.trunk/tmp
 
 # Package Managers
 # Ignore files for PNPM, NPM and YARN
