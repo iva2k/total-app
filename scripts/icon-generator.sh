@@ -28,7 +28,7 @@ SEP2="$(printf "%100s\r" "" | tr ' ' '=')"
 # Check and Decode args
 
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 input_favicon.svg [input_app_icon.svg [input_app_icon_bg.svg [input_app_icon_texture.svg]]] "
+    echo "Usage: $0 input_favicon.svg [input_app_icon.svg [input_app_icon_bg.svg [input_app_icon_texture.svg [input_app_icon_texture_wide.svg]]]] "
     exit 1;
 fi
 if [ ! -r "$1" ]; then
@@ -44,7 +44,7 @@ if [ $# -gt 1 ]; then
     fi
     APPICON_SRC="$2"
 else
-    APPICON_SRC="$1"
+    APPICON_SRC="${FAVICON_SRC}"
 fi
 
 if [ $# -gt 2 ]; then
@@ -65,6 +65,16 @@ if [ $# -gt 3 ]; then
     APPICON_SRC_TXR="$4"
 else
     APPICON_SRC_TXR="${APPICON_SRC_BG}"
+fi
+
+if [ $# -gt 4 ]; then
+    if [ ! -r "$5" ]; then
+        echo "Error, cannot read input_app_icon_texture_wide file \"$5\"." 
+        exit 1;
+    fi
+    APPICON_SRC_TXR_W="$5"
+else
+    APPICON_SRC_TXR_W="${APPICON_SRC_BG}"
 fi
 
 # Find All Programs
@@ -140,6 +150,9 @@ if [ ! -x "${CONVERT}" ]; then
     CONVERT="$(which magick.exe 2>/dev/null)"
 fi
 if [ ! -x "${CONVERT}" ]; then
+    CONVERT="C:/Program Files/ImageMagick-7.1.1-Q16/magick.exe"
+fi
+if [ ! -x "${CONVERT}" ]; then
     CONVERT="C:/Program Files/ImageMagick-7.1.0-Q16/magick.exe"
 fi
 if [ ! -x "${CONVERT}" ]; then
@@ -163,15 +176,16 @@ created=()
 function generatePng () {
     local INFILE=$1
     local OUTFILE=$2
-    local SIZE=$3
+    local SIZE_W=$3
+    local SIZE_H=${4:-$3}
     local TMPFILE="${SOURCE}/__tmp.png"
     rm "${TMPFILE}" >/dev/null 2>&1
     echo "${SEP2}GENERATING PNG: "
-    echo "\"${INFILE}\" -> size(${SIZE}x${SIZE}) -> \"${OUTFILE}\"... "
+    echo "\"${INFILE}\" -> size(${SIZE_W}x${SIZE_H}) -> \"${OUTFILE}\"... "
     [ -f "${OUTFILE}" ] && rm "${OUTFILE}"
     [ -f "${TMPFILE}" ] && rm "${TMPFILE}"
     # generate PNGs => optimise PNGs => clean up temporary files
-    "${INKSCAPE}" -h  "$SIZE" "$INFILE" --export-filename "${TMPFILE}"
+    "${INKSCAPE}" -h  "$SIZE_H" -w "$SIZE_W" "$INFILE" --export-filename "${TMPFILE}"
     "${OPTIPNG}" -o7 -out "${OUTFILE}" "${TMPFILE}"
     rm "${TMPFILE}" >/dev/null 2>&1
     [ ! -r "${OUTFILE}" ] && echo "Error, result file ${OUTFILE} not found" && exit 1;
@@ -248,8 +262,9 @@ generatePng "${APPICON_SRC_BG}" "${OUTPUT_DIR}/apple-icon-180x180.png" 180
 generatePng "${APPICON_SRC}" "${OUTPUT_DIR}/icon-192x192.png"          192
 generatePng "${APPICON_SRC}" "${OUTPUT_DIR}/icon-512x512.png"          512
 
-# For Readme
+# For Readme, Screenshot narrow
 generatePng "${APPICON_SRC_TXR}" "${OUTPUT_DIR}/icon-txr-512x512.png"  512
+generatePng "${APPICON_SRC_TXR_W}" "${OUTPUT_DIR}/icon-txr-1024x640.png"  1024 640
 
 #echo "${created[@]}"
 echo "${SEP2}Created files: "
