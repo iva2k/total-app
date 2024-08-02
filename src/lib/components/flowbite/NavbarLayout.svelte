@@ -20,12 +20,14 @@
   const version = '0.0.0'; // TODO: (when needed) Implement: version = __VERSION__;
 
   import { useState } from '$lib/utils/state.svelte';
+  const trimRightSlash = (input: string) => (input.endsWith('/') ? input.slice(0, -1) : input);
+
   let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
-  let pathname = $derived(browser ? ($page.url?.pathname ?? '') : ssrPathname);
+  let pathname = $derived(trimRightSlash(browser ? ($page.url?.pathname ?? '') : ssrPathname));
 
   let { content } = $props<{ content: Snippet }>();
   // let isHomePage: boolean; $: isHomePage = $page.route.id === '/';
-  let isHomePage = $derived(pathname === '/');
+  let isHomePage = $derived(['/', '/home'].includes(pathname));
 
   let logo = '/favicon.svg';
   let divClass = 'w-full ms-auto lg:block lg:w-auto order-1 lg:order-none';
@@ -104,7 +106,7 @@
     <NavUl
       {divClass}
       {ulClass}
-      {pathname}
+      activeUrl={pathname}
       onclick={() => setTimeout(toggle, 1)}
       nonActiveClass="md:!ps-3 md:!py-2 lg:!ps-0 text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:text-white lg:dark:hover:text-primary-700 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
       activeClass="md:!ps-3 md:!py-2 lg:!ps-0 text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:dark:text-primary-700 dark:bg-primary-600 lg:dark:bg-transparent cursor-default"

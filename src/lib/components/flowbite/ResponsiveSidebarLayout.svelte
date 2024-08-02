@@ -36,9 +36,10 @@
   };
 
   const fileDir = (path: string) => path.split('/').slice(0, -1).pop() ?? '';
+  const trimRightSlash = (input: string) => (input.endsWith('/') ? input.slice(0, -1) : input);
 
   let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
-  let pathname = $derived(browser ? ($page.url?.pathname ?? '') : ssrPathname);
+  let pathname = $derived(trimRightSlash(browser ? ($page.url?.pathname ?? '') : ssrPathname));
   let activeMainSidebar = $state<string>();
 
   import { type SiteLink } from '$lib/types';
@@ -58,7 +59,7 @@
     document.getElementById('svelte')?.scrollTo({ top: 0 });
     closeDrawer();
 
-    activeMainSidebar = navigation.to?.url.pathname ?? '';
+    activeMainSidebar = trimRightSlash(navigation.to?.url.pathname ?? '');
 
     const key = fileDir(activeMainSidebar);
     for (const k in dropdowns) dropdowns[k] = false;
@@ -66,6 +67,8 @@
   });
 
   let spanClass = '';
+  let spanClassHeaderLinks = '';
+  // let spanClassHeaderLinks = 'w-full text-sm font-semibold tracking-wide uppercase hover:text-primary-700 dark:hover:text-primary-600 text-gray-900 dark:text-white';
   let nonActiveClass =
     'transition-colors duration-200 relative flex items-center flex-wrap font-medium hover:text-gray-900 hover:cursor-pointer text-gray-500 dark:text-gray-400 dark:hover:text-white';
   let activeClass =
@@ -77,6 +80,7 @@
 <Sidebar
   class={_drawerHidden.value && 'hidden'}
   {nonActiveClass}
+  {activeClass}
   activeUrl={pathname}
   asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:static lg:h-auto border-e border-gray-200 dark:border-gray-600 lg:overflow-y-visible lg:pt-0 lg:block bg-white dark:bg-gray-900"
 >
@@ -106,8 +110,7 @@
                   label={meta.component_title}
                   {href}
                   {spanClass}
-                  {activeClass}
-                  active={activeMainSidebar === href}
+                  active={pathname === href}
                 />
               {/if}
             {/each}
@@ -118,9 +121,8 @@
           <SidebarItem
             label={link.title}
             href={link.href}
-            spanClass="w-full text-sm font-semibold tracking-wide uppercase hover:text-primary-700 dark:hover:text-primary-600 text-gray-900 dark:text-white"
-            {activeClass}
-            active={activeMainSidebar === link.href}
+            spanClass={spanClassHeaderLinks}
+            active={pathname === link.href}
           />
         {/each}
       </SidebarGroup>
