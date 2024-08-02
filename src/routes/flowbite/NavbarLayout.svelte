@@ -139,27 +139,6 @@
         </ToolbarLink>
       {/each}
 
-      <!-- <ToolbarLink
-        class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white sm:inline-block"
-        name="View on GitHub"
-        href="https://github.com/themesberg/flowbite-svelte"
-      >
-        <GitHub />
-      </ToolbarLink>
-      <ToolbarLink
-        class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white xl:inline-block"
-        name="Join community on Discord"
-        href="https://discord.gg/4eeurUVvTy"
-      >
-        <Discord />
-      </ToolbarLink>
-      <ToolbarLink
-        class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white xl:inline-block"
-        name="Subscribe to YouTube channel"
-        href="https://www.youtube.com/channel/UC_Ms4V2kYDsh7F_CSsHyQ6A"
-      >
-        <YouTube />
-      </ToolbarLink> -->
       <DarkMode size="lg" class="inline-block hover:text-gray-900 dark:hover:text-white" />
       <Tooltip class="dark:bg-gray-900" placement="bottom-end">Toggle dark mode</Tooltip>
     </div>
