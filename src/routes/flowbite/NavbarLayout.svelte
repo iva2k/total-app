@@ -123,8 +123,11 @@
           {#if link?.img_component}
             <svelte:component this={link?.img_component} />
           {:else if link?.img_html}
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html link?.img_html}
+            <div class="h-[1.5em] w-[1.5em] flex items-center justify-center">
+              <!-- Fixer div for size of img_component -->
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+              {@html link?.img_html}
+            </div>
           {:else if link?.img_src}
             <img
               src={link.img_src}
