@@ -18,7 +18,7 @@
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
-  import type { OpenGraphProps, SchemaOrgProps } from './common';
+  import type { OpenGraphProps, SchemaOrgProps, TwitterProps } from './common';
 
   const {
     author,
@@ -160,7 +160,10 @@
     image: twitterImage,
     timeToRead,
     doOgOverride: false
-  };
+    // metadescription: string;
+    // pageTitle: string;
+    // url: string;
+  } as TwitterProps;
 
   // console.log('DEBUG: <SEO> origin=%o, $page.url.origin=%o, siteUrlConfig=%o, siteUrl=%o, $page.url.pathname=%o', origin, $page.url?.origin, siteUrlConfig, siteUrl, $page.url?.pathname);
   // console.log('DEBUG: <SEO> $page.url.origin=%o, siteUrlConfig=%o, siteUrl=%o, $page.url.pathname=%o', $page.url?.origin, siteUrlConfig, siteUrl, $page.url?.pathname);

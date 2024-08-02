@@ -50,3 +50,25 @@ interface SchemaOrgPropsBase {
   };
 }
 export type SchemaOrgProps = SchemaOrgPropsBase;
+
+interface TwitterPropsBase {
+  article: boolean;
+  author: string;
+  twitterUsername?: string;
+  image: ImageResource;
+  timeToRead: number;
+  //   doOgOverride: boolean;
+  //   metadescription?: string;
+  //   pageTitle?: string;
+  //   url?: string;
+}
+interface TwitterOverrideProps extends TwitterPropsBase {
+  doOgOverride: true;
+  metadescription?: string;
+  pageTitle?: string;
+  url?: string;
+}
+interface TwitterNoOverrideProps extends TwitterPropsBase {
+  doOgOverride?: false;
+}
+export type TwitterProps = TwitterOverrideProps | TwitterNoOverrideProps;

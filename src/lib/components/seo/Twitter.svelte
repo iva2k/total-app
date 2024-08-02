@@ -1,20 +1,24 @@
 <script lang="ts">
-  import type { ImageResource } from '$lib/types';
+  import type { TwitterProps } from './common';
+  let {
+    article = false,
+    author,
+    twitterUsername,
+    image,
+    timeToRead = 0,
 
-  export let article = false;
-  export let author: string;
-  export let twitterUsername: string | undefined;
-  export let image: ImageResource;
-  export let timeToRead = 0;
+    // When there is an equivalent og tag present, Twitter takes that.
+    // If OG is not used, or Twitter tags should be different, set doOgOverride = true
+    doOgOverride = false,
+    ...rest
 
-  // When there is an equivalent og tag present, Twitter takes that.
-  // If OG is not used, or Twitter tags should be different, set doOgOverride = true
-  export let doOgOverride = false;
-
-  // The following tags will be added only if doOgOverride=true:
-  export let metadescription = '';
-  export let pageTitle = '';
-  export let url = '';
+    // The following tags will be added only if doOgOverride=true:
+    // metadescription = '',
+    // pageTitle = '',
+    // url = ''
+  }: TwitterProps = $props();
+  // This is silly, but optional props (for doOgOverride=true) need some gymnastics:
+  let { metadescription = '', pageTitle = '', url = '' } = { ...rest };
 </script>
 
 <svelte:head>
