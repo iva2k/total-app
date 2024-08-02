@@ -88,7 +88,7 @@
   -->
 
   <Header --corner-right-width="8em">
-    {#snippet content()}
+    {#snippet rightCorner()}
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
           <Input
