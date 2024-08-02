@@ -18,7 +18,7 @@
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
-  import type { OpenGraphProps } from './common';
+  import type { OpenGraphProps, SchemaOrgProps } from './common';
 
   const {
     author,
@@ -151,7 +151,7 @@
     telegramUsername,
     tiktokUsername,
     twitterUsername
-  };
+  } as SchemaOrgProps;
 
   const twitterProps = {
     article,

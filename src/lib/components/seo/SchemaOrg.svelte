@@ -1,38 +1,36 @@
 <script lang="ts">
   import hash from 'object-hash';
-  import type { ImageResource } from '$lib/types';
+  import type { SchemaOrgProps } from './common';
+  // import type { ImageResource } from '$lib/types';
 
-  export let article = false;
-  export let author: string;
-  export let breadcrumbs: { name: string; slug: string }[];
-  export let datePublished: string;
-  export let entity: string;
-  export let lastUpdated: string;
-  export let featuredImage: ImageResource;
-  export let metadescription: string;
-  export let siteLanguage: string;
-  export let siteTitle: string;
-  export let siteTitleAlt: string;
-  export let siteUrl: string;
-  export let title: string;
-  export let url: string;
-  export let facebookPage: string;
-  export let githubPage: string;
-  export let linkedinProfile: string;
-  export let telegramUsername: string;
-  export let tiktokUsername: string;
-  export let twitterUsername: string;
-  export let entityMeta: {
-    url: string;
-    faviconWidth: number;
-    faviconHeight: number;
-    caption?: string;
-  } | null = null;
+  let {
+    article = false,
+    author,
+    breadcrumbs,
+    datePublished,
+    entity,
+    lastUpdated,
+    featuredImage,
+    metadescription,
+    siteLanguage,
+    siteTitle,
+    siteTitleAlt,
+    siteUrl,
+    title,
+    url,
+    facebookPage,
+    githubPage,
+    linkedinProfile,
+    telegramUsername,
+    tiktokUsername,
+    twitterUsername,
+    entityMeta = undefined
+  }: SchemaOrgProps = $props();
 
   const entityHash = hash({ author }, { algorithm: 'md5' });
 
   const schemaOrgEntity =
-    entityMeta !== null
+    entityMeta !== undefined
       ? {
           '@type': ['Person', 'Organization'],
           '@id': `${siteUrl}/#/schema/person/${entityHash}`,

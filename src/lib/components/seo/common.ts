@@ -20,3 +20,33 @@ interface OpenGraphNonArticleProps extends OpenGraphPropsBase {
 }
 
 export type OpenGraphProps = OpenGraphArticleProps | OpenGraphNonArticleProps;
+
+interface SchemaOrgPropsBase {
+  article: boolean;
+  author: string;
+  breadcrumbs: { name: string; slug: string }[];
+  datePublished: string;
+  entity: string;
+  lastUpdated: string;
+  featuredImage: ImageResource;
+  metadescription: string;
+  siteLanguage: string;
+  siteTitle: string;
+  siteTitleAlt: string;
+  siteUrl: string;
+  title: string;
+  url: string;
+  facebookPage: string;
+  githubPage: string;
+  linkedinProfile: string;
+  telegramUsername: string;
+  tiktokUsername: string;
+  twitterUsername: string;
+  entityMeta?: {
+    url: string;
+    faviconWidth: number;
+    faviconHeight: number;
+    caption?: string;
+  };
+}
+export type SchemaOrgProps = SchemaOrgPropsBase;
