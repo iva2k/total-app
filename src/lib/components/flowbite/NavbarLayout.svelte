@@ -1,4 +1,5 @@
 <script lang="ts">
+  import './styles.css';
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
@@ -9,12 +10,12 @@
   import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   const { siteLinks } = website;
 
-  //   import DocBadge from '../utils/DocBadge.svelte';
-  //   import Discord from '../utils/icons/Discord.svelte';
-  //   import GitHub from '../utils/icons/GitHub.svelte';
-  //   import YouTube from '../utils/icons/YouTube.svelte';
+  // import DocBadge from '../utils/DocBadge.svelte';
+  // import Discord from '../utils/icons/Discord.svelte';
+  // import GitHub from '../utils/icons/GitHub.svelte';
+  // import YouTube from 'flowbite-svelte-icons/YoutubeSolid.svelte';
   import ToolbarLink from './ToolbarLink.svelte';
-  //   import AlgoliaSearch from '../utils/AlgoliaSearch.svelte';
+  // import AlgoliaSearch from '../utils/AlgoliaSearch.svelte';
 
   const version = '0.0.0'; // TODO: (when needed) Implement: version = __VERSION__;
 

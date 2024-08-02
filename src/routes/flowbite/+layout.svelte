@@ -1,12 +1,11 @@
 <script lang="ts">
-  import './styles.css';
-  import { onMount, type Snippet } from 'svelte';
+  import { type Snippet } from 'svelte';
 
   //   import { page } from '$app/stores';
   //   page;
 
-  import NavbarLayout from './NavbarLayout.svelte';
-  import ResponsiveSidebarLayout from './ResponsiveSidebarLayout.svelte';
+  import NavbarLayout from '$lib/components/flowbite/NavbarLayout.svelte';
+  import ResponsiveSidebarLayout from '$lib/components/flowbite/ResponsiveSidebarLayout.svelte';
 
   let { children } = $props<{ children: Snippet }>();
 </script>
