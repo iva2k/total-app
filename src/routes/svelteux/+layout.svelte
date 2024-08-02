@@ -15,7 +15,7 @@
 
   // DISABLED (see root +layout.svelte)
   // import type { LayoutData } from './$types';
-  // import type { LayoutContext } from '$lib/types';
+  // import { useState } from '$lib/utils/state.svelte';
 
   // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
   let { children } = $props<{ children: Snippet }>();
@@ -29,16 +29,12 @@
   /* DISABLED (see root +layout.svelte)
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
 
-  // Use context to make ssrPathname available to child components
-  setContext<LayoutContext>('layout', {
-    get: () => {
-      console.log(`getContext(layout) ssrPathname=${ssrPathname}`);
-      return { ssrPathname };
-    }
-  });
+  // useState() uses rune in a context to make ssrPathname available to child components
+  // let _ssrPathname =
+  useState('ssrPathname', { ssrPathname });
   */
 
-  /* DISABLED
+  /* DISABLED (see root +layout.svelte)
   // Favicon params:
   const pngFavicons = [
     { sizes: '32x32', href: '/favicon-32x32.png', imgSize: 32 },
@@ -61,7 +57,7 @@
   };
 </script>
 
-<!-- DISABLED
+<!-- DISABLED (see root +layout.svelte)
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 -->
 
@@ -72,7 +68,7 @@
   </main>
 </AppShell>
 
-<!-- DISABLED
+<!-- DISABLED (see root +layout.svelte)
 <Offline />
 -->
 
