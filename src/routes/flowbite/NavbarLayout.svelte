@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { page } from '$app/stores';
-  import { onMount, setContext } from 'svelte';
-  import { writable, type Writable } from 'svelte/store';
+  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
+  import { onMount, type Snippet } from 'svelte';
   import { DarkMode, Navbar, NavBrand, NavHamburger, NavLi, NavUl, Tooltip } from 'flowbite-svelte';
 
   import website from '$lib/config/website';
-  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
+  import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   const { siteLinks } = website;
 
   //   import DocBadge from '../utils/DocBadge.svelte';
@@ -15,27 +16,44 @@
   import ToolbarLink from './ToolbarLink.svelte';
   //   import AlgoliaSearch from '../utils/AlgoliaSearch.svelte';
 
-  let isHomePage: boolean;
-  $: isHomePage = $page.route.id === '/';
   const version = '0.0.0'; // TODO: (when needed) Implement: version = __VERSION__;
-  $: activeUrl = $page.url.pathname;
+
+  import { useState } from '$lib/utils/state.svelte';
+  let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
+  let pathname = $derived(browser ? ($page.url?.pathname ?? '') : ssrPathname);
+
+  let { content } = $props<{ content: Snippet }>();
+  // let isHomePage: boolean; $: isHomePage = $page.route.id === '/';
+  let isHomePage = $derived(pathname === '/');
+
   let logo = '/favicon.svg';
   let divClass = 'w-full ms-auto lg:block lg:w-auto order-1 lg:order-none';
   let ulClass =
     'flex flex-col py-3 my-4 lg:flex-row lg:my-0 text-sm font-medium text-gray-900 dark:text-gray-300 gap-4';
 
-  const drawerHiddenStore: Writable<boolean> = writable<boolean>(true);
-  setContext('drawer', drawerHiddenStore);
+  let _drawerHidden = useState<boolean>('drawerHidden', true);
 
-  setContext('testC', 'test for textContext');
+  useState<string>('testC', 'test for textContext');
 
   const toggleDrawer = () => {
-    drawerHiddenStore.update((state) => !state);
+    _drawerHidden.value = !_drawerHidden.value;
   };
 
   import { type SiteLink } from '$lib/types';
-  let headerLinks: typeof siteLinks = []; //  = $state<typeof siteLinks>([]);
-  let footerLinks: typeof siteLinks = []; //  = $state<typeof siteLinks>([]);
+  let headerLinks: SiteLink[] = $state<SiteLink[]>(
+    prepSiteLinks(siteLinks, 'header', 2, true, /* flatten */ true, /* prune */ true)
+  );
+  let footerLinks = $state<SiteLink[]>(
+    prepSiteLinks(
+      siteLinks,
+      'footer',
+      1,
+      /* nodeFilter */ true,
+      /* flatten */ true,
+      /* prune */ true
+    )
+  );
+
   onMount(async () => {
     // Workaround until https://github.com/sveltejs/kit/issues/2664 is fixed
     if (typeof window !== 'undefined' && window.location.hash) {
@@ -47,13 +65,9 @@
     }
 
     const mypath = import.meta.url;
-    headerLinks = (
-      await getSiteLinksComponents(getSiteLinksFiltered(siteLinks, 'header', 2, true, true), mypath)
-    ).filter((l) => l?.href);
-    footerLinks = (
-      await getSiteLinksComponents(getSiteLinksFiltered(siteLinks, 'footer', 1), mypath)
-    ).filter((l) => l?.href);
-    console.log('DEBUG: footerLinks=%o', footerLinks);
+    await Promise.all(loadSiteLinks([...headerLinks, ...footerLinks], mypath));
+    // console.log('DEBUG: headerLinks=%o', headerLinks);
+    // console.log('DEBUG: footerLinks=%o', footerLinks);
   });
 </script>
 
@@ -89,7 +103,7 @@
     <NavUl
       {divClass}
       {ulClass}
-      {activeUrl}
+      {pathname}
       onclick={() => setTimeout(toggle, 1)}
       nonActiveClass="md:!ps-3 md:!py-2 lg:!ps-0 text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:text-white lg:dark:hover:text-primary-700 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
       activeClass="md:!ps-3 md:!py-2 lg:!ps-0 text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:dark:text-primary-700 dark:bg-primary-600 lg:dark:bg-transparent cursor-default"
@@ -163,5 +177,5 @@
 </header>
 
 <div class="w-full dark:bg-gray-900 lg:flex">
-  <slot />
+  {@render content()}
 </div>

@@ -13,15 +13,17 @@
 </script>
 
 <NavbarLayout>
-  <ResponsiveSidebarLayout>
-    <slot />
-
-    <!--
+  {#snippet content()}
+    <ResponsiveSidebarLayout>
+      {#snippet content()}
+        <!--
     <div class="mx-auto flex w-full px-4">
       <main class="mx-auto w-full lg:ml-72">
         {@render children()}
       </main>
     </div>
     -->
-  </ResponsiveSidebarLayout>
+      {/snippet}
+    </ResponsiveSidebarLayout>
+  {/snippet}
 </NavbarLayout>

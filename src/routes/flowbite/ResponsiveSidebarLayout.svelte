@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { page } from '$app/stores';
+  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
   import { afterNavigate } from '$app/navigation';
   import {
     Sidebar,
@@ -8,24 +10,25 @@
     SidebarWrapper,
     SidebarDropdownWrapper
   } from 'flowbite-svelte';
-  import { getContext, onMount } from 'svelte';
-  import type { Writable } from 'svelte/store';
-  import type { PageData } from './$types';
+  import { onMount, type Snippet } from 'svelte';
+  // import type { Writable } from 'svelte/store';
   import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
+  import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   import website from '$lib/config/website';
-  import { getSiteLinksComponents, getSiteLinksFiltered } from '$lib/config/configUtils';
   const { siteLinks } = website;
 
+  let { content } = $props<{ content: Snippet }>();
   // export let data;
   // console.log('posts: ', data);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const posts: Record<string, any[]> = {}; // data.posts || {};
-  const drawerHidden: Writable<boolean> = getContext('drawer');
+
+  let _drawerHidden = useState<boolean>('drawerHidden');
 
   const closeDrawer = () => {
-    drawerHidden.set(true);
+    _drawerHidden.value = true;
   };
 
   const names_mapping: Record<string, string> = {
@@ -34,17 +37,20 @@
 
   const fileDir = (path: string) => path.split('/').slice(0, -1).pop() ?? '';
 
-  $: mainSidebarUrl = $page.url.pathname;
-  let activeMainSidebar: string;
+  let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
+  let pathname = $derived(browser ? ($page.url?.pathname ?? '') : ssrPathname);
+  let activeMainSidebar = $state<string>();
 
-  let headerLinks: typeof siteLinks = [];
+  import { type SiteLink } from '$lib/types';
+  import { useState } from '$lib/utils/state.svelte';
+  let headerLinks: SiteLink[] = $state<SiteLink[]>(
+    prepSiteLinks(siteLinks, 'header', 2, true, /* flatten */ true, /* prune */ true)
+  );
 
   onMount(async () => {
     const mypath = import.meta.url;
-    headerLinks = (
-      await getSiteLinksComponents(getSiteLinksFiltered(siteLinks, 'header', 2, true, true), mypath)
-    ).filter((l) => l?.href);
-    console.log('DEBUG: headerLinks=%o', headerLinks);
+    await Promise.all(loadSiteLinks(headerLinks, mypath));
+    // console.log('DEBUG: headerLinks=%o', headerLinks);
   });
 
   afterNavigate((navigation) => {
@@ -69,9 +75,9 @@
 </script>
 
 <Sidebar
-  class={$drawerHidden && 'hidden'}
+  class={_drawerHidden.value && 'hidden'}
   {nonActiveClass}
-  activeUrl={mainSidebarUrl}
+  activeUrl={pathname}
   asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:static lg:h-auto border-e border-gray-200 dark:border-gray-600 lg:overflow-y-visible lg:pt-0 lg:block bg-white dark:bg-gray-900"
 >
   <h4 id="sidebar-label" class="sr-only">Browse docs</h4>
@@ -123,13 +129,13 @@
 </Sidebar>
 
 <div
-  hidden={$drawerHidden}
+  hidden={_drawerHidden.value}
   class="fixed inset-0 z-20 bg-gray-900/50 dark:bg-gray-900/60"
-  on:click={closeDrawer}
-  on:keydown={closeDrawer}
+  onclick={closeDrawer}
+  onkeydown={closeDrawer}
   role="presentation"
 ></div>
 
 <main class="w-full min-w-0 flex-auto lg:static lg:max-h-full lg:overflow-visible">
-  <slot />
+  {@render content()}
 </main>
