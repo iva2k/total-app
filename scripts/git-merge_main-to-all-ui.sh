@@ -379,12 +379,20 @@ function merge_to_one() {
     fi
 
     # Merge changes from the source branch, but not commit
-    echo "MERGE $SOURCE_BRANCH to $TARGET_BRANCH" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+    echo "MERGE \"$SOURCE_BRANCH\" to \"$TARGET_BRANCH\"" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
     git merge "$SOURCE_BRANCH" --no-commit 2>&1 | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"; res="${PIPESTATUS[0]}"
     if [ "$res" -ne 0 ] ; then
-      echo "Merge conflict(s) detected in \"$TARGET_BRANCH\" branch." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+      output=$(git diff --name-only --diff-filter=U)
+      if echo "$output" | grep -q .; then
+        echo "Merge conflict(s) detected in \"$TARGET_BRANCH\" branch, res=$res." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+        # Continue, Use $res below
+      else
+        echo "Error $res merging \"$SOURCE_BRANCH\" to \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+        st_outputs[i]="Error merging branch"
+        st_errors[i]="$res"
+        exit_save_state 1
+      fi
     fi
-    # Use $res below
   fi
 
   # Check if package.json file is updated (ignore conflicted)
