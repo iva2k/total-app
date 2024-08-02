@@ -18,6 +18,8 @@
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
+  import type { OpenGraphProps } from './common';
+
   const {
     author,
     entity,
@@ -117,7 +119,6 @@
   }
 
   const openGraphProps = {
-    article,
     image: ogImage,
     squareImage: ogSquareImage,
     metadescription: pageCaption,
@@ -125,8 +126,8 @@
     pageTitle: pageTitleExtended,
     siteTitle,
     url: canonicalUrlMust,
-    ...(article ? { datePublished, lastUpdated, facebookPage, facebookAuthorPage } : {})
-  };
+    ...(article ? { article, datePublished, lastUpdated, facebookPage, facebookAuthorPage } : {})
+  } as OpenGraphProps;
 
   const schemaOrgProps = {
     article,

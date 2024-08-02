@@ -1,17 +1,27 @@
 <script lang="ts">
-  import type { ImageResource } from '$lib/types';
-  export let article = false;
-  export let datePublished = '';
-  export let lastUpdated = '';
-  export let facebookAuthorPage = '';
-  export let facebookPage = '';
-  export let image: ImageResource;
-  export let squareImage: ImageResource;
-  export let metadescription: string;
-  export let ogLanguage: string;
-  export let pageTitle: string;
-  export let siteTitle: string;
-  export let url: string;
+  import type { OpenGraphProps } from './common';
+  let {
+    article = false,
+    // datePublished = '',
+    // lastUpdated = '',
+    // facebookAuthorPage = '',
+    // facebookPage = '',
+    image,
+    squareImage,
+    metadescription,
+    ogLanguage,
+    pageTitle,
+    siteTitle,
+    url,
+    ...rest
+  }: OpenGraphProps = $props();
+  // This is silly, but optional props (for article=true) need some gymnastics:
+  let {
+    datePublished = '',
+    lastUpdated = '',
+    facebookAuthorPage = '',
+    facebookPage = ''
+  } = { ...rest };
 </script>
 
 <svelte:head>
