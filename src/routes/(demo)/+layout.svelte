@@ -97,7 +97,7 @@
   -->
 
   <Header --corner-right-width="auto">
-    {#snippet content()}
+    {#snippet rightCorner()}
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
           <div class="toolbar-themer">
