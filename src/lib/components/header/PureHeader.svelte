@@ -1,30 +1,36 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   import logo from '$lib/images/logo.svg';
   import website from '$lib/config/website';
   import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   import type { SiteLink } from '$lib/types';
-  const { websiteUrlBase, siteLinks } = website;
+  const { siteLinks } = website;
 
-  export let pathname = '/';
-  $: path1st = '/' + (pathname ?? '').split('/')[1];
+  let {
+    pathname = '/',
+    leftCorner,
+    rightCorner
+  } = $props<{
+    pathname: string;
+    leftCorner?: Snippet;
+    rightCorner?: Snippet;
+  }>();
+  let path1st = $derived('/' + (pathname ?? '').split('/')[1]);
 
-  let brandLink: SiteLink = prepSiteLinks(
-    siteLinks,
-    'brand',
-    1,
-    /* nodeFilter */ true,
-    /* flatten */ true,
-    /* prune */ false // Allow brand without a link
-  )?.[0];
-  let headerLinks: SiteLink[] = prepSiteLinks(
-    siteLinks,
-    'header',
-    2,
-    true,
-    /* flatten */ true,
-    /* prune */ true
+  let brandLink: SiteLink = $state<SiteLink>(
+    prepSiteLinks(
+      siteLinks,
+      'brand',
+      1,
+      /* nodeFilter */ true,
+      /* flatten */ true,
+      /* prune */ false // Allow brand without a link
+    )?.[0]
   );
+  let headerLinks: SiteLink[] = $state<SiteLink[]>(
+    prepSiteLinks(siteLinks, 'header', 2, true, /* flatten */ true, /* prune */ true)
+  );
+
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
     await loadIonicPWAElements(window);
@@ -32,7 +38,7 @@
     const mypath = import.meta.url;
     // [brandLink, ... headerLinks] =
     await Promise.all([
-      loadSiteLinks([brandLink], mypath)?.[0],
+      ...loadSiteLinks([brandLink], mypath),
       ...loadSiteLinks(headerLinks, mypath)
     ]);
     console.log('DEBUG: headerLinks=%o', headerLinks);
@@ -41,7 +47,9 @@
 
 <header>
   <div class="corner corner-left">
-    {#if brandLink}
+    {#if leftCorner}
+      {@render leftCorner()}
+    {:else if brandLink}
       <!-- {brandLink.prefix ?? ''} -->
       <a href={brandLink.href} target={brandLink.target ?? '_self'}>
         {#if brandLink.img_component}
@@ -82,7 +90,9 @@
   </nav>
 
   <div class="corner corner-right">
-    <slot />
+    {#if rightCorner}
+      {@render rightCorner()}
+    {/if}
   </div>
 </header>
 
