@@ -19,6 +19,7 @@
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
   import type { OpenGraphProps, SchemaOrgProps, SeoProps, TwitterProps } from './common';
+  import { browser } from '$app/environment';
 
   const {
     author,
@@ -179,19 +180,21 @@
 <svelte:head>
   <title>{pageTitleExtended}</title>
   <meta name="description" content={pageCaption} />
-  <meta
-    name="robots"
-    content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-  />
   {#if canonicalUrl}
     <link rel="canonical" href={canonicalUrl} />
   {/if}
+  {#if !browser}
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
 
-  {#if isNetlify && googleSiteVerificationNetlify}
-    <meta name="google-site-verification" content={googleSiteVerificationNetlify} />
-  {/if}
-  {#if isVercel && googleSiteVerificationVercel}
-    <meta name="google-site-verification" content={googleSiteVerificationVercel} />
+    {#if isNetlify && googleSiteVerificationNetlify}
+      <meta name="google-site-verification" content={googleSiteVerificationNetlify} />
+    {/if}
+    {#if isVercel && googleSiteVerificationVercel}
+      <meta name="google-site-verification" content={googleSiteVerificationVercel} />
+    {/if}
   {/if}
 </svelte:head>
 

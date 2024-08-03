@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import type { TwitterProps } from './common';
   let {
     article = false,
@@ -22,34 +23,39 @@
 </script>
 
 <svelte:head>
-  <meta name="twitter:card" content="summary_large_image" />
-  {#if doOgOverride}
-    {#if pageTitle}
-      <meta name="twitter:title" content={pageTitle} />
+  {#if !browser}
+    <meta name="twitter:card" content="summary_large_image" />
+    {#if doOgOverride}
+      {#if pageTitle}
+        <meta name="twitter:title" content={pageTitle} />
+      {/if}
+      {#if metadescription}
+        <meta name="twitter:description" content={metadescription} />
+      {/if}
+      {#if url}
+        <meta name="twitter:url" content={url} />
+      {/if}
     {/if}
-    {#if metadescription}
-      <meta name="twitter:description" content={metadescription} />
+    {#if image}
+      <meta name="twitter:image" content={image.url} />
+      {#if image.alt}
+        <meta name="twitter:image:alt" content={image.alt} />
+      {/if}
     {/if}
-    {#if url}
-      <meta name="twitter:url" content={url} />
+    {#if twitterUsername}
+      <meta name="twitter:creator" content={`@${twitterUsername}`} />
+      <meta name="twitter:site" content={`@${twitterUsername}`} />
     {/if}
-  {/if}
-  {#if image}
-    <meta name="twitter:image" content={image.url} />
-    {#if image.alt}
-      <meta name="twitter:image:alt" content={image.alt} />
+    {#if author}
+      <meta name="twitter:label1" content="Written by" />
+      <meta name="twitter:data1" content={author} />
     {/if}
-  {/if}
-  {#if twitterUsername}
-    <meta name="twitter:creator" content={`@${twitterUsername}`} />
-    <meta name="twitter:site" content={`@${twitterUsername}`} />
-  {/if}
-  {#if author}
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content={author} />
-  {/if}
-  {#if article && timeToRead > 0}
-    <meta name="twitter:label2" content="Est. reading time" />
-    <meta name="twitter:data2" content={timeToRead !== 1 ? `${timeToRead} minutes` : '1 minute'} />
+    {#if article && timeToRead > 0}
+      <meta name="twitter:label2" content="Est. reading time" />
+      <meta
+        name="twitter:data2"
+        content={timeToRead !== 1 ? `${timeToRead} minutes` : '1 minute'}
+      />
+    {/if}
   {/if}
 </svelte:head>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import hash from 'object-hash';
   import type { SchemaOrgProps } from './common';
-  // import type { ImageResource } from '$lib/types';
+  import { browser } from '$app/environment';
 
   let {
     article = false,
@@ -210,6 +210,8 @@
 </script>
 
 <svelte:head>
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-  {@html jsonLdScript}
+  {#if !browser}
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+    {@html jsonLdScript}
+  {/if}
 </svelte:head>
