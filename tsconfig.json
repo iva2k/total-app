@@ -37,7 +37,7 @@
     "sourceMap": true,
     "strict": true,
     "outDir": ".types",
-    "types": ["unplugin-icons/types/svelte"]
+    "types": ["vite-plugin-pwa/svelte", "unplugin-icons/types/svelte"]
   },
   "exclude": [
     "./node_modules/**",
