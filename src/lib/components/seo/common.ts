@@ -72,3 +72,34 @@ interface TwitterNoOverrideProps extends TwitterPropsBase {
   doOgOverride?: false;
 }
 export type TwitterProps = TwitterOverrideProps | TwitterNoOverrideProps;
+
+interface SeoPropsBase {
+  // Mandatory properties
+  pageTitle: string;
+  pageCaption: string;
+  slug: string | false;
+
+  // Optional properties
+  useTwitter?: boolean;
+  useOpenGraph?: boolean;
+  useSchemaOrg?: boolean;
+
+  article?: boolean;
+  breadcrumbs?: { name: string; slug: string }[];
+  entityMeta?: {
+    url: string;
+    faviconWidth: number;
+    faviconHeight: number;
+    caption?: string;
+  };
+  lastUpdated?: string;
+  datePublished?: string;
+  timeToRead?: number;
+
+  // imported props with fallback defaults
+  featuredImage?: ImageResource;
+  ogImage?: ImageResource;
+  ogSquareImage?: ImageResource;
+  twitterImage?: ImageResource;
+}
+export type SeoProps = SeoPropsBase;

@@ -18,7 +18,7 @@
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
-  import type { OpenGraphProps, SchemaOrgProps, TwitterProps } from './common';
+  import type { OpenGraphProps, SchemaOrgProps, SeoProps, TwitterProps } from './common';
 
   const {
     author,
@@ -56,48 +56,44 @@
   }
 
   // Mandatory properties
-  export let pageTitle: string;
-  export let pageCaption: string;
-  export let slug: string | false = false;
+  let {
+    pageTitle,
+    pageCaption,
+    slug = false,
 
-  // Optional properties
-  export let useTwitter: boolean | undefined = undefined;
-  export let useOpenGraph: boolean | undefined = undefined;
-  export let useSchemaOrg: boolean | undefined = undefined;
+    // Optional properties
+    useTwitter,
+    useOpenGraph,
+    useSchemaOrg,
 
-  export let article = false;
-  export let breadcrumbs: { name: string; slug: string }[] = [];
-  export let entityMeta: {
-    url: string;
-    faviconWidth: number;
-    faviconHeight: number;
-    caption?: string;
-  } | null = null;
-  export let lastUpdated = '';
-  export let datePublished = '';
-  export let timeToRead = 0;
+    article = false,
+    breadcrumbs = [],
+    entityMeta,
+    lastUpdated = '',
+    datePublished = '',
+    timeToRead = 0,
 
-  // imported props with fallback defaults
-  export let featuredImage: ImageResource = {
-    url: featuredImageSrc,
-    alt: altDescription,
-    width: 672,
-    height: 448,
-    caption: 'Home page'
-  };
-  export let ogImage: ImageResource = {
-    url: ogImageSrc,
-    alt: altDescription
-  };
-  export let ogSquareImage: ImageResource = {
-    url: ogSquareImageSrc,
-    alt: altDescription
-  };
-  export let twitterImage: ImageResource = {
-    url: twitterImageSrc,
-    alt: altDescription
-  };
-
+    // imported props with fallback defaults
+    featuredImage = {
+      url: featuredImageSrc,
+      alt: altDescription,
+      width: 672,
+      height: 448,
+      caption: 'Home page'
+    },
+    ogImage = {
+      url: ogImageSrc,
+      alt: altDescription
+    },
+    ogSquareImage = {
+      url: ogSquareImageSrc,
+      alt: altDescription
+    },
+    twitterImage = {
+      url: twitterImageSrc,
+      alt: altDescription
+    }
+  }: SeoProps = $props();
   // const pageTitleVeryExtended = `${siteTitle} ${VERTICAL_LINE_ENTITY} ${pageTitle}`;
   const pageTitleExtended = `${siteShortTitle} ${VERTICAL_LINE_ENTITY} ${pageTitle}`;
 

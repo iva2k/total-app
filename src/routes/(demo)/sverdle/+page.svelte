@@ -5,9 +5,10 @@
   import { reduced_motion } from './reduced-motion';
 
   import SEO from '$lib/components/seo/SEO.svelte';
+  import type { SeoProps } from '$lib/components/seo/common';
   const pageTitle = 'Sverdle';
   const pageCaption = 'A Wordle clone written in SvelteKit';
-  const seoProps = { pageTitle, pageCaption, slug: 'sverdle' };
+  const seoProps = { pageTitle, pageCaption, slug: 'sverdle' } as SeoProps;
 
   export let data: PageData;
 
