@@ -40,6 +40,7 @@
     "strict": true,
     "outDir": ".types"
   },
+  "files": ["./types.d.ts"], // Fix type-less packages in "types.d.ts"
   "exclude": [
     "./node_modules/**",
     "./.svelte-kit/[!ambient.d.ts]**",
