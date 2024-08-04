@@ -9,7 +9,7 @@
     altDescription
   } from '$lib/assets/home/index';
 
-  import type { ImageResource } from '$lib/types';
+  import { browser } from '$app/environment';
   import website from '$lib/config/website';
   import { VERTICAL_LINE_ENTITY } from '$lib/constants/entities';
   import OpenGraph from './OpenGraph.svelte';
@@ -19,7 +19,6 @@
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
   import type { OpenGraphProps, SchemaOrgProps, SeoProps, TwitterProps } from './common';
-  import { browser } from '$app/environment';
 
   const {
     author,
@@ -49,11 +48,12 @@
   // causing all sorts of troubles, including failing build (prerender stage crashing with "/undefined/").
   // Protect ourselves:
   let siteUrl;
-  if ($page.url?.origin === 'http://sveltekit-prerender') {
+  const origin = browser ? ($page.url?.origin ?? '') : '';
+  if (origin === 'http://sveltekit-prerender') {
     // We are in prerender on the server
     siteUrl = siteUrlConfig;
   } else {
-    siteUrl = siteUrlConfig || $page.url?.origin || '/';
+    siteUrl = siteUrlConfig || origin || '/';
   }
 
   // Mandatory properties
