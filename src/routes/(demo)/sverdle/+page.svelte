@@ -103,6 +103,8 @@
   action="?/enter"
   use:enhance={() => {
     // prevent default callback from resetting the form
+    // TODO: (when needed) Update to Typescript, remove eslint-disable:
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return ({ update }) => {
       update({ reset: false });
     };
