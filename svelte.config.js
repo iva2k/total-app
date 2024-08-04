@@ -67,6 +67,9 @@ const config = {
         pwaConfiguration.srcDir || 'src',
         pwaConfiguration.filename || 'sw.js'
       )
+    },
+    serviceWorker: {
+      register: false // Disable SvelteKit service worker to use virtual:pwa-register/svelte
     }
   },
 

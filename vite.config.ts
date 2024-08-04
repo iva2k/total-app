@@ -4,8 +4,9 @@ import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 import type { UserConfig, Plugin } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import basicSsl from '@vitejs/plugin-basic-ssl';
+// import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
+import backloopHttpsOptions from 'backloop.dev';
 
 import Icons from 'unplugin-icons/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
@@ -20,7 +21,7 @@ export default defineConfig(async ({ mode }) => {
   const { pwaConfiguration, replaceOptions } = await pwaConfigurationFnc(env);
 
   const plugins = [
-    // basicSsl(),
+    // see below: basicSsl(),
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
     Icons({
@@ -47,7 +48,7 @@ export default defineConfig(async ({ mode }) => {
     })
   ];
   // Playwright does not handle https, see https://github.com/microsoft/playwright/issues/16460
-  if (!process.env.NO_HTTPS) plugins.unshift([basicSsl()]);
+  // if (!process.env.NO_HTTPS) plugins.unshift([basicSsl()]);
 
   const config: UserConfig = {
     logLevel: 'info',
@@ -80,7 +81,16 @@ export default defineConfig(async ({ mode }) => {
     },
     test: {
       include: ['src/**/*.{test,spec}.{js,ts}']
-    }
+    },
+    server: process.env.NO_HTTPS
+      ? {}
+      : {
+          // Use valid HTTPS certs for localhost
+          port: 4443,
+          // port: 3000,
+          host: 'total-app.backloop.dev',
+          https: backloopHttpsOptions
+        }
   };
   return config;
 });
