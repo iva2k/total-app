@@ -1,11 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="512" height="512">
     <defs>
-        <linearGradient id="a">
-            <stop offset=".146" style="stop-color:#8142ef;stop-opacity:1"/>
-            <stop offset=".853" style="stop-color:#e11d48;stop-opacity:1"/>
-        </linearGradient>
-        <linearGradient xlink:href="#a" id="b" x1="0" x2="512" y1="256" y2="256" gradientUnits="userSpaceOnUse"/>
         <path id="c" d="M14.102 296.678H416v118.78H14.102z"/>
     </defs>
     <path d="M0 0h512v512H0z" style="opacity:.6;fill:url(#b);fill-opacity:1;stroke:red;stroke-width:0;stroke-linecap:round;stroke-linejoin:round"/>
