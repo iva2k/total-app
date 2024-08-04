@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
+  import { browser } from '$app/environment';
 
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
@@ -61,6 +62,12 @@
     ...headerLinksIni, // Show header links in the sidebar
     ...prepSiteLinks(siteLinks, 'sidebar', 2, true, true, true)
   ]);
+
+  import { useState } from '$lib/utils/state.svelte';
+  const trimRightSlash = (input: string) => (input.endsWith('/') ? input.slice(0, -1) : input);
+
+  let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
+  let pathname = $derived(trimRightSlash(browser ? ($page.url?.pathname ?? '') : ssrPathname));
 
   onMount(async () => {
     const mypath = import.meta.url;
@@ -167,6 +174,7 @@
           icon={mdiDotsGrid}
           menuIcon={null}
           iconOnly={true}
+          value={pathname}
           options={headerLinks.map((l) => ({
             label: l?.title,
             value: l?.href,
