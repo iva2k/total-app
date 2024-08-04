@@ -2,9 +2,10 @@
   import { Geolocation, type Position } from '@capacitor/geolocation';
 
   import SEO from '$lib/components/seo/SEO.svelte';
+  import type { SeoProps } from '$lib/components/seo/common';
   const pageTitle = 'Geolocation';
   const pageCaption = 'Geolocation page';
-  const seoProps = { pageTitle, pageCaption, slug: 'geolocation' };
+  const seoProps = { pageTitle, pageCaption, slug: 'geolocation' } as SeoProps;
 
   let loc: Position | null = null;
   async function getCurrentPosition() {
