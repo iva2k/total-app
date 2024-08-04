@@ -187,7 +187,7 @@ const pwaConfigurationFnc = async (
   };
 
   if (sw) {
-    // Option to use custom SW files (needs a patch to vite-plugin-pwa):
+    // Option to use custom SW files:
     const swFile = claims ? 'claims-sw.ts' : 'prompt-sw.ts';
     // pwaConfiguration.swSrc = swFile; // Must be relative to srcDir path. Define swSrc to use custom code. Leave undefined to let workbox generate one.
     // pwaConfiguration.swDest = swFile; // Must be relative to srcDir path.
