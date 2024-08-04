@@ -9,6 +9,21 @@
       "configurations": ["Launch server", "Launch Chrome against localhost:3000"]
     },
     {
+      "name": "Server (https) and Chrome",
+      "configurations": ["Launch server (https)", "Launch Chrome against https://localhost:4443"]
+    },
+    {
+      "name": "Server (SW) and Chrome",
+      "configurations": ["Launch server (SW)", "Launch Chrome against localhost:3000"]
+    },
+    {
+      "name": "Server (https, SW) and Chrome",
+      "configurations": [
+        "Launch server (https, SW)",
+        "Launch Chrome against https://localhost:4443"
+      ]
+    },
+    {
       "name": "Server and Edge",
       "configurations": ["Launch server", "Launch Edge"]
     }
@@ -21,6 +36,36 @@
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch server (https)",
+      "request": "launch",
+      "type": "node",
+      // "runtimeExecutable": "bun",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev:https"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch server (SW)",
+      "request": "launch",
+      "type": "node",
+      // "runtimeExecutable": "bun",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev-sw:http"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch server (https, SW)",
+      "request": "launch",
+      "type": "node",
+      // "runtimeExecutable": "bun",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev-sw:https"],
       "skipFiles": ["<node_internals>/**"],
       "console": "internalConsole"
     },
@@ -145,6 +190,14 @@
       "request": "launch",
       "name": "Launch Chrome against https://localhost:3000",
       "url": "https://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "enableContentValidation": false // Important to align .svelte files lines to the browser code
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against https://localhost:4443",
+      "url": "https://localhost:4443",
       "webRoot": "${workspaceFolder}",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },

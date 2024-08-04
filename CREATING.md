@@ -86,17 +86,40 @@ Run `pnpm run XXX` replacing XXX for each of the scripts in `package.json`. It's
 
 ### Add HTTPS
 
-```bash
-pnpm i -D @vitejs/plugin-basic-ssl
-```
-
-Add plugin to vite.config.ts (see source).
-
-Run the server with a self-signed cert:
+Install one of the https options below and run the dev server in https mode:
 
 ```bash
 pnpm run dev:https --host
 ```
+
+#### Use `@vitejs/plugin-basic-ssl` (Legacy)
+
+`@vitejs/plugin-basic-ssl` uses self-signed cert that browser will reject (need to accept it to let browser load the dev website).
+
+```bash
+pnpm i -D @vitejs/plugin-basic-ssl
+```
+
+Add plugin to `vite.config.ts`:
+
+```js
+...
+import basicSsl from '@vitejs/plugin-basic-ssl';
+const plugins = [
+  ...
+];
+if (!process.env.NO_HTTPS) plugins.unshift([basicSsl()]);
+```
+
+#### Use backloop.dev
+
+Note: Remove `basicSsl` from `vite.config.ts` and uninstall `@vitejs/plugin-basic-ssl`.
+
+```bash
+pnpm install -D backloop.dev
+```
+
+Add code to `vite.config.ts` (see source in repo).
 
 ### Add Tooling
 

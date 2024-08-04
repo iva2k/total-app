@@ -5,19 +5,20 @@
   import { reduced_motion } from './reduced-motion';
 
   import SEO from '$lib/components/seo/SEO.svelte';
+  import type { SeoProps } from '$lib/components/seo/common';
   const pageTitle = 'Sverdle';
   const pageCaption = 'A Wordle clone written in SvelteKit';
-  const seoProps = { pageTitle, pageCaption, slug: 'sverdle' };
+  const seoProps = { pageTitle, pageCaption, slug: 'sverdle' } as SeoProps;
 
   export let data: PageData;
 
   export let form: ActionData;
 
   /** Whether or not the user has won */
-  $: won = data.answers.at(-1) === 'xxxxx';
+  $: won = data.answers?.at(-1) === 'xxxxx';
 
   /** The index of the current guess */
-  $: i = won ? -1 : data.answers.length;
+  $: i = won ? -1 : data.answers?.length;
 
   /** The current guess */
   $: currentGuess = data.guesses[i] || '';
@@ -102,6 +103,8 @@
   action="?/enter"
   use:enhance={() => {
     // prevent default callback from resetting the form
+    // TODO: (when needed) Update to Typescript, remove eslint-disable:
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return ({ update }) => {
       update({ reset: false });
     };

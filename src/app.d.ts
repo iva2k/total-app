@@ -14,6 +14,10 @@ declare global {
   }
 }
 
+import 'vite-plugin-pwa/svelte'; // virtual:pwa-register/svelte
+import 'vite-plugin-pwa/info'; // virtual:pwa-info
+// import 'vite-plugin-pwa/pwa-assets'; // virtual:pwa-assets/head, virtual:pwa-assets/icons
+
 import 'unplugin-icons/types/svelte';
 
 export {};
