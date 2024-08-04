@@ -69,7 +69,7 @@
     "@ionic/pwa-elements": "^3.3.0",
     "@mdi/js": "^7.4.47",
     "qr-scanner": "^1.4.2",
-    "svelte-ux": "^0.73.3"
+    "svelte-ux": "^0.74.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.1.1",
@@ -134,7 +134,7 @@
     "svelte": "5.0.0-next.208",
     "svelte-check": "^3.8.5",
     "svgo": "^3.3.2",
-    "tailwindcss": "^3.4.6",
+    "tailwindcss": "^3.4.7",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.3",
     "tsx": "^4.16.5",
