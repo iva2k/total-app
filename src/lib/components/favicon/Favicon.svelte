@@ -1,13 +1,23 @@
 <script lang="ts">
-  export let pngFavicons: { sizes: string; href: string; imgSize: number }[] | undefined = [];
-  export let svgFavicon: string | undefined;
-  export let icoFavicon: string | undefined;
-  export let touchFavicons: { sizes: string; href: string; imgSize: number }[] | undefined = [];
-
   import { badge } from './badge.js';
-  export let badgeCount = 0;
-  export let badgeBackground = '#FF0000'; // Default red
-  export let badgeColor = '#FFFFFF'; // Default white
+
+  let {
+    pngFavicons = [],
+    svgFavicon,
+    icoFavicon,
+    touchFavicons = [],
+    badgeCount = 0,
+    badgeBackground = '#FF0000', // Default red
+    badgeColor = '#FFFFFF' // Default white
+  } = $props<{
+    pngFavicons?: { sizes: string; href: string; imgSize: number }[];
+    svgFavicon?: string;
+    icoFavicon?: string;
+    touchFavicons?: { sizes: string; href: string; imgSize: number }[];
+    badgeCount?: number;
+    badgeBackground?: string;
+    badgeColor?: string;
+  }>();
 </script>
 
 <svelte:head>

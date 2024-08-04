@@ -11,6 +11,7 @@
   let mounted = false;
   const dispatch = createEventDispatcher();
 
+  // TODO: (when needed) Convert to Svelte5 runes and snippets
   $: style = `--duration: ${duration}s; --size: ${size};`;
 
   function scrollLock(open: boolean) {
