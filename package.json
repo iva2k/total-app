@@ -127,7 +127,7 @@
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-standard": "^36.0.1",
-    "svelte": "5.0.0-next.190",
+    "svelte": "5.0.0-next.208",
     "svelte-check": "^3.8.5",
     "svgo": "^3.3.2",
     "ts-node": "^10.9.2",
