@@ -1,6 +1,5 @@
 <script lang="ts">
   import { pwaInfo } from 'virtual:pwa-info';
-  // TODO: (now) Fix favicons etc:  import { pwaAssetsHead } from 'virtual:pwa-assets/head';
   // Svelte4, 5 pre next.143: import { onMount, type ComponentType, type SvelteComponent } from 'svelte';
   import { onMount, type Component } from 'svelte';
 
@@ -25,12 +24,6 @@
 <svelte:head>
   <meta name="msapplication-TileColor" content={themeColor} />
   <meta name="theme-color" content={themeColor} />
-  <!-- {#if pwaAssetsHead.themeColor}
-		<meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
-	{/if}
-	{#each pwaAssetsHead.links as link}
-		<link {...link} />
-	{/each} -->
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   {@html webManifestLink}
 </svelte:head>
