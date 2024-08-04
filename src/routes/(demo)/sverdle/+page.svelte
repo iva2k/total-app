@@ -15,10 +15,10 @@
   export let form: ActionData;
 
   /** Whether or not the user has won */
-  $: won = data.answers.at(-1) === 'xxxxx';
+  $: won = data.answers?.at(-1) === 'xxxxx';
 
   /** The index of the current guess */
-  $: i = won ? -1 : data.answers.length;
+  $: i = won ? -1 : data.answers?.length;
 
   /** The current guess */
   $: currentGuess = data.guesses[i] || '';
