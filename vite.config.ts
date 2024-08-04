@@ -89,7 +89,8 @@ export default defineConfig(async ({ mode }) => {
           port: 4443,
           // port: 3000,
           host: 'total-app.backloop.dev',
-          https: backloopHttpsOptions
+          https: backloopHttpsOptions,
+          proxy: {} // Fixes https://github.com/sveltejs/svelte/issues/12398
         }
   };
   return config;
