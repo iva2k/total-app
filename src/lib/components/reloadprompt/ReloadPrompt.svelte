@@ -14,6 +14,7 @@
     intervalMS
   ); /* */
 
+  // TODO: (when needed) Convert to Svelte 5 runes. Can use https://runed.dev/docs/utilities/store
   const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
     onRegistered(r) {
       if (reloadSW === 'true') {

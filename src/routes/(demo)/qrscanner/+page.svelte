@@ -11,9 +11,10 @@
 
   import { GEARS_ENTITY, CAMERA_FLASH_ENTITY, SUN_ENTITY } from '$lib/constants/entities';
   import SEO from '$lib/components/seo/SEO.svelte';
+  import type { SeoProps } from '$lib/components/seo/common';
   const pageTitle = 'QR Scanner';
   const pageCaption = 'QR Scanner page';
-  const seoProps = { pageTitle, pageCaption, slug: 'qrscanner' };
+  const seoProps = { pageTitle, pageCaption, slug: 'qrscanner' } as SeoProps;
 
   const STORAGE_KEY = 'qr-scanner-serrings';
 

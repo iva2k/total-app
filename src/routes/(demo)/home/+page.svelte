@@ -1,5 +1,6 @@
 <script lang="ts">
   import SEO from '$lib/components/seo/SEO.svelte';
+  import type { SeoProps } from '$lib/components/seo/common';
   import website from '$lib/config/website';
   const { author, siteUrl } = website;
   const pageTitle = 'Home';
@@ -73,7 +74,7 @@
     useOpenGraph: true,
     useTwitter: true,
     useSchemaOrg: true
-  };
+  } as SeoProps;
 </script>
 
 <SEO {...seoProps} />
