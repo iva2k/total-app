@@ -1,10 +1,11 @@
 <script lang="ts">
   import SEO from '$lib/components/seo/SEO.svelte';
+  import type { SeoProps } from '$lib/components/seo/common';
   import website from '$lib/config/website';
   const { siteTitle, githubRepo } = website;
   const pageTitle = 'About';
   const pageCaption = 'About page';
-  const seoProps = { pageTitle, pageCaption, slug: 'about' };
+  const seoProps = { pageTitle, pageCaption, slug: 'about' } as SeoProps;
 </script>
 
 <SEO {...seoProps} />
