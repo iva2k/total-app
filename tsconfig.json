@@ -19,11 +19,13 @@
       "$env/*": ["./node_modules/@sveltejs/kit/src/runtime/env/*"], // Added for $env ESLint
       "$lib": ["./src/lib"],
       "$lib/*": ["./src/lib/*"],
-      "@vite-pwa/sveltekit": ["./node_modules/@vite-pwa/sveltekit/dist"],
+      // These are needed for eslint import-x:
       "virtual:icons/images/*": ["./src/lib/images/*"],
-      "virtual:pwa-client": ["./node_modules/vite-plugin-pwa/client.d.ts"],
       "virtual:pwa-info": ["./node_modules/vite-plugin-pwa/info.d.ts"],
       "virtual:pwa-register/svelte": ["./node_modules/vite-plugin-pwa/svelte.d.ts"]
+      // "virtual:pwa-assets/head": ["./node_modules/vite-plugin-pwa/pwa-assets.d.ts"],
+      // "virtual:pwa-assets/icons": ["./node_modules/vite-plugin-pwa/pwa-assets.d.ts"]
+      // ? "@vite-pwa/sveltekit": ["./node_modules/@vite-pwa/sveltekit/dist"],
       // "*": ["*", "./node_modules/@types/*", "./node_modules/@vite-pwa/sveltekit/*"]
     },
     // END override .svelte-kit/tsconfig.json
@@ -36,8 +38,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "outDir": ".types",
-    "types": ["vite-plugin-pwa/svelte", "unplugin-icons/types/svelte"]
+    "outDir": ".types"
   },
   "exclude": [
     "./node_modules/**",
