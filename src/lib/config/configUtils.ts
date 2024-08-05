@@ -1,4 +1,4 @@
-// Attention! Do not move this file away from website.js, websiteAsync.js, websiteFnc.js files. It must remain in the same directory, so getComponentPath() works properly
+// Attention! Do not move this file away from website.js, websiteAsync.js, websiteFnc.js files. It must remain in the same directory, so _getComponentPath() works properly
 import { type Component } from 'svelte';
 import type {
   SiteLinkAny,
@@ -8,7 +8,7 @@ import type {
   SiteLinkFilter
 } from '$lib/types';
 
-function getComponentPath(path: string, callerPath: string): string {
+function _getComponentPath(path: string, callerPath: string): string {
   // Resolve path to a resource specified relative to config/ directory, to the user module's callerPath
   // It does not preserve `?xxx` specifiers
   const mypath = import.meta.url;
@@ -56,15 +56,15 @@ export async function loadComponent(componentPath: string): Promise<Component | 
 }
 
 // Typeguard functions
-function isSiteLink(link: SiteLinkAny): link is SiteLink {
+function _isSiteLink(link: SiteLinkAny): link is SiteLink {
   return (link as SiteLink)?.href !== undefined;
 }
-function isSiteLinkGroup(link: SiteLinkAny): link is SiteLinkGroup {
+function _isSiteLinkGroup(link: SiteLinkAny): link is SiteLinkGroup {
   return (
     (link as SiteLinkGroup)?.items !== undefined && Array.isArray((link as SiteLinkGroup)?.items)
   );
 }
-function isSiteLinkFlatGroup(link: SiteLinkAny): link is SiteLinkFlatGroup {
+function _isSiteLinkFlatGroup(link: SiteLinkAny): link is SiteLinkFlatGroup {
   const items = (link as SiteLinkGroup)?.items;
   return items !== undefined && Array.isArray(items);
 }
@@ -76,8 +76,6 @@ function getSiteLinkGroupItems(link: SiteLinkAny): SiteLinkAny[] | undefined {
   const items = (link as SiteLinkGroup)?.items;
   return items;
 }
-
-type UnwrapArray<T> = T extends (infer U)[] ? U : T;
 
 export async function getSiteLinkComponent(
   siteLink: SiteLink,
@@ -105,7 +103,7 @@ export async function getSiteLinkComponent(
   const specifiers_nostr = ['component'];
   if (siteLink.img_import) {
     try {
-      const [prefix, img_import1] = siteLink.img_import.includes(':')
+      const [_prefix, img_import1] = siteLink.img_import.includes(':')
         ? siteLink.img_import.split(':', 2)
         : ['', siteLink.img_import];
       const [img_import, specifier1] = img_import1.includes('?')
