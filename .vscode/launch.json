@@ -10,7 +10,10 @@
     },
     {
       "name": "Server (https) and Chrome",
-      "configurations": ["Launch server (https)", "Launch Chrome against https://localhost:4443"]
+      "configurations": [
+        "Launch server (https)",
+        "Launch Chrome against https://total-app.backloop.dev:4443"
+      ]
     },
     {
       "name": "Server (SW) and Chrome",
@@ -20,7 +23,7 @@
       "name": "Server (https, SW) and Chrome",
       "configurations": [
         "Launch server (https, SW)",
-        "Launch Chrome against https://localhost:4443"
+        "Launch Chrome against https://total-app.backloop.dev:4443"
       ]
     },
     {
@@ -169,8 +172,8 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against https://localhost:4443",
-      "url": "https://localhost:4443",
+      "name": "Launch Chrome against https://total-app.backloop.dev:4443",
+      "url": "https://total-app.backloop.dev:4443",
       "webRoot": "${workspaceFolder}",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
