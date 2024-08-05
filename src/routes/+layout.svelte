@@ -19,7 +19,8 @@
   import type { LayoutData } from './$types';
   import { useState } from '$lib/utils/state.svelte';
 
-  let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let { data, children }: { data: LayoutData; children: Snippet } = $props();
+
   let isDarkMode = $state(false);
   const DARK_CSS = '/vendor/bootstrap/themes/darkly/bootstrap.min.css';
   const LIGHT_CSS = '/vendor/bootstrap/themes/flatly/bootstrap.min.css';
