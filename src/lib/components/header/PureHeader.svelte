@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
-  import logo from '$lib/images/logo.svg';
   import website from '$lib/config/website';
   import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
   import type { SiteLink } from '$lib/types';

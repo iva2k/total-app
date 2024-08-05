@@ -1,60 +1,37 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "productName": "total-app",
+  "version": "0.0.2",
+  "identifier": "com.iva2k.total-app",
   "build": {
-    "beforeBuildCommand": "pnpm run build",
+    "beforeBuildCommand": "pnpm run build:base",
     "beforeDevCommand": "pnpm run dev",
-    "devPath": "http://localhost:3000",
-    "distDir": "../build"
+    "devUrl": "http://localhost:3001",
+    "frontendDist": "../build"
   },
-  "package": {
-    "productName": "total-app",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.iva2k.total-app",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
-      }
-    },
-    "security": {
-      "csp": null
-    },
+  "app": {
     "windows": [
       {
-        "fullscreen": false,
+        "title": "total-app",
+        "width": 800,
         "height": 600,
         "resizable": true,
-        "title": "total-app",
-        "width": 800
+        "fullscreen": false
       }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
     ]
   }
 }
