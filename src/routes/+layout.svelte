@@ -20,7 +20,7 @@
   import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
   import { Dropdown, Theme } from 'carbon-components-svelte';
 
-  let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
   onMount(async () => {
     await loadIonicPWAElements(window);

@@ -20,8 +20,8 @@
   import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
   import { Dropdown, Theme } from 'carbon-components-svelte';
 
-  // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
-  let { children } = $props<{ children: Snippet }>();
+  // let { data, children }: { data: LayoutData; children: Snippet } = $props();
+  let { children }: { children: Snippet } = $props();
   let footerLinks = $state<SiteLink[]>(
     prepSiteLinks(
       siteLinks,

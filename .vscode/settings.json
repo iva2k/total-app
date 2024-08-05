@@ -68,5 +68,6 @@
   // "[markdown]": {
   //   "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   // },
-  "svg.preview.background": "transparent"
+  "svg.preview.background": "transparent",
+  "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }
