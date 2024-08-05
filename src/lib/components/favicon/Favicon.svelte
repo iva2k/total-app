@@ -9,7 +9,7 @@
     badgeCount = 0,
     badgeBackground = '#FF0000', // Default red
     badgeColor = '#FFFFFF' // Default white
-  } = $props<{
+  }: {
     pngFavicons?: { sizes: string; href: string; imgSize: number }[];
     svgFavicon?: string;
     icoFavicon?: string;
@@ -17,7 +17,7 @@
     badgeCount?: number;
     badgeBackground?: string;
     badgeColor?: string;
-  }>();
+  } = $props();
 </script>
 
 <svelte:head>
