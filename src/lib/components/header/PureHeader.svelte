@@ -10,11 +10,11 @@
     pathname = '/',
     leftCorner,
     rightCorner
-  } = $props<{
+  }: {
     pathname: string;
     leftCorner?: Snippet;
     rightCorner?: Snippet;
-  }>();
+  } = $props();
   let path1st = $derived('/' + (pathname ?? '').split('/')[1]);
 
   let brandLink: SiteLink = $state<SiteLink>(
