@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { glob, Glob } from 'glob';
+import { Glob } from 'glob';
 
 import { cleanup } from '../assets.js';
 
