@@ -44,14 +44,14 @@
     title = title_default,
     themes = themes_default,
     children
-  } = $props<{
+  } : {
     title?: string[] | string;
     themes?: {
       light?: string[];
       dark?: string[];
     };
     children: Snippet;
-  }>();
+  } = $props();
 
   let brandLink = $state<SiteLink>(prepSiteLinks(siteLinks, 'brand', 1, true, true, true)?.[0]);
   let footerLinks = $state<SiteLink[]>(prepSiteLinks(siteLinks, 'footer', 1, true, true, true));
