@@ -67,7 +67,7 @@
     let settings: ReturnType<typeof getDefaultSettings>;
     try {
       settings = JSON.parse((browser && localStorage.getItem(STORAGE_KEY)) || '');
-    } catch (e) {
+    } catch (_e) {
       settings = defaultSettings;
     }
     settings = { ...defaultSettings, ...settings };

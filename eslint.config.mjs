@@ -141,15 +141,15 @@ function legacyPlugin(name, alias = name) {
 /** @type Record<string, RulesRecord> */
 const RULES = {
   ts: {
-    // '@typescript-eslint/no-unused-vars': [
-    //   'error',
-    //   {
-    //     argsIgnorePattern: '^_',
-    //     varsIgnorePattern: '^_',
-    //     caughtErrorsIgnorePattern: '^_',
-    //     destructuredArrayIgnorePattern: '^_'
-    //   }
-    // ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_'
+      }
+    ],
 
     // TODO: (now) Fix all these rules below. Turned off when upgraded eslint to v9 to pass `pnpm run lint`.
     '@typescript-eslint/no-floating-promises': 'off',
@@ -158,7 +158,6 @@ const RULES = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/restrict-plus-operands': 'off',
