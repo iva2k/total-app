@@ -18,7 +18,7 @@
   import type { LayoutData } from './$types';
   import { useState } from '$lib/utils/state.svelte';
 
-  let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
+  let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
   onMount(async () => {
     await loadIonicPWAElements(window);
