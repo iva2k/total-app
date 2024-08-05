@@ -1146,7 +1146,7 @@ npx cap sync
 
 Create `src/routes/geolocation/+page.svelte` (see source file in repo)
 
-Add the page to the `siteLinks` pages array in `$src/config/websiteFnc.js`:
+Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
 
 ```js
   ...
@@ -1215,7 +1215,7 @@ pnpm install qr-scanner
 
 Create `src/routes/qrscanner/+page.svelte` (see source file in repo).
 
-Add the page to the `siteLinks` pages array in `$src/config/websiteFnc.js`:
+Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
 
 ```js
   ...
