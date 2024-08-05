@@ -561,7 +561,7 @@ pnpm run tauri init
 # Where are your web assets (HTML/CSS/JS) located, relative to the "<current dir>/src-tauri/tauri.conf.json" file that will be created? - ../build
 # What is the url of your dev server? - http://localhost:3000
 # What is your frontend dev command? - pnpm run dev
-# What is your frontend build command? - pnpm run build
+# What is your frontend build command? - pnpm run build:base
 ```
 
 Add some .gitignore/.eslintignore/.prettierignore patterns (see source files).
