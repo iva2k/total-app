@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { json, redirect, isRedirect } from '@sveltejs/kit';
 
-// TODO: (when needed) Figure out a fix for ESLint 'import/no-unresolved' error on '$env/static/public'
+// TODO: (when needed) Figure out a fix for ESLint 'import-x/no-unresolved' error on '$env/static/public'
 // eslint-disable-next-line import-x/no-unresolved
 import * as env from '$env/static/private';
 
