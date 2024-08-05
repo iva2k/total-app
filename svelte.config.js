@@ -56,7 +56,7 @@ const config = {
             // assets: 'build',
             // fallback: null,
             // precompress: false
-            fallback: '404.html'
+            fallback: 'index.html'
           }),
     // prerender: { entries: [] },
 
