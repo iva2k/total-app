@@ -12,7 +12,7 @@
     Breadcrumb,
     Button,
     Icon,
-    ListItem,
+    // ListItem,
     MenuButton,
     type MenuOption,
     NavItem,
@@ -29,7 +29,7 @@
   import './styles.css';
 
   import website from '$lib/config/website';
-  const { siteLinks, websiteUrl, siteUrl, siteShortTitle, siteTitle } = website;
+  const { siteLinks, websiteUrl, siteUrl, siteShortTitle /* , siteTitle */ } = website;
 
   import type { SiteLink } from '$lib/types';
   import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
@@ -158,7 +158,7 @@
     <div slot="actions" class="flex gap-0">
       <!-- App actions main sections on large screen -->
       {#if $lgScreen}
-        {#each headerLinks as link, i}
+        {#each headerLinks as link}
           <Button
             class={isActive($page.url, link.href ?? '')
               ? '[--bg-color:theme(colors.surface-content/20%)]'
