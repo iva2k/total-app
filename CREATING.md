@@ -399,7 +399,7 @@ This setup involves 4 files: `.env` (it is listed in .gitignore and is never com
 
 The source of truth / relevant variables are spread between 2 files: `.env` and `$lib/config/websiteFnc.js`. The `.env` file should never be committed to repository since it is intended to contain website secrets. It is more involved to reproduce that file on the server / hosting provider. Most variables for the website are public anyway, and they should be defined in `$lib/config/websiteFnc.js` and commited to the repository. It will limit how many variables will need to be configured on hosting provider, since all variables set in `.env` will need to be configured securely in provider UI.
 
-One more hurdle to overcome is fixing the ESLint rule 'import/no-unresolved' for `$env/static/public` used in `$lib/config/website.js`. But for now the ESLint is shut down with `// eslint-disable-next-line import/no-unresolved`.
+One more hurdle to overcome is fixing the ESLint rule 'import-x/no-unresolved' for `$env/static/public` used in `$lib/config/website.js`. But for now the ESLint is shut down with `// eslint-disable-next-line import-x/no-unresolved`.
 
 ### Add SEO
 
