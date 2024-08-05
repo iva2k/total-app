@@ -219,7 +219,7 @@ export default tseslint.config(
     name: 'config-ignores',
     ignores: [
       // because of import assertion of tsconfig.json
-      'eslint.config.js',
+      'eslint.config.mjs',
 
       // Use `.exclude` section from ./tsconfig.ts
       // Apparently, `project: 'tsconfig..json'` does not honor excludes.
