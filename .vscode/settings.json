@@ -28,9 +28,19 @@
   "stylelint.enable": true,
   "stylelint.validate": ["css", "postcss"],
   "svelte.enable-ts-plugin": true,
+  "svelte.plugin.svelte.note-new-transformation": false,
+  "svelte.plugin.svelte.useNewTransformation": false,
+  "playwright.reuseBrowser": true,
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "javascript.format.enable": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "debug.javascript.terminalOptions": {
+    "outFiles": ["${workspaceFolder}/**/*.(m|c|)js", "!**/node_modules/**"],
+    "localRoot": "${workspaceFolder}",
+    "cwd": "${workspaceFolder}"
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": false,
   "[html]": {
