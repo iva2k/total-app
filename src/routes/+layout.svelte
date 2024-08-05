@@ -1,20 +1,15 @@
 <script lang="ts">
-  import { onMount, setContext, type Snippet } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
-  // import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
-  // import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
   import 'agnostic-svelte/css/common.min.css';
   import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
-  // import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
-  import website from '$lib/config/website';
+  // import website from '$lib/config/website';
   // const { githubRepo } = website;
-  // import GithubLogo from '$lib/images/github.svelte';
-  // import svelte_logo from '$lib/images/svelte-logo.svg';
 
   import type { LayoutData } from './$types';
   import { useState } from '$lib/utils/state.svelte';
