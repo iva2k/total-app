@@ -44,7 +44,7 @@
     title = title_default,
     themes = themes_default,
     children
-  } : {
+  }: {
     title?: string[] | string;
     themes?: {
       light?: string[];
