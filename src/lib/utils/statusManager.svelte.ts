@@ -48,13 +48,13 @@ export class StatusManager {
     };
   }
 
-  log(message: string, ...optionalParams: any[]) {
+  log(message: string, ...optionalParams: unknown[]) {
     if (import.meta.env.MODE === 'development') {
       console.log(message, ...optionalParams);
     }
   }
 
-  private logError(message: string, ...optionalParams: any[]) {
+  private logError(message: string, ...optionalParams: unknown[]) {
     if (import.meta.env.MODE === 'development') {
       console.error(message, ...optionalParams);
     }
