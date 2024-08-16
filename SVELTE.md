@@ -1,4 +1,4 @@
-# Svelte and SvelteKit
+# Svelte 5 and SvelteKit 2
 
 ## Peculiarities
 
