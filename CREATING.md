@@ -37,6 +37,8 @@ KISS - Keep-It-Simple,Stupid. Keep the code simple and clear, making it easy to 
 
 ## Prerequisites
 
+Note: For developing on Windows, enable "Developer Mode" by opening "Settings" > "For developers" > "Developer Mode" = On. It will allow symlink creation (required for pnpm) without elevating as administrator. If you see "EPERM" error associated with SymLinks in any of the build tools, make sure that "Developer Mode" is turned on.
+
 Install [Git](https://git-scm.com/).
 
 Install [NodeJS](https://nodejs.org/en).
@@ -717,7 +719,7 @@ See sources - "src/components/darkmode/\*" and edits to "src/routes/+layout.svel
 
 Note: DarkMode toggles 'color-scheme' property on \<html\> tag between 'light' and 'dark'/.
 
-Add dark mode styles to "/src/routes/style.css" (see source).
+Add dark mode styles to "/src/routes/styles.css" (see source).
 
 ### Add Github and Svelte icons to Footer links
 
@@ -969,7 +971,7 @@ npx cap sync
 
 Create `src/routes/geolocation/+page.svelte` (see source file in repo)
 
-Add the page to the `siteLinks` pages array in `$src/config/websiteFnc.js`:
+Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
 
 ```js
   ...
@@ -1026,7 +1028,7 @@ pnpm install qr-scanner
 
 Create `src/routes/qrscanner/+page.svelte` (see source file in repo).
 
-Add the page to the `siteLinks` pages array in `$src/config/websiteFnc.js`:
+Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
 
 ```js
   ...
