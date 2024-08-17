@@ -9,10 +9,21 @@
 // @ts-ignore
 import { defineCustomElements } from '@ionic/pwa-elements/loader/index.cjs.js';
 
-export const loadIonicPWAElements = async (
+// export // <-- `ESM syntax is not allowed in a CommonJS module when 'verbatimModuleSyntax' is enabled.ts(1286)`
+const loadIonicPWAElements = async (
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   w
 ) => {
   await defineCustomElements(w);
 };
+
+// export default loadIonicPWAElements; // <-- `ESM syntax is not allowed in a CommonJS module when 'verbatimModuleSyntax' is enabled.ts(1286)`
+
+// This named ESM export is not showing any ts errors:
+export { loadIonicPWAElements };
+
+// Though correct CJS, this breaks `vite dev` with "module is not defined" or "exports is not defined":
+// module.exports = loadIonicPWAElements;
+// module.exports.loadIonicPWAElements = loadIonicPWAElements;
+// exports.loadIonicPWAElements = loadIonicPWAElements;
