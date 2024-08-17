@@ -21,7 +21,7 @@ function getExtension(path: string) {
   return path.slice(((path.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
-// All paths with *.svelte components that need to be loaded dynamically by loadComponent(), e.g. in `website.siteLinks`
+// All paths with *.svelte components that need to be loaded dynamically by loadComponentImport(), e.g. in `website.siteLinks`
 const componentPaths: ComponentMap[] = [
   import.meta.glob('../images/*.svelte') as ComponentMap,
   import.meta.glob('../images/*.svg', { query: '?raw' }) as ComponentMap
@@ -43,7 +43,9 @@ const components: ComponentMap = componentPaths.reduce((acc, map) => {
   return { ...acc, ...modules };
 }, {});
 
-export async function loadComponent(componentPath: string): Promise<Component | string | null> {
+export async function loadComponentImport(
+  componentPath: string
+): Promise<Component | string | null> {
   // const componentPath = `../images/${name}.svelte`;
   if (components[componentPath]) {
     const module = await components[componentPath]();
@@ -120,7 +122,7 @@ export async function getSiteLinkComponent(
         stringOk = true;
       }
 
-      const im = await loadComponent(img_import);
+      const im = await loadComponentImport(img_import);
       if (!im) {
         throw new Error(`Component ${img_import} not found`);
       }
