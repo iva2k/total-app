@@ -81,7 +81,7 @@
     },
 
     {
-      "name": "WORKS pnpm test:unit",
+      "name": "pnpm test:unit",
       "request": "launch",
       "type": "node",
       "runtimeExecutable": "pnpm",
@@ -89,52 +89,30 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "BROKEN pnpm test:unit node-terminal",
+      "name": "BROKEN pnpm test:unit (node-terminal)",
       "request": "launch",
       "type": "node-terminal",
       "command": "pnpm test:unit",
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "command": "pnpm test:integration",
       "name": "pnpm test:integration",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
-      "command": "pnpm test:integration:debug",
-      "name": "pnpm test:integration:debug",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
-      "command": "pnpm build:netlify",
-      "name": "pnpm build:netlify",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
-      "command": "pnpm build:vercel",
-      "name": "pnpm build:vercel",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
-      "command": "pnpm build:only",
-      "name": "pnpm build:only",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
-      "name": "pnpm build:only (node)",
       "request": "launch",
       "type": "node",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run", "build:only"],
+      "runtimeArgs": ["run", "test:integration"],
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "pnpm postinstall (node)",
+      "name": "pnpm test:integration:debug",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "test:integration:debug"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "pnpm postinstall",
       "request": "launch",
       "type": "node",
       "runtimeExecutable": "pnpm",
@@ -142,16 +120,52 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "command": "pnpm build:only-sw",
-      "name": "pnpm build:only-sw",
+      "name": "pnpm build",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build"],
+      "skipFiles": ["<node_internals>/**"]
     },
     {
-      "command": "pnpm build:only-destroy",
+      "name": "pnpm build:only",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build:only"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "pnpm build:netlify",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build:netlify"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "pnpm build:vercel",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build:vercel"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "pnpm build:only-sw",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build:only-sw"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
       "name": "pnpm build:only-destroy",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build:only-destroy"],
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "type": "chrome",
