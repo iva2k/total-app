@@ -63,7 +63,7 @@
       if (colorScheme && this.d) {
         this.d.firstElementChild?.setAttribute('color-scheme', colorScheme);
         if (this.htmlDarkClass) {
-          if (colorScheme == 'dark') this.d.firstElementChild?.classList.add(this.htmlDarkClass);
+          if (colorScheme === 'dark') this.d.firstElementChild?.classList.add(this.htmlDarkClass);
           else this.d.firstElementChild?.classList.remove(this.htmlDarkClass);
         }
       }
@@ -125,7 +125,7 @@
             ?.getAttribute('content'); // Work around Svelte not passing variables into <svelte:head><script>.
           document.firstElementChild?.setAttribute('color-scheme', colorScheme);
           if (htmlDarkClass) {
-            if (colorScheme == 'dark') document.firstElementChild?.classList.add(htmlDarkClass);
+            if (colorScheme === 'dark') document.firstElementChild?.classList.add(htmlDarkClass);
             else document.firstElementChild?.classList.remove(htmlDarkClass);
           }
         }
