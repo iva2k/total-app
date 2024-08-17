@@ -51,6 +51,18 @@ Out of the box features:
 - Prepared for UDX (UI designer experience) - see UI integrations below.
 - All deployment methods are included - build for standalone apps (iOS/Android/Windows), make a Website or a Web App, or Offline Web App, or all of them.
 
+## Q: Why include `.vscode/extensions.json`?
+
+A: Other projects indirectly recommend extensions via the README, but this file `.vscode/extensions.json` allows VS Code to prompt the user to install the recommended extension upon opening the project. It is easy to reject the recommendations for any reason, VSCode won't bother you anymore. Accepting these recommendations puts you in sync with the way this project is designed and makes most of it.
+
+## Q: Why include `.vscode/launch.json`?
+
+A: To preserve various debug configurations. If anything is not working, having a consistent debug configuration helps a lot to get to the root cause much quicker.
+
+## Q: Why include `.vscode/settings.json`?
+
+A: Unfortunately VSCode does not have an easy way to combine or split or inherit settings for the workspace. There are some critical settings that are required for the project tooling to operate properly. Pressure M$ team to implement extension mechanism for workspace settings to make a difference [TODO: (now) Link to the relevant VSCode issue here].
+
 ## Q: I found a bug, what shall I do?
 
 A: Please understand that this project currently follows bleeding edge of Svelte 5 development, and gets all the bugs from early release candidate / pre-alpha versions. Once upstream stabilizes and gets released, many things will be fixed, so your patience will be greatly appreciated.
