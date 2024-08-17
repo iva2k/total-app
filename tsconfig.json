@@ -6,7 +6,7 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "lib": ["esnext", "DOM", "DOM.Iterable"],
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler", // note the correctly Capitalized "Bundler".
     "module": "esnext",
     // "noEmit": true,
     "target": "esnext",
@@ -14,6 +14,7 @@
 
     // BEGIN override .svelte-kit/tsconfig.json
     "baseUrl": ".",
+    // ? "module": "CommonJS", // For working with CJS
     "paths": {
       "$app/*": ["./node_modules/@sveltejs/kit/src/runtime/app/*"], // Added for $app ESLint
       "$env/*": ["./node_modules/@sveltejs/kit/src/runtime/env/*"], // Added for $env ESLint
@@ -33,6 +34,8 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
+    // "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -42,7 +45,11 @@
   },
   "files": ["./types.d.ts"], // Fix type-less packages in "types.d.ts"
   "exclude": [
+    // BEGIN copy from .svelte-kit/tsconfig.json, relatively adjust all paths
     "./node_modules/**",
+    "./src/sw.js",
+    // END copy from .svelte-kit/tsconfig.json
+
     "./.svelte-kit/[!ambient.d.ts]**",
     "./.trunk/**",
     "./.types",

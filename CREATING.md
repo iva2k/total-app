@@ -38,6 +38,8 @@ KISS - Keep-It-Simple,Stupid. Keep the code simple and clear, making it easy to 
 
 ## Prerequisites
 
+Note: For developing on Windows, enable "Developer Mode" by opening "Settings" > "For developers" > "Developer Mode" = On. It will allow symlink creation (required for pnpm) without elevating as administrator. If you see "EPERM" error associated with SymLinks in any of the build tools, make sure that "Developer Mode" is turned on.
+
 Install [Git](https://git-scm.com/).
 
 Install [NodeJS](https://nodejs.org/en).
