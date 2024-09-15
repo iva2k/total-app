@@ -6,7 +6,7 @@
   "compounds": [
     {
       "name": "Prod Server and Chrome",
-      "configurations": ["Prod Server", "Chrome against https://total-app.backloop.dev:4173"]
+      "configurations": ["Prod Server", "Chrome against localhost:4173"]
     },
     {
       "name": "Dev Server and Chrome",
@@ -37,9 +37,8 @@
       "name": "Prod Server",
       "request": "launch",
       "type": "node",
-      // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run", "preview", "--", "--preserve-symlinks"],
+      "runtimeArgs": ["run", "preview:debug", "--", "--preserve-symlinks"],
       "skipFiles": ["<node_internals>/**"],
       "console": "internalConsole",
       "sourceMaps": true,
@@ -51,7 +50,7 @@
       "type": "node",
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": ["run", "dev", "--", "--preserve-symlinks"],
       "skipFiles": ["<node_internals>/**"],
       "console": "internalConsole",
       "sourceMaps": true,
@@ -237,7 +236,7 @@
       "request": "launch",
       "name": "Chrome against localhost:4173",
       "url": "http://localhost:4173",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}/.svelte-kit/output/client",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
     {

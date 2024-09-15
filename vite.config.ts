@@ -1,10 +1,11 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
-import type { UserConfig, Plugin } from 'vite';
+import type { PluginOption, UserConfig, Plugin as VitePlugin } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
+import rollupCommonjs from '@rollup/plugin-commonjs';
 import backloopHttpsOptions from 'backloop.dev';
 
 import Icons from 'unplugin-icons/vite';
@@ -18,9 +19,11 @@ import assets from './assets.js';
 export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   const { pwaConfiguration, replaceOptions } = await pwaConfigurationFnc(env);
+  const PROD_DEBUG = env.VITE_PROD_DEBUG?.toLowerCase() === 'true';
 
-  const plugins = [
+  const plugins: PluginOption[] = [
     // see below: basicSsl(),
+    rollupCommonjs() as VitePlugin,
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
     Icons({
@@ -37,10 +40,10 @@ export default defineConfig(async ({ mode }) => {
       }
     }),
 
-    replace(replaceOptions) as Plugin, // Convert rollup.Plugin into vite.Plugin
+    replace(replaceOptions) as VitePlugin, // Convert rollup.Plugin into vite.Plugin
 
     // copy is needed for vite to work in dev (especially under "tauri:dev")
-    // All copy commands are duplicated in package.json:scripts.svelte:prebuild, for dev to work correctly.
+    // All copy commands are duplicated in package.json:scripts.svelte:prebuild, for build to work correctly.
     viteStaticCopy({
       targets: assets
     })
@@ -49,9 +52,21 @@ export default defineConfig(async ({ mode }) => {
   // if (!process.env.NO_HTTPS) plugins.unshift([basicSsl()]);
 
   const config: UserConfig = {
+    optimizeDeps: {
+      include: [
+        '@ionic/pwa-elements/loader/index.cjs.js',
+        'node_modules/@ionic/pwa-elements/loader/index.cjs.js'
+      ]
+    },
     logLevel: 'info',
     build: {
-      minify: false
+      minify: !PROD_DEBUG,
+      sourcemap: PROD_DEBUG,
+      commonjsOptions: {
+        // Options for rollupCommonjs
+        include: [], // https://github.com/vitejs/vite/issues/2679#issuecomment-994772493
+        requireReturnsDefault: 'auto'
+      }
     },
     define: {
       __DATE__: JSON.stringify(new Date().toISOString()),

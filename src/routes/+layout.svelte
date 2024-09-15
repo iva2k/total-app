@@ -1,9 +1,10 @@
 <script lang="ts">
+  import './styles.css';
+
   import { onMount, type Snippet } from 'svelte';
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
-  import './styles.css';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
   // import website from '$lib/config/website';

@@ -8,6 +8,7 @@
     "./src/**/*.svelte",
     "./src/claims-sw.ts",
     "./src/prompt-sw.ts",
+    "./scripts/*.ts",
     "./tests/**/*.ts"
   ]
 }
