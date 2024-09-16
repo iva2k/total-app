@@ -13,8 +13,8 @@
 
   import type { LayoutData } from './$types';
   import { useState } from '$lib/utils/state.svelte';
-  import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
-  import { Dropdown, Theme } from 'carbon-components-svelte';
+  // import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
+  // import { Dropdown, Theme } from 'carbon-components-svelte';
 
   let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
