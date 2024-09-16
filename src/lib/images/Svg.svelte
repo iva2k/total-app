@@ -4,7 +4,7 @@
   let { file, alt }: { file: string; alt?: string } = $props();
   let Svg = $state<string>();
   onMount(async () => {
-    Svg = (await import(/* @vite-ignore */ file)).default;
+    Svg = (await import(/* webpackIgnore: true */ /* @vite-ignore */ file)).default;
   });
 </script>
 
