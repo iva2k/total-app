@@ -29,5 +29,5 @@
 </svelte:head>
 
 {#if ReloadPrompt}
-  <svelte:component this={ReloadPrompt} />
+  <ReloadPrompt />
 {/if}
