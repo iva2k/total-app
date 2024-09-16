@@ -1071,21 +1071,21 @@ pnpm install @ionic/pwa-elements
 
 A typical installation involves importing the package and registering the elements, or adding a script tag to the \<head\> of the index.html for the app.
 
-There is an issue with TypeScript types, so we use `src/lib/utils/ionicUtils.cjs` that avoids this issue.
+There is an issue with TypeScript types, so we use `src/lib/utils/ionicUtils.ts` that avoids this issue.
 
 ```js
 // src/routes/+layout.svelte
 <script lang="ts">
   ...
 +  import { onMount } from 'svelte';
-+  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
++  import { loadIonicPWAElements } from '$lib/utils/ionicUtils.ts';
 +  onMount(async () => {
 +    await loadIonicPWAElements(window);
 +  });
   ...
 ```
 
-Note: `svelte-check` throws error for no type definition in `import loader ...`. See `src/lib/utils/ionicUtils.cjs` that shuts this error up.
+Note: `svelte-check` throws error for no type definition in `import loader ...`. See `src/lib/utils/ionicUtils.ts` that shuts this error up.
 
 #### Interesting Capacitor Community Plugins
 
