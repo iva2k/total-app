@@ -5,7 +5,7 @@
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
 
-  import { settings } from 'svelte-ux';
+  // import { settings } from 'svelte-ux';
 
   import AppShell from '$lib/components/svelteux/AppShell.svelte';
 

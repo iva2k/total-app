@@ -2,7 +2,7 @@
   import { Button } from 'svelte-ux';
 
   let clickCounter = $state(0);
-  function onClick(e: MouseEvent) {
+  function onClick(_e: MouseEvent) {
     clickCounter += 1;
   }
 </script>

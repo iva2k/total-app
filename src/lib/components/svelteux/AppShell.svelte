@@ -201,7 +201,8 @@
                   <Icon data={link?.img_icon} />
                 {:else if link?.img_component}
                   <Icon>
-                    <svelte:component this={link?.img_component} />
+                    {@const ImgComponent = link?.img_component}
+                    <ImgComponent />
                     <!-- class="Icon inline-block flex-shrink-0 fill-current pointer-events-none" -->
                   </Icon>
                 {:else if link?.img_html}
