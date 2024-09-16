@@ -52,7 +52,8 @@
       <!-- {brandLink.prefix ?? ''} -->
       <a href={brandLink.href} target={brandLink.target ?? '_self'}>
         {#if brandLink.img_component}
-          <svelte:component this={brandLink.img_component} />
+          {@const BrandLink = brandLink.img_component}
+          <BrandLink />
         {:else if brandLink.img_html}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html brandLink.img_html}
