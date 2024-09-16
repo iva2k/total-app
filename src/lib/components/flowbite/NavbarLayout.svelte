@@ -17,7 +17,7 @@
   import ToolbarLink from './ToolbarLink.svelte';
   // import AlgoliaSearch from '../utils/AlgoliaSearch.svelte';
 
-  const version = '0.0.0'; // TODO: (when needed) Implement: version = __VERSION__;
+  // const version = '0.0.0'; // TODO: (when needed) Implement: version = __VERSION__;
 
   import { useState } from '$lib/utils/state.svelte';
   const trimRightSlash = (input: string) => (input.endsWith('/') ? input.slice(0, -1) : input);
@@ -117,14 +117,15 @@
     </NavUl>
 
     <div class="ms-auto flex items-center">
-      {#each footerLinks as link, i}
+      {#each footerLinks as link}
         <ToolbarLink
           class="hidden hover:text-gray-900 focus:ring-0 dark:hover:text-white sm:inline-block"
           name={link.title}
           href={link.href}
         >
           {#if link?.img_component}
-            <svelte:component this={link?.img_component} />
+            {@const ImgComponent = link?.img_component}
+            <ImgComponent />
           {:else if link?.img_html}
             <div class="flex h-[1.5em] w-[1.5em] items-center justify-center">
               <!-- Fixer div for size of img_component -->
