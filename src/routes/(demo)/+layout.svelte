@@ -9,7 +9,7 @@
   import './styles.css';
   import '../../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
   import { Input } from '@sveltestrap/sveltestrap';
-  // import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
+  // import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
   import website from '$lib/config/website';
@@ -124,7 +124,8 @@
           {link?.prefix ?? ''}
           <a href={link.href} target={link.target ?? '_self'}>
             {#if link?.img_component}
-              <svelte:component this={link?.img_component} />
+              {@const ImgComponent = link?.img_component}
+              <ImgComponent />
             {:else if link?.img_html}
               <!-- eslint-disable-next-line svelte/no-at-html-tags -->
               {@html link?.img_html}

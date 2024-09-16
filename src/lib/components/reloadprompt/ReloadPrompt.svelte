@@ -27,8 +27,7 @@
         console.log(`SW Registered: ${r}`);
       }
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onRegisterError(error: any) {
+    onRegisterError(error: unknown) {
       console.log('SW registration error', error);
     }
   });
