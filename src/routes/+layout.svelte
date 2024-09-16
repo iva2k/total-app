@@ -6,7 +6,7 @@
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
   import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
-  import { Input } from '@sveltestrap/sveltestrap';
+  // import { Input } from '@sveltestrap/sveltestrap';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
   // import website from '$lib/config/website';
