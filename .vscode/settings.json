@@ -32,6 +32,7 @@
   "svelte.plugin.svelte.useNewTransformation": false,
   "playwright.reuseBrowser": true,
   "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -41,6 +42,9 @@
     "localRoot": "${workspaceFolder}",
     "cwd": "${workspaceFolder}"
   },
+  "debug.javascript.autoAttachFilter": "always",
+  "javascript.validate.enable": false,
+  "js/ts.implicitProjectConfig.checkJs": false,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": false,
   "[html]": {

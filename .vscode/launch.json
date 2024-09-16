@@ -5,72 +5,92 @@
   "version": "0.2.0",
   "compounds": [
     {
-      "name": "Server and Chrome",
-      "configurations": ["Launch server", "Launch Chrome against localhost:3000"]
+      "name": "Prod Server and Chrome",
+      "configurations": ["Prod Server", "Chrome against localhost:4173"]
     },
     {
-      "name": "Server (https) and Chrome",
+      "name": "Dev Server and Chrome",
+      "configurations": ["Dev Server", "Chrome against localhost:3000"]
+    },
+    {
+      "name": "Dev Server (https) and Chrome",
+      "configurations": ["Dev Server (https)", "Chrome against https://total-app.backloop.dev:4173"]
+    },
+    {
+      "name": "Dev Server (SW) and Chrome",
+      "configurations": ["Dev Server (SW)", "Chrome against localhost:3000"]
+    },
+    {
+      "name": "Dev Server (https, SW) and Chrome",
       "configurations": [
-        "Launch server (https)",
-        "Launch Chrome against https://total-app.backloop.dev:4443"
+        "Dev Server (https, SW)",
+        "Chrome against https://total-app.backloop.dev:4173"
       ]
     },
     {
-      "name": "Server (SW) and Chrome",
-      "configurations": ["Launch server (SW)", "Launch Chrome against localhost:3000"]
-    },
-    {
-      "name": "Server (https, SW) and Chrome",
-      "configurations": [
-        "Launch server (https, SW)",
-        "Launch Chrome against https://total-app.backloop.dev:4443"
-      ]
-    },
-    {
-      "name": "Server and Edge",
-      "configurations": ["Launch server", "Launch Edge"]
+      "name": "Dev Server and Edge",
+      "configurations": ["Dev Server", "Launch Edge"]
     }
   ],
   "configurations": [
     {
-      "name": "Launch server",
+      "name": "Prod Server",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "preview:debug", "--", "--preserve-symlinks"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "internalConsole",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
+    },
+    {
+      "name": "Dev Server",
       "request": "launch",
       "type": "node",
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": ["run", "dev", "--", "--preserve-symlinks"],
       "skipFiles": ["<node_internals>/**"],
-      "console": "internalConsole"
+      "console": "internalConsole",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
-      "name": "Launch server (https)",
+      "name": "Dev Server (https)",
       "request": "launch",
       "type": "node",
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "dev:https"],
       "skipFiles": ["<node_internals>/**"],
-      "console": "internalConsole"
+      "console": "internalConsole",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
-      "name": "Launch server (SW)",
+      "name": "Dev Server (SW)",
       "request": "launch",
       "type": "node",
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "dev-sw:http"],
       "skipFiles": ["<node_internals>/**"],
-      "console": "internalConsole"
+      "console": "internalConsole",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
-      "name": "Launch server (https, SW)",
+      "name": "Dev Server (https, SW)",
       "request": "launch",
       "type": "node",
       // "runtimeExecutable": "bun",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "dev-sw:https"],
       "skipFiles": ["<node_internals>/**"],
-      "console": "internalConsole"
+      "console": "internalConsole",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "Launch Edge",
@@ -86,7 +106,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "test:unit"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "BROKEN pnpm test:unit (node-terminal)",
@@ -101,7 +123,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "test:integration"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm test:integration:debug",
@@ -109,7 +133,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "test:integration:debug"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm postinstall",
@@ -117,7 +143,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "postinstall"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm build",
@@ -125,7 +153,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "build"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm build:only",
@@ -133,7 +163,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "build:only"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm build:netlify",
@@ -141,7 +173,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "build:netlify"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm build:vercel",
@@ -149,7 +183,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "build:vercel"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm build:only-sw",
@@ -157,7 +193,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "build:only-sw"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "name": "pnpm build:only-destroy",
@@ -165,7 +203,9 @@
       "type": "node",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "build:only-destroy"],
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
     },
     {
       "command": "pnpm story:build",
@@ -182,7 +222,7 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost:3000",
+      "name": "Chrome against localhost:3000",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
@@ -190,7 +230,7 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against https://localhost:3000",
+      "name": "Chrome against https://localhost:3000",
       "url": "https://localhost:3000",
       "webRoot": "${workspaceFolder}",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
@@ -198,23 +238,23 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against https://total-app.backloop.dev:4443",
-      "url": "https://total-app.backloop.dev:4443",
+      "name": "Chrome against https://total-app.backloop.dev:4173",
+      "url": "https://total-app.backloop.dev:4173",
       "webRoot": "${workspaceFolder}",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost:4173",
+      "name": "Chrome against localhost:4173",
       "url": "http://localhost:4173",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}/.svelte-kit/output/client",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against https://localhost:4173",
+      "name": "Chrome against https://localhost:4173",
       "url": "https://localhost:4173",
       "webRoot": "${workspaceFolder}",
       "enableContentValidation": false // Important to align .svelte files lines to the browser code
