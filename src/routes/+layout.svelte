@@ -6,7 +6,7 @@
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
   import 'agnostic-svelte/css/common.min.css';
-  import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
+  // import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
   // import website from '$lib/config/website';
