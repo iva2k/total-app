@@ -58,6 +58,19 @@ export default defineConfig(async ({ mode }) => {
       include: [
         '@ionic/pwa-elements/loader/index.cjs.js',
         'node_modules/@ionic/pwa-elements/loader/index.cjs.js'
+        // To prebundle:
+        // 'carbon-components-svelte', // carbon-components-svelte is large, good to prebundle (if in `include`, remove from `exclude`)
+      ],
+      // Optional: since we use the `optimizeImports` preprocessor, we can exclude
+      // `carbon-components-svelte` and `carbon-pictograms-svelte` from the
+      // `optimizeDeps` configuration for even faster cold starts.
+      exclude: [
+        // Obsoltete: '@carbon/telemetry', // Disable IBM telemetry (not sure if this has any effect, see .env.EXAMPLE file)
+        '@ibm/telemetry-js', // Disable IBM telemetry (also see .env.EXAMPLE file)
+        'carbon-components-svelte',
+        'carbon-pictograms-svelte',
+        // carbon-icons-svelte is huge and takes 12s to prebundle, better use deep imports for the icons you need
+        'carbon-icons-svelte'
       ]
     },
     logLevel: 'info',
@@ -76,24 +89,6 @@ export default defineConfig(async ({ mode }) => {
       __UPDATE_CHECK_PERIOD_MS__: JSON.stringify(20000) // in milli-seconds, 20s for testing purposes
     },
     plugins,
-    optimizeDeps: {
-      // To prebundle:
-      include: [
-        // 'carbon-components-svelte', // carbon-components-svelte is large, good to prebundle (if in `include`, remove from `exclude`)
-      ],
-
-      // Optional: since we use the `optimizeImports` preprocessor, we can exclude
-      // `carbon-components-svelte` and `carbon-pictograms-svelte` from the
-      // `optimizeDeps` configuration for even faster cold starts.
-      exclude: [
-        // Obsoltete: '@carbon/telemetry', // Disable IBM telemetry (not sure if this has any effect, see .env.EXAMPLE file)
-        '@ibm/telemetry-js', // Disable IBM telemetry (also see .env.EXAMPLE file)
-        'carbon-components-svelte',
-        'carbon-pictograms-svelte',
-        // carbon-icons-svelte is huge and takes 12s to prebundle, better use deep imports for the icons you need
-        'carbon-icons-svelte'
-      ]
-    },
     test: {
       include: ['src/**/*.{test,spec}.{js,ts}']
     },
