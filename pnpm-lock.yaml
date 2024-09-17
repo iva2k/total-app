@@ -50,8 +50,8 @@ importers:
         specifier: ^0.15.7
         version: 0.15.7(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.246))(@svelteuidev/core@0.15.7(patch_hash=lx3mm7qztji6hhc77sogkp3i64)(@svelteuidev/composables@0.15.7(svelte@5.0.0-next.246))(svelte@5.0.0-next.246))(svelte@5.0.0-next.246)
       dayjs:
-        specifier: ^1.11.12
-        version: 1.11.12
+        specifier: ^1.11.13
+        version: 1.11.13
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -2424,8 +2424,8 @@ packages:
   dayjs@1.11.1:
     resolution: {integrity: sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==}
 
-  dayjs@1.11.12:
-    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -7231,7 +7231,7 @@ snapshots:
 
   dayjs@1.11.1: {}
 
-  dayjs@1.11.12: {}
+  dayjs@1.11.13: {}
 
   debug@2.6.9:
     dependencies:
