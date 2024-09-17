@@ -8629,7 +8629,7 @@ snapshots:
       markdown-it-anchor: 8.6.7(@types/markdown-it@12.2.3)(markdown-it@12.3.2)
       markdown-it-attrs: 4.1.6(markdown-it@12.3.2)
       markdown-it-emoji: 2.0.2
-      micromatch: 4.0.5
+      micromatch: 4.0.8
       mrmime: 1.0.1
       pathe: 1.1.2
       picocolors: 1.0.1
