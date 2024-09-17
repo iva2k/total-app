@@ -1,6 +1,6 @@
 {
-  "extends": ["stylelint-config-recommended", "stylelint-config-html", "stylelint-config-prettier"],
-  "plugins": ["@ronilaukkarinen/stylelint-a11y"],
+  "extends": ["stylelint-config-recommended", "stylelint-config-html"],
+  "plugins": ["@double-great/stylelint-a11y"],
   "processors": [],
   "rulesDisabled": {
     "a11y/media-prefers-reduced-motion-NOTE": "https:57//github.com/YozhikM/stylelint-a11y/issues/57",
@@ -46,7 +46,6 @@
         ]
       }
     ],
-    "declaration-block-trailing-semicolon": null,
     "no-descending-specificity": null,
     "no-invalid-double-slash-comments": true,
     "block-no-empty": null
