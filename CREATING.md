@@ -729,14 +729,7 @@ See `src/routes/+layout.svelte` source file.
 
 ESLint and Prettier is already part of Svelte Kit installation, so some of the packages below are already present, we will add some useful configuration to them.
 
-#### Stylelint and additional ESLint rules
-
-```bash
-pnpm install -D stylelint@^14.15.0 @ronilaukkarinen/stylelint-a11y@1.2.9 stylelint-config-standard@^29.0.0 stylelint-config-recommended@^9.0.0
-#? pnpm install -D stylelint@^14.15.0 @double-great/stylelint-a11y stylelint-config-standard stylelint-config-recommended
-```
-
-Note: stylelint-a11y original creator / maintainer is AWOL, using an updated and maintained fork `@ronilaukkarinen/stylelint-a11y`. Another fork `@double-great/stylelint-a11y` is also maintained.
+#### Additional ESLint rules
 
 Edit `.eslintrc.cjs` file:
 
@@ -798,22 +791,21 @@ Change all `<style>` tags in `*.svelte` files to `<style lang="scss">` to use `s
 
 Note: Using `<style lang="scss">` will pass the styles through `sass` preprocessor, which will be BEFORE `postcss`. If you plan to use `postcss` plugins for special syntax extensions (like TailwindCSS), do not use `<style lang="scss">`, as `sass` preprocessor will not understand those special syntax extensions.
 
-#### Prettier and additional Stylelint rules
+#### Prettier
 
 ```bash
-pnpm install -D prettier stylelint-config-prettier stylelint-config-html
+pnpm install -D prettier
 ```
 
-#### Create Stylelint configuration
+#### Stylelint
 
-Add file `.stylelintrc.json`:
-
-```json
-// .stylelintrc.json
-{
-  ... see file in the repo
-}
+```bash
+pnpm install -D stylelint @double-great/stylelint-a11y stylelint-config-standard stylelint-config-recommended stylelint-config-html
 ```
+
+Note: stylelint-a11y original creator / maintainer is AWOL, using an updated and maintained fork `@double-great/stylelint-a11y` that is compatible with stylelint v16. Another fork `@double-great/stylelint-a11y` is also maintained, but does not look like wt will be updated to stylelint v16.
+
+Add file `.stylelintrc.json` (see source file in repo):
 
 #### VSCode formatOnSave
 
