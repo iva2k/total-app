@@ -148,11 +148,11 @@
       "resolveSourceMapLocations": null
     },
     {
-      "name": "pnpm build",
+      "name": "pnpm build:base",
       "request": "launch",
       "type": "node",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["run", "build"],
+      "runtimeArgs": ["run", "build:base"],
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "resolveSourceMapLocations": null
