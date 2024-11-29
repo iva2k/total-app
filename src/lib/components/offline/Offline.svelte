@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { pwaInfo } from 'virtual:pwa-info';
+  import { pwaInfo } from 'virtual:pwa-info'; // vite-plugin-pwa
   // Svelte4, 5 pre next.143: import { onMount, type ComponentType, type SvelteComponent } from 'svelte';
   import { onMount, type Component } from 'svelte';
 
