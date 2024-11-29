@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useRegisterSW } from 'virtual:pwa-register/svelte';
+  import { useRegisterSW } from 'virtual:pwa-register/svelte'; // vite-plugin-pwa
 
   // replaced dynamically
   const buildDate = '__DATE__';
