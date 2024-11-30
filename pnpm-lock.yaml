@@ -27,11 +27,11 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       framework7:
-        specifier: ^8.3.3
-        version: 8.3.3
+        specifier: ^8.3.4
+        version: 8.3.4
       framework7-svelte:
-        specifier: ^8.3.3
-        version: 8.3.3
+        specifier: ^8.3.4
+        version: 8.3.4
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -2975,11 +2975,11 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framework7-svelte@8.3.3:
-    resolution: {integrity: sha512-5lZIeKfkRjqZpL4xFEdHe1UmdlyookVmCwyS+Gg03xKU4xraZMFiAI415+S5aybIqvXrVct9/VKvKmEDXf4Oeg==}
+  framework7-svelte@8.3.4:
+    resolution: {integrity: sha512-hoK9xzS7+5EWj+X/1Y5FTJDD7ylBf8t+wV/NeuHYtJDW9KDryaWiwR1upOD1mrLEFpwyxmTvrLFDOkLwa/k/0A==}
 
-  framework7@8.3.3:
-    resolution: {integrity: sha512-CU5NuTuLtmEIzbJGHMlImXTuRdxcs4b7qej1qPECo87M831oEc5CwMrJZLNrHUwqm7++SHHUWf6HHBGO69BwFA==}
+  framework7@8.3.4:
+    resolution: {integrity: sha512-RKrEeNTxKEzhxJMaw8hLoIZbzHMzLZDFmQlpbxYFUqxyGDH8r6+NFGDCxOFnpkP1VI+L5UsDenrxo8vEzh929Q==}
 
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -7966,9 +7966,9 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framework7-svelte@8.3.3: {}
+  framework7-svelte@8.3.4: {}
 
-  framework7@8.3.3:
+  framework7@8.3.4:
     dependencies:
       dom7: 4.0.6
       htm: 3.1.1
