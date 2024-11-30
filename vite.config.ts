@@ -6,7 +6,6 @@ import type { PluginOption, UserConfig, Plugin as VitePlugin } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
-import rollupCommonjs from '@rollup/plugin-commonjs';
 import backloopHttpsOptions from 'backloop.dev';
 
 import Icons from 'unplugin-icons/vite';
@@ -24,7 +23,6 @@ export default defineConfig(async ({ mode }) => {
 
   const plugins: PluginOption[] = [
     // see below: basicSsl(),
-    rollupCommonjs() as VitePlugin,
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
     Icons({
@@ -76,12 +74,7 @@ export default defineConfig(async ({ mode }) => {
     logLevel: 'info',
     build: {
       minify: !PROD_DEBUG,
-      sourcemap: PROD_DEBUG,
-      commonjsOptions: {
-        // Options for rollupCommonjs
-        include: [], // https://github.com/vitejs/vite/issues/2679#issuecomment-994772493
-        requireReturnsDefault: 'auto'
-      }
+      sourcemap: PROD_DEBUG
     },
     define: {
       __DATE__: JSON.stringify(new Date().toISOString()),
