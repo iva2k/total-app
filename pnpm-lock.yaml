@@ -115,17 +115,17 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       carbon-components-svelte:
-        specifier: ^0.85.2
-        version: 0.85.2
+        specifier: ^0.86.1
+        version: 0.86.1
       carbon-icons-svelte:
-        specifier: ^12.11.0
-        version: 12.11.0
+        specifier: ^12.13.0
+        version: 12.13.0
       carbon-pictograms-svelte:
-        specifier: ^12.11.0
-        version: 12.11.0
+        specifier: ^12.12.0
+        version: 12.12.0
       carbon-preprocess-svelte:
-        specifier: ^0.11.6
-        version: 0.11.6
+        specifier: ^0.11.7
+        version: 0.11.7
       comment-json:
         specifier: ^4.2.5
         version: 4.2.5
@@ -2305,17 +2305,17 @@ packages:
   caniuse-lite@1.0.30001647:
     resolution: {integrity: sha512-n83xdNiyeNcHpzWY+1aFbqCK7LuLfBricc4+alSQL2Xb6OR3XpnQAmlDG+pQcdTfiHRuLcQ96VOfrPSGiNJYSg==}
 
-  carbon-components-svelte@0.85.2:
-    resolution: {integrity: sha512-+ta2wP9jugeDoDDHdzqbSomyEwtOaVyqVeCy5Z/q8WxdnahKOMDeIgPBi/QnsmsDIgS3+79svGG0BcBMBbCfYw==}
+  carbon-components-svelte@0.86.1:
+    resolution: {integrity: sha512-PUle8+uL9dVTnFqNQsMWX29p/vw3TU4NlR5NtSvXguaoY+vFRFEqqUytrnuGYyYUoO3uYPS4BgUVkMiVLayjsw==}
 
-  carbon-icons-svelte@12.11.0:
-    resolution: {integrity: sha512-t1NT10i62/c0i5dymKHCcEQTM3TGlqVxRBHw8/LmOgq/jhIaAYNz6iXarSq3M6QuroV0om/KILEhaFo/APcKQA==}
+  carbon-icons-svelte@12.13.0:
+    resolution: {integrity: sha512-Tkp5Aa34GgAIQ5XSpD0JIKZTqiTUgtIt43SZxXuSDYvQjQ+HQVKNgYiDZ3oAA5etdcGT4O8+vDsVdGeL90Eezg==}
 
-  carbon-pictograms-svelte@12.11.0:
-    resolution: {integrity: sha512-JWu/wcaq2nCWvre6FACGk2mXv1yEUTSoPfX+ioRpZlsDY4pFvCQOep8ozOLh/zJ1682AzkLbqv24S22fkKWDvQ==}
+  carbon-pictograms-svelte@12.12.0:
+    resolution: {integrity: sha512-a7VmWOR//1kcStZcAsoeMirNt3r9stldBxEJtS9bICpFtoC8VlCtvM9jDz80JRh4+u6gkSsp7ct7Yp4xZ2eRUw==}
 
-  carbon-preprocess-svelte@0.11.6:
-    resolution: {integrity: sha512-EQAnuByPT71dns40Sy6l0pihWyJNOetobvLowrFqaMF0gXzSZafIH0lr+ybW4wgyyYA2zOIrXVPMIP8t1Cb2Kg==}
+  carbon-preprocess-svelte@0.11.7:
+    resolution: {integrity: sha512-ipqnoliKaBCT8WNyLzKkbpyAP4mO0QP+tjeYGndBbsBuf9+QpI3ghtV6cQ74FEOflgUDU3pABml+aXmoUd5DTQ==}
 
   chai@5.1.2:
     resolution: {integrity: sha512-aGtmf24DW6MLHHG5gCx4zaI3uBq3KRtxeVs0DjFH6Z0rDNbsvTxFASFvdj79pxjxZ8/5u3PIiN3IwEIQkiiuPw==}
@@ -3942,9 +3942,9 @@ packages:
     peerDependencies:
       postcss: ^8.0.0
 
-  postcss-discard-empty@6.0.3:
-    resolution: {integrity: sha512-znyno9cHKQsK6PtxL5D19Fj9uwSzC2mB74cpT66fhgOadEUPyXFkbgwm5tvc3bt3NAy8ltE5MrghxovZRVnOjQ==}
-    engines: {node: ^14 || ^16 || >=18.0}
+  postcss-discard-empty@7.0.0:
+    resolution: {integrity: sha512-e+QzoReTZ8IAwhnSdp/++7gBZ/F+nBq9y6PomfwORfP7q9nBpK5AMP64kOt0bA+lShBFbBDcgpJ3X4etHg4lzA==}
+    engines: {node: ^18.12.0 || ^20.9.0 || >=22.0}
     peerDependencies:
       postcss: ^8.4.31
 
@@ -7127,21 +7127,21 @@ snapshots:
 
   caniuse-lite@1.0.30001647: {}
 
-  carbon-components-svelte@0.85.2:
+  carbon-components-svelte@0.86.1:
     dependencies:
       '@ibm/telemetry-js': 1.6.0
       flatpickr: 4.6.9
 
-  carbon-icons-svelte@12.11.0: {}
+  carbon-icons-svelte@12.13.0: {}
 
-  carbon-pictograms-svelte@12.11.0: {}
+  carbon-pictograms-svelte@12.12.0: {}
 
-  carbon-preprocess-svelte@0.11.6:
+  carbon-preprocess-svelte@0.11.7:
     dependencies:
       estree-walker: 2.0.2
-      magic-string: 0.30.11
+      magic-string: 0.30.14
       postcss: 8.4.49
-      postcss-discard-empty: 6.0.3(postcss@8.4.49)
+      postcss-discard-empty: 7.0.0(postcss@8.4.49)
 
   chai@5.1.2:
     dependencies:
@@ -8859,7 +8859,7 @@ snapshots:
     transitivePeerDependencies:
       - jiti
 
-  postcss-discard-empty@6.0.3(postcss@8.4.49):
+  postcss-discard-empty@7.0.0(postcss@8.4.49):
     dependencies:
       postcss: 8.4.49
 
