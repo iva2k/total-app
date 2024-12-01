@@ -144,6 +144,7 @@ function parse_outdated() {
 }
 
 function print_summary() {
+  echo | tee -a "$LOGFILE"
   echo "${SEP1}All Branches With Outdated Packages " | tee -a "$LOGFILE"
 
   if [ ${#BRANCH_OUTDATED_PACKAGES[@]} -eq 0 ]; then
@@ -174,6 +175,7 @@ function run_one() {
 
   mkdir -p "$(dirname "$LOGFILE_I")" >/dev/null
   touch "$LOGFILE_I"
+
   echo "${SEP2}$TARGET_BRANCH " | tee -a "$LOGFILE"
   [ "$DEBUG" -ne 0 ] && echo "DEBUG: run_one() TARGET_BRANCH=$TARGET_BRANCH LOGFILE_I=$LOGFILE_I"
 
@@ -259,6 +261,7 @@ function run_all() {
     exit_save_state "$res"
   fi
 
+  # Main branch is special: if it has outdated packages, do not process TARGET_BRANCHES.
   run_one "$MAIN_BRANCH" || return 1
 
   # Loop through each target branch and execute one
