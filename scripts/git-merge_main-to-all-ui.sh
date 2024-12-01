@@ -648,7 +648,7 @@ function print_summary() {
   return $result
 }
 
-main() {
+function main() {
   parse_arguments "$@"
 
   if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then

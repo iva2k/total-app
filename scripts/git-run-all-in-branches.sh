@@ -35,7 +35,7 @@ LOGFILE=".logs/log.runallall"
 
 STOP_ON_ERROR=0
 
-SOURCE_BRANCH="main"
+MAIN_BRANCH="main"
 
 export GOOD_SKIP_TARGET_BRANCHES=(
 )
@@ -375,6 +375,7 @@ function run_one() {
   echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", error=$error" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 }
+
 function run_all() {
   local start_i="$1"
   local res i output TARGET_BRANCH LOGFILE_I
@@ -415,7 +416,7 @@ function run_all() {
     echo "  run time=${st_times[i]}s" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   done
 
-  git checkout "$SOURCE_BRANCH" 2>&1 | tee -a "$LOGFILE"
+  git checkout "$MAIN_BRANCH" 2>&1 | tee -a "$LOGFILE"
   # Ignore errors
 }
 
@@ -498,7 +499,7 @@ function print_summary() {
   return $result
 }
 
-main() {
+function main() {
   parse_arguments "$@"
 
   if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
