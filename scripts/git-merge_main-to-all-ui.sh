@@ -103,7 +103,7 @@ function load_state() {
     # shellcheck disable=SC1090
     source "$file"
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() loaded from file $file."
-    [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_outputs=${st_outputs[*]}."
+    [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_outputs=$(decolor "${st_outputs[*]}")."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_times=${st_times[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_errors=${st_errors[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_branches=${st_branches[*]}."
