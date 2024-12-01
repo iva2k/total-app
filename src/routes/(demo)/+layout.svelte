@@ -83,7 +83,7 @@
             label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
             labelPosition="left"
             isChecked={data.isDarkMode}
-            onchange={(e) => {
+            on:change={(e: Event) => {
               data.onChange(e, !(data.isDarkMode ?? false));
               return;
             }}
