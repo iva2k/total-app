@@ -159,5 +159,10 @@
   },
   "type": "module",
   "readme": "README.md",
-  "_id": "total-app@0.0.2"
+  "_id": "total-app@0.0.2",
+  "pnpm": {
+    "patchedDependencies": {
+      "framework7": "patches/framework7.patch"
+    }
+  }
 }

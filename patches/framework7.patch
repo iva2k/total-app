@@ -1,0 +1,12 @@
+diff --git a/components/view/view-class.js b/components/view/view-class.js
+index ec156578a8bb815d7ff35f1fad3dfe64c89aa369..e1d11098f2b4fffc1d9fb7084317a89e32da27d3 100644
+--- a/components/view/view-class.js
++++ b/components/view/view-class.js
+@@ -86,6 +86,7 @@ class View extends Framework7Class {
+   destroy() {
+     let view = this;
+     const app = view.app;
++    if (!view.$el) return;
+     view.$el.trigger('view:beforedestroy');
+     view.emit('local::beforeDestroy viewBeforeDestroy', view);
+     app.off('resize', view.checkMasterDetailBreakpoint);

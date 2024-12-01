@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  framework7:
+    hash: ltznrwlsmqjtb5g467qbcjghii
+    path: patches/framework7.patch
+
 importers:
 
   .:
@@ -28,7 +33,7 @@ importers:
         version: 3.3.0
       framework7:
         specifier: ^8.3.4
-        version: 8.3.4
+        version: 8.3.4(patch_hash=ltznrwlsmqjtb5g467qbcjghii)
       framework7-svelte:
         specifier: ^8.3.4
         version: 8.3.4
@@ -7968,7 +7973,7 @@ snapshots:
 
   framework7-svelte@8.3.4: {}
 
-  framework7@8.3.4:
+  framework7@8.3.4(patch_hash=ltznrwlsmqjtb5g467qbcjghii):
     dependencies:
       dom7: 4.0.6
       htm: 3.1.1
