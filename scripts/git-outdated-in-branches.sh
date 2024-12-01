@@ -144,7 +144,6 @@ function parse_outdated() {
 }
 
 function print_summary() {
-  echo | tee -a "$LOGFILE"
   echo "${SEP1}All Branches With Outdated Packages " | tee -a "$LOGFILE"
 
   if [ ${#BRANCH_OUTDATED_PACKAGES[@]} -eq 0 ]; then
@@ -233,6 +232,10 @@ function run_one() {
   echo "POST command \"${COMMAND_POST[*]}\" in branch $TARGET_BRANCH..." | tee -a "$LOGFILE"
   "${COMMAND_POST[@]}" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2); res="$?"
   [ "$res" -ne 0 ] && { echo "Error in post command for branch $TARGET_BRANCH." | tee -a "$LOGFILE"; return "$res"; }
+
+  # echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s result=$res" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", result=$rez" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
   return "$res"
 }
