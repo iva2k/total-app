@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  agnostic-svelte:
+    hash: ib2sp7654f7qfjxxm4bz6dvu4q
+    path: patches/agnostic-svelte.patch
+
 importers:
 
   .:
@@ -28,7 +33,7 @@ importers:
         version: 3.3.0
       agnostic-svelte:
         specifier: ^1.1.27
-        version: 1.1.27(svelte@5.2.12)
+        version: 1.1.27(patch_hash=ib2sp7654f7qfjxxm4bz6dvu4q)(svelte@5.2.12)
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -6914,7 +6919,7 @@ snapshots:
 
   agnostic-helpers@1.0.3: {}
 
-  agnostic-svelte@1.1.27(svelte@5.2.12):
+  agnostic-svelte@1.1.27(patch_hash=ib2sp7654f7qfjxxm4bz6dvu4q)(svelte@5.2.12):
     dependencies:
       agnostic-helpers: 1.0.3
       svelte-a11y-dialog: 0.2.0(svelte@5.2.12)

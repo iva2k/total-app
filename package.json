@@ -158,5 +158,10 @@
   },
   "type": "module",
   "readme": "README.md",
-  "_id": "total-app@0.0.2"
+  "_id": "total-app@0.0.2",
+  "pnpm": {
+    "patchedDependencies": {
+      "agnostic-svelte": "patches/agnostic-svelte.patch"
+    }
+  }
 }
