@@ -78,7 +78,7 @@
 </script>
 
 <Sidebar
-  class={_drawerHidden.value && 'hidden'}
+  class={_drawerHidden.value ? 'hidden' : undefined}
   {nonActiveClass}
   {activeClass}
   activeUrl={pathname}
@@ -106,24 +106,14 @@
             {#each values as { meta, path }}
               {@const href = key === 'icons' ? `/${key}${path}` : `/docs/${key}${path}`}
               {#if meta}
-                <SidebarItem
-                  label={meta.component_title}
-                  {href}
-                  {spanClass}
-                  active={pathname === href}
-                />
+                <SidebarItem label={meta.component_title} {href} {spanClass} />
               {/if}
             {/each}
           </SidebarDropdownWrapper>
         {/each}
 
         {#each headerLinks as link}
-          <SidebarItem
-            label={link.title}
-            href={link.href}
-            spanClass={spanClassHeaderLinks}
-            active={pathname === link.href}
-          />
+          <SidebarItem label={link.title} href={link.href} spanClass={spanClassHeaderLinks} />
         {/each}
       </SidebarGroup>
     </nav>
