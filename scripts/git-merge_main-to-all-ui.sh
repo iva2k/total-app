@@ -472,7 +472,6 @@ function merge_to_one() {
 
   echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   echo "DONE Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-  echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 }
 
 function continue_merge_to_all() {
@@ -496,6 +495,7 @@ function continue_merge_to_all() {
   i=$found_match
   time_it "$i" merge_to_one true "$found_match"
   echo "  run time=${st_times[i]}s" | tee -a "$LOGFILE"  ;# | tee -a "$LOGFILE_I"
+  echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
   # Now can continue running the merge_to_all:
   merge_to_all "$((i+1))" "$@"
