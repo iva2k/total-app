@@ -103,7 +103,7 @@ function load_state() {
     # shellcheck disable=SC1090
     source "$file"
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: load_state() loaded from file $file."
-    [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_outputs=${st_outputs[*]}."
+    [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_outputs=$(decolor "${st_outputs[*]}")."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_times=${st_times[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_errors=${st_errors[*]}."
     [ "$DEBUG" -ne 0 ] && echo "DEBUG: st_branches=${st_branches[*]}."
@@ -472,7 +472,6 @@ function merge_to_one() {
 
   echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   echo "DONE Merging branch \"$SOURCE_BRANCH\" into branch \"$TARGET_BRANCH\"." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-  echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 }
 
 function continue_merge_to_all() {
@@ -496,6 +495,7 @@ function continue_merge_to_all() {
   i=$found_match
   time_it "$i" merge_to_one true "$found_match"
   echo "  run time=${st_times[i]}s" | tee -a "$LOGFILE"  ;# | tee -a "$LOGFILE_I"
+  echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
   # Now can continue running the merge_to_all:
   merge_to_all "$((i+1))" "$@"
@@ -648,7 +648,7 @@ function print_summary() {
   return $result
 }
 
-main() {
+function main() {
   parse_arguments "$@"
 
   if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
