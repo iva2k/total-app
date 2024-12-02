@@ -8,9 +8,8 @@ It is not a tutorial per se, and uses a dense step-by-step language without too 
 
 Built with:
 
-- [Svelte](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework
-- [Svelte Kit](https://kit.svelte.dev) - Javascript/TypeScript App build system
-- [Tauri](https://tauri.studio) - Desktop Application framework
+- [Svelte + Svelte Kit](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework + Javascript/TypeScript App build system
+- [Tauri](https://tauri.app) - Desktop Application framework
 - [Capacitor](https://capacitorjs.com) - Building crossplatform apps
 - [Storybook](https://storybook.js.org) - Tool for building UI components and pages in isolation
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
