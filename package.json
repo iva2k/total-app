@@ -70,7 +70,7 @@
     "@ionic/pwa-elements": "^3.3.0",
     "@mdi/js": "^7.4.47",
     "qr-scanner": "^1.4.2",
-    "svelte-ux": "^0.75.5"
+    "svelte-ux": "^0.76.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.2.0",
