@@ -125,17 +125,23 @@ function parse_outdated() {
   local branch="$2"
 
   local parsed=""
-  local line
+  local name=""
+  local current=""
+  local latest=""
 
   # Parse each line of the outdated list
   while IFS= read -r line; do
-    # Expected format: packageName current latest
-    # Example: svelte 3.44.0 3.49.0
-    if [[ $line =~ ([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+) ]]; then
-      local name="${BASH_REMATCH[1]}"
-      local current="${BASH_REMATCH[2]}"
-      local latest="${BASH_REMATCH[3]}"
-      parsed+="$name (current: $current, latest: $latest)\n"
+    if [[ -n $line ]]; then
+      if [[ -z $name ]]; then
+        name="$line"
+      elif [[ $line =~ ([^[:space:]]+)[[:space:]=\>[[:space:]]+([^[:space:]]+) ]]; then
+        current="${BASH_REMATCH[1]}"
+        latest="${BASH_REMATCH[2]}"
+        parsed+="  $name (current: $current, latest: $latest)\n"
+        name=""
+        current=""
+        latest=""
+      fi
     fi
   done <<< "$outdated"
 
@@ -150,7 +156,7 @@ function print_summary() {
     echo "  All branches are up to date." | tee -a "$LOGFILE"
   else
     for branch in "${!BRANCH_OUTDATED_PACKAGES[@]}"; do
-      echo "Branch: $branch" | tee -a "$LOGFILE"
+      echo "${SEP2}Branch: $branch " | tee -a "$LOGFILE"
       if [ -n "${BRANCH_OUTDATED_PACKAGES[$branch]}" ]; then
         echo -e "${BRANCH_OUTDATED_PACKAGES[$branch]}" | tee -a "$LOGFILE"
       else
