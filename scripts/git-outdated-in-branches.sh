@@ -219,9 +219,9 @@ function run_one() {
   echo "BEGIN command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
   # Run command
-  outdated=$("${COMMAND[@]}" 2>&1 | tee -a "$LOGFILE_I"); res="$?"
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: res=$res"
-  if [ "$res" -eq 0 ]; then
+  outdated=$("${COMMAND[@]}" 2>&1 | tee -a "$LOGFILE_I"; exit "${PIPESTATUS[0]}"); res_cmd="$?"
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: res_cmd=$res_cmd"
+  if [ "$res_cmd" -eq 0 ]; then
     echo "No outdated packages in branch $TARGET_BRANCH." | tee -a "$LOGFILE"
   else
     echo "Outdated packages found in branch $TARGET_BRANCH:" | tee -a "$LOGFILE"
@@ -233,11 +233,11 @@ function run_one() {
   "${COMMAND_POST[@]}" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2); res="$?"
   [ "$res" -ne 0 ] && { echo "Error in post command for branch $TARGET_BRANCH." | tee -a "$LOGFILE"; return "$res"; }
 
-  # echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s result=$res" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-  echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", result=$rez" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  # echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s result=$res_cmd" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", result=$res_cmd" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
-  return "$res"
+  return "$res_cmd"
 }
 
 function run_all() {
