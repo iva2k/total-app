@@ -151,11 +151,11 @@ importers:
         specifier: ^2.5.2
         version: 2.5.2(rollup@2.79.1)
       flowbite-svelte:
-        specifier: ^0.47.3
-        version: 0.47.3(rollup@2.79.1)(svelte@5.5.3)
+        specifier: ^0.47.4
+        version: 0.47.4(rollup@2.79.1)(svelte@5.5.3)
       flowbite-svelte-icons:
         specifier: ^2.0.2
-        version: 2.0.2(svelte@5.5.3)(tailwind-merge@2.5.5)(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))
+        version: 2.0.2(svelte@5.5.3)(tailwind-merge@2.5.5)(tailwindcss@3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))
       glob:
         specifier: ^11.0.0
         version: 11.0.0
@@ -226,8 +226,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       tailwindcss:
-        specifier: ^3.4.15
-        version: 3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
+        specifier: ^3.4.16
+        version: 3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.10.1)(typescript@5.7.2)
@@ -262,8 +262,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(vite@6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2))
       vite-plugin-tailwind-purgecss:
-        specifier: ^0.3.3
-        version: 0.3.3(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))(vite@6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2))
+        specifier: ^0.3.5
+        version: 0.3.5(tailwindcss@3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))(vite@6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2))
       vitest:
         specifier: ^2.1.8
         version: 2.1.8(@types/node@22.10.1)(sass@1.82.0)(terser@5.26.0)
@@ -3160,9 +3160,8 @@ packages:
       tailwind-merge: ^2.3.0
       tailwindcss: ^3.4.3
 
-  flowbite-svelte@0.47.3:
-    resolution: {integrity: sha512-1Wdbx+YV6S20dnnMERr/XFNjO+sb22QOrZtIK0Wa8SXxxuYPmbkT3b4mR4TYwUWvWheXsWvlcPLSlV8YGJgItw==}
-    engines: {node: '>=18.0.0', pnpm: '>=8.0.0'}
+  flowbite-svelte@0.47.4:
+    resolution: {integrity: sha512-8oiY/oeWA7fgkDF91MZKEBo5VmjL8El3wuqTDWAFO1j7p45BHIL6G1VGnnidgCEYlbADDQN9BIGCvyPq4J3g+w==}
     peerDependencies:
       svelte: ^3.55.1 || ^4.0.0 || ^5.0.0
 
@@ -3694,6 +3693,10 @@ packages:
 
   lilconfig@3.0.0:
     resolution: {integrity: sha512-K2U4W2Ff5ibV7j7ydLr+zLAkIg5JJ4lPn1Ltsdt+Tz/IjQ8buJ55pZAxoP34lqIiwtF9iAvtLv3JGv7CAyAg+g==}
+    engines: {node: '>=14'}
+
+  lilconfig@3.1.3:
+    resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
   lines-and-columns@1.2.4:
@@ -4788,8 +4791,8 @@ packages:
   tailwind-merge@2.5.5:
     resolution: {integrity: sha512-0LXunzzAZzo0tEPxV3I297ffKZPlKDrjj7NXphC8V5ak9yHC5zRmxnOe2m/Rd/7ivsOMJe3JZ2JVocoDdQTRBA==}
 
-  tailwindcss@3.4.15:
-    resolution: {integrity: sha512-r4MeXnfBmSOuKUWmXe6h2CcyfzJCEk4F0pptO5jlnYSIViUkVmsawj80N5h2lO3gwcmSb4n3PuN+e+GC1Guylw==}
+  tailwindcss@3.4.16:
+    resolution: {integrity: sha512-TI4Cyx7gDiZ6r44ewaJmt0o6BrMCT5aK5e0rmJ/G9Xq3w7CX/5VXl/zIPEJZFUK5VEqwByyhqNPycPlvcK4ZNw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -5114,11 +5117,11 @@ packages:
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
 
-  vite-plugin-tailwind-purgecss@0.3.3:
-    resolution: {integrity: sha512-fsTAzcSdFKrhLxX8zTq3zaTFjk+APmJWOAy+1ujsmxkh9y8hIvM81dWEgdXK1k7suQjns+b7JsoIUkHpxLf5UA==}
+  vite-plugin-tailwind-purgecss@0.3.5:
+    resolution: {integrity: sha512-Ds9My/ED/DMWwMGgGUfu/KVxHKQnacnu0b3Kvm7Dv6ubOGuJq50pfbShVxLuSXFc6dOQKLTLZaoqdW9qxpC26g==}
     peerDependencies:
       tailwindcss: ^3.3.0
-      vite: ^4.1.1 || ^5.0.0
+      vite: ^4.1.1 || ^5.0.0 || ^6.0.0
 
   vite@5.4.11:
     resolution: {integrity: sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==}
@@ -8431,13 +8434,13 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  flowbite-svelte-icons@2.0.2(svelte@5.5.3)(tailwind-merge@2.5.5)(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))):
+  flowbite-svelte-icons@2.0.2(svelte@5.5.3)(tailwind-merge@2.5.5)(tailwindcss@3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))):
     dependencies:
       svelte: 5.5.3
       tailwind-merge: 2.5.5
-      tailwindcss: 3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
+      tailwindcss: 3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
 
-  flowbite-svelte@0.47.3(rollup@2.79.1)(svelte@5.5.3):
+  flowbite-svelte@0.47.4(rollup@2.79.1)(svelte@5.5.3):
     dependencies:
       '@floating-ui/dom': 1.6.11
       apexcharts: 3.54.1
@@ -8961,6 +8964,8 @@ snapshots:
 
   lilconfig@3.0.0: {}
 
+  lilconfig@3.1.3: {}
+
   lines-and-columns@1.2.4: {}
 
   local-pkg@0.5.1:
@@ -9402,7 +9407,7 @@ snapshots:
 
   postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)):
     dependencies:
-      lilconfig: 3.0.0
+      lilconfig: 3.1.3
       yaml: 2.3.4
     optionalDependencies:
       postcss: 8.4.49
@@ -10052,7 +10057,7 @@ snapshots:
 
   tailwind-merge@2.5.5: {}
 
-  tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)):
+  tailwindcss@3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -10063,7 +10068,7 @@ snapshots:
       glob-parent: 6.0.2
       is-glob: 4.0.3
       jiti: 1.21.6
-      lilconfig: 2.1.0
+      lilconfig: 3.1.3
       micromatch: 4.0.8
       normalize-path: 3.0.0
       object-hash: 3.0.0
@@ -10382,14 +10387,14 @@ snapshots:
       picocolors: 1.1.0
       vite: 6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2)
 
-  vite-plugin-tailwind-purgecss@0.3.3(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))(vite@6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2)):
+  vite-plugin-tailwind-purgecss@0.3.5(tailwindcss@3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))(vite@6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2)):
     dependencies:
       chalk: 5.3.0
       css-tree: 2.3.1
       fast-glob: 3.3.2
       purgecss: 6.0.0
       purgecss-from-html: 6.0.0
-      tailwindcss: 3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
+      tailwindcss: 3.4.16(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
       vite: 6.0.2(@types/node@22.10.1)(jiti@1.21.6)(sass@1.82.0)(terser@5.26.0)(tsx@4.19.2)
 
   vite@5.4.11(@types/node@22.10.1)(sass@1.82.0)(terser@5.26.0):
