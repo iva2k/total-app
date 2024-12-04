@@ -1,8 +1,8 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { optimizeCss } from 'carbon-preprocess-svelte';
 import { loadEnv } from 'vite';
-import { defineConfig } from 'vitest/config';
-import type { PluginOption, UserConfig, Plugin as VitePlugin } from 'vite';
+import { defineConfig, type ViteUserConfig } from 'vitest/config';
+import type { PluginOption, UserConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
@@ -21,7 +21,7 @@ export default defineConfig(async ({ mode }) => {
   const { pwaConfiguration, replaceOptions } = await pwaConfigurationFnc(env);
   const PROD_DEBUG = env.VITE_PROD_DEBUG?.toLowerCase() === 'true';
 
-  const plugins: PluginOption[] = [
+  const plugins = [
     // see below: basicSsl(),
     sveltekit(),
     SvelteKitPWA(pwaConfiguration),
@@ -39,7 +39,7 @@ export default defineConfig(async ({ mode }) => {
       }
     }),
 
-    replace(replaceOptions) as VitePlugin, // Convert rollup.Plugin into vite.Plugin
+    replace(replaceOptions),
     optimizeCss(),
 
     // copy is needed for vite to work in dev (especially under "tauri:dev")
@@ -47,11 +47,12 @@ export default defineConfig(async ({ mode }) => {
     viteStaticCopy({
       targets: assets
     })
-  ];
+  ] as PluginOption[];
   // Playwright does not handle https, see https://github.com/microsoft/playwright/issues/16460
   // if (!process.env.NO_HTTPS) plugins.unshift([basicSsl()]);
 
-  const config: UserConfig = {
+  // Some typing gymnasics to allow 'test' property in ViteConfig, and not fall into PluginOptions type difference:
+  const config: Omit<ViteUserConfig, 'plugins'> & UserConfig = {
     optimizeDeps: {
       include: [
         '@ionic/pwa-elements/loader/index.cjs.js',
@@ -96,5 +97,5 @@ export default defineConfig(async ({ mode }) => {
           proxy: {} // Fixes https://github.com/sveltejs/svelte/issues/12398
         }
   };
-  return config;
+  return config as ViteUserConfig;
 });
