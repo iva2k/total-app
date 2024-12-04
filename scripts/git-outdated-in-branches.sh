@@ -125,17 +125,23 @@ function parse_outdated() {
   local branch="$2"
 
   local parsed=""
-  local line
+  local name=""
+  local current=""
+  local latest=""
 
   # Parse each line of the outdated list
   while IFS= read -r line; do
-    # Expected format: packageName current latest
-    # Example: svelte 3.44.0 3.49.0
-    if [[ $line =~ ([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+) ]]; then
-      local name="${BASH_REMATCH[1]}"
-      local current="${BASH_REMATCH[2]}"
-      local latest="${BASH_REMATCH[3]}"
-      parsed+="$name (current: $current, latest: $latest)\n"
+    if [[ -n $line ]]; then
+      if [[ -z $name ]]; then
+        name="$line"
+      elif [[ $line =~ ([^[:space:]]+)[[:space:]=\>[[:space:]]+([^[:space:]]+) ]]; then
+        current="${BASH_REMATCH[1]}"
+        latest="${BASH_REMATCH[2]}"
+        parsed+="  $name (current: $current, latest: $latest)\n"
+        name=""
+        current=""
+        latest=""
+      fi
     fi
   done <<< "$outdated"
 
@@ -150,7 +156,7 @@ function print_summary() {
     echo "  All branches are up to date." | tee -a "$LOGFILE"
   else
     for branch in "${!BRANCH_OUTDATED_PACKAGES[@]}"; do
-      echo "Branch: $branch" | tee -a "$LOGFILE"
+      echo "${SEP2}Branch: $branch " | tee -a "$LOGFILE"
       if [ -n "${BRANCH_OUTDATED_PACKAGES[$branch]}" ]; then
         echo -e "${BRANCH_OUTDATED_PACKAGES[$branch]}" | tee -a "$LOGFILE"
       else
@@ -219,9 +225,9 @@ function run_one() {
   echo "BEGIN command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\"..." | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
   # Run command
-  outdated=$("${COMMAND[@]}" 2>&1 | tee -a "$LOGFILE_I"); res="$?"
-  [ "$DEBUG" -ne 0 ] && echo "DEBUG: res=$res"
-  if [ "$res" -eq 0 ]; then
+  outdated=$("${COMMAND[@]}" 2>&1 | tee -a "$LOGFILE_I"; exit "${PIPESTATUS[0]}"); res_cmd="$?"
+  [ "$DEBUG" -ne 0 ] && echo "DEBUG: res_cmd=$res_cmd"
+  if [ "$res_cmd" -eq 0 ]; then
     echo "No outdated packages in branch $TARGET_BRANCH." | tee -a "$LOGFILE"
   else
     echo "Outdated packages found in branch $TARGET_BRANCH:" | tee -a "$LOGFILE"
@@ -233,11 +239,11 @@ function run_one() {
   "${COMMAND_POST[@]}" 1> >(tee -a "$LOGFILE_I") 2> >(tee -a "$LOGFILE_I" >&2); res="$?"
   [ "$res" -ne 0 ] && { echo "Error in post command for branch $TARGET_BRANCH." | tee -a "$LOGFILE"; return "$res"; }
 
-  # echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s result=$res" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
-  echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", result=$rez" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  # echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", run time=${real}s result=$res_cmd" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
+  echo "DONE  command \"${COMMAND[*]}\" in branch \"$TARGET_BRANCH\", result=$res_cmd" | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
   echo | tee -a "$LOGFILE" | tee -a "$LOGFILE_I"
 
-  return "$res"
+  return "$res_cmd"
 }
 
 function run_all() {
