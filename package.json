@@ -67,7 +67,7 @@
     "@capacitor/ios": "^6.2.0",
     "@fontsource/fira-mono": "^5.1.0",
     "@ionic/pwa-elements": "^3.3.0",
-    "@shoelace-style/shoelace": "^2.18.0",
+    "@shoelace-style/shoelace": "^2.19.0",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
