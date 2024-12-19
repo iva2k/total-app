@@ -39,7 +39,7 @@ export const actions = {
 
     if (key === 'backspace') {
       game.guesses[i] = game.guesses[i].slice(0, -1);
-    } else if (game.guesses[i].length < 5) {
+    } else if (typeof key === 'string' && game.guesses[i].length < 5) {
       game.guesses[i] += key;
     }
 
