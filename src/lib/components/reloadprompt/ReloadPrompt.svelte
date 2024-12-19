@@ -24,7 +24,7 @@
             r.update();
           }, intervalMS);
       } else {
-        console.log(`SW Registered: ${r}`);
+        console.log(`SW Registered with scope: ${r?.scope ?? '(undefined)'}`);
       }
     },
     onRegisterError(error: unknown) {
