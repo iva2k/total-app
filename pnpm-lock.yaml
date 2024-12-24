@@ -36,8 +36,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2
       svelte-ux:
-        specifier: ^0.76.0
-        version: 0.76.0(@babel/core@7.26.0)(postcss-load-config@5.1.0(jiti@1.21.7)(postcss@8.4.49)(tsx@4.19.2))(postcss@8.4.49)(sass@1.83.0)(svelte@5.15.0)
+        specifier: ^0.77.0
+        version: 0.77.0(@babel/core@7.26.0)(postcss-load-config@5.1.0(jiti@1.21.7)(postcss@8.4.49)(tsx@4.19.2))(postcss@8.4.49)(sass@1.83.0)(svelte@5.15.0)
     devDependencies:
       '@capacitor/cli':
         specifier: ^6.2.0
@@ -4813,8 +4813,8 @@ packages:
       typescript:
         optional: true
 
-  svelte-ux@0.76.0:
-    resolution: {integrity: sha512-u/hMWd0AXzbxXt37qasHbPAhTdELBmf+bMxZx++/rk+KSBAXcaqj06urQWZAljvyETnmrPTLa/Toji+6preZsA==}
+  svelte-ux@0.77.0:
+    resolution: {integrity: sha512-5Ni9+3FWeAH1zH2On8BNbPVcKdSECYu2XvHm28xc8/hd36NoL1kEjqXgRKB1yC2NoIVLW4355CZ4cv1BNGYVQA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
@@ -10084,7 +10084,7 @@ snapshots:
       sass: 1.83.0
       typescript: 5.7.2
 
-  svelte-ux@0.76.0(@babel/core@7.26.0)(postcss-load-config@5.1.0(jiti@1.21.7)(postcss@8.4.49)(tsx@4.19.2))(postcss@8.4.49)(sass@1.83.0)(svelte@5.15.0):
+  svelte-ux@0.77.0(@babel/core@7.26.0)(postcss-load-config@5.1.0(jiti@1.21.7)(postcss@8.4.49)(tsx@4.19.2))(postcss@8.4.49)(sass@1.83.0)(svelte@5.15.0):
     dependencies:
       '@floating-ui/dom': 1.6.12
       '@fortawesome/fontawesome-common-types': 6.7.2
