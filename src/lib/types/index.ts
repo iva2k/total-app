@@ -25,9 +25,18 @@ export interface _SiteLinkBase {
   displayInFooter?: boolean;
   displayInActions?: boolean;
   displayInSidebar?: boolean;
+  displayInLogin?: boolean;
+  displayInUser?: boolean;
 }
 
-export type SiteLinkFilter = 'brand' | 'header' | 'footer' | 'actions' | 'sidebar';
+export type SiteLinkFilter =
+  | 'brand'
+  | 'header'
+  | 'footer'
+  | 'actions'
+  | 'sidebar'
+  | 'login'
+  | 'user';
 
 export interface _SiteLink extends _SiteLinkBase {
   href: string;

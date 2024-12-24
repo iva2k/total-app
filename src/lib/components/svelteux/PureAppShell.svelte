@@ -37,7 +37,7 @@
 
   import type { SiteLink } from '$lib/types';
   import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
-  import type { Session } from '@auth/core/types';
+  // import type { Session } from '@auth/core/types';
 
   // let title_default = siteTitle;
   const title_default = [siteShortTitle, 'Svelte UX'];
@@ -47,14 +47,14 @@
   };
   let {
     pathname = '',
-    session,
+    // session,
     title = title_default,
     themes = themes_default,
     onSignout,
     children
   }: {
     pathname?: string;
-    session?: Session;
+    // session?: Session;
     title?: string[] | string;
     themes?: {
       light?: string[];
@@ -63,6 +63,9 @@
     onSignout: () => void;
     children: Snippet;
   } = $props();
+  const session: { user?: { name?: string; email?: string; image?: string } } | undefined = {
+    user: undefined
+  }; // STUB
 
   let url = $derived({ pathname } as URL);
   let brandLink = $state<SiteLink>(prepSiteLinks(siteLinks, 'brand', 1, true, true, true)?.[0]);
