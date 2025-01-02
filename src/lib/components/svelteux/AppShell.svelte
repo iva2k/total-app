@@ -9,7 +9,8 @@
   import { useState } from '$lib/utils/state.svelte';
 
   // let title_default = siteTitle;
-  const title_default = ['TotalApp', 'Svelte UX'];
+  // let title_default = siteShortTitle;
+  let title_default = undefined;
   const themes_default = {
     light: ['light', 'emerald', 'hamlindigo-light'],
     dark: ['dark', 'forest', 'hamlindigo-dark']

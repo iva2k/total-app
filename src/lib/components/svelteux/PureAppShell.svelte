@@ -36,11 +36,9 @@
   const { siteLinks, websiteUrl, siteUrl, siteShortTitle /* , siteTitle */ } = website;
 
   import type { SiteLink } from '$lib/types';
-  import { loadSiteLinks, prepSiteLinks } from '$lib/config/configUtils';
+  import { loadSiteLinks, pathTitle, prepSiteLinks } from '$lib/config/configUtils';
   // import type { Session } from '@auth/core/types';
 
-  // let title_default = siteTitle;
-  const title_default = [siteShortTitle, 'Svelte UX'];
   const themes_default = {
     light: ['light', 'emerald', 'hamlindigo-light'],
     dark: ['dark', 'forest', 'hamlindigo-dark']
@@ -48,7 +46,7 @@
   let {
     pathname = '',
     // session,
-    title = title_default,
+    title,
     themes = themes_default,
     onSignout,
     children
@@ -79,6 +77,9 @@
     ...headerLinksIni, // Show header links in the sidebar
     ...prepSiteLinks(siteLinks, 'sidebar', 2, true, true, true)
   ]);
+
+  let path_title = $derived(pathTitle(url, siteLinks));
+  const title_actual = $derived(path_title ? [siteShortTitle, path_title] : title);
 
   onMount(async () => {
     const mypath = import.meta?.url ?? 'UNDEFINED';
@@ -156,7 +157,7 @@
   </svelte:fragment>
 
   <!-- <AppBar title="Example"> -->
-  <AppBar {title} class="bg-primary text-primary-content">
+  <AppBar title={title_actual} class="bg-primary text-primary-content">
     <div slot="title" class="ml-0 inline-flex text-lg font-medium">
       <!-- Emulate AppBar default title slot, with added Branding / Logo Button -->
       <!-- <ListItem title="Example" subheading="Page" /> -->
@@ -167,10 +168,10 @@
           class="mr-2 p-3"
         ></Button>
       {/if}
-      {#if typeof title === 'string' || typeof title === 'number'}
-        {title}
+      {#if typeof title_actual === 'string' || typeof title_actual === 'number'}
+        {title_actual}
       {:else}
-        <Breadcrumb items={title} class="flex-nowrap gap-2">
+        <Breadcrumb items={title_actual} class="flex-nowrap gap-2">
           <span slot="item" class="text-nowrap last:truncate" let:item>{item}</span>
         </Breadcrumb>
       {/if}
