@@ -249,11 +249,12 @@ export function prepSiteLinks(
   siteLinks: SiteLinkAny[],
   filter: SiteLinkFilter,
   treeDepth: number = 0, // 0 - will keep all depth branches, non-0 will prune the tree to the depth
-  nodeFilter: boolean = true, // true will filter out nodes based on filter only (igmoring if any children match the filter), false will keep nodes that have children matching the filter
+  nodeFilter: boolean = true, // true will filter out nodes based on filter only (ignoring if any children match the filter), false will keep nodes that have children matching the filter
   flatten: boolean = false,
   prune?: boolean
 ): SiteLinkAny[] {
   const filterField = {
+    '*': '*', // Match any
     brand: 'displayInBrand',
     header: 'displayInHeader',
     footer: 'displayInFooter',
@@ -274,7 +275,7 @@ export function prepSiteLinks(
     let result: typeof elements = [];
 
     for (const element of elements) {
-      const elem_filter_match = element[filterField];
+      const elem_filter_match = (filterField as string) === '*' || element[filterField];
       const filteredChildren: SiteLinkAny[] =
         (elem_filter_match || !nodeFilter) && 'items' in element && element?.items
           ? filterRecursively(element.items, currentDepth + 1)
@@ -334,4 +335,21 @@ export function loadSiteLinks(
 ): Promise<SiteLink | SiteLinkFlatGroup | SiteLinkGroup>[] {
   const result = siteLinks.map((siteLink) => getSiteLinkComponent(siteLink, callerPath));
   return result;
+}
+
+export function isActive(currentUrl: URL, path: string) {
+  if (path === '/') {
+    // home must be direct match (otherwise matches all)
+    return currentUrl.pathname === path;
+  } else {
+    // Matches full path next character is `/`
+    // return currentUrl.pathname.match(path + '($|\\/)') != null;
+    return RegExp(path + '($|\\/)').exec(currentUrl.pathname) != null;
+  }
+}
+
+export function pathTitle(currentUrl: URL, siteLinks: SiteLinkAny[]): string {
+  const flatLinks = prepSiteLinks(siteLinks, '*', 2, true, true, true); // TODO: (when needed) Redesign to traverse siteLinks without intermediate result, we're only looking for one match.
+  const link = flatLinks.find((link) => isActive(currentUrl, link.href));
+  return link?.title ?? '';
 }

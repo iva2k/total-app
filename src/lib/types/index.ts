@@ -30,6 +30,7 @@ export interface _SiteLinkBase {
 }
 
 export type SiteLinkFilter =
+  | '*' // Match any
   | 'brand'
   | 'header'
   | 'footer'
