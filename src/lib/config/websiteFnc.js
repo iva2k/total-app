@@ -8,8 +8,7 @@
 // For regular modules, it is easier to use "./website.js".
 
 const websiteFnc = (
-  // /** @type {Record<string, string> | undefined} */
-  /** @type {Record<string, string>} */
+  /** @type {Record<string, string | undefined>} */
   env
 ) => {
   const { PUBLIC_SITE_URL, VERCEL, NETLIFY } = env ?? {};
