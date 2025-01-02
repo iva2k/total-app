@@ -27,7 +27,13 @@ export interface _SiteLinkBase {
   displayInSidebar?: boolean;
 }
 
-export type SiteLinkFilter = 'brand' | 'header' | 'footer' | 'actions' | 'sidebar';
+export type SiteLinkFilter =
+  | '*' // Match any
+  | 'brand'
+  | 'header'
+  | 'footer'
+  | 'actions'
+  | 'sidebar';
 
 export interface _SiteLink extends _SiteLinkBase {
   href: string;
