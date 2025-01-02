@@ -55,6 +55,7 @@ Total App is a versatile starter app designed to streamline the development proc
 - **Flexible Rendering:** Supports SSR, SPA, and PWA (mix & match as needed) for various use cases.
 - **Native Features:** Includes support for camera, GPS, and other native capabilities via Capacitor.
 - **Backend Database:** Includes opinionated Database Abstraction Layer (DAL) with automatic migrations.
+- **Message Service:** Includes message service for sending emails and text messages (e.g. for signup / password recovery).
 - **Great Developer Experience (DX):** Built with SvelteKit with linting, formatting, and comprehensive testing, isolated component development.
 - **Ready for Deployment:** Configured for quick deployment on Netlify, Vercel, or building standalone apps for AppStore/PlayStore and more.
 

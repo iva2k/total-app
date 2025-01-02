@@ -1100,6 +1100,14 @@ If the width of your app's content doesn't match the width of the viewport, your
 
 Whole DAL deserves to be a separate library and half a book. See source files `src/lib/dal/...` in repo.
 
+## Message Service - sending Email and SMS messages
+
+See `src/lib/services/messageService.ts` source in repo for a simple email and SMS service wrapper. Uses `nodemailer` for emails and Twilio for SMS (Twilio is not free).
+
+See <https://github.com/typpo/textbelt> for a free SMS with limited capabilities (it blasts SMS in email to known carrier gateways).
+
+See <https://textbelt.com> for a simple but powerful paid SMS version.
+
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
