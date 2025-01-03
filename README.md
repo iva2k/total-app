@@ -54,6 +54,9 @@ Total App is a versatile starter app designed to streamline the development proc
 - **SEO and Social Integration:** Optimized for search engines and social networks.
 - **Flexible Rendering:** Supports SSR, SPA, and PWA (mix & match as needed) for various use cases.
 - **Native Features:** Includes support for camera, GPS, and other native capabilities via Capacitor.
+- **User Authentication:** Includes user login and registration.
+- **Backend Database:** Includes opinionated Database Abstraction Layer (DAL) with automatic migrations.
+- **Message Service:** Includes message service for sending emails and text messages (e.g. for signup / password recovery).
 - **Great Developer Experience (DX):** Built with SvelteKit with linting, formatting, and comprehensive testing, isolated component development.
 - **Ready for Deployment:** Configured for quick deployment on Netlify, Vercel, or building standalone apps for AppStore/PlayStore and more.
 
@@ -69,7 +72,9 @@ Total App is a versatile starter app designed to streamline the development proc
 [<img src="https://stylelint.io/img/favicon.svg"              alt="Stylelint"   title="Stylelint"   width="16" height="16"> Stylelint](https://stylelint.io/)  
 [<img src="https://postcss.org/assets/favicon-DbGqNhKa.ico"   alt="PostCSS"     title="PostCSS"     width="16" height="16"> Postcss](https://postcss.org/)  
 [<img src="https://playwright.dev/img/playwright-logo.svg"    alt="Playwright"  title="Playwright"  width="16" height="16"> Playwright](https://playwright.dev)  
-[<img src="https://vitest.dev/logo.svg"                       alt="Vitest"      title="Vitest"      width="16" height="16"> Vitest](https://vitest.dev)
+[<img src="https://vitest.dev/logo.svg"                       alt="Vitest"      title="Vitest"      width="16" height="16"> Vitest](https://vitest.dev)  
+[<img src="https://knexjs.org/knex-logo.png"                  alt="Knex"        title="Knex"        width="16" height="16"> Knex](https://knexjs.org)  
+[<img src="https://kysely.dev/img/logo.svg"                   alt="Kysely"      title="Kysely"      width="16" height="16"> Kysely](https://kysely.dev)
 
 ### Isolated Component Development
 
@@ -206,6 +211,8 @@ Variables for backend integrations are set in `.env` file.
 ## How This App Was Created
 
 See [CREATING](./CREATING.md) for step-by-step instructions.
+
+See [DAL](./src/lib/dal/README.md) for database integration.
 
 ## Styling / UI Components
 
