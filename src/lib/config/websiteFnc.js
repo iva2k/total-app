@@ -115,6 +115,16 @@ const websiteFnc = (
     }
   ];
 
+  /** @type { Record<string, {redirect?: string; message?: string;}> } */
+  const siteProtectedRoutes = {
+    '/protected': { message: 'Please sign in to access this content.' }
+  };
+
+  const siteConfig = {
+    // Various website configuration settings
+    mustLoginAfterUserRegister: true
+  };
+
   const website = {
     siteUrl: PUBLIC_SITE_URL,
     isNetlify: NETLIFY,
@@ -144,7 +154,9 @@ const websiteFnc = (
     githubRepo,
     websiteUrlBase,
     websiteUrl,
-    siteLinks
+    siteLinks,
+    siteProtectedRoutes,
+    siteConfig
   };
   // console.log('DEBUG websiteFnc.js website=%o, env=%o', website, env);
   return website;
