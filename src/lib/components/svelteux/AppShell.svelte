@@ -1,5 +1,5 @@
 <script lang="ts">
-  // import type { Session } from '@auth/core/types';
+  import type { Session } from '@auth/core/types';
   import { type Snippet } from 'svelte';
   import { browser } from '$app/environment';
 
@@ -16,13 +16,13 @@
     dark: ['dark', 'forest', 'hamlindigo-dark']
   };
   let {
-    // session,
+    session,
     title = title_default,
     themes = themes_default,
     onSignout,
     children
   }: {
-    // session?: Session;
+    session?: Session;
     title?: string[] | string;
     themes?: {
       light?: string[];
@@ -39,5 +39,5 @@
 </script>
 
 <div>
-  <PureAppShell {pathname} {title} {themes} {onSignout} {children}></PureAppShell>
+  <PureAppShell {pathname} {session} {title} {themes} {onSignout} {children}></PureAppShell>
 </div>

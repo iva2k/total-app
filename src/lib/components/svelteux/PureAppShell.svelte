@@ -37,7 +37,7 @@
 
   import type { SiteLink } from '$lib/types';
   import { loadSiteLinks, pathTitle, prepSiteLinks } from '$lib/config/configUtils';
-  // import type { Session } from '@auth/core/types';
+  import type { Session } from '@auth/core/types';
 
   const themes_default = {
     light: ['light', 'emerald', 'hamlindigo-light'],
@@ -45,14 +45,14 @@
   };
   let {
     pathname = '',
-    // session,
+    session,
     title,
     themes = themes_default,
     onSignout,
     children
   }: {
     pathname?: string;
-    // session?: Session;
+    session?: Session;
     title?: string[] | string;
     themes?: {
       light?: string[];
@@ -61,9 +61,6 @@
     onSignout: () => void;
     children: Snippet;
   } = $props();
-  const session: { user?: { name?: string; email?: string; image?: string } } | undefined = {
-    user: undefined
-  }; // STUB
 
   let url = $derived({ pathname } as URL);
   let brandLink = $state<SiteLink>(prepSiteLinks(siteLinks, 'brand', 1, true, true, true)?.[0]);

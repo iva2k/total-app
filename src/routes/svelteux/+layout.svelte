@@ -1,6 +1,7 @@
 <script lang="ts">
   // import { onMount, setContext, type Snippet } from 'svelte';
   import { onMount, type Snippet } from 'svelte';
+  import { signOut } from '@auth/sveltekit/client';
 
   import { page } from '$app/stores';
   page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
@@ -14,11 +15,10 @@
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
 
   // DISABLED (see root +layout.svelte)
-  // import type { LayoutData } from './$types';
+  import type { LayoutData } from './$types';
   // import { useState } from '$lib/utils/state.svelte';
 
-  // let { data, children } = $props<{ data: LayoutData; children: Snippet }>();
-  let { children } = $props<{ children: Snippet }>();
+  let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
@@ -61,7 +61,11 @@
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
 -->
 
-<AppShell {themes} onSignout={() => {}}>
+<AppShell
+  session={data.session ?? undefined}
+  {themes}
+  onSignout={() => signOut({ callbackUrl: '/', redirect: true })}
+>
   <!-- <div class="app"> -->
   <main class="isolate">
     {@render children()}

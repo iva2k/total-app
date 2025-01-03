@@ -1,7 +1,7 @@
 // import type { Story } from '@storybook/addon-svelte-csf';
 import type { Slots, Story, StoryProps } from '@storybook/addon-svelte-csf';
 import type { SvelteComponentTyped } from 'svelte';
-// import type { Session } from '@auth/core/types';
+import type { Session } from '@auth/core/types';
 import PureAppShell from './PureAppShell.svelte';
 
 export default {
@@ -26,7 +26,7 @@ export default {
 // Note: For Typescript, keep argParams in sync with export default.argTypes above.
 type argParams = {
   pathname?: string;
-  // session?: Session;
+  session?: Session;
   title?: string;
   //   themes?: Record<string, string[]>;
   onSignout: () => void;
@@ -42,14 +42,14 @@ const Template: Story = ((args: argParams) => ({
 export const Primary = Template.bind({});
 Primary.args = {
   pathname: '/',
-  /* session: {
+  session: {
     user: {
       id: '123',
       email: 'user@example.com',
       name: 'Bored User',
       image: 'https://picsum.photos/100/100'
     }
-  }, /* */
+  },
   title: 'My Awesome App'
 };
 
