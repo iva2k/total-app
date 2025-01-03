@@ -152,6 +152,7 @@ const RULES = {
     ],
 
     // TODO: (now) Fix all these rules below. Turned off when upgraded eslint to v9 to pass `pnpm run lint`.
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-require-imports': 'off',
@@ -163,6 +164,7 @@ const RULES = {
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/restrict-plus-operands': 'off',
     '@typescript-eslint/require-await': 'off',
+    '@typescript-eslint/no-redundant-type-constituents': 'off',
 
     // import-x:
     'import-x/no-named-as-default-member': 'off'

@@ -803,7 +803,7 @@ pnpm install -D stylelint @double-great/stylelint-a11y stylelint-config-standard
 
 Note: stylelint-a11y original creator / maintainer is AWOL, using an updated and maintained fork `@double-great/stylelint-a11y` that is compatible with stylelint v16. Another fork `@double-great/stylelint-a11y` is also maintained, but does not look like wt will be updated to stylelint v16.
 
-Add file `.stylelintrc.json` (see source file in repo):
+Add file `.stylelintrc.json` (see source file in repo).
 
 #### VSCode formatOnSave
 
@@ -949,7 +949,7 @@ pnpm install @capacitor/geolocation
 npx cap sync
 ```
 
-Create `src/routes/geolocation/+page.svelte` (see source file in repo)
+Create `src/routes/geolocation/+page.svelte` (see source file in repo).
 
 Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
 
@@ -1095,6 +1095,22 @@ Run Lighthouse and other web tests at <https://www.webpagetest.org>
 TODO: (now) Improve Lighthouse: Content is not sized correctly for the viewport The viewport size of 541px does not match the window size of 360px.
 If the width of your app's content doesn't match the width of the viewport, your app might not be optimized for mobile screens.
 <https://developer.chrome.com/docs/lighthouse/pwa/content-width/?utm_source=lighthouse&utm_medium=wpt>
+
+## DAL - Database Abstraction Layer
+
+Whole DAL deserves to be a separate library and half a book. See source files `src/lib/dal/...` in repo.
+
+## Message Service - sending Email and SMS messages
+
+See `src/lib/services/messageService.ts` source in repo for a simple email and SMS service wrapper. Uses `nodemailer` for emails and Twilio for SMS (Twilio is not free).
+
+See <https://github.com/typpo/textbelt> for a free SMS with limited capabilities (it blasts SMS in email to known carrier gateways).
+
+See <https://textbelt.com> for a simple but powerful paid SMS version.
+
+## User Registration and Authentication
+
+See `src/lib/services/userService.ts` source in repo. User UI is currently added only to "ui-svelteux" branch.
 
 ## References
 
