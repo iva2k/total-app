@@ -6,9 +6,19 @@ declare const __UPDATE_CHECK_PERIOD_MS__: string;
 // for information about these interfaces
 declare global {
   namespace App {
+    interface Locals {
+      user: {
+        id: string;
+        email: string;
+        name?: string;
+      } | null;
+    }
+
     // interface Error {}
     // interface Locals {}
-    // interface PageData {}
+    interface PageData {
+      user: App.Locals['user'];
+    }
     // interface PageState {}
     // interface Platform {}
   }
