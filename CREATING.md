@@ -1108,6 +1108,10 @@ See <https://github.com/typpo/textbelt> for a free SMS with limited capabilities
 
 See <https://textbelt.com> for a simple but powerful paid SMS version.
 
+## User Registration and Authentication
+
+See `src/lib/services/userService.ts` source in repo. User UI is currently added only to "ui-svelteux" branch.
+
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>

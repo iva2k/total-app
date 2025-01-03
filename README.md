@@ -54,6 +54,7 @@ Total App is a versatile starter app designed to streamline the development proc
 - **SEO and Social Integration:** Optimized for search engines and social networks.
 - **Flexible Rendering:** Supports SSR, SPA, and PWA (mix & match as needed) for various use cases.
 - **Native Features:** Includes support for camera, GPS, and other native capabilities via Capacitor.
+- **User Authentication:** Includes user login and registration.
 - **Backend Database:** Includes opinionated Database Abstraction Layer (DAL) with automatic migrations.
 - **Message Service:** Includes message service for sending emails and text messages (e.g. for signup / password recovery).
 - **Great Developer Experience (DX):** Built with SvelteKit with linting, formatting, and comprehensive testing, isolated component development.
