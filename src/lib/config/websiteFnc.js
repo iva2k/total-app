@@ -7,6 +7,15 @@
 // Do not use this file in `vite.config.ts`, instead use "./websiteAsync.js".
 // For regular modules, it is easier to use "./website.js".
 
+import {
+  mdiAccount,
+  mdiAccountCircleOutline,
+  mdiAccountOutline,
+  mdiCog,
+  mdiLogout,
+  mdiLogin
+} from '@mdi/js';
+
 const websiteFnc = (
   /** @type {Record<string, string | undefined>} */
   env
@@ -73,6 +82,36 @@ const websiteFnc = (
         { href: '/shoelace'      , title: 'Shoelace'        , displayInHeader: true, displayInSidebar: true },
       ],
       displayInHeader: true
+    },
+    {
+      // href: '/auth',
+      // prefix: 'visit',
+      title: 'User',
+      // suffix: 'for live example',
+      // img_import: '../images/logo.svg',
+      img_icon: mdiAccount,
+      img_alt: '',
+      // prettier-ignore
+      items: [
+        { href: '/setting'       , title: 'Settings'        , img_icon: mdiCog                  , /* img_import: 'mdiCog'                  ,*/ displayInUser: true },
+        { href: '/auth'          , title: 'Account'         , img_icon: mdiAccountCircleOutline , /* img_import: 'mdiAccountCircleOutline' ,*/ displayInUser: true },
+        { href: '/@auth:signout' , title: 'Log Out'         , img_icon: mdiLogout               , /* img_import: 'mdiLogout'               ,*/ displayInUser: true },
+      ],
+      displayInUser: true
+    },
+    {
+      // href: '/auth',
+      // prefix: 'visit',
+      title: 'User',
+      // suffix: 'for live example',
+      // img_import: '../images/logo.svg',
+      img_icon: mdiAccountOutline,
+      img_alt: '',
+      // prettier-ignore
+      items: [
+        { href: '/auth'          , title: 'Log In'          , img_icon: mdiLogin                , /* img_import: 'mdiLogin'                ,*/ displayInLogin: true },
+      ],
+      displayInLogin: true
     },
     {
       href: discord,
