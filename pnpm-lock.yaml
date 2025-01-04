@@ -26,6 +26,9 @@ importers:
       '@ionic/pwa-elements':
         specifier: ^3.3.0
         version: 3.3.0
+      '@mdi/js':
+        specifier: ^7.4.47
+        version: 7.4.47
       bootstrap-icons:
         specifier: ^1.11.3
         version: 1.11.3
@@ -1627,6 +1630,9 @@ packages:
     resolution: {integrity: sha512-nhSMNprz3WmeRvd8iUs5JqkKr0Ncx46JtPxM3AhXes84XpSJfmIwKeWXRpsr53S7kqPkQfPhzrMFUxSNb23qSA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@mdi/js@7.4.47':
+    resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
 
   '@neoconfetti/svelte@2.2.1':
     resolution: {integrity: sha512-2Ts0Rxaf6clW2qG+AKhTwpl01AAyZEAe03XeuQ7Vp+qYIaM3ycuI94j546fmEkUxwACwGI3Zl2cZ/pncTuNcJg==}
@@ -7055,6 +7061,8 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@mdi/js@7.4.47': {}
 
   '@neoconfetti/svelte@2.2.1': {}
 
