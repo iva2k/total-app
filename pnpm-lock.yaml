@@ -26,6 +26,9 @@ importers:
       '@ionic/pwa-elements':
         specifier: ^3.3.0
         version: 3.3.0
+      '@mdi/js':
+        specifier: ^7.4.47
+        version: 7.4.47
       qr-scanner:
         specifier: ^1.4.2
         version: 1.4.2
@@ -1803,6 +1806,9 @@ packages:
     resolution: {integrity: sha512-nhSMNprz3WmeRvd8iUs5JqkKr0Ncx46JtPxM3AhXes84XpSJfmIwKeWXRpsr53S7kqPkQfPhzrMFUxSNb23qSA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@mdi/js@7.4.47':
+    resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
 
   '@mdx-js/react@3.1.0':
     resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
@@ -8279,6 +8285,8 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@mdi/js@7.4.47': {}
 
   '@mdx-js/react@3.1.0(@types/react@18.2.47)(react@18.3.1)':
     dependencies:
