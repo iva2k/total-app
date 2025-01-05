@@ -7,6 +7,8 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  import '../../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+  import { Input } from '@sveltestrap/sveltestrap';
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
@@ -30,6 +32,10 @@
       /* prune */ true
     )
   );
+
+  let isDarkMode = $state(false);
+  const DARK_CSS = '/vendor/bootstrap/themes/darkly/bootstrap.min.css';
+  const LIGHT_CSS = '/vendor/bootstrap/themes/flatly/bootstrap.min.css';
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
@@ -67,6 +73,15 @@
   */
 </script>
 
+<svelte:head>
+  <!-- <link rel="stylesheet" href="vendor/bootstrap/themes/{isDarkMode ? 'darkly' : 'flatly'}/bootstrap.min.css" /> -->
+  {#if isDarkMode}
+    <link rel="stylesheet" href={DARK_CSS} />
+  {:else}
+    <link rel="stylesheet" href={LIGHT_CSS} />
+  {/if}
+</svelte:head>
+
 <div class="app">
   <!-- DISABLED (see root +layout.svelte)
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
@@ -76,19 +91,16 @@
     {#snippet rightCorner()}
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
-          <label>
-            <input
-              id="cb1"
-              type="checkbox"
-              checked={data.isDarkMode}
-              onchange={(e) => {
-                data.onChange(e, !(data.isDarkMode ?? false));
-                return;
-              }}
-              aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
-            />
-            {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
-          </label>
+          <Input
+            type="switch"
+            label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
+            checked={data.isDarkMode}
+            onchange={(e) => {
+              data.onChange(e, !(data.isDarkMode ?? false));
+              isDarkMode = data.isDarkMode; // For switching the stylesheet in <svelte:head>
+              return;
+            }}
+          />
         {/snippet}
       </DarkMode>
     {/snippet}

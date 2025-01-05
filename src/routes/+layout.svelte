@@ -5,6 +5,8 @@
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
+  import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+  // import { Input } from '@sveltestrap/sveltestrap';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
   // import website from '$lib/config/website';
@@ -14,6 +16,10 @@
   import { useState } from '$lib/utils/state.svelte';
 
   let { data, children }: { data: LayoutData; children: Snippet } = $props();
+
+  let isDarkMode = $state(false);
+  const DARK_CSS = '/vendor/bootstrap/themes/darkly/bootstrap.min.css';
+  const LIGHT_CSS = '/vendor/bootstrap/themes/flatly/bootstrap.min.css';
 
   onMount(async () => {
     await loadIonicPWAElements(window);
@@ -40,6 +46,15 @@
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
 </script>
+
+<svelte:head>
+  <!-- <link rel="stylesheet" href="vendor/bootstrap/themes/{isDarkMode ? 'darkly' : 'flatly'}/bootstrap.min.css" /> -->
+  {#if isDarkMode}
+    <link rel="stylesheet" href={DARK_CSS} />
+  {:else}
+    <link rel="stylesheet" href={LIGHT_CSS} />
+  {/if}
+</svelte:head>
 
 <!-- <div class="app"> -->
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />

@@ -68,6 +68,8 @@
     "@fontsource/fira-mono": "^5.1.0",
     "@ionic/pwa-elements": "^3.3.0",
     "@mdi/js": "^7.4.47",
+    "bootstrap-icons": "^1.11.3",
+    "bootswatch": "^5.3.3",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
@@ -87,6 +89,7 @@
     "@sveltejs/adapter-vercel": "^5.5.2",
     "@sveltejs/kit": "^2.15.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@sveltestrap/sveltestrap": "^6.2.7",
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/cli": "^2.1.0",
     "@types/bcrypt": "^5.0.2",
