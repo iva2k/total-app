@@ -217,7 +217,7 @@ export default [
 -     // https://github.com/import-js/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
 -     'import/no-unresolved': 'error',
 +     // https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-unresolved.md
-+     'import-x/no-unresolved': 'error',
++     'import-x/no-unresolved': [2, { ignore: ['^\\$env/'] }]
     },
   },
 ...

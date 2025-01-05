@@ -166,7 +166,8 @@ const RULES = {
     '@typescript-eslint/no-redundant-type-constituents': 'off',
 
     // import-x:
-    'import-x/no-named-as-default-member': 'off'
+    'import-x/no-named-as-default-member': 'off',
+    'import-x/no-unresolved': [2, { ignore: ['^\\$env/'] }]
   }
 };
 
