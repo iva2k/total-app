@@ -32,8 +32,6 @@ import { createAuthAdapter } from '$lib/dal/auth-dal-adapter';
 // import WorkOS from '@auth/sveltekit/providers/workos';
 // import Zoom from '@auth/sveltekit/providers/zoom';
 
-// TODO: (when needed) Figure out a fix for ESLint 'import-x/no-unresolved' error on '$env/static/public'
-// eslint-disable-next-line import-x/no-unresolved
 import * as env from '$env/static/private';
 
 import { UserService } from '$lib/services/userService';
