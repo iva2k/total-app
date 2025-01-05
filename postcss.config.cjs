@@ -2,9 +2,13 @@
 const config = {
   plugins: [
     require('postcss-import'), // Process @import
-    require('postcss-nesting'), // For CSS Nesting Specification https://www.w3.org/TR/css-nesting-1/
+
+    // Choose one:
+    // require('tailwindcss/nesting'), // Use 'postcss-nested' by default for sass syntax nesting
+    require('tailwindcss/nesting')('postcss-nesting'), // 'postcss-nesting' for CSS Nesting Specification https://www.w3.org/TR/css-nesting-1/
+
+    require('tailwindcss'), // order is important!
     require('autoprefixer')
-    //  require('postcss-nested'), // For sass syntax nesting
   ]
 };
 
