@@ -250,7 +250,9 @@ export function prepSiteLinks(
     header: 'displayInHeader',
     footer: 'displayInFooter',
     actions: 'displayInActions',
-    sidebar: 'displayInSidebar'
+    sidebar: 'displayInSidebar',
+    user: 'displayInUser',
+    login: 'displayInLogin'
   }?.[filter] as keyof SiteLinkAny;
   if (!filterField) {
     return [];
