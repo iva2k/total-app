@@ -3,8 +3,6 @@
 import nodemailer from 'nodemailer';
 import twilio from 'twilio';
 
-// TODO: (when needed) Figure out a fix for ESLint 'import-x/no-unresolved' error on '$env/static/public'
-// eslint-disable-next-line import-x/no-unresolved
 import * as env from '$env/static/private';
 
 // Define the structure of a message
