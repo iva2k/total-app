@@ -39,6 +39,8 @@
     // footerLinks =
     await Promise.all(loadSiteLinks(footerLinks, mypath));
     console.log('DEBUG: footerLinks=%o', footerLinks);
+
+    await import('@shoelace-style/shoelace');
   });
 
   /* DISABLED (see root +layout.svelte)
@@ -64,8 +66,18 @@
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
-  */
+ */
+
+  /* for SlSwitch */
+  // const onChange = (e: Event) => {
+  //   dark = (e.target as SlSwitch).checked;
+  // };
 </script>
+
+<svelte:head>
+  <link rel="stylesheet" href="/vendor/shoelace/themes/light.css" />
+  <link rel="stylesheet" href="/vendor/shoelace/themes/dark.css" />
+</svelte:head>
 
 <div class="app">
   <!-- DISABLED (see root +layout.svelte)
@@ -76,19 +88,15 @@
     {#snippet rightCorner()}
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
-          <label>
-            <input
-              id="cb1"
-              type="checkbox"
-              checked={data.isDarkMode}
-              onchange={(e) => {
-                data.onChange(e, !(data.isDarkMode ?? false));
-                return;
-              }}
-              aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
-            />
+          <sl-switch
+            checked={data.isDarkMode}
+            onsl-change={(e: Event) => {
+              data.onChange(e, !(data.isDarkMode ?? false));
+              return;
+            }}
+          >
             {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
-          </label>
+          </sl-switch>
         {/snippet}
       </DarkMode>
     {/snippet}

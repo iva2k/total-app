@@ -1101,3 +1101,15 @@ See `src/lib/services/userService.ts` source in repo. User UI is currently added
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Shoelace
+
+[Shoelace](https://shoelace.style/)
+
+```bash
+pnpm install @shoelace-style/shoelace
+```
+
+Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source in repo).
+
+Add example page `src/routes/shoelace/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).

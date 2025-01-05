@@ -17,6 +17,8 @@
 
   onMount(async () => {
     await loadIonicPWAElements(window);
+
+    await import('@shoelace-style/shoelace');
   });
 
   let ssrPathname = $state<string>(data?.ssrPathname ?? '');
@@ -39,7 +41,17 @@
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
+
+  /* for SlSwitch */
+  // const onChange = (e: Event) => {
+  //   dark = (e.target as SlSwitch).checked;
+  // };
 </script>
+
+<svelte:head>
+  <link rel="stylesheet" href="/vendor/shoelace/themes/light.css" />
+  <link rel="stylesheet" href="/vendor/shoelace/themes/dark.css" />
+</svelte:head>
 
 <!-- <div class="app"> -->
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
