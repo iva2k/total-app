@@ -7,6 +7,7 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  // import "bulma/css/bulma.css";  // Moved to style.css
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
@@ -67,6 +68,23 @@
   */
 </script>
 
+<svelte:head>
+  <!-- <link
+    rel="stylesheet"
+    href="/vendor/bulma/themes/{isDarkMode ? 'darkly' : 'flatly'}/bulma.min.css"
+  /> -->
+
+  <link
+    rel="stylesheet"
+    href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</svelte:head>
+
 <div class="app">
   <!-- DISABLED (see root +layout.svelte)
   <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
@@ -74,7 +92,7 @@
 
   <Header --corner-right-width="8em">
     {#snippet rightCorner()}
-      <DarkMode htmlDarkClass="dark">
+      <DarkMode htmlDarkClass="theme-dark">
         {#snippet content(data)}
           <label>
             <input

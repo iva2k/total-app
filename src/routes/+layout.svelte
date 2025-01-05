@@ -5,6 +5,7 @@
 
   import Favicon from '$lib/components/favicon/Favicon.svelte';
   import Offline from '$lib/components/offline/Offline.svelte';
+  // import "bulma/css/bulma.css";  // Moved to style.css
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
   // import website from '$lib/config/website';
@@ -40,6 +41,23 @@
     { sizes: '180x180', href: '/apple-icon-180x180.png', imgSize: 180 } // For iPhone
   ];
 </script>
+
+<svelte:head>
+  <!-- <link
+    rel="stylesheet"
+    href="/vendor/bulma/themes/{isDarkMode ? 'darkly' : 'flatly'}/bulma.min.css"
+  /> -->
+
+  <link
+    rel="stylesheet"
+    href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</svelte:head>
 
 <!-- <div class="app"> -->
 <Favicon {pngFavicons} {svgFavicon} {icoFavicon} {touchFavicons} />
