@@ -1101,3 +1101,48 @@ See `src/lib/services/userService.ts` source in repo. User UI is currently added
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Tailwind CSS
+
+Tailwind CSS is a utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.
+
+It is a terrible idea for production websites and accessibility (see Jason Knight's [Tailwind: The New King](https://medium.com/codex/tailwind-the-new-king-6a9908097da8)), but developers love it for quick results. There are a number of UI frameworks on top of Tailwind CSS. For those that require it, we will add Tailwind CSS, and cross fingers hoping that it will only be used for development.
+
+See <https://tailwindcss.com/docs/guides/sveltekit>
+
+```bash
+pnpm install -D tailwindcss postcss autoprefixer prettier-plugin-tailwindcss
+pnpx tailwindcss init tailwind.config.cjs -p
+```
+
+Rename ".prettierrc" to "prettier.config.сjs" and modify contents to employ `module.exports = {...};` syntax. Then add `require('prettier-plugin-tailwindcss')` to `plugins: [...]` (see source in repo).
+
+Add "tailwindcss: {}," to `plugins` in `postcss.config.cjs` (see source in repo).
+
+Add tailwind to src/routes/styles.css (see source in repo).
+
+For dark mode to work in tailwind, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
+
+## Add UI : Svelte UX
+
+[Svelte UX](https://svelte-ux.techniq.dev/)
+
+First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailwind-css)). Then, install Svelte UX:
+
+```bash
+pnpm install svelte-ux
+```
+
+Install some Icon libraries:
+
+```bash
+pnpm install @mdi/js @fortawesome/free-solid-svg-icons
+```
+
+Modify `tailwind.config.cjs` file to use Svelte UX (see source in repo).
+
+Insert `SvelteUIProvider` wrapper element from the framework into `src/routes/+layout.svelte` (see source in repo).
+
+Add example page `src/routes/svelteux/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
+
+For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
