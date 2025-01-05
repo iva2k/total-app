@@ -11,6 +11,7 @@ Built with:
 - [Svelte + Svelte Kit](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework + Javascript/TypeScript App build system
 - [Tauri](https://tauri.app) - Desktop Application framework
 - [Capacitor](https://capacitorjs.com) - Building crossplatform apps
+- [Storybook](https://storybook.js.org) - Tool for building UI components and pages in isolation
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
@@ -20,6 +21,7 @@ Built with:
 
 Continuous Integrations and Deployments:
 
+- [Chromatic](https://www.chromatic.com) - Storybook Github CI
 - [Netlify](https://total-app.netlify.app) - App Demo
 - [Vercel](https://total-app.vercel.app) - App Demo
 
@@ -675,6 +677,8 @@ See netlify.toml and vercel.json files for other deploy settings.
 
 Add '.netlify' and '.vercel' to .gitignore, .eslintignore, .prettierignore (see sources).
 
+Storybook (below) is deployed on Chromatic.
+
 ### Rework Header into Header + PureHeader
 
 Non-pure Header loads `page` from `$app/state`, and it makes it hard to use in Histoire/Storybook - it will need mocking of `$app/state` which is a lot of work without benefits. Instead we will make PureHeader.
@@ -852,7 +856,191 @@ See `histoire` branch.
 
 ### Add Storybook
 
-See `storybook` branch.
+```bash
+# pnpx storybook init -s --package-manager=pnpm
+pnpx storybook@next init -s --package-manager=pnpm
+# Answer "Yes" to question on installing "eslint-plugin-storybook".
+pnpm i -D @storybook/cli@next
+'''
+
+Add some additional packages:
+
+'''bash
+pnpm install -D @storybook/addons @storybook/addon-controls@next @storybook/addon-docs@next @storybook/addon-svelte-csf eslint-plugin-storybook
+```
+
+Add peer dependencies (some may be already installed by `storybook init`):
+
+```bash
+# The React packages were peer dependencies, somehow they leaked into storybook core dependencies:
+pnpm i -D react@^18.2.0 react-dom@18.2.0
+```
+
+One might ask - why add react et.al.? Storybook uses `react` & `react-dom` for its UI. Some of @storybook/addon-\* packages list them as peer dependencies, but it does not work well in npm package mess and breaks things. Current solution is to add react and react-dom as devDependencies.
+
+Disable Storybook telemetry and add Svelte CSF:
+
+```js
+// .storybook/main.ts
+module.exports = {
+  addons: [
+     ...
++    '@storybook/addon-svelte-csf',
+     ...
+  ],
+  core: {
++    disableTelemetry: true, // 👈 Disables telemetry
+  }
+};
+```
+
+Remove example stories and components:
+
+```bash
+npx rimraf src/stories
+```
+
+Edit `.eslintrc.cjs` file:
+
+```js
+// .eslintrc.cjs
+module.exports = {
+  ...
+  extends: [
+     'eslint:recommended',
+     'plugin:@typescript-eslint/recommended',
+     'plugin:import/recommended',
++    'plugin:storybook/recommended',
+     'prettier'
+  ],
+  ...
+```
+
+See some useful Storybook info at <https://github.com/storybookjs/storybook/tree/next/code/frameworks/sveltekit#manual-migration>.
+
+### TODO: (later) Solve Storybook Issues
+
+#### Using \*.stories.svelte files
+
+```bash
+pnpm story:dev
+pnpm story:build
+
+WARN 🚨 Unable to index ./src/lib/components/counter/Counter.stories.svelte:
+WARN   TypeError: Cannot read properties of undefined (reading 'instance')
+WARN     at extractStories (c:\dev\svelte\total-app\node_modules\.pnpm\@storybook+addon-svelte-csf@4.1.0_@storybook+svelte@0.0.0-pr-24889-sha-7abeedf4_@storybook+th_3k4uz76y5ybmvknzruh5glmdnm\node_modules\@storybook\addon-svelte-csf\dist\parser\extract-stories.js:92:13)
+WARN     at readStories (c:\dev\svelte\total-app\node_modules\.pnpm\@storybook+addon-svelte-csf@4.1.0_@storybook+svelte@0.0.0-pr-24889-sha-7abeedf4_@storybook+th_3k4uz76y5ybmvknzruh5glmdnm\node_modules\@storybook\addon-svelte-csf\dist\preset\indexer.js:13:12)
+...
+Error: Unable to index ./src/lib/components/counter/Counter.stories.svelte
+    at StoryIndexGenerator.getIndex (.\node_modules\.pnpm\@storybook+core-server@0.0.0-pr-24889-sha-7abeedf4\node_modules\@storybook\core-server\dist\index.js:60:3746)
+    at async extractStoriesJson (.\node_modules\.pnpm\@storybook+core-server@0.0.0-pr-24889-sha-7abeedf4\node_modules\@storybook\core-server\dist\index.js:51:4623)
+```
+
+Suspect clash with Svelte v5 changes <https://github.com/storybookjs/addon-svelte-csf/issues/156>.
+
+Also TypeScript usage is unclear, see <https://github.com/storybookjs/addon-svelte-csf/issues/162>.
+
+At least, Storybook is working with stories (.tsx, not .svelte) for Counter and Header (after reworking Header into Header + PureHeader).
+
+### Add Storybook App Theme Switcher Addon
+
+There's a default Storybook theming addon: `@storybook/theming`. It allows control over theming of all parts of Storybook app (UI, docs, preview), but it won't affect the components preview.
+
+```bash
+pnpm i -D @storybook/manager-api @storybook/theming
+```
+
+To add custom theme to Storybook app, per <https://storybook.js.org/docs/configure/theming> create files:
+
+- `.storybook/manager.ts` - Sets Storybook App theme
+- `.storybook/YourTheme.ts` - Custom Storybook theme to use
+- `.storybook/preview.ts` - Sets Storybook doc theme
+
+(See source files).
+
+The theme only changes class on the root element (which can be chosen to differ from the default \<body\> tag). The actual theme should be provided and can match the app theme.
+
+### Add Storybook Addon Themes
+
+To change themes in Storybook component previews, use an addon [Storybook Addon Themes](https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/getting-started/tailwind.md). It can coexist with `@storybook/theming`, and will show a theme menu on the toolbar.
+
+```bash
+pnpm i -D @storybook/addon-themes
+```
+
+Add plugin to Storybook:
+
+```js
+// .storybook/main.cjs
+
+module.exports = {
+  ...
+  addons: [
+    ...
++    '@storybook/addon-themes'
+  ],
+  ...
+```
+
+Add themes preview configuration:
+
+```js
+// .storybook/preview.ts
+...
++import { withThemeByDataAttribut, withThemeByClassName } from '@storybook/addon-themes';
+
+const preview: Preview = {
++    decorators: [
++      withThemeByDataAttribute<Renderer>({
++        themes: {
++          light: '',
++          dark: 'dark'
++        },
++        defaultTheme: 'light',
++        attributeName: 'color-scheme'
++      }),
++      withThemeByClassName<Renderer>({
++        themes: {
++          light: '',
++          dark: 'dark',
++        },
++        defaultTheme: 'light',
++      })
++    ],
+  parameters: {
+  ...
+```
+
+The theme switch changes "class" and "color-scheme" attribute on the \<html\> element of component preview iframe. The actual theme should be provided in the app's styles.css. To load the app styles, just import the CSS file in `.storybook/preview.ts`:
+
+```js
+// .storybook/preview.ts
++ import '../src/routes/styles.css';
++ import '../src/routes/(demo)/styles.css';
+```
+
+### Add @storybook/addon-a11y
+
+```bash
+pnpm i -D @storybook/addon-a11y
+```
+
+Edit `.storybook/main.ts` to add "@storybook/addon-a11y" to addons (see source file).
+
+### Publish Storybook on Chromatic
+
+Login to [www.chromatic.com](https://www.chromatic.com) and setup yor project, get [YOUR_TOKEN]. Then connect:
+
+```bash
+pnpm i -D chromatic
+npx chromatic --build-script-name=story:build --project-token=[YOUR_TOKEN]
+```
+
+Also add project token to the Github repo, see <https://www.chromatic.com/docs/github-actions>:
+
+Go to [Your Github Repo](https://github.com/iva2k/total-app) > Settings > Secrets and Variables > Actions > New Repository Secret, then enter Name - CHROMATIC_PROJECT_TOKEN and Secret - [YOUR_TOKEN].
+
+Create file '.github/workflows/chromatic.yml' (see contents in sources).
 
 ### Add Capacitor
 
@@ -949,6 +1137,18 @@ Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
 +       { href: '/geolocation', title: 'Geolocation', displayInHeader: true, dispayInSidebar: true },
 ```
 
+Add option to PureHeader.stories.tsx:
+
+```tsx
+export default {
+  ...
+  argTypes: {
+    pathname: {
+-      options: ['/', '/about'],
++      options: ['/', '/about', '/geolocation'],
+    ...
+```
+
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:
 
 ```xml
@@ -1005,6 +1205,18 @@ Add the page to the `siteLinks` pages array in `$lib/config/websiteFnc.js`:
         ...
 +       { path: '/qrscanner', title: 'QR Scanner', displayInHeader: true, dispayInSidebar: true },
   ];
+```
+
+Add option to PureHeader.stories.tsx:
+
+```tsx
+export default {
+  ...
+  argTypes: {
+    pathname: {
+-      options: ['/', '/about', '/geolocation'],
++      options: ['/', '/about', '/geolocation', 'qrscanner'],
+    ...
 ```
 
 For Android, add permissions to "android/app/src/main/AndroidManifest.xml" file:

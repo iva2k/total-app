@@ -101,7 +101,27 @@
     },
 
     {
-      "name": "pnpm test:unit",
+      "name": "pnpm story",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "story"],
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
+    },
+    {
+      "name": "pnpm story:build",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "story:build"],
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null
+    },
+    {
+      "name": "WORKS pnpm test:unit",
       "request": "launch",
       "type": "node",
       "runtimeExecutable": "pnpm",

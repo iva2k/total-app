@@ -15,6 +15,7 @@ import sveltePlugin from 'eslint-plugin-svelte';
 import pluginImportX from 'eslint-plugin-import-x';
 import playwright from 'eslint-plugin-playwright';
 import vitest from 'eslint-plugin-vitest';
+import storybook from 'eslint-plugin-storybook';
 
 // Parsers
 const { parser: tsParser } = tseslint;
@@ -168,6 +169,12 @@ const RULES = {
     // import-x:
     'import-x/no-named-as-default-member': 'off',
     'import-x/no-unresolved': [2, { ignore: ['^\\$env/'] }]
+  },
+  storybook: {
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    'import-x/no-anonymous-default-export': 'off'
   }
 };
 
@@ -419,6 +426,23 @@ export default tseslint.config(
       globals: {
         ...vitest.environments.env.globals
       }
+    }
+  },
+
+  ...patchFilesPrefix(storybook.configs['flat/recommended']),
+  // storybook sets files: ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)', '*.story.@(ts|tsx|js|jsx|mjs|cjs)'],
+  {
+    // Storybook Overrides
+    name: 'config-storybook',
+    // storybook.configs['flat/recommended'][0] - setup, [1] - *.stories.*ts/*js/tsx/jsx, [2] - .storybook/main.*js/*ts
+    files: arrayFilePathsDeprefix(storybook.configs['flat/recommended'][1], 'files', '*.', '**/*.'),
+    // files: ['**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)', '**/*.story.@(ts|tsx|js|jsx|mjs|cjs)'],
+    rules: {
+      ...RULES.ts,
+      // ...storybook.configs['flat/recommended'][0].rules,
+      ...storybook.configs['flat/recommended'][1].rules,
+      // ...storybook.configs['flat/recommended'][2].rules,
+      ...RULES.storybook
     }
   }
 );
