@@ -1,12 +1,11 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { page } from '$app/stores';
-  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
+  import { page } from '$app/state';
   import { useState } from '$lib/utils/state.svelte';
   let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
-  let pathname = $derived(browser ? ($page.url?.pathname ?? '') : ssrPathname);
-  let error = $derived((browser && $page?.error) || { message: '(checking error...)' });
-  let status = $derived((browser && $page?.status) || '___');
+  let pathname = $derived(browser ? (page.url?.pathname ?? '') : ssrPathname);
+  let error = $derived((browser && page?.error) || { message: '(checking error...)' });
+  let status = $derived((browser && page?.status) || '___');
   let title = $derived(`${status}: ${error.message}`);
 
   // let nav = $derived(browser ? navigator : null);
@@ -17,7 +16,7 @@
 
   function onRetry() {
     console.log('DEBUG: onRetry()');
-    // TODO: (now) Retry $page.url.href
+    // TODO: (now) Retry page.url.href
   }
 </script>
 

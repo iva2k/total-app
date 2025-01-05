@@ -1,5 +1,5 @@
 <script lang="ts">
-  // TODO: (now) Redesign to use: // Per Svelte's documentation: A common pattern is to return SEO-related data from page load functions, then use it (as $page.data) in a <svelte:head> in your root layout. https://kit.svelte.dev/docs/load#$page-data
+  // TODO: (now) Redesign to use: // Per Svelte's documentation: A common pattern is to return SEO-related data from page load functions, then use it (as page.data) in a <svelte:head> in your root layout. https://kit.svelte.dev/docs/load#page-data
 
   import {
     ogSquareImageSrc,
@@ -15,8 +15,7 @@
   import OpenGraph from './OpenGraph.svelte';
   import SchemaOrg from './SchemaOrg.svelte';
   import Twitter from './Twitter.svelte';
-  import { page } from '$app/stores';
-  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
+  import { page } from '$app/state';
 
   import type { OpenGraphProps, SchemaOrgProps, SeoProps, TwitterProps } from './common';
 
@@ -48,7 +47,7 @@
   // causing all sorts of troubles, including failing build (prerender stage crashing with "/undefined/").
   // Protect ourselves:
   let siteUrl;
-  const origin = browser ? ($page.url?.origin ?? '') : '';
+  const origin = browser ? (page.url?.origin ?? '') : '';
   if (origin === 'http://sveltekit-prerender') {
     // We are in prerender on the server
     siteUrl = siteUrlConfig;
@@ -162,8 +161,8 @@
     // url: string;
   } as TwitterProps;
 
-  // console.log('DEBUG: <SEO> origin=%o, $page.url.origin=%o, siteUrlConfig=%o, siteUrl=%o, $page.url.pathname=%o', origin, $page.url?.origin, siteUrlConfig, siteUrl, $page.url?.pathname);
-  // console.log('DEBUG: <SEO> $page.url.origin=%o, siteUrlConfig=%o, siteUrl=%o, $page.url.pathname=%o', $page.url?.origin, siteUrlConfig, siteUrl, $page.url?.pathname);
+  // console.log('DEBUG: <SEO> origin=%o, page.url.origin=%o, siteUrlConfig=%o, siteUrl=%o, page.url.pathname=%o', origin, page.url?.origin, siteUrlConfig, siteUrl, page.url?.pathname);
+  // console.log('DEBUG: <SEO> page.url.origin=%o, siteUrlConfig=%o, siteUrl=%o, page.url.pathname=%o', page.url?.origin, siteUrlConfig, siteUrl, page.url?.pathname);
   console.log(
     'DEBUG: <SEO> pageTitle=%o, pageTitleExtended=%o, pageCaption=%o, canonicalUrl=%o, canonicalUrlMust=%o, useOpenGraph=%o, useTwitter=%o, useSchemaOrg=%o',
     pageTitle,

@@ -155,20 +155,6 @@ import CustomIcon from 'virtual:icons/<set>/<icon>'; // <- this will show icon p
 <CustomIcon />
 ```
 
-### Lint Error "illegal variable name"
-
-```bash
-$ pnpm run lint
-...\total-app\src\routes\Header.svelte
-  19:25  error  $page is an illegal variable name. To reference a global variable called $page, use globalThis.$page(illegal-global)  svelte/valid-compile
-...\total-app\src\routes\sverdle\+page.svelte
-  189:22  error  $reduced_motion is an illegal variable name. To reference a global variable called $reduced_motion, use globalThis.$reduced_motion(illegal-global)  svelte/valid-compile
-
-✖ 2 problems (2 errors, 0 warnings)
-```
-
-To resolve (temporarily), added eslint-disable comments to the affected lines.
-
 ### Issue with imports linting
 
 #### Update 2024
@@ -418,7 +404,7 @@ pnpm i -D @types/object-hash object-hash vanilla-lazyload
 
 Create `src/lib/components/seo/SEO.svelte` component and few sub-components for generating meta-data for SEO (see sources). SEO component is used on each page, and relies on the configuration information from `src/lib/config/website.js`.
 
-It is worth stressing that there's no way to determine hosting website URL during build / prerendering phase. PUBLIC_SITE_URL variable must be configured so the SEO canonical URL is generated correctly. Site URL's for Netlify and Vercel can be also set in `prerender.origin` in `svelte.config.js`, but they seem to not work as expected (SEO.svelte does not receive `$page.url.origin` other than `http://sveltekit-prerender`).
+It is worth stressing that there's no way to determine hosting website URL during build / prerendering phase. PUBLIC_SITE_URL variable must be configured so the SEO canonical URL is generated correctly. Site URL's for Netlify and Vercel can be also set in `prerender.origin` in `svelte.config.js`, but they seem to not work as expected (SEO.svelte does not receive `page.url.origin` other than `http://sveltekit-prerender`).
 
 Credits: [Rodney Lab: SvelteKit SEO](https://rodneylab.com/sveltekit-seo/)
 
@@ -691,11 +677,11 @@ Add '.netlify' and '.vercel' to .gitignore, .eslintignore, .prettierignore (see 
 
 ### Rework Header into Header + PureHeader
 
-Non-pure Header loads $page from $app/store, and it makes it hard to use in Histoire/Storybook - it will need mocking of $app/stores which is a lot of work without benefits. Instead we will make PureHeader.
+Non-pure Header loads `page` from `$app/state`, and it makes it hard to use in Histoire/Storybook - it will need mocking of `$app/state` which is a lot of work without benefits. Instead we will make PureHeader.
 
-In "src/lib/components/header" copy Header.svelte to PureHeader.svelte, remove `import { page } from '$app/stores';` and replace all usages of $page.pathname with a component parameter `pathname` in PureHeader. PureHeader will be usable in Histoire/Storybook below.
+In "src/lib/components/header" copy Header.svelte to PureHeader.svelte, remove `import { page } from '$app/state';` and replace all usages of `page.pathname` with a component parameter `pathname` in PureHeader. PureHeader will be usable in Histoire/Storybook below.
 
-Rework Header.svelte to use PureHeader and pass it the $page.pathname (see sources).
+Rework Header.svelte to use PureHeader and pass it the `page.pathname` (see sources).
 
 ### Rework PureHeader Corners
 
