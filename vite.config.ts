@@ -6,6 +6,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 import replace from '@rollup/plugin-replace';
 import backloopHttpsOptions from 'backloop.dev';
+import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 
 import Icons from 'unplugin-icons/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
@@ -39,6 +40,7 @@ export default defineConfig(async ({ mode }) => {
     }),
 
     replace(replaceOptions),
+    purgeCss(),
 
     // copy is needed for vite to work in dev (especially under "tauri:dev")
     // All copy commands are duplicated in package.json:scripts.svelte:prebuild, for build to work correctly.
