@@ -68,6 +68,13 @@
     "@fontsource/fira-mono": "^5.1.0",
     "@ionic/pwa-elements": "^3.3.0",
     "@mdi/js": "^7.4.47",
+    "@svelteuidev/composables": "^0.15.7",
+    "@svelteuidev/core": "^0.15.7",
+    "@svelteuidev/dates": "^0.15.7",
+    "@svelteuidev/motion": "^0.15.7",
+    "@svelteuidev/preprocessors": "^0.15.7",
+    "@svelteuidev/prism": "^0.15.7",
+    "dayjs": "^1.11.13",
     "qr-scanner": "^1.4.2"
   },
   "devDependencies": {
@@ -175,5 +182,10 @@
   },
   "type": "module",
   "readme": "README.md",
-  "_id": "total-app@0.0.2"
+  "_id": "total-app@0.0.2",
+  "pnpm": {
+    "patchedDependencies": {
+      "@svelteuidev/core@0.15.7": "patches/@svelteuidev__core@0.15.7.patch"
+    }
+  }
 }
