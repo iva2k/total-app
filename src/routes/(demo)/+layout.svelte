@@ -7,6 +7,8 @@
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
   import './styles.css';
+  import 'agnostic-svelte/css/common.min.css';
+  import { Switch } from 'agnostic-svelte'; // Must assign `id` for Switch to work properly.  import Header from '$lib/header/Header.svelte';
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 
@@ -76,19 +78,16 @@
     {#snippet rightCorner()}
       <DarkMode htmlDarkClass="dark">
         {#snippet content(data)}
-          <label>
-            <input
-              id="cb1"
-              type="checkbox"
-              checked={data.isDarkMode}
-              onchange={(e) => {
-                data.onChange(e, !(data.isDarkMode ?? false));
-                return;
-              }}
-              aria-label="Dark mode {data.isDarkMode ? 'on' : 'off'}"
-            />
-            {data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
-          </label>
+          <Switch
+            id="switch-1"
+            label={data.isDarkMode ? CRESCENT_MOON_ENTITY : BRIGHT_ENTITY}
+            labelPosition="left"
+            isChecked={data.isDarkMode}
+            on:change={(e: Event) => {
+              data.onChange(e, !(data.isDarkMode ?? false));
+              return;
+            }}
+          />
         {/snippet}
       </DarkMode>
     {/snippet}

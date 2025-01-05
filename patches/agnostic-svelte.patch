@@ -1,0 +1,13 @@
+diff --git a/components/Divider/Divider.svelte b/components/Divider/Divider.svelte
+index 531200ce75953ab734e1cee161745f27ce89ad19..e1c5fdc253f2753d1334d3d56206eeda21599b72 100644
+--- a/components/Divider/Divider.svelte
++++ b/components/Divider/Divider.svelte
+@@ -126,7 +126,7 @@
+   // small (default is medium) large xlarge
+   export let size = "";
+ 
+-  let slots = $$props.$$slots;
++  let slots = $$slots;
+ 
+   const dividerClasses = [
+     "divider",

@@ -1101,3 +1101,27 @@ See `src/lib/services/userService.ts` source in repo. User UI is currently added
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Agnostic
+
+```bash
+pnpm install agnostic-svelte
+```
+
+Insert code that loads the framework and adds dark theme toggle into `src/routes/+layout.svelte` (see source).
+
+Add example page `src/routes/agnostic/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
+
+### Svelte 5 Status: Broken in next.190 (worked in next.41)
+
+```text
+Declaring or accessing a prop starting with `$$` is illegal (they are reserved for Svelte internals)
+file: node_modules/agnostic-svelte/components/Divider/Divider.svelte:129:22
+ 127 |    export let size = "";
+ 128 |
+ 129 |    let slots = $$props.$$slots;
+                                     ^
+ 130 |
+```
+
+Note: Going back to svelte@5.0.0-next.41 is not possible due to number of breaking changes.
