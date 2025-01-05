@@ -1101,3 +1101,85 @@ See `src/lib/services/userService.ts` source in repo. User UI is currently added
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Tailwind CSS
+
+Tailwind CSS is a utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.
+
+It is a terrible idea for production websites and accessibility (see Jason Knight's [Tailwind: The New King](https://medium.com/codex/tailwind-the-new-king-6a9908097da8)), but developers love it for quick results. There are a number of UI frameworks on top of Tailwind CSS. For those that require it, we will add Tailwind CSS, and cross fingers hoping that it will only be used for development.
+
+See <https://tailwindcss.com/docs/guides/sveltekit>
+
+```bash
+pnpm install -D tailwindcss postcss autoprefixer prettier-plugin-tailwindcss
+pnpx tailwindcss init tailwind.config.cjs -p
+```
+
+Rename ".prettierrc" to "prettier.config.сjs" and modify contents to employ `module.exports = {...};` syntax. Then add `require('prettier-plugin-tailwindcss')` to `plugins: [...]` (see source in repo).
+
+Add "tailwindcss: {}," to `plugins` in `postcss.config.cjs` (see source in repo).
+
+Add tailwind to src/routes/styles.css (see source in repo).
+
+For dark mode to work in tailwind, add htmlDarkClass="dark" property to DarkMode component in `src/routes/+layout.svelte`, so component `src/lib/components/darkmode/DarkMode.svelte` will set class "dark" on `<body>` tag (see source in repo).
+
+## Add UI : Konsta
+
+[Konsta](https://konstaui.com/svelte)
+
+First, install required Tailwind CSS (see [Add UI : Tailwind CSS](#add-ui--tailwind-css)). Then, install Konsta:
+
+```bash
+pnpm i konsta @fontsource/roboto
+```
+
+Modify `tailwind.config.cjs` file to use konsta (see source in repo).
+
+Add example page `src/routes/konsta/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
+
+For dark mode to work in Konsta components, add code into `src/lib/components/darkmode/DarkMode.svelte` that sets class "dark" on `<body>` tag (see source in repo).
+
+### Issue in `pnpm check`
+
+```bash
+Error: Argument of type 'typeof App' is not assignable to parameter of type 'ConstructorOfATypedSvelteComponent'.
+(and many other like that, for all Konsta components)
+```
+
+See <https://github.com/konstaui/konsta/issues/151>
+
+### Issue in `pnpm test:unit`
+
+See <https://github.com/iva2k/total-app/issues/1>
+
+`vitest run` fails on first run and shows an error:
+
+```bash
+⎯⎯ Unhandled Rejection ⎯⎯
+Error: Failed to resolve entry for package "konsta". The package may have incorrect main/module/exports specified in its package.json: Missing "." specifier in "konsta" package
+ ❯ packageEntryFailure node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:29450:17
+ ❯ resolvePackageEntry node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:29445:9
+ ❯ tryNodeResolve node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:29217:20
+ ❯ Context.resolveId node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:28985:28
+ ❯ Object.resolveId node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:63629:64
+ ❯ async file:/C:/dev/svelte/total-app/node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:67637:21
+ ❯ async file:/C:/dev/svelte/total-app/node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:64286:20
+ ❯ addManuallyIncludedOptimizeDeps node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:65479:31
+ ❯ optimizeServerSsrDeps node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:65070:5
+ ❯ createDevSsrDepsOptimizer node_modules/.pnpm/vite@5.0.10_@types+node@20.10.6_sass@1.69.7/node_modules/vite/dist/node/chunks/dep-R0I0XnyH.js:64988:22
+
+⎯⎯Serialized Error: { code: 'ERR_RESOLVE_PACKAGE_ENTRY_FAIL' }
+```
+
+On second run, `vitest run` does not show any errors and hangs up. Deleting "node_modules/.vitest" resets the error:
+
+```bash
+rm -rf node_modules/.vitest
+```
+
+- See (closed, no solution) <https://github.com/vitest-dev/vitest/issues/3913>
+- See (closed, no solution) <https://github.com/sveltejs/vite-plugin-svelte/issues/710>
+- See (closed, no solution) <https://github.com/vitejs/vite/issues/1505>
+- See <https://github.com/vitejs/vite/issues/15868>
+
+Workaround monkey-patch: `patches/konsta@3.1.2.patch`, adds "." entry to konsta/package.json.
