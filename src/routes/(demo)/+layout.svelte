@@ -6,7 +6,16 @@
   // import Offline from '$lib/components/offline/Offline.svelte';
   import DarkMode from '$lib/components/darkmode/DarkMode.svelte';
   import Header from '$lib/components/header/Header.svelte';
-  import './styles.css';
+  // import './styles.css';
+
+  // Framework7 common init
+  import Framework7 from 'framework7/lite';
+  // Or import bundle with all components:
+  // import Framework7 from 'framework7/lite-bundle';
+  import Framework7Svelte from 'framework7-svelte';
+  Framework7.use(Framework7Svelte);
+  import 'framework7/css/bundle';
+
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
   import { BRIGHT_ENTITY, CRESCENT_MOON_ENTITY } from '$lib/constants/entities';
 

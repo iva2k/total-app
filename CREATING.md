@@ -1101,3 +1101,19 @@ See `src/lib/services/userService.ts` source in repo. User UI is currently added
 ## References
 
 - Svelte components: <https://www.shadcn-svelte.com/docs>
+
+## Add UI : Framework7
+
+[Framework7 for Svelte](https://framework7.io/svelte/introduction.html)
+
+```bash
+pnpm install framework7 framework7-svelte
+```
+
+Insert code that loads the framework into `src/routes/+layout.svelte` (see source in repo).
+
+Add example page `src/routes/framework7/+page.svelte` and add route to `siteLinks` in `src/lib/config/websiteFnc.js` (see sources in repo).
+
+### Issue - `framework7-svelte` is not compatible with Svelte 5
+
+Things break miserably. As of now, ui-framework7 branch is useless.
