@@ -79,6 +79,7 @@ const websiteFnc = (
         { href: '/sverdle'       , title: 'Sverdle'         , displayInHeader: true, displayInSidebar: true },
         { href: '/geolocation'   , title: 'Geolocation'     , displayInHeader: true, displayInSidebar: true },
         { href: '/qrscanner'     , title: 'QR Scanner'      , displayInHeader: true, displayInSidebar: true },
+        { href: '/carbon'        , title: 'Carbon'          , displayInHeader: true, displayInSidebar: true },
       ],
       displayInHeader: true
     },
