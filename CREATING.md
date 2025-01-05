@@ -11,6 +11,7 @@ Built with:
 - [Svelte + Svelte Kit](https://svelte.dev) - Truly reactive Javascript/TypeScript App UI framework + Javascript/TypeScript App build system
 - [Tauri](https://tauri.app) - Desktop Application framework
 - [Capacitor](https://capacitorjs.com) - Building crossplatform apps
+- [Histoire](https://histoire.dev) - Tool for building UI components and pages in isolation
 - [Prettier](https://prettier.io/) - Opinionated Code Formatter
 - [ESLint](https://eslint.org) - Pluggable JavaScript linter
 - [Stylelint](https://stylelint.io/) - A mighty, modern CSS linter
@@ -848,7 +849,17 @@ See `package.json` file for "scripts.format" change and new "scripts.lint:css".
 
 ### Add Histoire
 
-See `histoire` branch.
+Per [Histoire Svelte Guide](https://histoire.dev/guide/svelte3/getting-started.html).
+
+Install Histoire:
+
+```bash
+pnpm i -D histoire @histoire/plugin-svelte
+```
+
+Create `histoire.config.ts` (see source). Add it to the "include" section in `tsconfig.lint.json`.
+
+As of 2024-0110, @histoire/plugin-svelte@0.17.6 does not work with svelte@5 and @sveltejs/kit@2.
 
 ### Add Storybook
 

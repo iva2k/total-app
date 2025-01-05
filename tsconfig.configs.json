@@ -5,6 +5,7 @@
     "./assets.ts",
     "./capacitor.config.ts",
     "./eslint.config.mjs",
+    "./histoire.config.ts",
     "./playwright.config.ts",
     "./postcss.config.cjs",
     "./prettier.config.cjs",
