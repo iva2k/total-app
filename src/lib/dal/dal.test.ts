@@ -45,8 +45,6 @@ describe.each([
     beforeEach(async () => {
       //   vi.clearAllMocks();
       //   __setDatabase(null);
-      // TODO: (when needed) Figure out a fix for ESLint 'import-x/no-unresolved' error on '$env/static/private'
-      // eslint-disable-next-line import-x/no-unresolved
       const env = await import('$env/static/private');
       const impl = implementation === 'default' ? DEFAULT_IMPLEMENTATION : implementation;
       env.DB_IMPLEMENTATION = impl;

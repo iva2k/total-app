@@ -11,8 +11,6 @@ const { siteProtectedRoutes } = website;
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const dbInitializer: Handle = async ({ event, resolve }) => {
-  // TODO: (when needed) Figure out a fix for ESLint 'import-x/no-unresolved' error on '$env/static/public'
-  // eslint-disable-next-line import-x/no-unresolved
   const env = await import('$env/static/private');
   // const { env } = await import('$env/dynamic/private');
   const dbConfig = {
