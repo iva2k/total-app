@@ -99,11 +99,19 @@ export async function getSiteLinkComponent(
   siteLink: SiteLinkAny,
   callerPath: string
 ): Promise<SiteLinkAny> {
-  const exts_str = ['svg'];
-  const exts_nostr = ['svelte'];
-  const specifiers_str = ['raw'];
-  const specifiers_nostr = ['component'];
   if (siteLink.img_import) {
+    // This implementation is extremely expensive, as it ends up with 2.8MB of @mdi/js bundled into root chunk.
+    // Instead, use `img_icon = mdiCog` after `import { mdiCog } from '@mdi/js';` in websiteFnc.js siteLinks.
+    // if (siteLink.img_import.startsWith('mdi')) {
+    //   const img = (await import('@mdi/js'))?.[siteLink.img_import];
+    //   if (typeof img === 'string') {
+    //     siteLink.img_icon = img;
+    //   }
+    // } else {
+    const exts_str = ['svg'];
+    const exts_nostr = ['svelte'];
+    const specifiers_str = ['raw'];
+    const specifiers_nostr = ['component'];
     try {
       const [_prefix, img_import1] = siteLink.img_import.includes(':')
         ? siteLink.img_import.split(':', 2)
@@ -142,6 +150,7 @@ export async function getSiteLinkComponent(
     } catch (e) {
       console.log(`Error "${e}" loading module "${siteLink.img_import}"`);
     }
+    // }
   }
   if (siteLink.img_icon) {
     if (typeof siteLink.img_icon === 'string') {
