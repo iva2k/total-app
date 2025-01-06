@@ -32,8 +32,8 @@
     { sizes: '48x48', href: '/favicon-48x48.png', imgSize: 48 },
     { sizes: '192x192', href: '/icon-192x192.png', imgSize: 192 } // For Android Devices
   ];
-  const svgFavicon = undefined; // TODO: '/favicon.svg';
-  const icoFavicon = undefined; // TODO: '/favicon.ico';
+  const svgFavicon = undefined; // TODO: (when needed) '/favicon.svg';
+  const icoFavicon = undefined; // TODO: (when needed) '/favicon.ico';
 
   const touchFavicons = [
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad

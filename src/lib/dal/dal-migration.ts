@@ -267,7 +267,7 @@ export async function applyMigrationPlan(db: DB, plan: MigrationPlan): Promise<v
         // This is highly dependent on the database you're using.
         // Below is an example for PostgreSQL.
 
-        // TODO: (now) Modify this part according to your DBMS.
+        // TODO: (when needed) Modify this part according to your DBMS.
         await db.schema.table(step.tableName, (_table: any) => {
           // This is a placeholder. Actual implementation may vary.
           // For example, in PostgreSQL:
@@ -582,7 +582,7 @@ export function migrationPlanToKnexMigration(plan: MigrationPlan): Knex.Migratio
             // This is highly dependent on the database you're using.
             // Below is an example for PostgreSQL.
 
-            // TODO: (now) Modify this part according to your DBMS.
+            // TODO: (when needed) Modify this part according to your DBMS.
             await knex.schema.table(step.tableName, (_table) => {
               // Placeholder for modifyColumn implementation
               // For example, in PostgreSQL:
