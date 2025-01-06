@@ -19,9 +19,11 @@
     "vitest.explorer",
     "usernamehw.errorlens",
     "github.vscode-github-actions",
+    "jebbs.markdown-extended",
     "yzhang.markdown-all-in-one",
     "antfu.iconify",
     "crystal-spider.jsdoc-generator",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "qwtel.sqlite-viewer"
   ]
 }
