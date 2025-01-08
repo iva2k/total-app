@@ -135,7 +135,7 @@ export class UserService {
       throw new Error('Invalid email or password');
     }
 
-    const token = signToken(user);
+    const token = await signToken(user);
 
     const { passwordHash: _passwordHash, ...userWithoutPassword } = user;
     return { user: userWithoutPassword, token };
@@ -181,7 +181,7 @@ export class UserService {
     input: OAuthInput
   ): Promise<{ user: Omit<User, 'passwordHash'>; token: string }> {
     const { user } = await this._oauthLoginEx(input);
-    const token = signToken(user);
+    const token = await signToken(user);
     const { passwordHash: _passwordHash, ...userWithoutPassword } = user;
     return { user: userWithoutPassword, token };
   }
