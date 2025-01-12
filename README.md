@@ -206,7 +206,9 @@ iOS platform is installed but not fully scripted in this repo, custom scripts ca
 
 Check file `src/lib/config/websiteFnc.js` for setting all information about the App / Website.
 
-Variables for backend integrations are set in `.env` file.
+Some settings should be duplicated in file `src-tauri/tauri.conf.json`, which, unfortunately, cannot use any of settings from `websiteFnc.js` file.
+
+Secret variables for backend integrations are set in `.env` file.
 
 ## How This App Was Created
 
