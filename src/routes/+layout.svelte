@@ -8,6 +8,7 @@
   import Offline from '$lib/components/offline/Offline.svelte';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
+  import { SvelteToast, type SvelteToastOptions } from '@zerodevx/svelte-toast';
   // import website from '$lib/config/website';
   // const { githubRepo } = website;
 
@@ -17,6 +18,8 @@
   // import { Dropdown, Theme } from 'carbon-components-svelte';
 
   let { data, children }: { data: LayoutData; children: Snippet } = $props();
+
+  const toast_options: SvelteToastOptions = {};
 
   onMount(async () => {
     await loadIonicPWAElements(window);
@@ -35,8 +38,8 @@
     { sizes: '48x48', href: '/favicon-48x48.png', imgSize: 48 },
     { sizes: '192x192', href: '/icon-192x192.png', imgSize: 192 } // For Android Devices
   ];
-  const svgFavicon = undefined; // TODO: '/favicon.svg';
-  const icoFavicon = undefined; // TODO: '/favicon.ico';
+  const svgFavicon = undefined; // TODO: (when needed) '/favicon.svg';
+  const icoFavicon = undefined; // TODO: (when needed) '/favicon.ico';
 
   const touchFavicons = [
     { sizes: '167x167', href: '/apple-icon-167x167.png', imgSize: 167 }, // For iPad
@@ -77,6 +80,7 @@
 </main>
 
 <Offline />
+<SvelteToast options={toast_options} />
 
 <!-- </div> -->
 

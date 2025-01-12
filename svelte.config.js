@@ -8,7 +8,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { loadEnv } from 'vite';
 import { pwaConfigurationFnc } from './pwa-configuration.js';
 
-const mode = process.env.NODE_ENV || 'development';
+const mode = process.env.NODE_ENV ?? 'production';
 const env = loadEnv(mode, process.cwd());
 const { pwaConfiguration } = await pwaConfigurationFnc(env);
 

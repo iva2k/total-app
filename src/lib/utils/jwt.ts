@@ -1,6 +1,7 @@
 import jwt, { type SignOptions, type VerifyOptions } from 'jsonwebtoken';
 import { env } from '$env/dynamic/private';
 import type { User } from '$lib/db-schema';
+import websiteAsync from '$lib/config/websiteAsync.js';
 
 // Define the payload structure
 interface JWTPayload {
@@ -12,7 +13,9 @@ interface JWTPayload {
 }
 
 // Sign a JWT
-export function signToken(user: User, options?: SignOptions): string {
+export async function signToken(user: User, options?: SignOptions): Promise<string> {
+  const { appIdentifier } = await websiteAsync(env as Record<string, string>);
+
   const JWT_SECRET = env.JWT_SECRET;
   if (!JWT_SECRET) {
     throw new Error('JWT_SECRET is not defined in environment variables');
@@ -26,7 +29,7 @@ export function signToken(user: User, options?: SignOptions): string {
   };
   const opts: SignOptions = {
     expiresIn,
-    issuer: 'your-app-name', // TODO: (now) Replace with your app's name, use websiteFnc config.
+    issuer: appIdentifier,
     ...options
   };
 
@@ -34,13 +37,14 @@ export function signToken(user: User, options?: SignOptions): string {
 }
 
 // Verify a JWT
-export function verifyToken(token: string): JWTPayload | null {
+export async function verifyToken(token: string): Promise<JWTPayload | null> {
+  const { appIdentifier } = await websiteAsync(env as Record<string, string>);
   const JWT_SECRET = env.JWT_SECRET;
   if (!JWT_SECRET) {
     throw new Error('JWT_SECRET is not defined in environment variables');
   }
   const options: VerifyOptions = {
-    issuer: 'your-app-name', // TODO: (now) Replace with your app's name, use websiteFnc config.
+    issuer: appIdentifier,
     complete: false
   } as const;
   try {
