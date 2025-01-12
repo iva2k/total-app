@@ -242,7 +242,8 @@
       "name": "Chrome against https://localhost:3000",
       "url": "https://localhost:3000",
       "webRoot": "${workspaceFolder}",
-      "enableContentValidation": false // Important to align .svelte files lines to the browser code
+      "enableContentValidation": false, // Important to align .svelte files lines to the browser code
+      "port": 9876 // This allows logging into Google accounts in Chrome under debugger
     },
     {
       "type": "chrome",
@@ -250,7 +251,8 @@
       "name": "Chrome against https://total-app.backloop.dev:4173",
       "url": "https://total-app.backloop.dev:4173",
       "webRoot": "${workspaceFolder}",
-      "enableContentValidation": false // Important to align .svelte files lines to the browser code
+      "enableContentValidation": false, // Important to align .svelte files lines to the browser code
+      "port": 9876 // This allows logging into Google accounts in Chrome under debugger
     },
     {
       "type": "chrome",
@@ -258,7 +260,8 @@
       "name": "Chrome against localhost:4173",
       "url": "http://localhost:4173",
       "webRoot": "${workspaceFolder}/.svelte-kit/output/client",
-      "enableContentValidation": false // Important to align .svelte files lines to the browser code
+      "enableContentValidation": false, // Important to align .svelte files lines to the browser code
+      "port": 9876 // This allows logging into Google accounts in Chrome under debugger
     },
     {
       "type": "chrome",
@@ -266,7 +269,8 @@
       "name": "Chrome against https://localhost:4173",
       "url": "https://localhost:4173",
       "webRoot": "${workspaceFolder}",
-      "enableContentValidation": false // Important to align .svelte files lines to the browser code
+      "enableContentValidation": false, // Important to align .svelte files lines to the browser code
+      "port": 9876 // This allows logging into Google accounts in Chrome under debugger
     }
   ]
 }
