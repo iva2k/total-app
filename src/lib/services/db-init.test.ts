@@ -110,13 +110,13 @@ describe('initializeDatabase', () => {
   it('should log an error and rollback the transaction if seeding fails', async () => {
     process.env.NODE_ENV = 'development';
     const consoleSpy = vi.spyOn(console, 'error');
-    // TODO: (now) const spyRollback = vi.spyOn(mockDb, 'rollback');
+    // TODO: (when needed) const spyRollback = vi.spyOn(mockDb, 'rollback');
     (seedDevData as Mock).mockRejectedValue(new Error('Seeding error'));
 
     await initializeDatabase();
 
     expect(seedDevData).toHaveBeenCalledWith(mockDb);
-    // TODO: (now) expect(spyRollback).toHaveBeenCalled();
+    // TODO: (when needed) expect(spyRollback).toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
       'An error occurred during database initialization:',
       'Seeding error'
