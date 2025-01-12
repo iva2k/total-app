@@ -190,7 +190,6 @@ function pathsToSvg(paths: string[]): string {
   return html;
 }
 
-// TODO: (now) This function badly needs UNIT TESTS for all kinds of arg combinations and siteLinks structures.
 export function prepSiteLinks(
   siteLinks: SiteLinkAny[],
   filter: SiteLinkFilter,

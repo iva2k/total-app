@@ -28,6 +28,8 @@ const websiteFnc = (
   const siteLanguage = 'en-US';
   const siteTitle = 'Total App - SvelteKit template';
   const siteShortTitle = 'Total App';
+  const appIdentifier = 'com.iva2k.total-app';
+  const appIssuer = 'com.iva2k';
   const description = 'Total App - starter application template built with SvelteKit.';
   const themeColor = '#000000';
   const backgroundColor = '#ffffff';
@@ -175,6 +177,8 @@ const websiteFnc = (
     siteLanguage,
     siteTitle,
     siteShortTitle,
+    appIdentifier,
+    appIssuer,
     description,
     themeColor,
     backgroundColor,
