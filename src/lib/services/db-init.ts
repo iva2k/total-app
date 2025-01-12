@@ -28,7 +28,7 @@ export async function initializeDatabase(config?: DalConfig, schema?: Schema): P
       console.error('An error occurred during database initialization:', stringifyAnyError(error));
       seeded = undefined;
       // Rollback the transaction
-      // TODO: (now) Refactor transactions: await db.rollback();
+      // TODO: (when needed) Refactor transactions: await db.rollback();
     }
   }
 

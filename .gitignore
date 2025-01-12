@@ -41,3 +41,6 @@ test-results.json
 /playwright-report
 /coverage
 *.sqlite
+stats*.html
+/.VSCodeCounter
+

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { showToast } from '$lib/services/toastService';
   import SEO from '$lib/components/seo/SEO.svelte';
   import type { SeoProps } from '$lib/components/seo/common';
   import website from '$lib/config/website';
@@ -108,7 +109,13 @@
     try editing <strong>src/routes/+page.svelte</strong>
   </h2>
 
-  <Counter />
+  <Counter
+    onChange={(newCount) => {
+      const styles = ['info', 'success', 'warning', 'error'];
+      const style = styles[newCount % styles.length];
+      showToast(`Hello world! (${style})`, style);
+    }}
+  />
 </section>
 
 <style lang="scss">
