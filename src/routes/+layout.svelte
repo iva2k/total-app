@@ -7,6 +7,7 @@
   import Offline from '$lib/components/offline/Offline.svelte';
   import { loadIonicPWAElements } from '$lib/utils/ionicUtils';
 
+  import { SvelteToast, type SvelteToastOptions } from '@zerodevx/svelte-toast';
   // import website from '$lib/config/website';
   // const { githubRepo } = website;
 
@@ -14,6 +15,8 @@
   import { useState } from '$lib/utils/state.svelte';
 
   let { data, children }: { data: LayoutData; children: Snippet } = $props();
+
+  const toast_options: SvelteToastOptions = {};
 
   onMount(async () => {
     await loadIonicPWAElements(window);
@@ -49,6 +52,7 @@
 </main>
 
 <Offline />
+<SvelteToast options={toast_options} />
 
 <!-- </div> -->
 
