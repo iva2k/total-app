@@ -16,7 +16,7 @@
 
   function onRetry() {
     console.log('DEBUG: onRetry()');
-    // TODO: (now) Retry page.url.href
+    // TODO: (when needed) Retry page.url.href
   }
 </script>
 

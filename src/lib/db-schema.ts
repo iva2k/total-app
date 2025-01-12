@@ -52,7 +52,7 @@ export const UserSchema = z.object({
 export const AccountSchema = z.object({
   id: z.string().uuid(),
   // userId: z.string().uuid(), // Foreign key to User.id
-  userId: z.string().uuid().optional(), // Foreign key to User.id // TODO: (now) Make not optional
+  userId: z.string().uuid(), // Foreign key to User.id
   provider: z.string(), // OAuth provider (e.g., 'github', 'google')
   providerAccountId: z.string(), // Provider's unique ID for the account
   refresh_token: z.string().optional(), // OAuth refresh token
@@ -60,7 +60,7 @@ export const AccountSchema = z.object({
   expires_at: z.number().optional(), // OAuth token expiration time (UNIX timestamp)
   // ? (found in TokenEndpointResponse) expires_in: z.number().optional(), // OAuth token expiration time (UNIX timestamp)
   token_type: z.string().optional(), // Type of token (e.g., 'bearer')
-  type: z.string().optional(), // Type of provider (e.g., 'oidc') // TODO: (now) Make not optional
+  type: z.string(), // Type of provider (e.g., 'oidc')
   scope: z.string().optional(), // OAuth token scope
   id_token: z.string().optional(), // ID token (for OpenID Connect)
   session_state: z.string().optional() // OAuth session state

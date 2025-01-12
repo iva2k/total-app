@@ -8,6 +8,9 @@
   --color-bg-0: #cad8e4; /* rgb(202, 216, 228); */
   --color-bg-1: #cedce8; /* hsl(209, 36%, 86%); */
   --color-bg-2: #edf0f8; /* hsl(224, 44%, 95%); */
+  --color-success: #6bcc87;
+  --color-danger: #bc6054;
+  --color-warning: #dbae59;
   --color-theme-1: #ff3e00;
   --color-theme-2: #40b3ff;
   --color-text: rgba(0, 0, 0, 0.7);
@@ -22,6 +25,9 @@
   --color-bg-0: #15202b;
   --color-bg-1: #192734;
   --color-bg-2: #22303c;
+  --color-success: #6bb187;
+  --color-danger: #ac3e31;
+  --color-warning: #c9922c;
   --color-theme-1: #ff3e00;
   --color-theme-2: #40b3ff;
   --color-text: rgba(255, 255, 255, 0.7);
@@ -130,3 +136,28 @@ button:focus:not(:focus-visible) {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Toast styling */
+._toastContainer {
+  --toastContainerTop: 5rem; /* Adjust top to be positioned under AppBar */
+}
+.toast-info {
+  --toastColor: var(--color-text);
+  --toastBackground: var(--color-bg-2);
+  --toastBarBackground: var(--color-text);
+}
+.toast-success {
+  --toastColor: var(--color-text);
+  --toastBackground: var(--color-theme-2);
+  --toastBarBackground: var(--color-text);
+}
+.toast-error {
+  --toastColor: var(--color-text);
+  --toastBackground: var(--color-danger);
+  --toastBarBackground: var(--color-text);
+}
+.toast-warning {
+  --toastColor: var(--color-text);
+  --toastBackground: var(--color-warning);
+  --toastBarBackground: var(--color-text);
+}

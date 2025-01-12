@@ -31,6 +31,7 @@
     },
     // END override .svelte-kit/tsconfig.json
 
+    "types": ["vitest/globals"],
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
