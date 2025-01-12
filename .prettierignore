@@ -33,6 +33,7 @@ log.*
 /test-results
 test-results.json
 /storybook-static
+/src-tauri/gen
 /src-tauri/target
 /src-tauri/WixTools
 /src-tauri/Cargo.lock
@@ -41,6 +42,7 @@ test-results.json
 /android
 /ios
 /.trunk/tmp
+/.VSCodeCounter
 
 # Package Managers
 # Ignore files for PNPM, NPM and YARN
