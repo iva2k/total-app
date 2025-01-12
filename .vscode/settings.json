@@ -43,6 +43,7 @@
     "cwd": "${workspaceFolder}"
   },
   "debug.javascript.autoAttachFilter": "always",
+  "debug.javascript.unmapMissingSources": true,
   "javascript.validate.enable": false,
   "js/ts.implicitProjectConfig.checkJs": false,
   "files.insertFinalNewline": true,
@@ -64,14 +65,16 @@
   },
   "npm.packageManager": "pnpm",
   "vitest.commandLine": "pnpm run test:unit --",
+  "markdownlint.lintWorkspaceGlobs": ["!.VSCodeCounter/**/*"],
   "markdownlint.config": {
     "MD033": {
-      "allowed_elements": ["table", "td", "tr", "thead", "tbody", "img", "a"]
+      "allowed_elements": ["table", "td", "tr", "thead", "tbody", "img", "a", "abbr"]
     }
   },
   // "[markdown]": {
   //   "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   // },
   "svg.preview.background": "transparent",
+  "workbench.editor.labelFormat": "short",
   "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

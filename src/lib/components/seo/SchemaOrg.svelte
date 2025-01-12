@@ -48,7 +48,7 @@
             '@id': `${siteUrl}/#personlogo`
           },
           sameAs: [
-            // TODO: (now) Dynamically prune the list of items with no value:
+            // TODO: (soon) Dynamically prune the list of items with no value:
             `https://twitter.com/${twitterUsername}`,
             `https://github.com/${githubPage}`,
             `https://www.tiktok.com/${tiktokUsername}`,

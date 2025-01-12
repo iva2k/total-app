@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "./gen/schemas/desktop-schema.json",
   "productName": "total-app",
   "version": "0.0.2",
   "identifier": "com.iva2k.total-app",
