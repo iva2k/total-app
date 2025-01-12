@@ -4,11 +4,11 @@
    * @param event
    */
 
-  // TODO: (now) on "register" error form goes to isLogin mode, and wording of the error description does not match, Use URL for the tab / mode (so outside links can choose the tab).
+  // TODO: (when needed) on "register" error form goes to isLogin mode, and wording of the error description does not match, Use URL for the tab / mode (so outside links can choose the tab).
   // TODO: (now) Password recovery via email. Make a link, but show it as a tab along with Login/Register (use URL for the tab / mode)
-  // TODO: (now) MFA
-  // TODO: (now) Style OAuth login buttons, add icons (maybe from Auth.js lib)
-  // TODO: (now) Erorrs due to entries validation inside Auth.js are not passed to us. Need either to make client-side validation, or make Auth.js pass more descriptive errors to us.
+  // TODO: (when needed) MFA
+  // TODO: (when needed) Style OAuth login buttons, add icons (maybe from Auth.js lib)
+  // TODO: (when needed) Erorrs due to entries validation inside Auth.js are not passed to us. Need either to make client-side validation, or make Auth.js pass more descriptive errors to us.
 
   import type { PageData } from './$types';
   import { SignIn } from '@auth/sveltekit/components';
@@ -70,7 +70,7 @@
 
   // Parse URL parameters for messages
   onMount(async () => {
-    // TODO: (now) Make it more Svelte:
+    // TODO: (soon) Make it more Svelte:
     const params = new URLSearchParams(window.location.search);
     if (params.has('error')) {
       error = params.get('error') || '';
