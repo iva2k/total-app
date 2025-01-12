@@ -1,11 +1,13 @@
 /** Use this file to get site-wide settings:
  * import websiteFnc from '$lib/config/websiteFnc.js';
- * import { env } from '$env/static/public';
+ * import * as env from '$env/static/public';
  * const { author, ogLanguage, siteLanguage, siteTitle, siteTitleAlt } = websiteFnc(env);
+ *
+ * Note: Unfortunately, file `src-tauri/tauri.conf.json` cannot use any of settings from this file, and has to be edited to be in sync.
+ *
+ * Do not use this file in `vite.config.ts`, instead use "./websiteAsync.js".
+ * For regular modules, it is easier to use "./website.js".
  */
-
-// Do not use this file in `vite.config.ts`, instead use "./websiteAsync.js".
-// For regular modules, it is easier to use "./website.js".
 
 import {
   mdiAccount,

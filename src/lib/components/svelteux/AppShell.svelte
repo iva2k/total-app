@@ -3,8 +3,8 @@
   import { type Snippet } from 'svelte';
   import { browser } from '$app/environment';
 
-  import { page } from '$app/stores';
-  page; // TODO: (when issue fixed) Replace a hacky patch to fix <https://github.com/sveltejs/eslint-plugin-svelte/issues/652>
+  import { page } from '$app/state';
+
   import PureAppShell from './PureAppShell.svelte';
   import { useState } from '$lib/utils/state.svelte';
 
@@ -35,7 +35,7 @@
   const trimRightSlash = (input: string) => (input.endsWith('/') ? input.slice(0, -1) : input);
 
   let ssrPathname = $derived(useState<string>('ssrPathname')?.value ?? '');
-  let pathname = $derived(trimRightSlash(browser ? ($page.url?.pathname ?? '') : ssrPathname));
+  let pathname = $derived(trimRightSlash(browser ? (page.url?.pathname ?? '') : ssrPathname));
 </script>
 
 <div>

@@ -53,3 +53,28 @@ main :not(.prose) h2 + h3 {
 main small {
   @apply inline-block text-xs text-surface-content/50;
 }
+
+/* Toast styling */
+._toastContainer {
+  --toastContainerTop: 5rem; /* Adjust top to be positioned under AppBar */
+}
+.toast-info {
+  --toastColor: hsl(var(--color-info-content));
+  --toastBackground: hsl(var(--color-info));
+  --toastBarBackground: hsl(var(--color-info-800));
+}
+.toast-success {
+  --toastColor: hsl(var(--color-success-content));
+  --toastBackground: hsl(var(--color-success));
+  --toastBarBackground: hsl(var(--color-success-800));
+}
+.toast-error {
+  --toastColor: hsl(var(--color-danger-content));
+  --toastBackground: hsl(var(--color-danger));
+  --toastBarBackground: hsl(var(--color-danger-800));
+}
+.toast-warning {
+  --toastColor: hsl(var(--color-warning-content));
+  --toastBackground: hsl(var(--color-warning));
+  --toastBarBackground: hsl(var(--color-warning-800));
+}

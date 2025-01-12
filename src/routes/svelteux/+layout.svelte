@@ -15,10 +15,14 @@
   // import { loadIonicPWAElements } from '$lib/utils/ionicUtils.cjs';
 
   // DISABLED (see root +layout.svelte)
+
+  import { SvelteToast, type SvelteToastOptions } from '@zerodevx/svelte-toast';
   import type { LayoutData } from './$types';
   // import { useState } from '$lib/utils/state.svelte';
 
   let { data, children }: { data: LayoutData; children: Snippet } = $props();
+
+  const toast_options: SvelteToastOptions = {};
 
   onMount(async () => {
     /* DISABLED (see root +layout.svelte)
@@ -75,6 +79,8 @@
 <!-- DISABLED (see root +layout.svelte)
 <Offline />
 -->
+
+<SvelteToast options={toast_options} />
 
 <!-- </div> -->
 

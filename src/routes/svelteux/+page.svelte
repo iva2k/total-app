@@ -1,9 +1,13 @@
 <script lang="ts">
   import { Button } from 'svelte-ux';
+  import { showToast } from '$lib/services/toastService';
 
   let clickCounter = $state(0);
   function onClick(_e: MouseEvent) {
     clickCounter += 1;
+    const styles = ['info', 'success', 'warning', 'error'];
+    const style = styles[clickCounter % styles.length];
+    showToast(`Hello world! (${style})`, style);
   }
 </script>
 
