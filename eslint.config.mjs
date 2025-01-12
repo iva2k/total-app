@@ -151,7 +151,7 @@ const RULES = {
       }
     ],
 
-    // TODO: (now) Fix all these rules below. Turned off when upgraded eslint to v9 to pass `pnpm run lint`.
+    // TODO: (soon) Fix all these rules below. Turned off when upgraded eslint to v9 to pass `pnpm run lint`.
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
@@ -263,11 +263,13 @@ export default tseslint.config(
       '**/*.log',
       'test-results/',
       '**/test-results.json',
+      'src-tauri/gen/',
       'src-tauri/target/',
       'src-tauri/WixTools/',
       'src-tauri/Cargo.lock',
       'playwright-report/',
       '/.trunk/tmp',
+      '/.VSCodeCounter',
 
       // Vite
       '**/vite.config.js.timestamp-*',

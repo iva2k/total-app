@@ -72,7 +72,7 @@ export class UserService {
     const transaction = await this.db.transaction();
     try {
       // Check if a user with the same email already exists
-      const existingUsers = await this.db.findAll<User>('User'); // TODO: (now) Implement query by key,value
+      const existingUsers = await this.db.findAll<User>('User'); // TODO: (when needed) Implement query by key,value
       if (existingUsers.some((user) => user.email === email)) {
         throw new Error('User with this email already exists');
       }
@@ -135,7 +135,7 @@ export class UserService {
       throw new Error('Invalid email or password');
     }
 
-    const token = signToken(user);
+    const token = await signToken(user);
 
     const { passwordHash: _passwordHash, ...userWithoutPassword } = user;
     return { user: userWithoutPassword, token };
@@ -162,7 +162,7 @@ export class UserService {
         passwordHash: '', // No password as it's OAuth
         name,
         oauthProviders: [
-          // TODO: (now) REMOVE (oauthProviders filed liquidated, use Account table instead)
+          // TODO: (when needed) REMOVE (oauthProviders filed liquidated, use Account table instead)
           {
             provider,
             providerId
@@ -181,7 +181,7 @@ export class UserService {
     input: OAuthInput
   ): Promise<{ user: Omit<User, 'passwordHash'>; token: string }> {
     const { user } = await this._oauthLoginEx(input);
-    const token = signToken(user);
+    const token = await signToken(user);
     const { passwordHash: _passwordHash, ...userWithoutPassword } = user;
     return { user: userWithoutPassword, token };
   }
