@@ -45,6 +45,7 @@ export interface ITransaction<_TDatabase> {
   commit: () => Promise<void>;
   rollback: () => Promise<void>;
   findById<T extends Entity>(entityName: string, id: string): Promise<T | null>;
+  findOne<T extends Entity>(entityName: string, entity: Partial<T>): Promise<T | null>;
   findAll<T extends Entity>(entityName: string): Promise<T[]>;
   create<T extends Entity>(entityName: string, entity: T): Promise<T>;
   update<T extends Entity>(entityName: string, entity: T): Promise<T>;
@@ -57,6 +58,7 @@ export interface IDatabase<TDatabase> {
   initialize(seed?: (db: IDatabase<TDatabase>, dbFilePath: string) => Promise<void>): Promise<void>;
   transaction(): Promise<ITransaction<TDatabase>>;
   findById<T extends Entity>(entityName: string, id: string): Promise<T | null>;
+  findOne<T extends Entity>(entityName: string, entity: Partial<T>): Promise<T | null>;
   findAll<T extends Entity>(entityName: string): Promise<T[]>;
   create<T extends Entity>(entityName: string, entity: T): Promise<T>;
   update<T extends Entity>(entityName: string, entity: T): Promise<T>;

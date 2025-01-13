@@ -123,4 +123,50 @@ describe('KyselySqliteDatabase with :memory:', () => {
     expect(usersM).toContainEqual(withoutTimestamps(user1));
     expect(usersM).toContainEqual(withoutTimestamps(user2));
   });
+
+  it('should find a user by email using findOne', async () => {
+    await db.create('User', newUser);
+    const foundUser = await db.findOne<User>('User', { email: newUser.email });
+    expect(foundUser).toBeTruthy();
+    if (foundUser) expect(withoutTimestamps(foundUser)).toEqual(withoutTimestamps(newUser));
+  });
+
+  it('should find a user by name using findOne', async () => {
+    await db.create('User', newUser);
+    const foundUser = await db.findOne<User>('User', { name: newUser.name });
+    expect(foundUser).toBeTruthy();
+    if (foundUser) expect(withoutTimestamps(foundUser)).toEqual(withoutTimestamps(newUser));
+  });
+
+  it('should return null when findOne finds no matching user', async () => {
+    const foundUser = await db.findOne<User>('User', { email: 'nonexistent@example.com' });
+    expect(foundUser).toBeNull();
+  });
+
+  it('should find a user by multiple properties using findOne', async () => {
+    await db.create('User', newUser);
+    const foundUser = await db.findOne<User>('User', { name: newUser.name, email: newUser.email });
+    expect(foundUser).toBeTruthy();
+    if (foundUser) expect(withoutTimestamps(foundUser)).toEqual(withoutTimestamps(newUser));
+  });
+
+  it("should not find a user when one property doesn't match using findOne", async () => {
+    await db.create('User', newUser);
+    const foundUser = await db.findOne<User>('User', {
+      name: newUser.name,
+      email: 'wrong@example.com'
+    });
+    expect(foundUser).toBeNull();
+  });
+
+  it('should find the first matching user when multiple users match the criteria', async () => {
+    const user1 = { ...newUser, id: '1', email: 'user1@example.com' };
+    const user2 = { ...newUser, id: '2', email: 'user2@example.com' };
+    await db.create('User', user1);
+    await db.create('User', user2);
+
+    const foundUser = await db.findOne<User>('User', { name: newUser.name });
+    expect(foundUser).toBeTruthy();
+    if (foundUser) expect(foundUser.id).toEqual(1); // Assuming findOne returns the first match
+  });
 });

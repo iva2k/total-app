@@ -160,6 +160,7 @@ export class KyselySqliteDatabase<TDatabase> implements IDatabase<TDatabase> {
         await txnPromise?.catch((_e) => {}); // Rejection will throw error, we need to swallow it.
       },
       findById: this.findById.bind(this),
+      findOne: this.findOne.bind(this),
       findAll: this.findAll.bind(this),
       create: this.create.bind(this),
       update: this.update.bind(this),
@@ -182,6 +183,24 @@ export class KyselySqliteDatabase<TDatabase> implements IDatabase<TDatabase> {
     } catch (error) {
       console.error(`Failed to find ${entityName} by ID:`, error);
       throw new Error(`Failed to find ${entityName} by ID: ${(error as Error).message}`);
+    }
+  }
+
+  async findOne<T extends Entity>(entityName: string, entity: Partial<T>): Promise<T | null> {
+    if (!this.txn) {
+      throw new Error('Database connection is not open');
+    }
+    try {
+      // Build the where clause based on the provided entity object
+      let query = this.txn.selectFrom(entityName).selectAll();
+      Object.entries(entity).forEach(([key, value]) => {
+        query = query.where(key, '=', value);
+      });
+      const result = await query.executeTakeFirst();
+      return (result ?? null) as T | null;
+    } catch (error) {
+      console.error(`Failed to find ${entityName} by given props:`, error);
+      throw new Error(`Failed to find ${entityName} by given props: ${(error as Error).message}`);
     }
   }
 

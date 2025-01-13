@@ -32,6 +32,7 @@ The `IDatabase` interface defines the standard methods that all DAL implementati
 - `close()`: Close the database connection.
 - `transaction()`: Create new transaction (returns transaction object with the same API as below)
 - `findById()`: Retrieve a record by its ID.
+- `findOne()`: Retrieve one record by given props.
 - `findAll()`: Retrieve all records of a specific type.
 - `create()`: Create a new record.
 - `update()`: Update a record.

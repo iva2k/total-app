@@ -116,6 +116,7 @@ export class KnexSqliteDatabase<TDatabase> implements IDatabase<TDatabase> {
         this.txn = this.db;
       },
       findById: this.findById.bind(this),
+      findOne: this.findOne.bind(this),
       findAll: this.findAll.bind(this),
       create: this.create.bind(this),
       update: this.update.bind(this),
@@ -133,6 +134,24 @@ export class KnexSqliteDatabase<TDatabase> implements IDatabase<TDatabase> {
     } catch (error) {
       console.error(`Failed to find ${entityName} by ID:`, error);
       throw new Error(`Failed to find ${entityName} by ID: ${(error as Error).message}`);
+    }
+  }
+
+  async findOne<T extends Entity>(entityName: string, entity: Partial<T>): Promise<T | null> {
+    if (!this.txn) {
+      throw new Error('Database connection is not open');
+    }
+    try {
+      // Build the where clause based on the provided entity object
+      const query = this.txn(entityName);
+      Object.entries(entity).forEach(([key, value]) => {
+        query.where(key, value);
+      });
+      const row = await query.first();
+      return row ?? null;
+    } catch (error) {
+      console.error(`Failed to find ${entityName} by given props:`, error);
+      throw new Error(`Failed to find ${entityName} by given props: ${(error as Error).message}`);
     }
   }
 
